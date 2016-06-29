@@ -1,6 +1,6 @@
-# Red Tetris Boilerplate
+# Red todo Boilerplate
 
-This starter kit was made to help students to develop red_tetris project : a Full Stack Javascript Tetris. We can also use it as a starting point for any product made of React / Redux and socket.io.
+This starter kit was made to help to develop a react project 
 
 It helps:
 
@@ -31,8 +31,8 @@ Edit `params.js` for your needs.
 
 ```
 $ npm run  srv-dev
-> red_tetrisboilerplate@0.0.1 srv-dev /home/eric/JS/red_tetris_boilerplate
-> DEBUG=tetris:* babel-watch -w src src/server/main.js
+> todoboilerplate@0.0.1 srv-dev /home/eric/JS/todo_boilerplate
+> DEBUG=todo:* babel-watch -w src src/server/main.js
 ```
 
 It launches a node.js server listening for socket.io connexions, that is wired to receive `ping` messages and answered to … `pong`.
@@ -41,18 +41,18 @@ It launches a node.js server listening for socket.io connexions, that is wired t
 
 ```
 $ npm run client-dev
-> red_tetrisboilerplate@0.0.1 client-dev /home/eric/JS/red_tetris_boilerplate
+> todoboilerplate@0.0.1 client-dev /home/eric/JS/todo_boilerplate
 > webpack-dev-server --colors --hot --inline --host 0.0.0.0 --port 8080
 
 http://0.0.0.0:8080/
 webpack result is served from /
-content is served from /home/eric/JS/red_tetris_boilerplate
+content is served from /home/eric/JS/todo_boilerplate
 …
 webpack: bundle is now VALID.
 ```
 
 
-Point your browser to `http://0.0.0.0:8080/` it will load client side application. You should see `Soon, will be here a fantastic Tetris ...`, open your console and check you have :
+Point your browser to `http://0.0.0.0:8080/` it will load client side application. You should see `Soon, will be here a fantastic todo ...`, open your console and check you have :
 
 ```
 [HMR] Waiting for update signal from WDS...
@@ -85,7 +85,7 @@ Tests are installed under `test` folder.
 
 #### fake.js
 
-A simple template to implement simple unit tests. In Tetris context you will try to test every functions or classes from server or client code. Just import your files and check (http://shouldjs.github.io/)[should] documentation to extend the test.
+A simple template to implement simple unit tests. In todo context you will try to test every functions or classes from server or client code. Just import your files and check (http://shouldjs.github.io/)[should] documentation to extend the test.
 
 
 #### redux.js
@@ -156,15 +156,15 @@ import params from '../params'
 chai.should()
 
 describe('Fake server test', function(){
-  let tetrisServer
+  let todoServer
 
 // 2 
   before(cb => startServer( params.server, function(err, server){
-    tetrisServer = server
+    todoServer = server
     cb()
   }))
 
-  after(function(done){tetrisServer.stop(done)})
+  after(function(done){todoServer.stop(done)})
 
   it('should pong', function(done){
     const initialState = {}
@@ -180,7 +180,7 @@ describe('Fake server test', function(){
 
 
 1. This time we will test server actions: it means client actions that transparently communicate with server
-2. for each `describe` we have to launch the server. Tetris server is statefull, so we can run multiple tests (`it`) on one server to check behavior (ex: multiple users, events)
+2. for each `describe` we have to launch the server. todo server is statefull, so we can run multiple tests (`it`) on one server to check behavior (ex: multiple users, events)
 3. Now we have a socket (client connection), so middleware is able to send socket.io messages to server.
 
 In our context, we dispatch `ping` action and register a callback on `pong` action.
@@ -190,7 +190,7 @@ In our context, we dispatch `ping` action and register a callback on `pong` acti
 ```
 npm run coverage
 
-> red_tetrisboilerplate@0.0.1 coverage /home/eric/JS/red_tetris_boilerplate
+> todoboilerplate@0.0.1 coverage /home/eric/JS/todo_boilerplate
 > NODE_ENV=test nyc -r lcov -r text mocha --require babel-core/register
 
 ```
@@ -200,13 +200,13 @@ Check results …. of this command, and launch your browser to `./coverage/lcov-
 
 ### Production Mode
 
-It’s not a production recipe to run your Tetris over billions of players, but just 2 commands to run it without live reload.
+It’s not a production recipe to run your todo over billions of players, but just 2 commands to run it without live reload.
 
 ```
 $ npm run srv-dist
 
-> red_tetrisboilerplate@0.0.1 srv-dist /home/eric/JS/red_tetris_boilerplate
-> DEBUG=tetris:* babel src --out-dir dist
+> todoboilerplate@0.0.1 srv-dist /home/eric/JS/todo_boilerplate
+> DEBUG=todo:* babel src --out-dir dist
 
 src/client/actions/alert.js -> dist/client/actions/alert.js
 src/client/actions/server.js -> dist/client/actions/server.js
@@ -221,7 +221,7 @@ src/server/main.js -> dist/server/main.js
 
 $ npm run client-dist
 
-> red_tetrisboilerplate@0.0.1 client-dist /home/eric/JS/red_tetris_boilerplate
+> todoboilerplate@0.0.1 client-dist /home/eric/JS/todo_boilerplate
 > NODE_ENV=production webpack --progress --colors
 
 Hash: 6841f78bfe6867fb2913  
@@ -231,9 +231,9 @@ Time: 1923ms
 bundle.js  754 kB       0  [emitted]  main
     + 197 hidden modules
 
-$  DEBUG=tetris:* node dist/server/main.js 
-  tetris:info tetris listen on http://0.0.0.0:3004 +0ms
-  not yet ready to play tetris with U ...
+$  DEBUG=todo:* node dist/server/main.js 
+  todo:info todo listen on http://0.0.0.0:3004 +0ms
+  not yet ready to play todo with U ...
 ```
 
 In production mode, node.js server serves `index.html` and `bundle.js`, so you have to point to url set up in `params.js` 
