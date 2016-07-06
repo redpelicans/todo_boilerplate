@@ -14,6 +14,17 @@ const LISTS = [
       { id: 4, text: 'write tests' },
       { id: 5, text: 'flexbox' },
   ] },
+  { id: 2, title: 'Sprint two', tasks: [
+      { id: 7, text: 'stateful components' },
+      { id: 8, text: 'write tests' },
+  ] },
+  { id: 3, title: 'Sprint three', tasks: [
+      { id: 9, text: 'redux' },
+      { id: 10, text: 'write tests' },
+  ] },
+  { id: 4, title: 'Flexbox wrap test', tasks: [
+      { id: 11, text: 'yata' },
+  ] },
 ];
 
 ReactDom.render(

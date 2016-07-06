@@ -83,12 +83,6 @@ h2 {
   align-items: flex-start;
 }
 
-.task-list:first-child {
-  margin-left: 10px;
-}
-.task-list:last-child {
-  margin-right: 10px;
-}
 .task-list > header {
 	display: flex;
 	flex-direction: row;
@@ -97,7 +91,8 @@ h2 {
 .task-list {
   display: flex;
   flex-direction: column;
-  margin: 0 5px;
+  margin: 0 10px;
+	margin-top: 10px;
   background: #E2E4E6;
   box-sizing: border-box;
   border-radius: 4px;
