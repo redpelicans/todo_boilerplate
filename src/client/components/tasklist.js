@@ -3,12 +3,12 @@ import Task from './task'
 import ListTitle from './listtitle'
 import InputTask from './inputtask'
 
-const TaskList = ({ tasks, title }) => {
-  const data = tasks.map((task) => <Task key={task.id} task={task.task} />)
+const TaskList = ({ tasks, title, onButtonSelected }) => {
+  const data = tasks.map((task) => <Task key={task.id} task={task.task} onButtonSelected={onButtonSelected}/>)
   return (
     <div className='tasklist'>
         <ListTitle title={title} />
-        <InputTask />
+        <InputTask onButtonSelected={onButtonSelected} />
         {data}
     </div>
     )

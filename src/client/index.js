@@ -11,6 +11,14 @@ const fake = [
                                     { id: 5, task: '5th' },
                                     { id: 6, task: '6th' }],
     },
+    { id: 3, title: 'List3', tasks: [{ id: 7, task: '7th' },
+                                    { id: 8, task: '8th' },
+                                    { id: 9, task: '9th' }],
+    },
+    { id: 4, title: 'List4', tasks: [{ id: 10, task: '10th' },
+                                    { id: 11, task: '11th' },
+                                    { id: 12, task: '12th' }],
+    },
 ];
 
 ReactDom.render(

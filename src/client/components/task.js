@@ -1,7 +1,7 @@
 import React from 'react'
 import CustomButton from './custombutton'
 
-const Task = ({ task }) => <li className='task'>{ task } <CustomButton message='X' /></li>
+const Task = ({ task, onButtonSelected }) => <li className='task'>{ task } <CustomButton name='remove' message='X' onClick={onButtonSelected} /></li>
 
 Task.propTypes = {
   task: React.PropTypes.string.isRequired,

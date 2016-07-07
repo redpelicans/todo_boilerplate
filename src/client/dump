@@ -32,3 +32,20 @@ injection modele de donnée
 les tests
 css
 flexbox
+
+state control 
+
+mount doc
+
+dom manip (ref)
+
+this.props.list (setstate)
+
+shouldcomponentupdate method (anciennes props, new props)
+
+
+outil de mesure sur facebook github react/docs/perf.html
+
+fichier action pour simuler les clicks & interactions
+
+checkout  poutchdb / dbconnect
