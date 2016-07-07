@@ -1,0 +1,41 @@
+.Todo {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.AppTitle {
+	background-color: white;
+	color: blue;
+	border : 2px solid blue;
+	text-align: center;
+	margin : 10px;
+}
+
+.Lists {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-around;
+}
+
+.List {
+	border : 1px solid black;
+	display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin : 10px;
+}
+
+.ListHeader {
+	border : 1px solid red;
+	margin : 5px;
+}
+
+.ListName {
+	text-align: center;
+}
+
+.Elems {
+	border : 1px solid green;
+	margin : 5px;
+}
