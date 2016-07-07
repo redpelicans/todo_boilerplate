@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Title = ({ title }) =>
-		<h1 className='title'>{ title }</h1>
+		<div className='title'><h1>{ title }</h1></div>
 
 Title.propTypes = { title: React.PropTypes.string.isRequired };
 
