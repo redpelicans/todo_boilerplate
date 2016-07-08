@@ -1,10 +1,14 @@
 import React from 'react'
 import CustomButton from './custombutton'
+import AddToTaskList from './addtotasklist'
 
-const InputTask = ({ type, message, onButtonSelected }) =>
-    <div className='input-task'>
-      <input placeholder={message} type={type} /><CustomButton message='Ajouter' onClick={onButtonSelected} />
-    </div>
+const InputTask = ({ message, onButtonSelected }) =>
+    <form onSubmit={addToTaskList}>
+      <input
+      	className='input-task'
+      	placeholder={message}
+      	type='text' />
+    </form>
 
 InputTask.propTypes = {
   message: React.PropTypes.string,

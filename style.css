@@ -6,18 +6,19 @@
      background-color: lightgrey;
      -webkit-flex-flow: row wrap;
      flex-flow: row wrap;
+     flex-wrap: ltr;
  }
  .tasklists {
      background-color: yellow;
-     
-     align-items: flex-start;
  }
  .tasklist {
      background-color: deepskyblue;
-     align-items: flex-end;
  }
  .task {
      margin: 1em;
+ }
+ .remove {
+     justify-content: flex-end;
  }
  body {
      padding: 2em;
