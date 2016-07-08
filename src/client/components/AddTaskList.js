@@ -1,16 +1,16 @@
-import React from 'react'
+import React from 'react';
 
 const AddTaskList = ({ onAddTaskList, onChange, value }) => {
 
   const handleUserInput = (e) => {
-    e.preventDefault()
-    onChange(e.target.value)
-  }
+    e.preventDefault();
+    onChange(e.target.value);
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    onAddTaskList()
-  }
+    e.preventDefault();
+    onAddTaskList();
+  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -21,13 +21,13 @@ const AddTaskList = ({ onAddTaskList, onChange, value }) => {
         type='text'
         value={value} />
     </form>
-  )
-}
+  );
+};
 
 AddTaskList.propTypes = {
   onAddTaskList: React.PropTypes.func.isRequired,
   onChange: React.PropTypes.func.isRequired,
   value: React.PropTypes.string.isRequired,
-}
+};
 
-export default AddTaskList
+export default AddTaskList;

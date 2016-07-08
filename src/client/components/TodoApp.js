@@ -1,9 +1,13 @@
-import React from 'react'
-import Title from './Title'
-import AddTaskList from './AddTaskList'
-import TaskLists from './TaskLists'
+import React from 'react';
+import Title from './Title';
+import AddTaskList from './AddTaskList';
+import TaskLists from './TaskLists';
 
 class TodoApp extends React.Component {
+  static propTypes = {
+    lists: React.PropTypes.object,
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -14,7 +18,7 @@ class TodoApp extends React.Component {
   }
 
   addTasklist() {
-    let newLists = this.state.lists;
+    const newLists = this.state.lists;
     newLists[this.state.currentListId] = {
       title: this.state.newListTitle,
       tasks: {},
@@ -31,7 +35,7 @@ class TodoApp extends React.Component {
   }
 
   removeTaskList(id) {
-    let newLists = this.state.lists;
+    const newLists = this.state.lists;
     delete newLists[id];
     this.setState({ lists: newLists });
   }

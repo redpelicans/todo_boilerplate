@@ -1,11 +1,11 @@
-import React from 'react'
-import RemoveTask from './RemoveTask'
+import React from 'react';
+import RemoveTask from './RemoveTask';
 
 const Task = ({ text }) =>
   <div className='task'>
     <span>{text}</span><RemoveTask />
-  </div>
+  </div>;
 
-Task.propTypes = { text: React.PropTypes.string }
+Task.propTypes = { text: React.PropTypes.string.isRequired };
 
-export default Task
+export default Task;

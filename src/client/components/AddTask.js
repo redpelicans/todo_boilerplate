@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 
 const AddTask = () =>
   <form>
     <input className='add-task' placeholder='New task..' type='text' />
-  </form>
+  </form>;
 
-export default AddTask
+export default AddTask;
