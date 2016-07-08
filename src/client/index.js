@@ -27,7 +27,19 @@ const LISTS = [
   ] },
 ];
 
+const TEMPLATE = {
+  0: {
+    title: 'sprint one',
+    tasks: {
+      0: { text: 'yata' },
+      1: { text: 'yo' }
+    }
+  }
+}
+
+const EMPTY = {}
+
 ReactDom.render(
-  <TodoApp lists={LISTS} />,
+  <TodoApp lists={EMPTY} />,
   document.getElementById('todo')
 )

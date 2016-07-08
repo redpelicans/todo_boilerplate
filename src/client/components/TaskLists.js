@@ -1,8 +1,9 @@
 import React from 'react'
+import _ from 'lodash'
 import TaskList from './TaskList'
 
 const TaskLists = ({ lists }) => {
-  const listElems = lists.map((list) => <TaskList {...list} key={list.id} />)
+  const listElems = _.map(lists, (list, id) => <TaskList {...list} key={id} />)
   return (
     <div className='task-lists'>
       {listElems}
@@ -11,7 +12,7 @@ const TaskLists = ({ lists }) => {
 }
 
 TaskLists.propTypes = {
-  lists: React.PropTypes.arrayOf(React.PropTypes.object),
+  lists: React.PropTypes.object.isRequired,
 }
 
 export default TaskLists

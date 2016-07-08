@@ -1,11 +1,12 @@
 import React from 'react'
+import _ from 'lodash'
 import Task from './Task'
 import AddTask from './AddTask'
 import TaskListTitle from './TaskListTitle'
 import RemoveTaskList from './RemoveTaskList'
 
 const TaskList = ({ title, tasks }) => {
-  const taskElems = tasks.map((task) => <Task key={task.id} text={task.text} />)
+  const taskElems = _.map(tasks, (task, id) => <Task key={id} text={task.text} />)
   return (
     <div className='task-list'>
       <header>
@@ -21,8 +22,8 @@ const TaskList = ({ title, tasks }) => {
 }
 
 TaskList.propTypes = {
-  tasks: React.PropTypes.arrayOf(React.PropTypes.object),
-  title: React.PropTypes.string,
+  tasks: React.PropTypes.object.isRequired,
+  title: React.PropTypes.string.isRequired,
 }
 
 export default TaskList
