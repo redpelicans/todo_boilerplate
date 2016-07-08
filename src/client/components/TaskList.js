@@ -16,13 +16,20 @@ const TaskList = (props) => {
       <div className='tasks'>
         {taskElems}
       </div>
-      <AddTask />
+      <AddTask
+        listId={props.id}
+        onAddTask={props.onAddTask}
+        onChange={props.onAddTaskInput}
+        value={props.newTaskText} />
     </div>
   );
 };
 
 TaskList.propTypes = {
   id: React.PropTypes.string.isRequired,
+  newTaskText: React.PropTypes.string.isRequired,
+  onAddTask: React.PropTypes.func.isRequired,
+  onAddTaskInput: React.PropTypes.func.isRequired,
   onRemoveTaskList: React.PropTypes.func.isRequired,
   tasks: React.PropTypes.object.isRequired,
   title: React.PropTypes.string.isRequired,

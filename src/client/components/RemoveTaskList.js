@@ -2,12 +2,13 @@ import React from 'react';
 import Button from './Button';
 
 const RemoveTaskList = ({ id, onRemove }) => {
-  const removeHandler = () => {
+
+  const handleRemove = () => {
     onRemove(id);
   };
 
   return (
-    <Button className='rm-task-list' onClick={removeHandler}>x</Button>
+    <Button className='rm-task-list' onClick={handleRemove}>x</Button>
   );
 };
 

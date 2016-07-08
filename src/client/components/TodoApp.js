@@ -13,6 +13,7 @@ class TodoApp extends React.Component {
     this.state = {
       lists: props.lists,
       currentListId: 0,
+      currentTaskId: 0,
       newListTitle: '',
     };
   }
@@ -21,6 +22,7 @@ class TodoApp extends React.Component {
     const newLists = this.state.lists;
     newLists[this.state.currentListId] = {
       title: this.state.newListTitle,
+      newTaskText: '',
       tasks: {},
     };
     this.setState({
@@ -34,9 +36,27 @@ class TodoApp extends React.Component {
     this.setState({ newListTitle: value });
   }
 
-  removeTaskList(id) {
+  removeTaskList(listId) {
     const newLists = this.state.lists;
-    delete newLists[id];
+    delete newLists[listId];
+    this.setState({ lists: newLists });
+  }
+
+  addTask(listId) {
+    const newLists = this.state.lists;
+    newLists[listId].tasks[this.state.currentTaskId] = {
+      text: newLists[listId].newTaskText,
+    };
+    newLists[listId].newTaskText = '';
+    this.setState({
+      lists: newLists,
+      currentTaskId: this.state.currentTaskId + 1,
+    });
+  }
+
+  addTaskInput(listId, value) {
+    const newLists = this.state.lists;
+    newLists[listId].newTaskText = value;
     this.setState({ lists: newLists });
   }
 
@@ -50,6 +70,8 @@ class TodoApp extends React.Component {
           value={this.state.newListTitle} />
         <TaskLists
           lists={this.state.lists}
+          onAddTask={this.addTask.bind(this)}
+          onAddTaskInput={this.addTaskInput.bind(this)}
           onRemoveTaskList={this.removeTaskList.bind(this)} />
       </div>
     );
