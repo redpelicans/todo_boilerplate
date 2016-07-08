@@ -6,16 +6,16 @@ import TaskListTitle from './TaskListTitle';
 import RemoveTaskList from './RemoveTaskList';
 
 const TaskList = (props) => {
-  const taskElems = _.map(props.tasks, (task, id) => {
-    return (
+
+  const taskElems = _.map(props.tasks, (task, id) => (
       <Task
         key={id}
         listId={props.id}
         onRemoveTask={props.onRemoveTask}
         taskId={id}
         text={task.text} />
-    );
-  });
+  ));
+
   return (
     <div className='task-list'>
       <header>
@@ -27,6 +27,7 @@ const TaskList = (props) => {
       </div>
       <AddTask
         listId={props.id}
+        {...props}
         onAddTask={props.onAddTask}
         onChange={props.onAddTaskInput}
         value={props.newTaskText} />

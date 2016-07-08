@@ -18,14 +18,17 @@ const AddTask = ({ onAddTask, onChange, value, listId }) => {
         className='add-task'
         onChange={handleUserInput}
         placeholder='New task..'
-        type='text' value
+        type='text'
         value={value} />
     </form>
   );
-}
+};
 
 AddTask.propTypes = {
+  listId: React.PropTypes.string.isRequired,
   onAddTask: React.PropTypes.func.isRequired,
+  onChange: React.PropTypes.func.isRequired,
+  value: React.PropTypes.string.isRequired,
 };
 
 export default AddTask;
