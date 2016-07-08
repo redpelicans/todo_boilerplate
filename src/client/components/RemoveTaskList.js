@@ -1,10 +1,10 @@
 import React from 'react';
 import Button from './Button';
 
-const RemoveTaskList = ({ id, onRemove }) => {
+const RemoveTaskList = ({ listId, onRemove }) => {
 
   const handleRemove = () => {
-    onRemove(id);
+    onRemove(listId);
   };
 
   return (
@@ -13,7 +13,7 @@ const RemoveTaskList = ({ id, onRemove }) => {
 };
 
 RemoveTaskList.propTypes = {
-  id: React.PropTypes.string.isRequired,
+  listId: React.PropTypes.string.isRequired,
   onRemove: React.PropTypes.func.isRequired,
 };
 

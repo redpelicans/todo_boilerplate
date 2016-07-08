@@ -60,6 +60,12 @@ class TodoApp extends React.Component {
     this.setState({ lists: newLists });
   }
 
+  removeTask(listId, taskId) {
+    const newLists = this.state.lists;
+    delete newLists[listId].tasks[taskId];
+    this.setState({ lists: newLists });
+  }
+
   render() {
     return (
       <div className='todo-app'>
@@ -72,6 +78,7 @@ class TodoApp extends React.Component {
           lists={this.state.lists}
           onAddTask={this.addTask.bind(this)}
           onAddTaskInput={this.addTaskInput.bind(this)}
+          onRemoveTask={this.removeTask.bind(this)}
           onRemoveTaskList={this.removeTaskList.bind(this)} />
       </div>
     );
