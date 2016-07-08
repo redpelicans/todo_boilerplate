@@ -5,12 +5,13 @@ import CustomButton from './custombutton'
 import Task from './task'
 
 class App extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.onButtonSelected = this.onButtonSelected.bind(this);
     this.state = {
       onClick: false,
       onEnter: false,
+      app: { lists: _.map(this.props, 'list')},
     };
   }
 
@@ -23,7 +24,7 @@ class App extends React.Component {
     console.log('il appuie sur des touches et il est content....');
     if (e.key === 'Enter') {
       console.log('putain c\'était pas compliqué bordel !');
-      this.setState({ onKEnter: true });
+      this.setState({ onEnter: true });
     }
   }
 
@@ -31,7 +32,11 @@ class App extends React.Component {
     console.log('Ah t\'as trouvé le bouton enfin.... : ');
     console.log(button);
     if (button === 'addtask') {
-      return <Task />
+      console.log('lalalilali');
+      //this.setState{app: }
+    }
+    if (button === 'addtasklist') {
+    	console.log('las');
     }
   }
 
@@ -43,7 +48,7 @@ class App extends React.Component {
         onKeyPress={this.leOnKeyPress.bind(this)}>
         <CustomButton message='Ajouter une liste' name='addlist' onButtonSelected={this.onButtonSelected} />
         <Title title='App' />
-        <TaskLists {...this.props} onButtonSelected={this.onButtonSelected} />
+        <TaskLists {...this.state.app} onButtonSelected={this.onButtonSelected} />
       </div>
     );
   }

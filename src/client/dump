@@ -43,7 +43,6 @@ this.props.list (setstate)
 
 shouldcomponentupdate method (anciennes props, new props)
 
-
 outil de mesure sur facebook github react/docs/perf.html
 
 fichier action pour simuler les clicks & interactions
