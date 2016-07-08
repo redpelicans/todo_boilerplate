@@ -5,33 +5,35 @@ import TaskLists from './TaskLists'
 
 class TodoApp extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       lists: props.lists,
-      currentListId: 5,
+      currentListId: 0,
       newListTitle: '',
-    }
+    };
   }
 
   addTasklist() {
-    let newLists = this.state.lists
+    let newLists = this.state.lists;
     newLists[this.state.currentListId] = {
       title: this.state.newListTitle,
-      tasks: [],
-    }
+      tasks: {},
+    };
     this.setState({
       lists: newLists,
       currentListId: this.state.currentListId + 1,
       newListTitle: '',
-    })
+    });
   }
 
   addTaskListInput(value) {
-    this.setState({ newListTitle: value })
+    this.setState({ newListTitle: value });
   }
 
-  removeTaskList() {
-    let newLists = this.state.lists
+  removeTaskList(id) {
+    let newLists = this.state.lists;
+    delete newLists[id];
+    this.setState({ lists: newLists });
   }
 
   render() {
@@ -42,10 +44,12 @@ class TodoApp extends React.Component {
           onAddTaskList={this.addTasklist.bind(this)}
           onChange={this.addTaskListInput.bind(this)}
           value={this.state.newListTitle} />
-        <TaskLists {...this.props} />
+        <TaskLists
+          lists={this.state.lists}
+          onRemoveTaskList={this.removeTaskList.bind(this)} />
       </div>
-    )
+    );
   }
 }
 
-export default TodoApp
+export default TodoApp;

@@ -5,13 +5,13 @@ import AddTask from './AddTask'
 import TaskListTitle from './TaskListTitle'
 import RemoveTaskList from './RemoveTaskList'
 
-const TaskList = ({ title, tasks }) => {
-  const taskElems = _.map(tasks, (task, id) => <Task key={id} text={task.text} />)
+const TaskList = (props) => {
+  const taskElems = _.map(props.tasks, (task, id) => <Task key={id} text={task.text} />)
   return (
     <div className='task-list'>
       <header>
-        <TaskListTitle value={title} />
-        <RemoveTaskList />
+        <TaskListTitle value={props.title} />
+        <RemoveTaskList id={props.id} onRemove={props.onRemoveTaskList} />
       </header>
       <div className='tasks'>
         {taskElems}
