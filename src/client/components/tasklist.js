@@ -4,7 +4,7 @@ import ListTitle from './listtitle'
 import InputTask from './inputtask'
 
 const TaskList = ({ tasks, title, onButtonSelected }) => {
-  const data = tasks.map((task) => <Task key={task.id} task={task.task} onButtonSelected={onButtonSelected}/>)
+  const data = tasks.map((task) => <Task key={task.id}onButtonSelected={onButtonSelected} task={task.task}/>)
   return (
     <div className='tasklist'>
         <ListTitle title={title} />
@@ -15,6 +15,7 @@ const TaskList = ({ tasks, title, onButtonSelected }) => {
 }
 
 TaskList.propTypes = {
+  onButtonSelected: React.PropTypes.object,
   tasks: React.PropTypes.array.isRequired,
   title: React.PropTypes.string.isRequired,
 };

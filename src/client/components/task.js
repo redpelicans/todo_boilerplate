@@ -1,14 +1,18 @@
 import React from 'react'
 import CustomButton from './custombutton'
 
-const Task = ({ task, onButtonSelected }) => <li className='task'>{ task } <CustomButton name='remove' message='X' onButtonSelected={onButtonSelected} /></li>
+const Task = ({ task, onButtonSelected }) =>
+  <li className='task'>{ task }
+  <CustomButton message='X' name='remove' onButtonSelected={onButtonSelected} />
+  </li>
 
 Task.propTypes = {
+  onButtonSelected: React.PropTypes.object,
   task: React.PropTypes.string,
 };
 
 Task.defaultProperties = {
-	task: "",
+  task: '',
 }
 
 export default Task
