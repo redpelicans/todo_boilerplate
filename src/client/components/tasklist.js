@@ -15,7 +15,7 @@ const TaskList = ({ tasks, title, onButtonSelected }) => {
 }
 
 TaskList.propTypes = {
-  onButtonSelected: React.PropTypes.object,
+  onButtonSelected: React.PropTypes.func,
   tasks: React.PropTypes.array.isRequired,
   title: React.PropTypes.string.isRequired,
 };

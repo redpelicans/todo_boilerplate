@@ -7,7 +7,7 @@ const Task = ({ task, onButtonSelected }) =>
   </li>
 
 Task.propTypes = {
-  onButtonSelected: React.PropTypes.object,
+  onButtonSelected: React.PropTypes.func,
   task: React.PropTypes.string,
 };
 

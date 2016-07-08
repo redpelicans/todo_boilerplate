@@ -7,6 +7,7 @@ import Task from './task'
 class App extends React.Component {
   constructor() {
     super();
+    this.onButtonSelected = this.onButtonSelected.bind(this);
     this.state = {
       onClick: false,
       onEnter: false,

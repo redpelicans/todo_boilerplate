@@ -12,7 +12,7 @@ const TaskLists = ({ lists, onButtonSelected }) => {
 
 TaskLists.propTypes = {
   lists: React.PropTypes.array.isRequired,
-  onButtonSelected: React.PropTypes.object,
+  onButtonSelected: React.PropTypes.func,
 };
 
 export default TaskLists

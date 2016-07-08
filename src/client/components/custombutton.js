@@ -11,7 +11,7 @@ const	CustomButton = ({ message, name, type, onButtonSelected }) => {
 CustomButton.propTypes = {
   message: React.PropTypes.string.isRequired,
   name: React.PropTypes.string,
-  onButtonSelected: React.PropTypes.object,
+  onButtonSelected: React.PropTypes.func,
   type: React.PropTypes.string,
 };
 
