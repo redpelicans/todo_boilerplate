@@ -3,11 +3,9 @@ import TodoApp from './app'
 
 const CreateList = ({createListClick}) => {
 	const appelCreateListClick = (event) => {
-		console.log("LOL");
 		event.preventDefault();
 		createListClick('lol');
-		event.stopPropagation();
-		
+		event.stopPropagation();	
 	};
 	
 	return (
