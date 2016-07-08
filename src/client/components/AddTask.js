@@ -1,8 +1,31 @@
-import React from 'react'
+import React from 'react';
 
-const AddTask = () =>
-  <form>
-    <input className='add-task' placeholder='New task..' type='text' />
-  </form>
+const AddTask = ({ onAddTask, onChange, value, listId }) => {
 
-export default AddTask
+  const handleUserInput = (e) => {
+    e.preventDefault();
+    onChange(listId, e.target.value);
+  };
+
+  const handleAdd = (e) => {
+    e.preventDefault();
+    onAddTask(listId);
+  };
+
+  return (
+    <form onSubmit={handleAdd}>
+      <input
+        className='add-task'
+        onChange={handleUserInput}
+        placeholder='New task..'
+        type='text' value
+        value={value} />
+    </form>
+  );
+}
+
+AddTask.propTypes = {
+  onAddTask: React.PropTypes.func.isRequired,
+};
+
+export default AddTask;
