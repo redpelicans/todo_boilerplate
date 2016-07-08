@@ -1,6 +1,14 @@
 import React from 'react'
 import ReactDom from 'react-dom'
+import TodoApp from './app'
 
-const App = () => (<h1> A fantastic Todo list will be here soon ... </h1>)
+let Items = [
+	{ id: 1, title: 'List1', tasks: [{ id: 1, name: 'A' }, { id: 2, name: 'B' }, { id: 3, name: 'C' }] },
+	{ id: 2, title: 'List2', tasks: [{ id: 1, name: 'E' }, { id: 2, name: 'F' }, { id: 3, name: 'G' }] },
 
-ReactDom.render(<App/>, document.getElementById('todo'))
+];
+
+ReactDom.render(
+		<TodoApp list={Items}/>,
+		document.getElementById('todo'),
+		)
