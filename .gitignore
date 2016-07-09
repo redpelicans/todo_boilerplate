@@ -4,3 +4,4 @@ dist
 *.lock
 *.tmp
 *.log
+.idea
