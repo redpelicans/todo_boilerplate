@@ -18,29 +18,36 @@ import Button from '../src/client/components/Button'
 chai.should()
 chai.use(equalJSX)
 
-const LISTS = [
-  { id: 0, title: 'To do', tasks: [
-    { id: 0, text: 'buy eggs' },
-    { id: 1, text: 'buy milk' },
-    { id: 2, text: 'call bank' },
-  ]},
-  { id: 1, title: 'Sprint one', tasks: [
-    { id: 3, text: 'stateless components' },
-    { id: 4, text: 'write tests' },
-    { id: 5, text: 'flexbox' },
-  ]},
-];
+const LISTS = {
+  0: {
+    title: 'yata',
+    tasks: {
+      0: 'yo',
+      1: 'ey',
+    },
+  },
+};
+
+const testFunc = () => {};
 
 describe('TodoApp component', function() {
   it('works', function() {
     const renderer = createRenderer()
-    renderer.render(React.createElement(TodoApp))
+    renderer.render(React.createElement(TodoApp, { lists: LISTS }))
     const output = renderer.getRenderOutput()
     output.should.equalJSX(
       <div className='todo-app'>
         <Title value='Todo App' />
-        <AddTaskList />
-        <TaskLists />
+        <AddTaskList
+          onAddTasklist={testFunc}
+          onChange={testFunc}
+          value="" />
+        <TaskLists
+          lists={LISTS}
+          onAddTask={testFunc}
+          onAddTaskInput={testFunc}
+          onRemoveTask={testFunc}
+          onRemoveTaskList={testFunc} />
       </div>
     )
   })
@@ -85,20 +92,42 @@ describe('TaskLists component', function() {
 describe('TaskList component', function() {
   it('works', function() {
     const renderer = createRenderer()
-    renderer.render(React.createElement(TaskList, { title: LISTS[0].title, tasks: LISTS[0].tasks }))
+    renderer.render(React.createElement(TaskList,
+      { title: LISTS[0].title,
+        tasks: LISTS[0].tasks,
+        id: '1',
+        listId: '1',
+        onRemoveTaskList: testFunc,
+        onAddTask: testFunc,
+        onAddTaskInput: testFunc,
+        newTaskText: 'yata',
+      }));
     const output = renderer.getRenderOutput()
     output.should.equalJSX(
       <div className='task-list'>
         <header>
           <TaskListTitle value={LISTS[0].title} />
-          <RemoveTaskList />
+          <RemoveTaskList listId='1' onRemove={testFunc} />
         </header>
         <div className='tasks'>
-          <Task text={LISTS[0].tasks[0].text} />
-          <Task text={LISTS[0].tasks[1].text} />
-          <Task text={LISTS[0].tasks[2].text} />
+          <Task
+            listId='1'
+            onRemoveTask={testFunc}
+            taskId='0'
+            text='ey'
+          />
+          <Task
+            listId='1'
+            onRemoveTask={undefined}
+            taskId='1'
+            text='yo'
+          />
         </div>
-        <AddTask />
+        <AddTask
+          listId='1'
+          onAddTask={testFunc}
+          onChange={testFunc}
+          value='yata' />
       </div>
     )
   })
@@ -116,11 +145,16 @@ describe('TaskListTitle component', function() {
 describe('AddTask component', function() {
   it('works', function() {
     const renderer = createRenderer()
-    renderer.render(React.createElement(AddTask))
+    renderer.render(React.createElement(AddTask, { value: 'yata' }))
     const output = renderer.getRenderOutput()
     output.should.equalJSX(
-      <form>
-        <input className='add-task' placeholder='New task..' type='text' />
+      <form onSubmit={testFunc}>
+        <input
+          className='add-task'
+          onChange={testFunc}
+          placeholder='New task..'
+          type='text'
+          value='yata' />
       </form>
     )
   })
@@ -131,27 +165,34 @@ describe('RemoveTask component', function() {
     const renderer = createRenderer()
     renderer.render(React.createElement(RemoveTask))
     const output = renderer.getRenderOutput()
-    output.should.equalJSX(<Button className='rm-task'>x</Button>)
+    output.should.equalJSX(
+      <Button className='rm-task' onClick={() => {}}>x</Button>
+    )
   })
 })
 
 describe('Button component', function() {
   it('works', function() {
     const renderer = createRenderer()
-    renderer.render(React.createElement(Button))
+    renderer.render(React.createElement(Button, { children: 'yata' }))
     const output = renderer.getRenderOutput()
-    output.should.equalJSX(<button></button>)
+    output.should.equalJSX(<button>yata</button>)
   })
 })
 
 describe('Task component', function() {
   it('works', function() {
     const renderer = createRenderer()
-    renderer.render(React.createElement(Task, { text: 'yata' }))
+    renderer.render(React.createElement(Task,
+      { text: 'yata', listId: '1', taskId: '1', onRemoveTask: testFunc }))
     const output = renderer.getRenderOutput()
     output.should.equalJSX(
       <div className='task'>
-        <span>yata</span><RemoveTask />
+        <span>yata</span>
+        <RemoveTask
+          listId='1'
+          onRemove={testFunc}
+          taskId='1' />
       </div>
     )
   })
