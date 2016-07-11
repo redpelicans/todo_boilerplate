@@ -1,6 +1,10 @@
-import React from 'react'
-import ReactDom from 'react-dom'
+import React from 'react';
+import ReactDom from 'react-dom';
+import TodoApp from './components/TodoApp';
 
-const App = () => (<h1> A fantastic Todo list will be here soon ... </h1>)
+const LISTS = {};
 
-ReactDom.render(<App/>, document.getElementById('todo'))
+ReactDom.render(
+  <TodoApp lists={LISTS} />,
+  document.getElementById('todo')
+);
