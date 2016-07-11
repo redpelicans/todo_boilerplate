@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import Title from './Title';
 import AddTaskList from './AddTaskList';
 import TaskLists from './TaskLists';
@@ -19,14 +20,16 @@ class TodoApp extends React.Component {
   }
 
   addTasklist() {
-    const newLists = this.state.lists;
-    newLists[this.state.currentListId] = {
-      title: this.state.newListTitle,
-      newTaskText: '',
-      tasks: {},
-    };
+    const { lists } = this.state;
     this.setState({
-      lists: newLists,
+      lists: {
+        ...lists,
+        [this.state.currentListId]: {
+          title: this.state.newListTitle,
+          newTaskText: '',
+          tasks: {},
+        },
+      },
       currentListId: this.state.currentListId + 1,
       newListTitle: '',
     });
@@ -37,33 +40,54 @@ class TodoApp extends React.Component {
   }
 
   removeTaskList(listId) {
-    const newLists = this.state.lists;
-    delete newLists[listId];
-    this.setState({ lists: newLists });
+    const { lists } = this.state;
+    this.setState({
+      lists: _.omit(lists, listId),
+    });
   }
 
   addTask(listId) {
-    const newLists = this.state.lists;
-    newLists[listId].tasks[this.state.currentTaskId] = {
-      text: newLists[listId].newTaskText,
-    };
-    newLists[listId].newTaskText = '';
+    const { lists } = this.state;
     this.setState({
-      lists: newLists,
+      lists: {
+        ...lists,
+        [listId]: {
+          ...lists[listId],
+          tasks: {
+            ...lists[listId].tasks,
+            [this.state.currentTaskId]: { text: lists[listId].newTaskText }
+          },
+          newTaskText: '',
+        },
+      },
       currentTaskId: this.state.currentTaskId + 1,
     });
   }
 
   addTaskInput(listId, value) {
-    const newLists = this.state.lists;
-    newLists[listId].newTaskText = value;
-    this.setState({ lists: newLists });
+    const { lists } = this.state;
+    this.setState({
+      lists: {
+        ...lists,
+        [listId]: {
+          ...lists[listId],
+          newTaskText: value,
+        },
+      },
+    });
   }
 
   removeTask(listId, taskId) {
-    const newLists = this.state.lists;
-    delete newLists[listId].tasks[taskId];
-    this.setState({ lists: newLists });
+    const { lists } = this.state;
+    this.setState({
+      lists: {
+        ...lists,
+        [listId]: {
+          ...lists[listId],
+          tasks: _.omit(lists[listId].tasks, taskId),
+        },
+      },
+    });
   }
 
   render() {
