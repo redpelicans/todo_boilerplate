@@ -6,22 +6,27 @@ import _ from 'lodash'
 import fake from './data'
 
 // A man must know how to render
-const Task = ({id, description}) => (<li>{id}: {description}</li>)
+const Task = ({task}) => (<li>{task.id}: {task.description}</li>)
 
-const TaskList = (list) => (
+const TaskList = ({list}) => (
     <div>
         <div>{list.title}</div>
-        <ul>{_.map(list.tasks, Task)}</ul>
+        <ul>{_.map(list.tasks, ((task)=>(
+            <Task task={task} key={task.id} />
+        )))}</ul>
     </div>
 )
 
 // A man must do what he is meant to do
 const App = ({data}) => {
-    console.log(_.map(data));
     return (
         <div>
             <h1> A fantastic Todo list is on its way !</h1>
-            {_.map(data, TaskList)}
+            {_.map(data,
+                (taskList)=>(
+                    <TaskList list={taskList} key={taskList.id} />
+                )
+            )}
         </div>
     );
 }
