@@ -19,35 +19,35 @@ class TodoApp extends React.Component {
     };
   }
 
-  addTasklist() {
-    const { lists } = this.state;
+  addTasklist = () => {
+    const { lists, currentListId, newListTitle } = this.state;
     this.setState({
       lists: {
         ...lists,
-        [this.state.currentListId]: {
-          title: this.state.newListTitle,
+        [currentListId]: {
+          title: newListTitle,
           newTaskText: '',
           tasks: {},
         },
       },
-      currentListId: this.state.currentListId + 1,
+      currentListId: currentListId + 1,
       newListTitle: '',
     });
   }
 
-  addTaskListInput(value) {
+  addTaskListInput = (value) => {
     this.setState({ newListTitle: value });
   }
 
-  removeTaskList(listId) {
+  removeTaskList = (listId) => {
     const { lists } = this.state;
     this.setState({
       lists: _.omit(lists, listId),
     });
   }
 
-  addTask(listId) {
-    const { lists } = this.state;
+  addTask = (listId) => {
+    const { lists, currentTaskId } = this.state;
     this.setState({
       lists: {
         ...lists,
@@ -55,16 +55,16 @@ class TodoApp extends React.Component {
           ...lists[listId],
           tasks: {
             ...lists[listId].tasks,
-            [this.state.currentTaskId]: { text: lists[listId].newTaskText }
+            [currentTaskId]: { text: lists[listId].newTaskText }
           },
           newTaskText: '',
         },
       },
-      currentTaskId: this.state.currentTaskId + 1,
+      currentTaskId: currentTaskId + 1,
     });
   }
 
-  addTaskInput(listId, value) {
+  addTaskInput = (listId, value) => {
     const { lists } = this.state;
     this.setState({
       lists: {
@@ -77,7 +77,7 @@ class TodoApp extends React.Component {
     });
   }
 
-  removeTask(listId, taskId) {
+  removeTask = (listId, taskId) => {
     const { lists } = this.state;
     this.setState({
       lists: {
@@ -95,15 +95,15 @@ class TodoApp extends React.Component {
       <div className='todo-app'>
         <Title value='Todo App' />
         <AddTaskList
-          onAddTaskList={this.addTasklist.bind(this)}
-          onChange={this.addTaskListInput.bind(this)}
+          onAddTaskList={this.addTasklist}
+          onChange={this.addTaskListInput}
           value={this.state.newListTitle} />
         <TaskLists
           lists={this.state.lists}
-          onAddTask={this.addTask.bind(this)}
-          onAddTaskInput={this.addTaskInput.bind(this)}
-          onRemoveTask={this.removeTask.bind(this)}
-          onRemoveTaskList={this.removeTaskList.bind(this)} />
+          onAddTask={this.addTask}
+          onAddTaskInput={this.addTaskInput}
+          onRemoveTask={this.removeTask}
+          onRemoveTaskList={this.removeTaskList} />
       </div>
     );
   }
