@@ -9,10 +9,10 @@ const TaskList = (props) => {
 
   const taskElems = _.map(props.tasks, (task, id) => (
       <Task
+        {...props}
         key={id}
         listId={props.id}
-        onRemoveTask={props.onRemoveTask}
-        taskId={id}
+        taskId={Number(id)}
         text={task.text} />
   ));
 
@@ -20,14 +20,14 @@ const TaskList = (props) => {
     <div className='task-list'>
       <header>
         <TaskListTitle value={props.title} />
-        <RemoveTaskList listId={props.id} onRemove={props.onRemoveTaskList} />
+        <RemoveTaskList id={props.id} onRemove={props.onRemoveTaskList} />
       </header>
       <div className='tasks'>
         {taskElems}
       </div>
       <AddTask
-        listId={props.id}
         {...props}
+        listId={props.id}
         onAddTask={props.onAddTask}
         onChange={props.onAddTaskInput}
         value={props.newTaskText} />
@@ -36,11 +36,10 @@ const TaskList = (props) => {
 };
 
 TaskList.propTypes = {
-  id: React.PropTypes.string.isRequired,
+  id: React.PropTypes.number.isRequired,
   newTaskText: React.PropTypes.string.isRequired,
   onAddTask: React.PropTypes.func.isRequired,
   onAddTaskInput: React.PropTypes.func.isRequired,
-  onRemoveTask: React.PropTypes.func.isRequired,
   onRemoveTaskList: React.PropTypes.func.isRequired,
   tasks: React.PropTypes.object.isRequired,
   title: React.PropTypes.string.isRequired,

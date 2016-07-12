@@ -25,7 +25,7 @@ const AddTask = ({ onAddTask, onChange, value, listId }) => {
 };
 
 AddTask.propTypes = {
-  listId: React.PropTypes.string.isRequired,
+  listId: React.PropTypes.number.isRequired,
   onAddTask: React.PropTypes.func.isRequired,
   onChange: React.PropTypes.func.isRequired,
   value: React.PropTypes.string.isRequired,

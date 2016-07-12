@@ -11,9 +11,9 @@ const Task = (props) =>
   </div>;
 
 Task.propTypes = {
-  listId: React.PropTypes.string.isRequired,
+  listId: React.PropTypes.number.isRequired,
   onRemoveTask: React.PropTypes.func.isRequired,
-  taskId: React.PropTypes.string.isRequired,
+  taskId: React.PropTypes.number.isRequired,
   text: React.PropTypes.string.isRequired,
 };
 

@@ -13,9 +13,9 @@ const RemoveTask = ({ listId, onRemove, taskId }) => {
 };
 
 RemoveTask.propTypes = {
-  listId: React.PropTypes.string.isRequired,
+  listId: React.PropTypes.number.isRequired,
   onRemove: React.PropTypes.func.isRequired,
-  taskId: React.PropTypes.string.isRequired,
+  taskId: React.PropTypes.number.isRequired,
 };
 
 export default RemoveTask;

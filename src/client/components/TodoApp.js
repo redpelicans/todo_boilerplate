@@ -55,7 +55,7 @@ class TodoApp extends React.Component {
           ...lists[listId],
           tasks: {
             ...lists[listId].tasks,
-            [currentTaskId]: { text: lists[listId].newTaskText }
+            [currentTaskId]: { text: lists[listId].newTaskText },
           },
           newTaskText: '',
         },
