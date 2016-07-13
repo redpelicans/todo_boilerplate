@@ -4,6 +4,9 @@ import Title from './Title';
 import AddTaskList from './AddTaskList';
 import TaskLists from './TaskLists';
 
+let currentListId = 0;
+let currentTaskId = 0;
+
 class TodoApp extends React.Component {
   static propTypes = {
     lists: React.PropTypes.object,
@@ -13,14 +16,12 @@ class TodoApp extends React.Component {
     super(props);
     this.state = {
       lists: props.lists,
-      currentListId: 0,
-      currentTaskId: 0,
       newListTitle: '',
     };
   }
 
   addTasklist = () => {
-    const { lists, currentListId, newListTitle } = this.state;
+    const { lists, newListTitle } = this.state;
     this.setState({
       lists: {
         ...lists,
@@ -30,9 +31,9 @@ class TodoApp extends React.Component {
           tasks: {},
         },
       },
-      currentListId: currentListId + 1,
       newListTitle: '',
     });
+    currentListId = currentListId + 1;
   }
 
   addTaskListInput = (value) => {
@@ -47,7 +48,7 @@ class TodoApp extends React.Component {
   }
 
   addTask = (listId) => {
-    const { lists, currentTaskId } = this.state;
+    const { lists } = this.state;
     this.setState({
       lists: {
         ...lists,
@@ -60,8 +61,8 @@ class TodoApp extends React.Component {
           newTaskText: '',
         },
       },
-      currentTaskId: currentTaskId + 1,
     });
+    currentTaskId = currentTaskId + 1;
   }
 
   addTaskInput = (listId, value) => {
