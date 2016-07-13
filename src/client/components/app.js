@@ -3,48 +3,80 @@ import TaskLists from './tasklists'
 import Title from './title'
 import CustomButton from './custombutton'
 import Task from './task'
-var _ = require('lodash');
+import _ from 'lodash'
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.onButtonSelected = this.onButtonSelected.bind(this);
     this.state = {
-      onClick: false,
-      onEnter: false,
-      app: { lists: _.reduce({...this.props}, 0), }
-    },
-    console.log("constructor : ");
-    console.log({...this.state.app});
-  };
-
-  leOnKeyPress(e) {
-    console.log('il appuie sur des touches et il est content....');
-    if (e.key === 'Enter') {
-      console.log('putain c\'était pas compliqué bordel !');
+      lists: this.props.lists,
+      currentTaskId: 2,
+      currentListId: 3,
     }
   }
 
-  onButtonSelected(button) {
-    console.log('Ah t\'as trouvé le bouton enfin.... : ');
-    console.log(button);
-    if (button === 'remove') {
-      const newapp = ({ this.state.app.lists[1].tasks.task[1] = '30' })
-      this.setState({ app: newapp });
-      console.log("on selected : ");
- 	  console.log({...this.state.app});
+  onButtonSelected = (e, idList, idTask) => {
+  	console.log(e.target);
+  	console.log(e.target.name);
+    const { lists, currentTaskId, currentListId } = this.state;
+    if (e.target.className === 'remove') {
+      console.log('remove');
+      this.setState({
+      	lists: {
+      		...lists,
+      		[idList]: {
+      			...lists[idList],
+      			tasks: _.omit(lists[idList].tasks, idTask),
+      			}
+      		}
+      });
     }
-    if (button === 'addtasklist') {
-    	console.log('las');
+    if (e.target.className === 'addlist') {
+    	console.log('addlist');
+    	this.setState({
+      	lists: {
+      		...lists,
+      		[idList + 1]: {
+      			id: currentListId + 1,
+      			title: e.target.value,      			
+      			tasks: [{id: 0, task: ' '}],
+      			}
+      		}
+      });
     }
+    if (e.target.className === 'input-task') {
+    	console.log('input-task value :');
+    	this.setState({
+      	lists: {
+      		...lists,
+      		[idList]: {     			
+      			...lists[idList],
+      			tasks: {
+      				...lists[idList].tasks,
+					[currentTaskId + 1]: [{
+      				id: currentTaskId + 1,
+      				task: e.target.value,
+      			}],
+      			}
+      		}
+      	},
+      	currentTaskId: currentTaskId + 1,
+      	});
+    }
+  }
+
+  handleKey = (e) => {
+  	if (e.key === 'Enter') {
+  		this.onButtonSelected(e);
+  	}
   }
 
   render() {
     return (
       <div className='datApp'>
-        <CustomButton message='Ajouter une liste' name='addlist' onButtonSelected={this.onButtonSelected} />
+        <input placeholder='Ajouter une liste' className='addlist' onKeyPress={ this.handleKey } />
         <Title title='App' />
-        <TaskLists {...this.state.app} onButtonSelected={this.onButtonSelected} />
+        <TaskLists { ...this.state } onButtonSelected={this.onButtonSelected} />
       </div>
     );
   }

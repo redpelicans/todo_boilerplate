@@ -29,7 +29,6 @@ const fake = [
 
 describe('App test', function(){
   it('test App', function(){
-    var testApp = [{ title: 'List1', tasks: ['1st', '2nd', '3rd'] }, { title: 'List2', tasks: ['1st', '2nd', '3rd'] }];
     const renderer = createRenderer()
     renderer.render(React.createElement(App, {lists: fake} ));
     const output = renderer.getRenderOutput()

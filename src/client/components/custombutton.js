@@ -1,11 +1,13 @@
 import React from 'react'
 
-const	CustomButton = ({ message, name, type, onButtonSelected }) => {
+const	CustomButton = ({ idList, idTask, message, name, type, onButtonSelected }) => {
   const handleClick = (e) => {
     e.stopPropagation();
-    onButtonSelected(name);
+    console.log(idList);
+    console.log(idTask);
+    onButtonSelected(e, idList, idTask);
   };
-  return <button onClick={handleClick} type={type}>{message}</button>
+  return <button className={name} onClick={handleClick} type={type}>{message}</button>
 };
 
 CustomButton.propTypes = {

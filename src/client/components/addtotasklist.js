@@ -1,8 +1,14 @@
 import React from 'react'
-import Task from './task'
 
-const addToTaskList = () => {
-  console.log('added to task list');
-}
+const addToTaskList = _.map(props.tasks, (task, id) => {
+    return (
+      <Task
+        key={id}
+        listId={props.id}
+        onRemoveTask={props.onRemoveTask}
+        taskId={id}
+        text={task.text} />
+    );
+  });
 
 export default addToTaskList
