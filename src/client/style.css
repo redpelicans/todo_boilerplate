@@ -1,0 +1,16 @@
+/* ID graphique redPels : Red CD4436 | white DCDDD8 | anthracite 424242 */
+
+body {
+	background-color: #DCDDD8;
+    color: #424242;
+}
+
+.todo-list {
+    background-color: #424242;
+    color: #DCDDD8;
+}
+
+.task {
+    background-color: #CD4436;
+    color: #DCDDD8;
+}
