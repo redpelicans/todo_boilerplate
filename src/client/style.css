@@ -1,14 +1,9 @@
-/* ID graphique redPels : Red CD4436 | white DCDDD8 | anthracite 424242 */
+/* couleurs redPels : Red CD4436 | white DCDDD8 | anthracite 424242 */
 
 body {
 	background-color: #DCDDD8;
     color: #424242;
-}
-
-li {
-    list-style: none;
-    padding-left: 5px;
-    padding-top: 5px;
+    font-family: sans-serif;
 }
 
 .todo-list {
@@ -22,45 +17,46 @@ li {
     color: #DCDDD8;
 }
 
+li {
+    list-style: none;
+
+    padding: 5px 5px 5px 5px;
+}
+
+h1 {
+    text-align: center;
+}
+
 .flex-container {
     display: flex;
-    flex-direction: row;
-    /*display: -moz-flex;*/
-    /*-moz-flex-direction: row;*/
-    /*display: -webkit-flex;*/
-    /*-webkit-flex-direction: row;*/
-
     flex-wrap: wrap;
-    /*-moz-flex-wrap: wrap;*/
-    /*-webkit-flex-wrap: wrap;*/
-
     flex-flow: row wrap;
-
     justify-content: space-between;
 
-    max-width: 100%;
     height: 100%;
 
     padding-bottom: 10px;
-    padding-right: 10px;
     margin: auto;
 }
 
 .flex-item {
-    height: 50px;
-    max-height: 20%;
+    flex: 1 1 100%;
 
-    width: 400px;
-    max-width: 48%;
-    /*width: 100%;*/
-    /*min-width: 30%;*/
-
-    margin-left: 5px;
+    min-height: 50px;
     margin-top: 10px;
-
-    flex-grow: 1;
 }
 
-@media {
-    /*<viewport < 600px flex-item 100% width>*/
+@media all and (min-width: 550px) {
+    h1 {
+        text-align: left;
+    }
+    .flex-item {
+        max-width: 48%;
+    }
+}
+
+@media all and (min-width: 850px) {
+    .flex-item {
+        max-width: 30%;
+    }
 }
