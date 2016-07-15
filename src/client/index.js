@@ -6,14 +6,14 @@ import _ from 'lodash'
 import fake from './data'
 
 // A man must know how to render
-const Task = ({task}) => (<li className="task">{task.id}: {task.description}</li>)
+const Task = ({task}) => (<li className="task flex-item">{task.id}: {task.description}</li>)
 
 const TaskList = ({list}) => (
     <div className="todo-list">
-        <div>{list.title}</div>
-        <ul>{_.map(list.tasks, ((task)=>(
+        <h3>{list.title}</h3>
+        <div className="flex-container">{_.map(list.tasks, ((task)=>(
             <Task task={task} key={task.id} />
-        )))}</ul>
+        )))}</div>
     </div>
 )
 
