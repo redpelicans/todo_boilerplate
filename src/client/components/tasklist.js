@@ -1,17 +1,29 @@
 import React from 'react'
 import Task from './task'
 import ListTitle from './listtitle'
-import InputTask from './inputtask'
+import _ from 'lodash'
 
-const TaskList = ({ idList, tasks, title, onButtonSelected }) => {
-  console.log({tasks});
-  const data = _.map({ ...tasks }, (task) => <Task idList={ idList } idTask={ task.id } key={ task.id } onButtonSelected={ onButtonSelected } task={task.task}/>)
-  console.log('tasklist :');
-  console.log(data);
+const TaskList = ({ idList, tasks, title, ...actions }) => {
+  const handleEnter = (e) => {
+    if (e.key === 'Enter') {
+      actions.createTask(idList, e.target.value);
+    }
+  };
+  const data = _.map({ ...tasks }, (task) =>
+    <Task { ...actions }
+      idList={ idList }
+      idTask={ task.id }
+      key={ task.id }
+      task={ task.task }
+    />)
   return (
     <div className='tasklist'>
-        <ListTitle title={ title } />
-        <InputTask idList={ idList } onButtonSelected={ onButtonSelected } />
+        <ListTitle { ...actions } idList={ idList } title={ title } />
+        <input
+          className='create-task'
+          onKeyPress={ handleEnter }
+          placeholder='New task...'
+          type='text' />
         {data}
     </div>
     )
@@ -19,7 +31,6 @@ const TaskList = ({ idList, tasks, title, onButtonSelected }) => {
 
 TaskList.propTypes = {
   idList: React.PropTypes.number.isRequired,
-  onButtonSelected: React.PropTypes.func.isRequired,
   tasks: React.PropTypes.array.isRequired,
   title: React.PropTypes.string.isRequired,
 };

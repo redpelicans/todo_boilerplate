@@ -1,85 +1,81 @@
 import React from 'react'
 import TaskLists from './tasklists'
 import Title from './title'
-import CustomButton from './custombutton'
-import Task from './task'
 import _ from 'lodash'
 
+let idTaskGlobal = 11;
+let idListGlobal = 3;
+
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      lists: this.props.lists,
-      currentTaskId: 2,
-      currentListId: 3,
-    }
-  }
+  state = {
+    lists: this.props.lists,
+  };
 
-  onButtonSelected = (e, idList, idTask) => {
-  	console.log(e.target);
-  	console.log(e.target.name);
-    const { lists, currentTaskId, currentListId } = this.state;
-    if (e.target.className === 'remove') {
-      console.log('remove');
-      this.setState({
-      	lists: {
-      		...lists,
-      		[idList]: {
-      			...lists[idList],
-      			tasks: _.omit(lists[idList].tasks, idTask),
-      			}
-      		}
-      });
-    }
-    if (e.target.className === 'addlist') {
-    	console.log('addlist');
-    	this.setState({
-      	lists: {
-      		...lists,
-      		[idList + 1]: {
-      			id: currentListId + 1,
-      			title: e.target.value,      			
-      			tasks: [{id: 0, task: ' '}],
-      			}
-      		}
-      });
-    }
-    if (e.target.className === 'input-task') {
-    	console.log('input-task value :');
-    	this.setState({
-      	lists: {
-      		...lists,
-      		[idList]: {     			
-      			...lists[idList],
-      			tasks: {
-      				...lists[idList].tasks,
-					[currentTaskId + 1]: [{
-      				id: currentTaskId + 1,
-      				task: e.target.value,
-      			}],
-      			}
-      		}
-      	},
-      	currentTaskId: currentTaskId + 1,
-      	});
-    }
-  }
+  createList = (name) => {
+    const id = idListGlobal + 1;
+    const currentLists = this.state.lists;
+    const lists = [...currentLists, { id, title: name, tasks: [] }];
+    idListGlobal = idListGlobal + 1;
+    this.setState({ lists });
+  };
 
-  handleKey = (e) => {
-  	if (e.key === 'Enter') {
-  		this.onButtonSelected(e);
-  	}
-  }
+  createTask = (idList, task) => {
+    const id = idTaskGlobal + 1;
+    const list = this.state.lists[idList];
+    const newTasks = [...list.tasks, { id, task }];
+    const remainingLists = _.reject(this.state.lists, list => list.id === idList);
+    const unsortedLists = [...remainingLists, { id: idList, title: list.title, tasks: newTasks }];
+    const lists = _.orderBy(unsortedLists, 'id');
+    idTaskGlobal = idTaskGlobal + 1;
+    this.setState({ lists });
+  };
+
+  removeTask = ({ idList, idTask }) => {
+    const list = this.state.lists[idList];
+    const remainingTasks = _.reject(list.tasks, task => task.id === idTask);
+    const remainingLists = _.reject(this.state.lists, list => list.id === idList);
+    const unsortedLists = [...remainingLists, { id: idList, title: list.title, tasks: remainingTasks }];
+    const lists = _.orderBy(unsortedLists, 'id');
+    this.setState({ lists });
+    idTaskGlobal = idTaskGlobal - 1;
+  };
+
+  removeList = (idList) => {
+    const lists = _.reject(this.state.lists, list => list.id === idList);
+    this.setState({ lists });
+    idListGlobal = idListGlobal - 1;
+  };
+
+  handleKey = (event) => {
+    if (event.key === 'Enter') {
+      this.createList(event.target.value);
+    }
+  };
+
+  actions = {
+    createList: this.createList,
+    createTask: this.createTask,
+    removeTask: this.removeTask,
+    removeList: this.removeList,
+  };
 
   render() {
     return (
       <div className='datApp'>
-        <input placeholder='Ajouter une liste' className='addlist' onKeyPress={ this.handleKey } />
         <Title title='App' />
-        <TaskLists { ...this.state } onButtonSelected={this.onButtonSelected} />
+        <input
+          className='addlist'
+          onKeyPress={ this.handleKey }
+          placeholder='Ajouter une liste'
+        />
+        <TaskLists lists={ this.state.lists } { ...this.actions } />
       </div>
     );
   }
 }
+
+App.propTypes = {
+  lists: React.PropTypes.array,
+};
 
 export default App

@@ -27,6 +27,20 @@ ReactDom.render(
     document.getElementById('todo')
 )
 
+
+pour ce qui est d'éviter les forêts de ifs et d'avoir un espèce de wrapper, c'est ça que vous aviez en tête ?
+```actions = {
+    createList: this.createList,
+    createTask: this.createTask,
+    removeTask: this.removeTask,
+    removeList: this.removeList,
+  };
+
+et dans le render : 
+
+<TaskLists lists={this.state.lists} { ...this.actions } />```
+
+
 arborescence
 injection modele de donnée
 les tests
