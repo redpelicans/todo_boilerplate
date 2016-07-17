@@ -21,7 +21,7 @@ class App extends React.Component {
 
   createTask = (idList, task) => {
     const id = idTaskGlobal + 1;
-    const list = this.state.lists[idList];
+    const list = _.find(this.state.lists, { id: idList });
     const newTasks = [...list.tasks, { id, task }];
     const remainingLists = _.reject(this.state.lists, list => list.id === idList);
     const unsortedLists = [...remainingLists, { id: idList, title: list.title, tasks: newTasks }];
@@ -31,19 +31,17 @@ class App extends React.Component {
   };
 
   removeTask = ({ idList, idTask }) => {
-    const list = this.state.lists[idList];
+    const list = _.find(this.state.lists, { id: idList });
     const remainingTasks = _.reject(list.tasks, task => task.id === idTask);
     const remainingLists = _.reject(this.state.lists, list => list.id === idList);
     const unsortedLists = [...remainingLists, { id: idList, title: list.title, tasks: remainingTasks }];
     const lists = _.orderBy(unsortedLists, 'id');
     this.setState({ lists });
-    idTaskGlobal = idTaskGlobal - 1;
   };
 
   removeList = (idList) => {
     const lists = _.reject(this.state.lists, list => list.id === idList);
     this.setState({ lists });
-    idListGlobal = idListGlobal - 1;
   };
 
   handleKey = (event) => {
@@ -66,7 +64,7 @@ class App extends React.Component {
         <input
           className='addlist'
           onKeyPress={ this.handleKey }
-          placeholder='Ajouter une liste'
+          placeholder='New tasklist...'
         />
         <TaskLists lists={ this.state.lists } { ...this.actions } />
       </div>
