@@ -1,14 +1,23 @@
 import React from 'react'
 import TaskList from './tasklist'
+import _ from 'lodash'
 
-const TaskLists = ({ lists }) => {
-  const data = lists.map((list) => <TaskList {...list} key={list.id} />)
+const TaskLists = ({ lists, ...actions }) => {
+  const data = _.map(lists, (list) => (
+  <TaskList
+    { ...actions }
+    { ...list }
+    idList={ list.id }
+    inputtask={ list.inputtask }
+    key={ list.id }
+  />)
+  )
   return (
     <div className='tasklists'>
-        {data}
+      {data}
     </div>
-    )
-}
+  )
+};
 
 TaskLists.propTypes = {
   lists: React.PropTypes.array.isRequired,
