@@ -59,7 +59,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className='datApp'>
+      <div className='app'>
         <Title title='App' />
         <input
           className='addlist'

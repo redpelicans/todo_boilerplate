@@ -5,7 +5,7 @@ const	RemoveTask = ({ idList, idTask, ...actions }) => {
     e.stopPropagation();
     actions.removeTask({ idList, idTask });
   };
-  return <button className='deleteTask' onClick={ handleClick } type='button'>X</button>
+  return <button className='removeTask' onClick={ handleClick } type='button'>X</button>
 };
 
 RemoveTask.propTypes = {

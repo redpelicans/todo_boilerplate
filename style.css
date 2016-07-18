@@ -5,20 +5,33 @@
      height: 100%;
      background-color: lightgrey;
      -webkit-flex-flow: row wrap;
-     flex-flow: row wrap;
-     flex-wrap: ltr;
+     margin: 1em;
+     padding: 1em;
+ }
+ .create-task {
+     padding: 1em;
  }
  .tasklists {
+     display: flex;
      background-color: yellow;
+     border: 1px;
+     border-style: solid;
+     border-color: black;
+     padding: 1em;
  }
  .tasklist {
      background-color: deepskyblue;
+     margin: 1em;
+     padding: 1em;
+     border: 1px;
+     border-style: solid;
+     border-color: black;
  }
  .task {
      margin: 1em;
+     padding: 1em;
  }
- .remove {
-     justify-content: flex-end;
+ .removeTask {
  }
  body {
      padding: 2em;
