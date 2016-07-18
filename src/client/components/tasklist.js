@@ -3,11 +3,9 @@ import Task from './task'
 import ListTitle from './listtitle'
 import _ from 'lodash'
 
-const TaskList = ({ idList, tasks, title, ...actions }) => {
-  const handleEnter = (e) => {
-    if (e.key === 'Enter') {
-      actions.createTask(idList, e.target.value);
-    }
+const TaskList = ({ idList, inputtask, tasks, title, ...actions }) => {
+  const handleKeyTask = (e) => {
+    actions.handleTask(e.key, idList);
   };
   const data = _.map({ ...tasks }, (task) =>
     <Task { ...actions }
@@ -21,9 +19,11 @@ const TaskList = ({ idList, tasks, title, ...actions }) => {
         <ListTitle { ...actions } idList={ idList } title={ title } />
         <input
           className='create-task'
-          onKeyPress={ handleEnter }
+          onKeyDown={ handleKeyTask }
           placeholder='New task...'
-          type='text' />
+          type='text'
+          value={ inputtask }
+        />
         {data}
     </div>
     )
@@ -31,6 +31,7 @@ const TaskList = ({ idList, tasks, title, ...actions }) => {
 
 TaskList.propTypes = {
   idList: React.PropTypes.number.isRequired,
+  inputtask: React.PropTypes.string,
   tasks: React.PropTypes.array.isRequired,
   title: React.PropTypes.string.isRequired,
 };
