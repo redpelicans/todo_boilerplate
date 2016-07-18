@@ -13,16 +13,16 @@ class App extends React.Component {
   };
 
   createList = (name) => {
-    const id = idListGlobal + 1;
     const currentLists = this.state.lists;
+    const id = idListGlobal + 1;
     const lists = [...currentLists, { id, title: name, tasks: [] }];
     idListGlobal = idListGlobal + 1;
     this.setState({ lists, inputlist: '' });
   };
 
   createTask = (idList, task) => {
-    const id = idTaskGlobal + 1;
     const list = _.find(this.state.lists, { id: idList });
+    const id = idTaskGlobal + 1;
     const newTasks = [...list.tasks, { id, task }];
     const remainingLists = _.reject(this.state.lists, list => list.id === idList);
     const unsortedLists = [...remainingLists, { id: idList, title: list.title, inputtask: '', tasks: newTasks }];
