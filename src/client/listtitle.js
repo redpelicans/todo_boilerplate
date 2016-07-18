@@ -1,7 +1,14 @@
 import React from 'react'
+import RemoveList from './removelist'
 
-const ListTitle = ({ title }) => <h2 className='listtitle'>{title}</h2>
+const ListTitle = ({ listId, onRemoveList, title }) =>
+  <h2 className='listtitle'> { title } <RemoveList listId={ listId }
+    onRemoveList={ onRemoveList } /></h2>
 
-ListTitle.propTypes = { title: React.PropTypes.string.isRequired };
+ListTitle.propTypes = {
+  listId: React.PropTypes.number.isRequired,
+  onRemoveList: React.PropTypes.func.isRequired,
+  title: React.PropTypes.string.isRequired,
+};
 
 export default ListTitle

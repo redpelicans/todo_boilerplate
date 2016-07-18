@@ -1,0 +1,48 @@
+.todoapp, .todolist, .todoitem
+		{
+			display: flex;
+		}
+.todoapp
+		{
+			display: -webkit-flex;
+  			-webkit-flex-direction: column;
+   			flex-direction: column;
+		}
+.title
+		{
+			text-align: center;
+			height: 100px;
+		}
+.createlist
+		{  
+			margin: 5px;
+		}
+.todolist
+		{
+			-webkit-flex-wrap: wrap;
+			flex-flow: row wrap;		
+  			
+		}
+.listtitle
+		{
+			text-align: center;
+		}
+.todoitem
+		{
+			margin: 20px;
+			flex-direction: column;
+			align-items: start;
+			margin-right: auto;
+			flex: 0 20%;
+			text-align: left;
+  			border: 1px solid black;
+		}
+.item	
+		{
+			flex-direction: column;
+				
+		}
+.removeitem	
+		{
+			align-items: right;	
+		}
