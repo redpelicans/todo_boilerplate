@@ -1,19 +1,22 @@
 import React from 'react'
 import TodoItem from './todoitem'
-import TodoApp from './app'
+import _ from 'lodash'
 
-const TodoList = ({ list, removeItemClick} ) => {
-  const data = list.map((tasks) => <TodoItem {...tasks} removeItemClick={removeItemClick} key={tasks.id} />)
+const TodoList = ({ lists, onCreateTask, onRemoveList, onRemoveTask }) => {
+  const data = _.map(lists, (list) => <TodoItem {...list} key={ list.id } listId={ list.id }
+    onCreateTask={ onCreateTask } onRemoveList={ onRemoveList } onRemoveTask={ onRemoveTask } />);
   return (
-		<div className='todolist'>
-			{data}
-		</div>
-	)
+    <div className='todolist'>
+    {data}
+    </div>
+    );
 };
 
-TodoList.propTypes = { 
-	list: React.PropTypes.array.isRequired,
-	removeItemClick: React.PropTypes.func.isRequired,
+TodoList.propTypes = {
+  lists: React.PropTypes.array.isRequired,
+  onCreateTask: React.PropTypes.func.isRequired,
+  onRemoveList: React.PropTypes.func.isRequired,
+  onRemoveTask: React.PropTypes.func.isRequired,
 };
 
 export default TodoList

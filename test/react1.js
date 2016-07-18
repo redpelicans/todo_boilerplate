@@ -14,24 +14,24 @@ import TodoItem from '../src/client/todoitem.js'
 chai.should()
 chai.use(equalJSX)
 
-let Items = [
+const Items = [
   { id: 1, title: 'List1', tasks: [{ id: 1, name: 'A' }, { id: 2, name: 'B' }, { id: 3, name: 'C' }] },
   { id: 2, title: 'List2', tasks: [{ id: 1, name: 'E' }, { id: 2, name: 'F' }, { id: 3, name: 'G' }] },
 
 ];
 
 describe('TodoApp test', function(){
-  it('test App', function(){
-  	const renderer = createRenderer()	
-    var data = [{id:'1', title: 'List1', tasks:[{id:1, name:'A'},{id:2, name:'B'},{id:3, name:'C'}]},
+	it('test App', function(){
+		const renderer = createRenderer()	
+    		var data = [{id:'1', title: 'List1', tasks:[{id:1, name:'A'},{id:2, name:'B'},{id:3, name:'C'}]},
 				{id:'2', title: 'List2', tasks:[{id:1, name:'E'},{id:2, name:'F'},{id:3, name:'G'}]}];
-    renderer.render(React.createElement(TodoApp, {list:data}));
-    const output = renderer.getRenderOutput()
-    output.should.equalJSX(<div className='todoapp'>
-		<Title title='Marianne&#39;s todo list'/>
-		<CreateList/>
-		<TodoList list={data} />
-		</div>
+    		renderer.render(React.createElement(TodoApp, {list:data}));
+    		const output = renderer.getRenderOutput()
+    		output.should.equalJSX(<div className='todoapp'>
+			<Title title='Marianne&#39;s todo list'/>
+			<CreateList/>
+			<TodoList list={data} />
+			</div>
 		); 
 	});
 });

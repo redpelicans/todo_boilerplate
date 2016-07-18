@@ -1,14 +1,16 @@
 import React from 'react'
-import TodoApp from './app'
 import RemoveItem from './removeitem'
 
-const Item = ({ name, removeItemClick }) => <li className='item'>{ name }<RemoveItem removeItemClick={removeItemClick} /></li>
+const Item = ({ listId, name, onRemoveTask, taskId }) =>
+  <div className='item'>
+  <li >{ name }<RemoveItem listId={listId} onRemoveTask={onRemoveTask} taskId={taskId} /></li>
+  </div>
 
 Item.propTypes = {
+  listId: React.PropTypes.number.isRequired,
   name: React.PropTypes.string.isRequired,
-  removeItemClick: React.PropTypes.func.isRequired,
-  
-  
+  onRemoveTask: React.PropTypes.func.isRequired,
+  taskId: React.PropTypes.number.isRequired,
 };
 
 export default Item

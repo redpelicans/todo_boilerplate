@@ -1,19 +1,21 @@
 import React from 'react'
 
-const RemoveItem = ({removeItemClick}) => {
-  const appelRemoveItemClick = (event) => {
-  	event.preventDefault();
-  	removeItemClick('lol');
-  	event.stopPropagation();
+const RemoveItem = ({ listId, onRemoveTask, taskId }) => {
+  const handleRemoveItem = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    onRemoveTask({ listId, taskId });
+  };
 
-  }
-	return (
- 		<button onClick={appelRemoveItemClick}>x</button>
- 	);
+  return (
+    <div className='removeitem'><button onClick={ handleRemoveItem }>x</button></div>
+    );
 }
 
 RemoveItem.propTypes = {
-  removeItemClick: React.PropTypes.func.isRequired,
+  listId: React.PropTypes.number.isRequired,
+  onRemoveTask: React.PropTypes.func.isRequired,
+  taskId: React.PropTypes.number.isRequired,
 };
 
 export default RemoveItem

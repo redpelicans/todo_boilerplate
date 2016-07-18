@@ -1,27 +1,30 @@
 import React from 'react'
-import TodoApp from './app'
 
-const CreateList = ({createListClick}) => {
-	const appelCreateListClick = (event) => {
-		event.preventDefault();
-		createListClick('lol');
-		event.stopPropagation();	
-	};
-	
-	return (
-	<div className='createlist'>
-		<form>
-			<input type='text'/>
-			<button onClick={appelCreateListClick}>Add</button>
-		</form>
-	</div>
-	);
+const createList = ({ listVal, onCreateList, updateVal }) => {
+  const handleCreateList = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      event.stopPropagation();
+      onCreateList(event.target.value);
+    }
+    else {
+      event.preventDefault();
+      event.stopPropagation();
+      updateVal(event.key);
+    }
+  };
+
+  return (
+    <div className='createlist'>
+    <input onKeyDown={ handleCreateList } placeholder='new' type='text' value={ listVal } />
+    </div>
+    );
 };
 
-CreateList.propTypes = {
-  createListClick: React.PropTypes.func.isRequired,
+createList.propTypes = {
+  listVal: React.PropTypes.string.isRequired,
+  onCreateList: React.PropTypes.func.isRequired,
+  updateVal: React.PropTypes.func.isRequired,
 };
 
-export default CreateList
-
-
+export default createList
