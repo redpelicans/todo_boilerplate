@@ -2,9 +2,9 @@ import React from 'react'
 import InputRenameList from './InputRenameList'
 import ButtonRenameList from './ButtonRenameList'
 
-const RenameList = () => (
+const RenameList = (props) => (
 	<div>
-		<InputRenameList />
+		<InputRenameList {...props}/>
 		<ButtonRenameList />
 	</div>
 );

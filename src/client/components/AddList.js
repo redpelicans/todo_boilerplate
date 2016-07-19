@@ -2,9 +2,9 @@ import React from 'react'
 import InputAddList from './InputAddList'
 import ButtonAddList from './ButtonAddList'
 
-const AddList = () => (
+const AddList = (props) => (
 	<div className='List'>
-		<InputAddList />
+		<InputAddList {...props} />
 		<ButtonAddList />
 	</div>
 );

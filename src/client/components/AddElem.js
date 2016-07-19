@@ -2,9 +2,9 @@ import React from 'react'
 import InputAddElem from './InputAddElem'
 import ButtonAddElem from './ButtonAddElem'
 
-const AddElem = () => (
+const AddElem = (props) => (
 	<div>
-		<InputAddElem />
+		<InputAddElem {...props} />
 		<ButtonAddElem />
 	</div>
 );

@@ -2,9 +2,9 @@ import React from 'react'
 import InputRenameElem from './InputRenameElem'
 import ButtonRenameElem from './ButtonRenameElem'
 
-const RenameElem = () => (
+const RenameElem = (props) => (
 	<div>
-		<InputRenameElem />
+		<InputRenameElem {...props}/>
 		<ButtonRenameElem />
 	</div>
 );
