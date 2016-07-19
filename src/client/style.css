@@ -1,0 +1,64 @@
+/* couleurs redPels : Red CD4436 | white DCDDD8 | anthracite 424242 */
+
+body {
+	background-color: #DCDDD8;
+    color: #424242;
+    font-family: sans-serif;
+}
+
+li {
+    list-style: none;
+}
+
+.todo-list {
+    margin-top: 30px;
+    background-color: #424242;
+    color: #DCDDD8;
+}
+
+.task {
+    background-color: #CD4436;
+    color: #DCDDD8;
+}
+
+.padded {
+    padding: 5px 5px 5px 5px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-flow: row wrap;
+    justify-content: space-between;
+
+    height: 100%;
+
+    padding-bottom: 10px;
+    margin: auto;
+}
+
+.flex-item {
+    flex: 1 1 100%;
+
+    min-height: 50px;
+    margin-top: 10px;
+}
+
+@media all and (min-width: 550px) {
+    h1 {
+        text-align: left;
+    }
+    .flex-item {
+        max-width: 48%;
+    }
+}
+
+@media all and (min-width: 850px) {
+    .flex-item {
+        max-width: 30%;
+    }
+}
