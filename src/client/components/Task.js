@@ -4,17 +4,12 @@ import RemoveTask from './RemoveTask';
 const Task = (props) =>
   <div className='task'>
     <span>{props.task.text}</span>
-    <RemoveTask
-      listId={props.list.id}
-      onRemove={props.onRemoveTask}
-      taskId={props.task.id} />
+    <RemoveTask onRemove={props.onRemoveTask} id={props.task.id} />
   </div>;
 
 Task.propTypes = {
-  listId: React.PropTypes.number.isRequired,
   onRemoveTask: React.PropTypes.func.isRequired,
-  taskId: React.PropTypes.number.isRequired,
-  text: React.PropTypes.string.isRequired,
+  task: React.PropTypes.object.isRequired,
 };
 
 export default Task;

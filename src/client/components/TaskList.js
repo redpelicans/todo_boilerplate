@@ -7,7 +7,9 @@ import RemoveTaskList from './RemoveTaskList';
 
 const TaskList = (props) => {
 
-  const taskElems = _.map(props.tasks, task => (
+  const tasks = _.pickBy(props.tasks, task => task.listId === props.list.id);
+
+  const taskElems = _.map(tasks, task => (
       <Task task={task} {...props} key={task.id} />
   ));
 
