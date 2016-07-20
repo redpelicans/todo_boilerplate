@@ -13,50 +13,48 @@ import {
   removeTask,
 } from '../actions';
 
-class App extends React.Component {
+const App = ({ dispatch, lists, tasks }) => {
 
-  onListInput = (value) => {
-    this.props.dispatch(listInput(value));
+  const onListInput = (value) => {
+    dispatch(listInput(value));
   }
 
-  onAddList = () => {
-    this.props.dispatch(addList(this.props.input));
+  const onAddList = () => {
+    dispatch(addList(lists.input));
   }
 
-  onRemoveList = (id) => {
-    this.props.dispatch(removeList(id));
+  const onRemoveList = (id) => {
+    dispatch(removeList(id));
   }
 
-  onTaskInput = (listId, value) => {
-    this.props.dispatch(taskInput(listId, value));
+  const onTaskInput = (listId, value) => {
+    dispatch(taskInput(listId, value));
   }
 
-  onAddTask = (listId) => {
-    this.props.dispatch(addTask(listId, this.props.lists[listId].newTaskText));
+  const onAddTask = (listId) => {
+    dispatch(addTask(listId, lists.data[listId].newTaskText));
   }
 
-  onRemoveTask = (id) => {
-    this.props.dispatch(removeTask(id));
+  const onRemoveTask = (id) => {
+    dispatch(removeTask(id));
   }
 
-  render() {
-    return (
-      <div className='todo-app'>
-        <Title value='Todo App' />
-        <AddTaskList
-          onAddList={this.onAddList}
-          onChange={this.onListInput}
-          value={this.props.input} />
-        <TaskLists
-          lists={this.props.lists}
-          tasks={this.props.tasks}
-          onAddTask={this.onAddTask}
-          onTaskInput={this.onTaskInput}
-          onRemoveTask={this.onRemoveTask}
-          onRemoveList={this.onRemoveList} />
-      </div>
-    );
-  }
+  return (
+    <div className='todo-app'>
+      <Title value='Todo App' />
+      <AddTaskList
+        onAddList={onAddList}
+        onChange={onListInput}
+        value={lists.input} />
+      <TaskLists
+        lists={lists.data}
+        tasks={tasks}
+        onAddTask={onAddTask}
+        onTaskInput={onTaskInput}
+        onRemoveTask={onRemoveTask}
+        onRemoveList={onRemoveList} />
+    </div>
+  );
 }
 
 const mapStateToProps = (state) => {

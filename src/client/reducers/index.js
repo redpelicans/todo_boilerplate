@@ -10,23 +10,48 @@ import {
 
 function lists(state = {}, action) {
   switch (action.type) {
+    case LIST_INPUT:
+      return {
+        input: action.value,
+        data: { ...state.data },
+      };
     case ADD_LIST:
       return {
-        ...state,
-        [action.id]: {
-          id: action.id,
-          title: action.title,
-          newTaskText: '',
+        input: '',
+        data: {
+          ...state.data,
+          [action.id]: {
+            id: action.id,
+            title: action.title,
+            newTaskText: '',
+          },
         },
       };
     case REMOVE_LIST:
-      return _.omit(state, action.id);
+      return {
+        input: state.input,
+        data: _.omit(state.data, action.id),
+      };
     case TASK_INPUT:
       return {
-        ...state,
-        [action.id]: {
-          ...state[action.id],
-          newTaskText: action.value,
+        input: state.input,
+        data: {
+          ...state.data,
+          [action.id]: {
+            ...state.data[action.id],
+            newTaskText: action.value,
+          },
+        },
+      };
+    case ADD_TASK:
+      return {
+        input: state.input,
+        data: {
+          ...state.data,
+          [action.listId]: {
+            ...state.data[action.listId],
+            newTaskText: '',
+          },
         },
       };
     default:
@@ -52,24 +77,18 @@ function tasks(state = {}, action) {
   }
 }
 
-function input(state = '', action) {
-  if (action.type === LIST_INPUT) {
-    return action.value;
-  }
-  return state;
-}
-
 const initialState = {
-  lists: {},
+  lists: {
+    input: '',
+    data: {},
+  },
   tasks: {},
-  input: '',
 };
 
 function rootReducer(state = initialState, action) {
   return {
     lists: lists(state.lists, action),
     tasks: tasks(state.tasks, action),
-    input: input(state.input, action),
   };
 }
 
