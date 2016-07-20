@@ -15,7 +15,7 @@ const TaskList = (props) => {
     <div className='task-list'>
       <header>
         <TaskListTitle value={props.list.title} />
-        <RemoveTaskList id={props.list.id} onRemove={props.onRemoveTaskList} />
+        <RemoveTaskList id={props.list.id} onRemove={props.onRemoveList} />
       </header>
       <div className='tasks'>
         {taskElems}
@@ -34,7 +34,7 @@ TaskList.propTypes = {
   list: React.PropTypes.object.isRequired,
   onAddTask: React.PropTypes.func.isRequired,
   onAddTaskInput: React.PropTypes.func.isRequired,
-  onRemoveTaskList: React.PropTypes.func.isRequired,
+  onRemoveList: React.PropTypes.func.isRequired,
   tasks: React.PropTypes.object.isRequired,
 };
 

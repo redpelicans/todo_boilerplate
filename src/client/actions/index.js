@@ -38,14 +38,6 @@ export function removeList(id) {
   };
 }
 
-export function taskInput(listId, value) {
-  return {
-    type: TASK_INPUT,
-    id: listId,
-    value,
-  };
-}
-
 export function addTask(id, listId, text) {
   return {
     type: ADD_TASK,
