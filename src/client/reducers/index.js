@@ -4,8 +4,8 @@ import {
   REMOVE_LIST,
   ADD_TASK,
   REMOVE_TASK,
-  INPUT_LIST,
-  INPUT_TASK,
+  LIST_INPUT,
+  TASK_INPUT,
 } from '../actions';
 
 function lists(state = {}, action) {
@@ -21,7 +21,7 @@ function lists(state = {}, action) {
       };
     case REMOVE_LIST:
       return _.omit(state, action.id);
-    case INPUT_TASK:
+    case TASK_INPUT:
       return {
         ...state,
         [action.id]: {
@@ -53,7 +53,7 @@ function tasks(state = {}, action) {
 }
 
 function input(state = '', action) {
-  if (action.type === INPUT_LIST) {
+  if (action.type === LIST_INPUT) {
     return action.value;
   }
   return state;

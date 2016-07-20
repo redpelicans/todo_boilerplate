@@ -7,42 +7,35 @@ import RemoveTaskList from './RemoveTaskList';
 
 const TaskList = (props) => {
 
-  const taskElems = _.map(props.tasks, (task, id) => (
-      <Task
-        {...props}
-        key={id}
-        listId={props.id}
-        taskId={Number(id)}
-        text={task.text} />
+  const taskElems = _.map(props.tasks, task => (
+      <Task task={task} {...props} key={task.id} />
   ));
 
   return (
     <div className='task-list'>
       <header>
-        <TaskListTitle value={props.title} />
-        <RemoveTaskList id={props.id} onRemove={props.onRemoveTaskList} />
+        <TaskListTitle value={props.list.title} />
+        <RemoveTaskList id={props.list.id} onRemove={props.onRemoveTaskList} />
       </header>
       <div className='tasks'>
         {taskElems}
       </div>
       <AddTask
         {...props}
-        listId={props.id}
+        listId={props.list.id}
         onAddTask={props.onAddTask}
         onChange={props.onAddTaskInput}
-        value={props.newTaskText} />
+        value={props.list.newTaskText} />
     </div>
   );
 };
 
 TaskList.propTypes = {
-  id: React.PropTypes.number.isRequired,
-  newTaskText: React.PropTypes.string.isRequired,
+  list: React.PropTypes.object.isRequired,
   onAddTask: React.PropTypes.func.isRequired,
   onAddTaskInput: React.PropTypes.func.isRequired,
   onRemoveTaskList: React.PropTypes.func.isRequired,
   tasks: React.PropTypes.object.isRequired,
-  title: React.PropTypes.string.isRequired,
 };
 
 export default TaskList;
