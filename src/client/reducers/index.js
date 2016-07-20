@@ -1,16 +1,76 @@
-import lists from './lists';
-import tasks from './tasks';
+import _ from 'lodash';
+import {
+  ADD_LIST,
+  REMOVE_LIST,
+  ADD_TASK,
+  REMOVE_TASK,
+  INPUT_LIST,
+  INPUT_TASK,
+} from '../actions';
+
+function lists(state = {}, action) {
+  switch (action.type) {
+    case ADD_LIST:
+      return {
+        ...state,
+        [action.id]: {
+          id: action.id,
+          title: action.title,
+          newTaskText: '',
+        },
+      };
+    case REMOVE_LIST:
+      return _.omit(state, action.id);
+    case INPUT_TASK:
+      return {
+        ...state,
+        [action.id]: {
+          ...state[action.id],
+          newTaskText: action.value,
+        },
+      };
+    default:
+      return  state;
+  }
+}
+
+function tasks(state = {}, action) {
+  switch (action.type) {
+    case ADD_TASK:
+      return {
+        ...state,
+        [action.id]: {
+          id: action.id,
+          listId: action.listId,
+          text: action.text,
+        },
+      };
+    case REMOVE_TASK:
+      return _.omit(state, action.id);
+    default:
+      return  state;
+  }
+}
+
+function input(state = '', action) {
+  if (action.type === INPUT_LIST) {
+    return action.value;
+  }
+  return state;
+}
 
 const initialState = {
   lists: {},
   tasks: {},
+  input: '',
 };
 
-function reducer(state = initialState, action) {
+function rootReducer(state = initialState, action) {
   return {
     lists: lists(state.lists, action),
     tasks: tasks(state.tasks, action),
+    input: input(state.input, action),
   };
 }
 
-export default reducer;
+export default rootReducer;

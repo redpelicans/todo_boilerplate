@@ -1,10 +1,15 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import TodoApp from './components/TodoApp';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import App from './containers/App';
+import rootReducer from './reducers'
 
-const LISTS = {};
+let store = createStore(rootReducer);
 
 ReactDom.render(
-  <TodoApp lists={LISTS} />,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('todo')
 );

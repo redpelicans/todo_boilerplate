@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AddTaskList = ({ onAddTaskList, onChange, value }) => {
+const AddTaskList = ({ onAddList, onChange, value }) => {
 
   const handleUserInput = (e) => {
     e.preventDefault();
@@ -9,7 +9,7 @@ const AddTaskList = ({ onAddTaskList, onChange, value }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddTaskList();
+    onAddList();
   };
 
   return (
@@ -25,7 +25,7 @@ const AddTaskList = ({ onAddTaskList, onChange, value }) => {
 };
 
 AddTaskList.propTypes = {
-  onAddTaskList: React.PropTypes.func.isRequired,
+  onAddList: React.PropTypes.func.isRequired,
   onChange: React.PropTypes.func.isRequired,
   value: React.PropTypes.string.isRequired,
 };
