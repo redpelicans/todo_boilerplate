@@ -46,10 +46,10 @@ export function taskInput(listId, value) {
   };
 }
 
-export function addTask(id, listId, text) {
+export function addTask(listId, text) {
   return {
     type: ADD_TASK,
-    id,
+    id: nextTaskId++,
     listId,
     text,
   };

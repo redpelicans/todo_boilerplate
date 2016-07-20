@@ -9,6 +9,7 @@ import {
   addList,
   removeList,
   taskInput,
+  addTask,
 } from '../actions';
 
 class App extends React.Component {
@@ -29,8 +30,8 @@ class App extends React.Component {
     this.props.dispatch(taskInput(listId, value));
   }
 
-  addTask = (listId) => {
-
+  onAddTask = (listId) => {
+    this.props.dispatch(addTask(listId, this.props.lists[listId].newTaskText));
   }
 
   removeTask = (listId, taskId) => {
@@ -48,7 +49,7 @@ class App extends React.Component {
         <TaskLists
           lists={this.props.lists}
           tasks={this.props.tasks}
-          onAddTask={this.addTask}
+          onAddTask={this.onAddTask}
           onTaskInput={this.onTaskInput}
           onRemoveTask={this.removeTask}
           onRemoveList={this.onRemoveList} />
