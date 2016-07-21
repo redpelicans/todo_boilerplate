@@ -17,16 +17,17 @@ export const REMOVE_TASK = 'REMOVE_TASK';
  */
 
 export function listInput(value) {
- return {
-   type: LIST_INPUT,
-   value,
- };
+  return {
+    type: LIST_INPUT,
+    value,
+  };
 }
 
 export function addList(title) {
+  nextListId = nextListId + 1;
   return {
     type: ADD_LIST,
-    id: nextListId++,
+    id: nextListId,
     title,
   };
 }
@@ -47,9 +48,10 @@ export function taskInput(listId, value) {
 }
 
 export function addTask(listId, text) {
+  nextTaskId = nextTaskId + 1;
   return {
     type: ADD_TASK,
-    id: nextTaskId++,
+    id: nextTaskId,
     listId,
     text,
   };

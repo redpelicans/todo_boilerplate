@@ -35,8 +35,8 @@ const TaskList = (props) => {
 TaskList.propTypes = {
   list: React.PropTypes.object.isRequired,
   onAddTask: React.PropTypes.func.isRequired,
-  onTaskInput: React.PropTypes.func.isRequired,
   onRemoveList: React.PropTypes.func.isRequired,
+  onTaskInput: React.PropTypes.func.isRequired,
   tasks: React.PropTypes.object.isRequired,
 };
 

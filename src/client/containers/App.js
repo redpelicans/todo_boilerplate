@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import _ from 'lodash';
 import Title from '../components/Title';
 import AddTaskList from '../components/AddTaskList';
 import TaskLists from '../components/TaskLists';
@@ -17,27 +16,27 @@ const App = ({ dispatch, lists, tasks }) => {
 
   const onListInput = (value) => {
     dispatch(listInput(value));
-  }
+  };
 
   const onAddList = () => {
     dispatch(addList(lists.input));
-  }
+  };
 
   const onRemoveList = (id) => {
     dispatch(removeList(id));
-  }
+  };
 
   const onTaskInput = (listId, value) => {
     dispatch(taskInput(listId, value));
-  }
+  };
 
   const onAddTask = (listId) => {
     dispatch(addTask(listId, lists.data[listId].newTaskText));
-  }
+  };
 
   const onRemoveTask = (id) => {
     dispatch(removeTask(id));
-  }
+  };
 
   return (
     <div className='todo-app'>
@@ -48,17 +47,24 @@ const App = ({ dispatch, lists, tasks }) => {
         value={lists.input} />
       <TaskLists
         lists={lists.data}
-        tasks={tasks}
         onAddTask={onAddTask}
-        onTaskInput={onTaskInput}
+        onRemoveList={onRemoveList}
         onRemoveTask={onRemoveTask}
-        onRemoveList={onRemoveList} />
+        onTaskInput={onTaskInput}
+        tasks={tasks} />
     </div>
   );
-}
-
-const mapStateToProps = (state) => {
-  return state;
 };
+
+App.propTypes = {
+  dispatch: React.PropTypes.func.isRequired,
+  lists: React.PropTypes.object.isRequired,
+  tasks: React.PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  lists: state.lists,
+  tasks: state.tasks,
+});
 
 export default connect(mapStateToProps)(App);

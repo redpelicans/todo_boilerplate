@@ -4,7 +4,7 @@ import RemoveTask from './RemoveTask';
 const Task = (props) =>
   <div className='task'>
     <span>{props.task.text}</span>
-    <RemoveTask onRemove={props.onRemoveTask} id={props.task.id} />
+    <RemoveTask id={props.task.id} onRemove={props.onRemoveTask} />
   </div>;
 
 Task.propTypes = {
