@@ -8,7 +8,7 @@ import {
   TASK_INPUT,
 } from '../actions';
 
-function lists(state = {}, action) {
+function lists(state = { data: {}, input: '' }, action) {
   switch (action.type) {
   case LIST_INPUT:
     return {
