@@ -8,7 +8,6 @@ import NewList from './newlist';
 import { connect } from 'react-redux'
 
 const Todo = ({ lists, tasks }) => {
-	console.log(lists, tasks);
 	return (
 		<div className="todo">
 		{_.map(lists, (taskList) => (
