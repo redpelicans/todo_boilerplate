@@ -4,14 +4,19 @@ import createLogger from 'redux-logger'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 
-import App from './containers/App'
+import App from './containers/app'
+import todoReducer from './reducers/todoReducer'
 
-// A man must have data
-import fake from './data'
+const initialState = {
+  lists: [{id: 0, title: 'first'}],
+  tasks: [{id: 0, description: 'the first task', listId: 0}]
+};
 
-// .. with a little help from his frameworks
+const todoStore = createStore( todoReducer, initialState, applyMiddleware( createLogger() ) );
+
+
 ReactDom.render(
-  <Provider>
-    <App data={fake} />
+  <Provider store={todoStore}>
+    <App />
   </Provider>, document.getElementById('react-wrapper')
 );
