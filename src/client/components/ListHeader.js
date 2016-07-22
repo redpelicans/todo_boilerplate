@@ -1,19 +1,46 @@
-import React from 'react'
-import ListName from './ListName'
-import RenameList from './RenameList'
-import ButtonDeleteList from './ButtonDeleteList'
+import React from 'react';
 
-const ListHeader = ({ functions, id, name }) => (
-	<div className='ListHeader'>
-		<ListName name={name} />
-		<RenameList id={id} renameList={functions.renameList} />
-		<ButtonDeleteList deleteList={functions.deleteList} id={id} />
-	</div>
-);
+const ListHeader = (props) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    props.onRenameList(props.id);
+  };
+
+  const handleEnableClick = () => {
+    props.onEnableRenameList(props.id);
+  };
+
+  const handleDeleteClick = () => {
+    props.onDeleteList(props.id);
+  };
+
+  const handleChange = (e) => {
+    props.onInputRenameList(e.target.value, props.id);
+  };
+
+  const button = (props.list.rename === true) ? 'Close' : 'Rename';
+
+  const input = ((props.list.rename === true) ? (
+    <form onSubmit={handleSubmit}>
+      <input onChange={handleChange} type='text' value={props.list.input}></input>
+    </form>) : null);
+
+  return (
+    <div className='ListHeader'>
+      <h2>{props.list.name}</h2>
+      {input}
+      <button onClick={handleEnableClick}>{button}</button>
+      <button onClick={handleDeleteClick}>Delete</button>
+    </div>
+  );
+};
 
 ListHeader.propTypes = {
-  functions: React.PropTypes.object.isRequired,
   id: React.PropTypes.number.isRequired,
-  name: React.PropTypes.string.isRequired }
+  list: React.PropTypes.object.isRequired,
+  onDeleteList: React.PropTypes.func.isRequired,
+  onEnableRenameList: React.PropTypes.func.isRequired,
+  onInputRenameList: React.PropTypes.func.isRequired,
+  onRenameList: React.PropTypes.func.isRequired };
 
-export default ListHeader
+export default ListHeader;

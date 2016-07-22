@@ -1,89 +1,29 @@
-import React from 'react'
-import Todo from './Todo'
-import _ from 'lodash'
+import React from 'react';
+import { connect } from 'react-redux';
+import Todo from './Todo';
+import { addElem, deleteElem, doneElem, enableRenameElem,
+  inputAddElem, inputRenameElem, renameElem } from '../actions/elems';
+import { addList, deleteList, inputAddList, inputRenameList, renameList, enableRenameList } from '../actions/lists';
 
-export default class App extends React.Component {
-  static propTypes = {
-    lists: React.PropTypes.object,
-  };
+const App = (props) => (
+  <Todo {...props} />
+);
 
-  constructor(props) {
-    super(props);
-    this.state = { lists: props.lists };
-  }
+App.propTypes = {
+  elems: React.PropTypes.object.isRequired,
+  lists: React.PropTypes.object.isRequired };
 
-  addElem = (newname, idList) => {
-    const { lists } = this.state;
-    const newId = _.size(lists[idList].elems) + 1;
-    this.setState({
-      lists: {
-        ...lists,
-        [idList]: {
-          ...lists[idList],
-          elems: {
-            ...lists[idList].elems,
-            [newId]: { name: newname } } } } });
-  }
-
-  deleteElem = (idElem, idList) => {
-    const { lists } = this.state;
-    this.setState({
-      lists: {
-        ...lists,
-        [idList]: {
-          ...lists[idList],
-          elems: _.omit(lists[idList].elems, idElem) } } });
-  }
-
-  renameElem = (newname, idElem, idList) => {
-    const { lists } = this.state;
-    this.setState({
-      lists: {
-        ...lists,
-        [idList]: {
-          ...lists[idList],
-          elems: {
-            ...lists[idList].elems,
-            [idElem]: {
-              ...lists[idList].elems[idElem],
-              name: newname } } } } });
-  }
-
-  addList = (newname) => {
-    const { lists } = this.state;
-    const newId = _.size(lists) + 1;
-    this.setState({
-      lists: {
-        ...lists,
-        [newId]: {
-          name: newname,
-          elems: {} } } });
-  }
-
-  deleteList = (idList) => {
-    const { lists } = this.state;
-    this.setState({ lists: _.omit(lists, idList) });
-  }
-
-  renameList = (newname, idList) => {
-    const { lists } = this.state;
-    this.setState({
-      lists: {
-        ...lists,
-        [idList]: {
-          ...lists[idList],
-          name: newname } } });
-  }
-
-  functions = {
-    addElem: this.addElem,
-    deleteElem: this.deleteElem,
-    renameElem: this.renameElem,
-    addList: this.addList,
-    deleteList: this.deleteList,
-    renameList: this.renameList }
-
-  render() {
-    return <Todo functions={ this.functions } lists={ this.state.lists } />
-  }
-}
+export default connect(state => ({ elems: state.elems, lists: state.lists }),
+  { onAddElem: addElem,
+    onAddList: addList,
+    onDeleteElem: deleteElem,
+    onDeleteList: deleteList,
+    onDoneElem: doneElem,
+    onEnableRenameElem: enableRenameElem,
+    onEnableRenameList: enableRenameList,
+    onInputAddElem: inputAddElem,
+    onInputAddList: inputAddList,
+    onInputRenameElem: inputRenameElem,
+    onInputRenameList: inputRenameList,
+    onRenameElem: renameElem,
+    onRenameList: renameList })(App);

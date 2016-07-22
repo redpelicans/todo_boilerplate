@@ -1,6 +1,6 @@
-import React from 'react'
-import AppTitle from './AppTitle'
-import Lists from './Lists'
+import React from 'react';
+import AppTitle from './AppTitle';
+import Lists from './Lists';
 
 const Todo = (props) => (
 	<div className='Todo'>
@@ -9,4 +9,4 @@ const Todo = (props) => (
 	</div>
 );
 
-export default Todo
+export default Todo;

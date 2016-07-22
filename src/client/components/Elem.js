@@ -1,20 +1,52 @@
-import React from 'react'
-import ElemName from './ElemName'
-import RenameElem from './RenameElem'
-import ButtonDeleteElem from './ButtonDeleteElem'
+import React from 'react';
 
-const Elem = ({ functions, id, idList, name }) => (
-	<div>
-		<ElemName name={name}/>
-		<RenameElem id={id} idList={idList} renameElem={functions.renameElem} />
-		<ButtonDeleteElem deleteElem={functions.deleteElem} id={id} idList={idList} />
-	</div>
-)
+const Elem = (props) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    props.onRenameElem(props.id);
+  };
+
+  const handleChange = (e) => {
+    props.onInputRenameElem(props.id, e.target.value);
+  };
+
+  const handleDeleteClick = () => {
+    props.onDeleteElem(props.id);
+  };
+
+  const handleDoneClick = () => {
+    props.onDoneElem(props.id);
+  };
+
+  const handleEnableClick = () => {
+    props.onEnableRenameElem(props.id);
+  };
+
+  const button = (props.elem.rename === true) ? 'Close' : 'Rename';
+
+  const done = (props.elem.done === true) ? 'Undone' : 'Done';
+
+  const input = ((props.elem.rename === true) ? (
+    <form onSubmit={handleSubmit}>
+      <input onChange={handleChange} type='text' value={props.elem.input}></input>
+    </form>) : null);
+
+  return (
+    <div>
+      <p>{props.elem.name}</p>
+      <button onClick={handleDoneClick}>{done}</button>
+      {input}
+      <button onClick={handleEnableClick}>{button}</button>
+      <button onClick={handleDeleteClick}>Delete Task</button>
+    </div>
+  );
+};
 
 Elem.propTypes = {
-  functions: React.PropTypes.object.isRequired,
+  elem: React.PropTypes.object.isRequired,
   id: React.PropTypes.number.isRequired,
-  idList: React.PropTypes.number.isRequired,
-  name: React.PropTypes.string.isRequired };
+  onDeleteElem: React.PropTypes.func.isRequired,
+  onEnableRenameElem: React.PropTypes.func.isRequired,
+  onRenameElem: React.PropTypes.func.isRequired };
 
-export default Elem
+export default Elem;
