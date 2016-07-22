@@ -1,39 +1,34 @@
-import React from 'react'
-import Task from './task'
-import ListTitle from './listtitle'
-import _ from 'lodash'
+import React from 'react';
+import Task from './task';
+import ListTitle from './listtitle';
+import InputFormTask from '../components/inputformtask';
+import _ from 'lodash';
 
 const TaskList = ({ idList, inputtask, tasks, title, ...actions }) => {
-  const handleKeyTask = (e) => {
-    actions.handleTask(e.key, idList);
-  };
-  const data = _.map({ ...tasks }, (task) =>
+  const data = _.map(_.filter(tasks, (task) => (task.idList === idList)), (task, id) =>
     <Task { ...actions }
-      idList={ idList }
       idTask={ task.id }
-      key={ task.id }
+      key={ Number(id) }
       task={ task.task }
-    />)
+    />);
   return (
     <div className='tasklist'>
         <ListTitle { ...actions } idList={ idList } title={ title } />
-        <input
-          className='create-task'
-          onKeyDown={ handleKeyTask }
-          placeholder='New task...'
-          type='text'
+        <InputFormTask
+          idList={ idList }
           value={ inputtask }
+          { ...actions }
         />
         {data}
     </div>
-    )
-}
-
-TaskList.propTypes = {
-  idList: React.PropTypes.number.isRequired,
-  inputtask: React.PropTypes.string,
-  tasks: React.PropTypes.array.isRequired,
-  title: React.PropTypes.string.isRequired,
+    );
 };
 
-export default TaskList
+TaskList.propTypes = {
+  idList: React.PropTypes.number,
+  inputtask: React.PropTypes.string,
+  tasks: React.PropTypes.object,
+  title: React.PropTypes.string,
+};
+
+export default TaskList;

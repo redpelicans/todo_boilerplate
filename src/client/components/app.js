@@ -1,16 +1,12 @@
-import React from 'react'
-import TaskLists from './tasklists'
-import Title from './title'
-import _ from 'lodash'
+import React from 'react';
+import TaskLists from './tasklists';
+import Title from './title';
+import _ from 'lodash';
 
 let idTaskGlobal = 11;
 let idListGlobal = 3;
 
 class App extends React.Component {
-  state = {
-    lists: this.props.lists,
-    inputlist: '',
-  };
 
   createList = (name) => {
     const currentLists = this.state.lists;
@@ -50,7 +46,7 @@ class App extends React.Component {
       this.createList(this.state.inputlist);
     }
     else if (event.key === 'Backspace') {
-      this.setState({ inputlist: this.state.inputlist.slice(0, this.state.inputlist.length - 1) })
+      this.setState({ inputlist: this.state.inputlist.slice(0, this.state.inputlist.length - 1) });
     }
     else if (event.key.length === 1) {
       this.setState({ inputlist: this.state.inputlist.concat(event.key) });
@@ -114,4 +110,4 @@ App.propTypes = {
   lists: React.PropTypes.array,
 };
 
-export default App
+export default App;

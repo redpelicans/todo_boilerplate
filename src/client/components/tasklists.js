@@ -1,26 +1,28 @@
-import React from 'react'
-import TaskList from './tasklist'
-import _ from 'lodash'
+import React from 'react';
+import TaskList from './tasklist';
+import _ from 'lodash';
 
-const TaskLists = ({ lists, ...actions }) => {
-  const data = _.map(lists, (list) => (
+const TaskLists = ({ lists, tasks, ...actions }) => {
+  const data = _.map(lists, (list, id) => (
   <TaskList
-    { ...actions }
-    { ...list }
     idList={ list.id }
     inputtask={ list.inputtask }
-    key={ list.id }
+    key={ Number(id) }
+    tasks={ tasks }
+    title={ list.title }
+    { ...actions }
   />)
-  )
+  );
   return (
     <div className='tasklists'>
       {data}
     </div>
-  )
+  );
 };
 
 TaskLists.propTypes = {
-  lists: React.PropTypes.array.isRequired,
+  lists: React.PropTypes.object,
+  tasks: React.PropTypes.object,
 };
 
-export default TaskLists
+export default TaskLists;

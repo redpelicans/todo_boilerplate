@@ -1,16 +1,15 @@
-import React from 'react'
+import React from 'react';
 
-const	RemoveTask = ({ idList, idTask, ...actions }) => {
+const	RemoveTask = ({ idTask, ...actions }) => {
   const handleClick = (e) => {
     e.stopPropagation();
-    actions.removeTask({ idList, idTask });
+    actions.onRemoveTask(idTask);
   };
-  return <button className='removeTask' onClick={ handleClick } type='button'>X</button>
+  return <button className='removeTask' onClick={ handleClick } type='button'>X</button>;
 };
 
 RemoveTask.propTypes = {
-  idList: React.PropTypes.number.isRequired,
   idTask: React.PropTypes.number.isRequired,
 };
 
-export default RemoveTask
+export default RemoveTask;
