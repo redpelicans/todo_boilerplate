@@ -4,7 +4,7 @@
 import React from 'react'
 import { ADD_TASK, DEL_TASK } from '../actions/tasks';
 
-export function tasks(state = [], action) {
+export default function tasks(state = [], action) {
   switch (action.type) {
   	case ADD_TASK:
   		return _.concat(state.tasks, action.task);

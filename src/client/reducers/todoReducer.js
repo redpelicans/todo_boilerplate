@@ -1,5 +1,6 @@
 import combineReducers from 'redux'
 
+import input from './inputReducer'
 import lists from './listReducer'
 import tasks from './taskReducer'
 
@@ -8,13 +9,22 @@ import tasks from './taskReducer'
 //   tasks
 // })
 
-// export default function reducer(state = [lists, tasks], action) {
-// 	return [
-// 		lists(state.lists, action),
-// 		tasks(state.tasks, action)
-// 	]
-// }
 
-export default function reducer(state, action) {
-	return state
+const initialState = {
+	input: {
+		lists: '',
+		tasks: [],
+	},
+	lists: [
+	],
+	tasks: [
+	]
+};
+
+export default function rootReducer(state = [], action) {
+	return {
+		input: input(state.input, action),
+		lists: lists(state.lists, action),
+		tasks: tasks(state.tasks, action),
+	};
 }

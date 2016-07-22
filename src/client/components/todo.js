@@ -11,10 +11,8 @@ const Todo = ({ lists, tasks }) => {
 	return (
 		<div className="todo">
 		{_.map(lists, (taskList) => (
-			<TaskList list={taskList} key={taskList.id}
-				tasks={_.filter(tasks, t =>(
-					t.listId===t.id)
-				)} />))}
+			<TaskList list={taskList} key={taskList.id} tasks={
+				_.filter(tasks, t=>(t.listID===taskList.listID))} />))}
 		</div>
 	)
 };

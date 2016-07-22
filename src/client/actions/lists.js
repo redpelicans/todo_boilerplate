@@ -5,10 +5,14 @@
 export const ADD_LIST = 'ADD_LIST';
 export const DEL_LIST = 'DEL_LIST';
 
-export const addList = (list) => ({
-  type: ADD_LIST,
-  list
-});
+let currID = 1;
+
+export const addList = ( title ) => {
+	currID = currID + 1;
+	return ({
+		type: ADD_LIST,
+		list: {title, id: currID}
+})};
 
 export const delList = (list) => ({
   type: DEL_LIST,

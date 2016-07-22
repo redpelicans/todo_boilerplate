@@ -8,10 +8,10 @@ export default function lists(state = [], action) {
   switch (action.type) {
 
     case ADD_LIST:
-      return _.concat(state.lists, action.list);
+      return _.concat(state, action.list);
 
     case DEL_LIST:
-      return _.reject(state.lists, (list)=>(
+      return _.reject(state, (list)=>(
       list.id === action.id));
 
     default:
