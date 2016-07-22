@@ -14,16 +14,6 @@ export const createTask = (listId, name) => {
   };
 };
 
-export const changeTask = (taskVal) => {
-  return {
-    type: CHANGE_TASK,
-    taskVal,
-  };
-};
+export const changeTask = (taskVal) => ({ type: CHANGE_TASK, taskVal });
 
-export const removeTask = (taskId) => {
-  return {
-    type: REMOVE_TASK,
-    taskId,
-  };
-};
+export const removeTask = (taskId) => ({ type: REMOVE_TASK, taskId });

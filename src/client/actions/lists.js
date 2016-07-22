@@ -13,17 +13,7 @@ export const createList = (title) => {
   };
 };
 
-export const changeList = (listVal) => {
-  return {
-    type: CHANGE_LIST,
-    listVal,
-  };
-};
+export const changeList = (listVal) => ({ type: CHANGE_LIST, listVal });
 
-export const removeList = (listId) => {
-  return {
-    type: REMOVE_LIST,
-    listId,
-  };
-};
+export const removeList = (listId) => ({ type: REMOVE_LIST, listId });
 
