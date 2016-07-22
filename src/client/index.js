@@ -1,15 +1,43 @@
-import React from 'react'
-import ReactDom from 'react-dom'
-import TodoApp from './app'
+import React from 'react';
+import ReactDom from 'react-dom';
+import { createStore, applyMiddleware } from 'redux';
+import createLogger from 'redux-logger';
+import { Provider } from 'react-redux';
+import TodoApp from './containers/app';
+import reducer from './reducers';
 
-const items = [
-	{ id: 0, title: 'List1', tasks: [{ id: 0, name: 'AAAA' }, { id: 1, name: 'BBB' }, { id: 2, name: 'CCCCCCC' }] },
-	{ id: 1, title: 'List2', tasks: [{ id: 3, name: 'DDDDDDDDD' }, { id: 4, name: 'EE' }, { id: 5, name: 'FFFFF' }] },
-	{ id: 2, title: 'List3', tasks: [{ id: 6, name: 'GG' }, { id: 7, name: 'HHH' }, { id: 8, name: 'IIIIIIIIII' }] },
+const stat = {
+  lists: {
+    'listVal': '',
+    0: { title: 'List1' },
+    1: { title: 'List2' },
+    2: { title: 'List3' },
+  },
+  tasks: {
+    'taskVal': '',
+    0: { listId: 0, name: 'AAAA' },
+    1: { listId: 0, name: 'BB' },
+    2: { listId: 1, name: 'CCCC' },
+    3: { listId: 1, name: 'DDD' },
+    4: { listId: 2, name: 'EEEEE' },
+    5: { listId: 2, name: 'F' },
+  },
+};
 
-];
+const initialState = {
+  lists: stat.lists,
+  tasks: stat.tasks,
+};
+
+const store = createStore(
+  reducer,
+  initialState,
+  applyMiddleware(createLogger()),
+);
 
 ReactDom.render(
-		<TodoApp lists={items}/ >,
+    <Provider store={ store }>
+      <TodoApp />
+    </Provider>,
 		document.getElementById('todo'),
-		)
+		);
