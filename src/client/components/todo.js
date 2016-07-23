@@ -4,17 +4,19 @@
 import React from 'react'
 import _ from 'lodash'
 import TaskList from './tasklist'
-import NewList from './newlist';
-import { connect } from 'react-redux'
 
-const Todo = ({ lists, tasks }) => {
-	return (
-		<div className="todo">
-		{_.map(lists, (taskList) => (
-			<TaskList list={taskList} key={taskList.id} tasks={
-				_.filter(tasks, t=>(t.listID===taskList.listID))} />))}
-		</div>
-	)
-};
+const Todo = ({ lists, tasks }) => (
+  <div className='todo'>
+  {_.map(lists, (taskList) => (
+    <TaskList key={ taskList.id }
+      list={ taskList }
+      tasks={ _.filter(tasks, t => (t.listId === taskList.id)) } />))}
+  </div>
+)
+
+Todo.propTypes = {
+  lists: React.PropTypes.array.isRequired,
+  tasks: React.PropTypes.array.isRequired,
+}
 
 export default Todo

@@ -5,18 +5,19 @@ import React from 'react'
 import _ from 'lodash'
 import Task from './task'
 
-const TaskList = ({ list, tasks }) => {
-	const	listTasks = _.filter(tasks, (t)=>(t.listId === list.id));
+const TaskList = ({ list, tasks }) => (
+  <div className='todo-list'>
+    <h3>{list.title}</h3>
+    <div className='flex-container'>
+    {_.map(tasks, (task =>
+      <Task key={task.id} task={task} />))}
+    </div>
+  </div>
+)
 
-	return(
-		<div className="todo-list">
-			<h3>{list.title}</h3>
-			<div className="flex-container">
-			{_.map(listTasks, (task => 
-				<Task task={task} key={task.id} />))}
-			</div>
-		</div>
-	);
+TaskList.propTypes = {
+  list: React.PropTypes.object.isRequired,
+  tasks: React.PropTypes.array.isRequired,
 }
 
 export default TaskList
