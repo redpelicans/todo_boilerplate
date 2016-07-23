@@ -1,4 +1,5 @@
 import expect from 'expect';
+import deepFreeze from 'deep-freeze';
 import rootReducer from '../src/client/reducers';
 import * as actions from '../src/client/actions';
 
@@ -14,8 +15,10 @@ describe('Reducers', () => {
   });
 
   it('should handle LIST_INPUT', () => {
+    const state = {};
+    deepFreeze(state);
     expect(
-      rootReducer({}, {
+      rootReducer(state, {
         type: actions.LIST_INPUT,
         value: 'yata',
       })
@@ -29,8 +32,10 @@ describe('Reducers', () => {
   });
 
   it('should handle ADD_LIST', () => {
+    const state = {};
+    deepFreeze(state);
     expect(
-      rootReducer({}, {
+      rootReducer(state, {
         type: actions.ADD_LIST,
         id: 0,
         title: 'yata',
@@ -47,16 +52,17 @@ describe('Reducers', () => {
   });
 
   it('should handle REMOVE_LIST', () => {
-    expect(
-      rootReducer({
-        lists: {
-          input: '',
-          data: {
-            0: { id: 0, title: 'yata' , newTaskText: '' },
-          },
+    const state = {
+      lists: {
+        input: '',
+        data: {
+          0: { id: 0, title: 'yata' , newTaskText: '' },
         },
       },
-      {
+    };
+    deepFreeze(state);
+    expect(
+      rootReducer(state, {
         type: actions.REMOVE_LIST,
         id: 0,
       })
@@ -70,16 +76,17 @@ describe('Reducers', () => {
   });
 
   it('should handle TASK_INPUT', () => {
-    expect(
-      rootReducer({
-        lists: {
-          input: '',
-          data: {
-            0: { id: 0, title: 'yata', newTaskText: '' },
-          },
+    const state = {
+      lists: {
+        input: '',
+        data: {
+          0: { id: 0, title: 'yata', newTaskText: '' },
         },
       },
-      {
+    };
+    deepFreeze(state);
+    expect(
+      rootReducer(state, {
         type: actions.TASK_INPUT,
         id: 0,
         value: 'yata',
@@ -96,17 +103,18 @@ describe('Reducers', () => {
   });
 
   it('should handle ADD_TASK', () => {
-    expect(
-      rootReducer({
-        lists: {
-          input: '',
-          data: {
-            0: { id: 0, title: 'yata', newTaskText: '' },
-          },
+    const state = {
+      lists: {
+        input: '',
+        data: {
+          0: { id: 0, title: 'yata', newTaskText: '' },
         },
-        tasks: {},
       },
-      {
+      tasks: {},
+    };
+    deepFreeze(state);
+    expect(
+      rootReducer(state, {
         type: actions.ADD_TASK,
         id: 0,
         listId: 0,
@@ -126,19 +134,20 @@ describe('Reducers', () => {
   });
 
   it('should handle REMOVE_TASK', () => {
-    expect(
-      rootReducer({
-        lists: {
-          input: '',
-          data: {
-            0: { id: 0, title: 'yata', newTaskText: '' },
-          },
-        },
-        tasks: {
-          0: { id: 0, listId: 0, text: 'yata' },
+    const state = {
+      lists: {
+        input: '',
+        data: {
+          0: { id: 0, title: 'yata', newTaskText: '' },
         },
       },
-      {
+      tasks: {
+        0: { id: 0, listId: 0, text: 'yata' },
+      },
+    };
+    deepFreeze(state);
+    expect(
+      rootReducer(state, {
         type: actions.REMOVE_TASK,
         id: 0,
       })
