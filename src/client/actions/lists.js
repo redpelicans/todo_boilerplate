@@ -15,7 +15,7 @@ export const addList = title => {
   })
 }
 
-export const delList = (listId) => ({
+export const delList = (id) => ({
   type: DEL_LIST,
-  listId,
+  id,
 })

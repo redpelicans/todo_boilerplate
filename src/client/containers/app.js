@@ -17,20 +17,20 @@ const App = ({ input, lists, tasks, dispatch }) => {
   const onNewList = () => {
     dispatch(addList(input.lists));
   }
-  const onDelList = listId => {
-    dispatch(delList(listId));
+  const onDelList = e => {
+    console.log(e);
+    dispatch(delList(e.target.id));
   }
   return (
     <div className='app-wrapper'>
       <h1>A fantastic Todo is on its way !</h1>
       <NewList handleChange={ handleChange }
         inputVal={ input.lists }
-        onDelList= { onDelList }
         onNewList={ onNewList } />
-      <Todo lists={lists} tasks={tasks} />
+      <Todo lists={lists} onDelList={onDelList} tasks={tasks} />
     </div>
-  );
-};
+  )
+}
 
 App.propTypes = {
   dispatch: React.PropTypes.func,

@@ -6,13 +6,15 @@ const NewList = ({ inputVal, handleChange, onNewList }) => {
   };
   const handleSubmit = e => {
     e.preventDefault();
-    onNewList();
+    if (inputVal) {
+      onNewList();
+    }
   };
   return (
     <div className='todo-list padded'>
       <form onSubmit={ handleSubmit }>
         <input onChange={ handleInput } value={inputVal} />
-        <button type='submit'>Add list</button>
+        <button type='submit'>+</button>
       </form>
     </div>
   )

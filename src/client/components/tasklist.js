@@ -3,11 +3,15 @@
  */
 import React from 'react'
 import _ from 'lodash'
+import ListHead from './listhead'
 import Task from './task'
 
-const TaskList = ({ list, tasks }) => (
+const TaskList = ({ list, tasks, onDelList }) => (
   <div className='todo-list'>
-    <h3>{list.title}</h3>
+    <ListHead
+      id={list.id}
+      onDelList={onDelList}
+      title={list.title} />
     <div className='flex-container'>
     {_.map(tasks, (task =>
       <Task key={task.id} task={task} />))}
@@ -17,6 +21,7 @@ const TaskList = ({ list, tasks }) => (
 
 TaskList.propTypes = {
   list: React.PropTypes.object.isRequired,
+  onDelList: React.PropTypes.func.isRequired,
   tasks: React.PropTypes.array.isRequired,
 }
 

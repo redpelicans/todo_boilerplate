@@ -11,7 +11,7 @@ export default function lists(state = [], action) {
 
   case DEL_LIST:
     return _.reject(state, (list) => (
-     list.id === action.id));
+     list.id === parseInt(action.id)));
 
   default:
     return state;
