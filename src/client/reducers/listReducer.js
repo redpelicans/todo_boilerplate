@@ -3,6 +3,7 @@
  */
 import _ from 'lodash'
 import { ADD_LIST, DEL_LIST } from '../actions/lists'
+import { ADD_TASK, INPUT_TASK } from '../actions/tasks'
 
 export default function lists(state = [], action) {
   switch (action.type) {
@@ -10,8 +11,18 @@ export default function lists(state = [], action) {
     return _.concat(state, action.list);
 
   case DEL_LIST:
-    return _.reject(state, (list) => (
+    return _.reject(state, list => (
      list.id === parseInt(action.id)));
+
+  case ADD_TASK:
+    return _.map(state, list => (
+      list.id === parseInt(action.id) ?
+        list : _.create(list, { input: '' })))
+
+  case INPUT_TASK:
+    return _.map(state, list => (
+      (list.id === parseInt(action.id)) ?
+        _.create(list, { input: action.input }) : list))
 
   default:
     return state;

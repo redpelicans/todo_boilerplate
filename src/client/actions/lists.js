@@ -4,6 +4,7 @@
 
 export const ADD_LIST = 'ADD_LIST';
 export const DEL_LIST = 'DEL_LIST';
+export const INPUT_LIST = 'INPUT_LIST';
 
 let currID = 1;
 
@@ -18,4 +19,9 @@ export const addList = title => {
 export const delList = (id) => ({
   type: DEL_LIST,
   id,
+})
+
+export const listInput = (input) => ({
+  type: INPUT_LIST,
+  input,
 })

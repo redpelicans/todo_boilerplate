@@ -1,13 +1,24 @@
 export const ADD_TASK = 'ADD_TASK';
 export const DEL_TASK = 'DEL_TASK';
+export const INPUT_TASK = 'INPUT_TASK';
 
-export const addTask = (task) => ({
-  type: ADD_TASK,
-  task,
-})
+let currID = 3;
 
-export const delTask = ({ id, listID }) => ({
+export const addTask = (description, listId) => {
+  currID = currID + 1;
+  return ({
+    type: ADD_TASK,
+    task: { id: currID, description, listId },
+  })
+}
+
+export const delTask = (id) => ({
   type: DEL_TASK,
   id,
-  listID,
+})
+
+export const taskInput = (input, id) => ({
+  type: INPUT_TASK,
+  input,
+  id,
 })

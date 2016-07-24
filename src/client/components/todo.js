@@ -5,12 +5,13 @@ import React from 'react'
 import _ from 'lodash'
 import TaskList from './tasklist'
 
-const Todo = ({ lists, tasks, onDelList }) => (
+const Todo = ({ lists, tasks, ...handlers }) => (
   <div className='todo'>
   {_.map(lists, (taskList) => (
-    <TaskList key={ taskList.id }
+    <TaskList
+      handlers={ handlers }
+      key={ taskList.id }
       list={ taskList }
-      onDelList={onDelList}
       tasks={ _.filter(tasks, t => (t.listId === taskList.id)) } />))}
   </div>
 )

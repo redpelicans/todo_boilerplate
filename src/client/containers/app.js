@@ -7,12 +7,12 @@ import { connect } from 'react-redux'
 import NewList from '../components/newlist'
 import Todo from '../components/todo'
 
-import { addList, delList } from '../actions/lists'
-import { newInput } from '../actions/input'
+import { addList, delList, listInput } from '../actions/lists'
+import { addTask, delTask, taskInput } from '../actions/tasks'
 
 const App = ({ input, lists, tasks, dispatch }) => {
-  const handleChange = value => {
-    dispatch(newInput(value));
+  const listChange = value => {
+    dispatch(listInput(value));
   };
   const onNewList = () => {
     dispatch(addList(input.lists));
@@ -21,13 +21,30 @@ const App = ({ input, lists, tasks, dispatch }) => {
     console.log(e);
     dispatch(delList(e.target.id));
   }
+  const taskChange = (value, id) => {
+    dispatch(taskInput(value, id));
+  }
+  const onNewTask = (description, listId) => {
+    dispatch(addTask(description, listId));
+  }
+  const onDelTask = e => {
+    dispatch(delTask(e.target.id));
+  }
   return (
     <div className='app-wrapper'>
       <h1>A fantastic Todo is on its way !</h1>
-      <NewList handleChange={ handleChange }
+      <NewList handleChange={ listChange }
         inputVal={ input.lists }
         onNewList={ onNewList } />
-      <Todo lists={lists} onDelList={onDelList} tasks={tasks} />
+      <Todo
+        listChange={listChange}
+        lists={lists}
+        onDelList={onDelList}
+        onDelTask={onDelTask}
+        onNewList={onNewList}
+        onNewTask={onNewTask}
+        taskChange={taskChange}
+        tasks={tasks} />
     </div>
   )
 }

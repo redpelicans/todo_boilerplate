@@ -13,7 +13,7 @@ const NewList = ({ inputVal, handleChange, onNewList }) => {
   return (
     <div className='todo-list padded'>
       <form onSubmit={ handleSubmit }>
-        <input onChange={ handleInput } value={inputVal} />
+        <input onChange={ handleInput } placeholder='New List' value={inputVal} />
         <button type='submit'>+</button>
       </form>
     </div>

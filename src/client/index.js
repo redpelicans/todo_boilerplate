@@ -12,7 +12,7 @@ import App from './containers/app'
 
 const initialState = {
   input: {
-    lists: 'New List',
+    lists: '',
   },
   lists: [
     { id: 0, title: 'first', input: '' },
