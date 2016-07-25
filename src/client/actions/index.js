@@ -12,7 +12,9 @@ export const TASK_INPUT = 'TASK_INPUT';
 export const ADD_TASK = 'ADD_TASK';
 export const REMOVE_TASK = 'REMOVE_TASK';
 export const REQUEST_LISTS = 'REQUEST_LISTS';
+export const RECEIVE_LISTS = 'RECEIVE_LISTS';
 export const REQUEST_TASKS = 'REQUEST_TASKS';
+export const RECEIVE_TASKS = 'RECEIVE_TASKS';
 
 /*
  * action creators
@@ -70,8 +72,22 @@ export function requestLists() {
   };
 }
 
+export function receiveLists(json) {
+  return {
+    type: RECEIVE_LISTS,
+    lists: json.data.children.map(child => child.data),
+  };
+}
+
 export function requestTasks() {
   return {
     type: REQUEST_TASKS,
+  };
+}
+
+export function receiveTasks(json) {
+  return {
+    type: RECEIVE_TASKS,
+    tasks: json.data.children.map(child => child.data),
   };
 }

@@ -8,15 +8,16 @@ import {
   TASK_INPUT,
 } from '../actions';
 
-function lists(state = { data: {}, input: '' }, action) {
+function lists(state = { data: {}, input: '', isFetching: false }, action) {
   switch (action.type) {
   case LIST_INPUT:
     return {
+      ...state,
       input: action.value,
-      data: state.data,
     };
   case ADD_LIST:
     return {
+      ...state,
       input: '',
       data: {
         ...state.data,
@@ -28,7 +29,7 @@ function lists(state = { data: {}, input: '' }, action) {
     };
   case REMOVE_LIST:
     return {
-      input: state.input,
+      ...state,
       data: _.omit(state.data, action.id),
     };
   default:
@@ -36,26 +37,27 @@ function lists(state = { data: {}, input: '' }, action) {
   }
 }
 
-function tasks(state = { data: {}, input: {} }, action) {
+function tasks(state = { data: {}, input: {}, isFetching: false }, action) {
   switch (action.type) {
   case ADD_LIST:
     return {
+      ...state,
       input: {
         ...state.input,
         [action.id]: '',
       },
-      data: state.data,
     };
   case TASK_INPUT:
     return {
+      ...state,
       input: {
         ...state.input,
         [action.id]: action.value,
       },
-      data: state.data,
     };
   case ADD_TASK:
     return {
+      ...state,
       input: {
         ...state.input,
         [action.listId]: '',
@@ -71,7 +73,7 @@ function tasks(state = { data: {}, input: {} }, action) {
     };
   case REMOVE_TASK:
     return {
-      input: state.input,
+      ...state,
       data: _.omit(state.data, action.id),
     };
   default:
@@ -83,10 +85,12 @@ const initialState = {
   lists: {
     input: '',
     data: {},
+    isFetching: false,
   },
   tasks: {
     input: {},
     data: {},
+    isFetching: false,
   },
 };
 

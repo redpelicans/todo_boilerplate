@@ -9,10 +9,12 @@ describe('Reducers', () => {
       lists: {
         input: '',
         data: {},
+        isFetching: false,
       },
       tasks: {
         input: {},
         data: {},
+        isFetching: false,
       },
     });
   });
@@ -29,10 +31,12 @@ describe('Reducers', () => {
       lists: {
         input: 'yata',
         data: {},
+        isFetching: false,
       },
       tasks: {
         input: {},
         data: {},
+        isFetching: false,
       },
     });
   });
@@ -42,6 +46,7 @@ describe('Reducers', () => {
       lists: {
         input: 'yata',
         data: {},
+        isFetching: false,
       },
     };
     deepFreeze(state);
@@ -56,12 +61,14 @@ describe('Reducers', () => {
         data: {
           0: { id: 0, title: 'yata' },
         },
+        isFetching: false,
       },
       tasks: {
         input: {
           0: '',
         },
         data: {},
+        isFetching: false,
       },
     });
   });
@@ -73,6 +80,7 @@ describe('Reducers', () => {
         data: {
           0: { id: 0, title: 'yata' },
         },
+        isFetching: false,
       },
     };
     deepFreeze(state);
@@ -85,10 +93,12 @@ describe('Reducers', () => {
       lists: {
         input: '',
         data: {},
+        isFetching: false,
       },
       tasks: {
         input: {},
         data: {},
+        isFetching: false,
       },
     });
   });
@@ -100,6 +110,7 @@ describe('Reducers', () => {
         data: {
           0: { id: 0, title: 'yata' },
         },
+        isFetching: false,
       },
     };
     deepFreeze(state);
@@ -115,10 +126,12 @@ describe('Reducers', () => {
         data: {
           0: { id: 0, title: 'yata' },
         },
+        isFetching: false,
       },
       tasks: {
         input: { 0: 'yata' },
         data: {},
+        isFetching: false,
       },
     });
   });
@@ -130,9 +143,12 @@ describe('Reducers', () => {
         data: {
           0: { id: 0, title: 'yata' },
         },
+        isFetching: false,
       },
       tasks: {
         input: { 0: 'yata' },
+        data: {},
+        isFetching: false,
       },
     };
     deepFreeze(state);
@@ -148,12 +164,14 @@ describe('Reducers', () => {
         data: {
           0: { id: 0, title: 'yata' },
         },
+        isFetching: false,
       },
       tasks: {
         input: { 0: '' },
         data: {
           0: { id: 0, listId: 0, text: 'yata' },
         },
+        isFetching: false,
       },
     });
   });
@@ -165,12 +183,14 @@ describe('Reducers', () => {
         data: {
           0: { id: 0, title: 'yata' },
         },
+        isFetching: false,
       },
       tasks: {
         input: { 0: '' },
         data: {
           0: { id: 0, listId: 0, text: 'yata' },
         },
+        isFetching: false,
       },
     };
     deepFreeze(state);
@@ -185,10 +205,12 @@ describe('Reducers', () => {
         data: {
           0: { id: 0, title: 'yata' },
         },
+        isFetching: false,
       },
       tasks: {
         input: { 0: '' },
         data: {},
+        isFetching: false,
       },
     });
   });
