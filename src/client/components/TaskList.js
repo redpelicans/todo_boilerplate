@@ -7,7 +7,7 @@ import RemoveTaskList from './RemoveTaskList';
 
 const TaskList = (props) => {
 
-  const tasks = _.pickBy(props.tasks, task => task.listId === props.list.id);
+  const tasks = _.pickBy(props.tasks.data, task => task.listId === props.list.id);
 
   const taskElems = _.map(tasks, task => (
       <Task task={task} {...props} key={task.id} />
@@ -27,7 +27,7 @@ const TaskList = (props) => {
         listId={props.list.id}
         onAddTask={props.onAddTask}
         onChange={props.onTaskInput}
-        value={props.list.newTaskText} />
+        value={props.tasks.input[props.list.id]} />
     </div>
   );
 };

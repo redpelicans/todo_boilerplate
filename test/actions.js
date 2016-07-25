@@ -17,7 +17,6 @@ describe('Actions', () => {
     const expectedAction = {
       type: actions.ADD_LIST,
       id,
-      title,
     };
     expect(actions.addList(title)).toEqual(expectedAction);
     expectedAction.id = 2;
@@ -52,7 +51,6 @@ describe('Actions', () => {
       type: actions.ADD_TASK,
       id,
       listId,
-      text,
     };
     expect(actions.addTask(listId, text)).toEqual(expectedAction);
     expectedAction.id = 2;

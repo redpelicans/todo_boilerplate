@@ -13,7 +13,7 @@ function lists(state = { data: {}, input: '' }, action) {
   case LIST_INPUT:
     return {
       input: action.value,
-      data: { ...state.data },
+      data: state.data,
     };
   case ADD_LIST:
     return {
@@ -22,8 +22,7 @@ function lists(state = { data: {}, input: '' }, action) {
         ...state.data,
         [action.id]: {
           id: action.id,
-          title: action.title,
-          newTaskText: '',
+          title: state.input,
         },
       },
     };
@@ -32,46 +31,49 @@ function lists(state = { data: {}, input: '' }, action) {
       input: state.input,
       data: _.omit(state.data, action.id),
     };
-  case TASK_INPUT:
-    return {
-      input: state.input,
-      data: {
-        ...state.data,
-        [action.id]: {
-          ...state.data[action.id],
-          newTaskText: action.value,
-        },
-      },
-    };
-  case ADD_TASK:
-    return {
-      input: state.input,
-      data: {
-        ...state.data,
-        [action.listId]: {
-          ...state.data[action.listId],
-          newTaskText: '',
-        },
-      },
-    };
   default:
     return state;
   }
 }
 
-function tasks(state = {}, action) {
+function tasks(state = { data: {}, input: {} }, action) {
   switch (action.type) {
+  case ADD_LIST:
+    return {
+      input: {
+        ...state.input,
+        [action.id]: '',
+      },
+      data: state.data,
+    };
+  case TASK_INPUT:
+    return {
+      input: {
+        ...state.input,
+        [action.id]: action.value,
+      },
+      data: state.data,
+    };
   case ADD_TASK:
     return {
-      ...state,
-      [action.id]: {
-        id: action.id,
-        listId: action.listId,
-        text: action.text,
+      input: {
+        ...state.input,
+        [action.listId]: '',
+      },
+      data: {
+        ...state.data,
+        [action.id]: {
+          id: action.id,
+          listId: action.listId,
+          text: state.input[action.listId],
+        },
       },
     };
   case REMOVE_TASK:
-    return _.omit(state, action.id);
+    return {
+      input: state.input,
+      data: _.omit(state.data, action.id),
+    };
   default:
     return state;
   }
@@ -82,7 +84,10 @@ const initialState = {
     input: '',
     data: {},
   },
-  tasks: {},
+  tasks: {
+    input: {},
+    data: {},
+  },
 };
 
 function rootReducer(state = initialState, action) {

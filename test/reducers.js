@@ -10,7 +10,10 @@ describe('Reducers', () => {
         input: '',
         data: {},
       },
-      tasks: {},
+      tasks: {
+        input: {},
+        data: {},
+      },
     });
   });
 
@@ -27,27 +30,39 @@ describe('Reducers', () => {
         input: 'yata',
         data: {},
       },
-      tasks: {},
+      tasks: {
+        input: {},
+        data: {},
+      },
     });
   });
 
   it('should handle ADD_LIST', () => {
-    const state = {};
+    const state = {
+      lists: {
+        input: 'yata',
+        data: {},
+      },
+    };
     deepFreeze(state);
     expect(
       rootReducer(state, {
         type: actions.ADD_LIST,
         id: 0,
-        title: 'yata',
       })
     ).toEqual({
       lists: {
         input: '',
         data: {
-          0: { id: 0, title: 'yata', newTaskText: '' },
+          0: { id: 0, title: 'yata' },
         },
       },
-      tasks: {},
+      tasks: {
+        input: {
+          0: '',
+        },
+        data: {},
+      },
     });
   });
 
@@ -56,7 +71,7 @@ describe('Reducers', () => {
       lists: {
         input: '',
         data: {
-          0: { id: 0, title: 'yata' , newTaskText: '' },
+          0: { id: 0, title: 'yata' },
         },
       },
     };
@@ -71,7 +86,10 @@ describe('Reducers', () => {
         input: '',
         data: {},
       },
-      tasks: {},
+      tasks: {
+        input: {},
+        data: {},
+      },
     });
   });
 
@@ -80,7 +98,7 @@ describe('Reducers', () => {
       lists: {
         input: '',
         data: {
-          0: { id: 0, title: 'yata', newTaskText: '' },
+          0: { id: 0, title: 'yata' },
         },
       },
     };
@@ -95,10 +113,13 @@ describe('Reducers', () => {
       lists: {
         input: '',
         data: {
-          0: { id: 0, title: 'yata', newTaskText: 'yata' },
+          0: { id: 0, title: 'yata' },
         },
       },
-      tasks: {},
+      tasks: {
+        input: { 0: 'yata' },
+        data: {},
+      },
     });
   });
 
@@ -107,10 +128,12 @@ describe('Reducers', () => {
       lists: {
         input: '',
         data: {
-          0: { id: 0, title: 'yata', newTaskText: '' },
+          0: { id: 0, title: 'yata' },
         },
       },
-      tasks: {},
+      tasks: {
+        input: { 0: 'yata' },
+      },
     };
     deepFreeze(state);
     expect(
@@ -118,17 +141,19 @@ describe('Reducers', () => {
         type: actions.ADD_TASK,
         id: 0,
         listId: 0,
-        text: 'yata',
       })
     ).toEqual({
       lists: {
         input: '',
         data: {
-          0: { id: 0, title: 'yata', newTaskText: '' },
+          0: { id: 0, title: 'yata' },
         },
       },
       tasks: {
-        0: { id: 0, listId: 0, text: 'yata' },
+        input: { 0: '' },
+        data: {
+          0: { id: 0, listId: 0, text: 'yata' },
+        },
       },
     });
   });
@@ -138,11 +163,14 @@ describe('Reducers', () => {
       lists: {
         input: '',
         data: {
-          0: { id: 0, title: 'yata', newTaskText: '' },
+          0: { id: 0, title: 'yata' },
         },
       },
       tasks: {
-        0: { id: 0, listId: 0, text: 'yata' },
+        input: { 0: '' },
+        data: {
+          0: { id: 0, listId: 0, text: 'yata' },
+        },
       },
     };
     deepFreeze(state);
@@ -155,10 +183,13 @@ describe('Reducers', () => {
       lists: {
         input: '',
         data: {
-          0: { id: 0, title: 'yata', newTaskText: '' },
+          0: { id: 0, title: 'yata' },
         },
       },
-      tasks: {},
+      tasks: {
+        input: { 0: '' },
+        data: {},
+      },
     });
   });
 });

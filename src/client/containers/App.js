@@ -19,7 +19,7 @@ const App = ({ dispatch, lists, tasks }) => {
   };
 
   const onAddList = () => {
-    dispatch(addList(lists.input));
+    dispatch(addList());
   };
 
   const onRemoveList = (id) => {
@@ -31,7 +31,7 @@ const App = ({ dispatch, lists, tasks }) => {
   };
 
   const onAddTask = (listId) => {
-    dispatch(addTask(listId, lists.data[listId].newTaskText));
+    dispatch(addTask(listId));
   };
 
   const onRemoveTask = (id) => {

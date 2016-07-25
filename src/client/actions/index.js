@@ -11,6 +11,8 @@ export const REMOVE_LIST = 'REMOVE_LIST';
 export const TASK_INPUT = 'TASK_INPUT';
 export const ADD_TASK = 'ADD_TASK';
 export const REMOVE_TASK = 'REMOVE_TASK';
+export const REQUEST_LISTS = 'REQUEST_LISTS';
+export const REQUEST_TASKS = 'REQUEST_TASKS';
 
 /*
  * action creators
@@ -23,12 +25,11 @@ export function listInput(value) {
   };
 }
 
-export function addList(title) {
+export function addList() {
   nextListId = nextListId + 1;
   return {
     type: ADD_LIST,
     id: nextListId,
-    title,
   };
 }
 
@@ -47,13 +48,12 @@ export function taskInput(listId, value) {
   };
 }
 
-export function addTask(listId, text) {
+export function addTask(listId) {
   nextTaskId = nextTaskId + 1;
   return {
     type: ADD_TASK,
     id: nextTaskId,
     listId,
-    text,
   };
 }
 
@@ -61,5 +61,17 @@ export function removeTask(id) {
   return {
     type: REMOVE_TASK,
     id,
+  };
+}
+
+export function requestLists() {
+  return {
+    type: REQUEST_LISTS,
+  };
+}
+
+export function requestTasks() {
+  return {
+    type: REQUEST_TASKS,
   };
 }
