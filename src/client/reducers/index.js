@@ -2,7 +2,13 @@ import { ADD_LIST, REMOVE_LIST, CHANGE_LIST } from '../actions/list';
 import { ADD_TASK, CHANGE_TASK, REMOVE_TASK } from '../actions/task';
 import _ from 'lodash';
 
-export const reducer = (state, action) => {
+const initialState = {
+  lists: {},
+  tasks: {},
+  inputlist: '',
+}
+
+export default function reducer (state = initialState, action) {
   switch (action.type) {
   case ADD_LIST:
     return {

@@ -115,3 +115,21 @@ component did mount
       },
     });
   }
+
+
+
+mocha alternatives: karma (usine à gaz)
+
+NYC pour encapsuler les tests et rajouter du code coverage;
+à voir ce week end !
+
+tester l immutabilité dans les reducers;
+
+asynchronisme
+(thunk ect);
+
+comment fonctionne l'event loop de l'engine javascript en doc;
+
+middleware;
+
+promises

@@ -4,7 +4,7 @@ import ReactDom from 'react-dom';
 import createLogger from 'redux-logger';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import { reducer } from './reducers';
+import reducer from './reducers';
 
 const lists = {
   0: { id: 0, title: 'List1', inputtask: '' },
