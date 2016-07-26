@@ -1,14 +1,16 @@
 import fetch from 'isomorphic-fetch';
 import _ from 'lodash';
 
-let nextTaskId = 0;
-
 /*
  * action types
  */
 
+export const ADDING_TASK = 'ADDING_TASK';
 export const ADD_TASK = 'ADD_TASK';
+export const TASK_ADDED = 'TASK_ADDED';
+export const REMOVING_TASK = 'REMOVING_TASK';
 export const REMOVE_TASK = 'REMOVE_TASK';
+export const TASK_REMOVED = 'TASK_REMOVED';
 export const REQUEST_TASKS = 'REQUEST_TASKS';
 export const RECEIVE_TASKS = 'RECEIVE_TASKS';
 
@@ -16,13 +18,37 @@ export const RECEIVE_TASKS = 'RECEIVE_TASKS';
  * action creators
  */
 
-export const addTask = (listId, text) => {
-  nextTaskId = nextTaskId + 1;
+export const addingTask = () => {
   return {
-    type: ADD_TASK,
-    id: nextTaskId,
-    listId,
-    text,
+    type: ADDING_TASK,
+  };
+};
+
+export const addTask = (listId, text) => {
+  return (dispatch) => {
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        task: {
+          description: text,
+          listId,
+        },
+      }),
+    };
+    dispatch(addingTask());
+    fetch('http://rp4.redpelicans.com:13004/api/todo/tasks', options)
+    .then(response => response.json())
+    .then(resTask => dispatch(taskAdded(resTask)));
+  };
+};
+
+export const taskAdded = (task) => {
+  return {
+    type: TASK_ADDED,
+    task,
   };
 };
 
@@ -39,9 +65,19 @@ export const requestTasks = () => {
   };
 };
 
+export const fetchTasks = () => {
+  return (dispatch) => {
+    dispatch(requestTasks());
+    fetch('http://rp4.redpelicans.com:13004/api/todo/tasks')
+      .then(response => response.json())
+      .then(resTasks => dispatch(receiveTasks(resTasks)));
+  };
+};
+
 export const receiveTasks = (json) => {
+  console.log(_.keyBy(json, o => o.id));
   return {
     type: RECEIVE_TASKS,
-    tasks: json.data.children.map(child => child.data),
+    tasks: _.keyBy(json, o => o.id),
   };
 };

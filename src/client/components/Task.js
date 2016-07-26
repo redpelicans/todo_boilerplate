@@ -3,7 +3,7 @@ import RemoveTask from './RemoveTask';
 
 const Task = (props) =>
   <div className='task'>
-    <span>{props.task.text}</span>
+    <span>{props.task.description}</span>
     <RemoveTask id={props.task.id} onRemove={props.onRemoveTask} />
   </div>;
 

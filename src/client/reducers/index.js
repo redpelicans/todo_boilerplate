@@ -46,22 +46,41 @@ function lists(state = { data: {}, isFetching: false }, action) {
 
 function tasks(state = { data: {}, isFetching: false }, action) {
   switch (action.type) {
-  case task.ADD_TASK:
+  case task.ADDING_TASK:
+    return {
+      ...state,
+    };
+  case task.TASK_ADDED:
     return {
       ...state,
       data: {
         ...state.data,
-        [action.id]: {
-          id: action.id,
-          listId: action.listId,
-          text: action.text,
+        [action.task.id]: {
+          id: action.task.id,
+          listId: action.task.listId,
+          description: action.task.description,
         },
       },
     };
-  case task.REMOVE_TASK:
+  case task.REMOVING_TASK:
+    return {
+      ...state,
+    };
+  case task.TASK_REMOVED:
     return {
       ...state,
       data: _.omit(state.data, action.id),
+    };
+  case task.REQUEST_TASKS:
+    return {
+      ...state,
+      isFetching: true,
+    };
+  case task.RECEIVE_TASKS:
+    return {
+      ...state,
+      isFetching: false,
+      data: action.tasks,
     };
   default:
     return state;
