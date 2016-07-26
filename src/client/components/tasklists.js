@@ -8,9 +8,9 @@ const TaskLists = ({ lists, tasks, ...actions }) => {
     idList={ list.id }
     inputtask={ list.inputtask }
     key={ Number(id) }
-    tasks={ tasks }
-    title={ list.title }
+    label={ list.label }
     { ...actions }
+    tasks={ tasks }
   />)
   );
   return (
@@ -22,7 +22,6 @@ const TaskLists = ({ lists, tasks, ...actions }) => {
 
 TaskLists.propTypes = {
   lists: React.PropTypes.object,
-  tasks: React.PropTypes.object,
 };
 
 export default TaskLists;

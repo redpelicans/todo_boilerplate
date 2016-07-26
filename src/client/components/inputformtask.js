@@ -1,6 +1,6 @@
 import React from 'react';
 
-const InputFormTask = ({ idList, value, ...actions }) => {
+const InputFormTask = ({ idList, idTask, value, ...actions }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     actions.onSubmitAddTask(idList);

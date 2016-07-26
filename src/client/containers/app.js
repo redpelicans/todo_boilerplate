@@ -12,8 +12,8 @@ const App = ({ dispatch, inputlist, lists, tasks }) => {
     dispatch(changeTask(idList, inputtask));
   };
 
-  const onSubmitAddTask = (idList) => {
-    dispatch(addTask(idList));
+  const onSubmitAddTask = (idList, idTask) => {
+    dispatch(addTask(idList, idTask));
   };
 
   const onRemoveTask = (idTask) => {

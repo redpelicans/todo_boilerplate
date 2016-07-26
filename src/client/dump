@@ -133,3 +133,21 @@ comment fonctionne l'event loop de l'engine javascript en doc;
 middleware;
 
 promises
+
+fonctions:
+get
+post
+delete
+
+outil a install : postman / jsonview
+
+addlist : retournera une fonction dispatch avec un fetch de 'http://rp4' blabla then.
+puis passé dans le body
+
+
+on peu pas addtask si la list n'existe pas mais ça remove pas les tasks quand on remove la liste'
+
+changer le reject remove list en une fonction lodash object.
+
+
+component will mount dans app pour dispatch et chopé les données du server ou store.dispatch dans index.
