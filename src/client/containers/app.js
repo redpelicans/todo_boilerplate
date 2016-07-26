@@ -41,7 +41,7 @@ const App = ({ input, lists, tasks, dispatch }) => {
   const onRefresh = () => {
     // console.log('Asking for refresh...');
     console.log('dispatching fetch');
-    dispatch(apiCall('GET')('lists')(refreshLists))
+    return (apiCall('GET')('lists')(refreshLists))
   };
   return (
     <div className='app-wrapper'>
