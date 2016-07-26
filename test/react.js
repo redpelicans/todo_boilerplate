@@ -28,9 +28,7 @@ describe('AddTaskList component', () => {
   it('works', () => {
     const renderer = createRenderer();
     renderer.render(React.createElement(AddTaskList, {
-      value: 'yo',
       onAddList: () => {},
-      onChange: () => {},
     }));
     const output = renderer.getRenderOutput();
     output.should.equalJSX(
@@ -40,7 +38,7 @@ describe('AddTaskList component', () => {
           onChange={() => {}}
           placeholder='New Task list..'
           type='text'
-          value='yo' />
+          value='' />
       </form>
     );
   });
@@ -59,10 +57,8 @@ describe('AddTask component', () => {
   it('works', () => {
     const renderer = createRenderer();
     renderer.render(React.createElement(AddTask, {
-      value: 'yata',
       listId: 1,
       onAddTask: () => {},
-      onChange: () => {},
     }));
     const output = renderer.getRenderOutput();
     output.should.equalJSX(
@@ -72,7 +68,7 @@ describe('AddTask component', () => {
           onChange={testFunc}
           placeholder='New task..'
           type='text'
-          value='yata' />
+          value='' />
       </form>
     );
   });
@@ -107,7 +103,7 @@ describe('Task component', () => {
     const task = {
       id: 1,
       listId: 0,
-      text: 'yata',
+      description: 'yata',
     };
     renderer.render(React.createElement(Task, {
       task,

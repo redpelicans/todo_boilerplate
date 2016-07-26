@@ -1,68 +1,109 @@
 import expect from 'expect';
-import * as actions from '../src/client/actions';
+import * as alist from '../src/client/actions/lists';
+import * as atask from '../src/client/actions/tasks';
 
-describe('Actions', () => {
-  it('should create an action for refreshing new list title', () => {
-    const value = 'yata';
+describe('Lists actions', () => {
+  it('should create a ADDING_LIST action', () => {
     const expectedAction = {
-      type: actions.LIST_INPUT,
-      value,
+      type: alist.ADDING_LIST,
     };
-    expect(actions.listInput(value)).toEqual(expectedAction);
+    expect(alist.addingList()).toEqual(expectedAction);
   });
 
-  it('should create an action to add a task list', () => {
-    const id = 1;
-    const title = 'yata';
+  it('should create a LIST_ADDED action', () => {
+    const list = { id: 0, label: 'yata' };
     const expectedAction = {
-      type: actions.ADD_LIST,
-      id,
+      type: alist.LIST_ADDED,
+      list,
     };
-    expect(actions.addList(title)).toEqual(expectedAction);
-    expectedAction.id = 2;
-    expect(actions.addList(title)).toEqual(expectedAction);
+    expect(alist.listAdded(list)).toEqual(expectedAction);
   });
 
-  it('should create an action to remove a task list', () => {
-    const id = 0;
+  it('should create a REMOVING_LIST action', () => {
     const expectedAction = {
-      type: actions.REMOVE_LIST,
-      id,
+      type: alist.REMOVING_LIST,
     };
-    expect(actions.removeList(id)).toEqual(expectedAction);
+    expect(alist.removingList()).toEqual(expectedAction);
   });
 
-  it('should create an action for refreshing new task text', () => {
-    const id = 0;
-    const value = 'yata';
+  it('should create a LIST_REMOVED action', () => {
     const expectedAction = {
-      type: actions.TASK_INPUT,
-      id,
-      value,
+      type: alist.LIST_REMOVED,
+      id: 1,
     };
-    expect(actions.taskInput(id, value)).toEqual(expectedAction);
+    expect(alist.listRemoved(1)).toEqual(expectedAction);
   });
 
-  it('should create an action to add a task', () => {
-    const id = 1;
-    const listId = 0;
-    const text = 'yata';
+  it('should create a REQUEST_LISTS action', () => {
     const expectedAction = {
-      type: actions.ADD_TASK,
-      id,
-      listId,
+      type: alist.REQUEST_LISTS,
     };
-    expect(actions.addTask(listId, text)).toEqual(expectedAction);
-    expectedAction.id = 2;
-    expect(actions.addTask(listId, text)).toEqual(expectedAction);
+    expect(alist.requestLists()).toEqual(expectedAction);
   });
 
-  it('should create an action to remove a task', () => {
-    const id = 0;
-    const expectedAction = {
-      type: actions.REMOVE_TASK,
-      id,
+  it('should create a RECEIVE_LISTS action', () => {
+    const json = {
+      0: { id: 1, label: 'yata' },
     };
-    expect(actions.removeTask(id)).toEqual(expectedAction);
+    const expectedAction = {
+      type: alist.RECEIVE_LISTS,
+      lists: {
+        1: { id: 1, label: 'yata' },
+      },
+    };
+    expect(alist.receiveLists(json)).toEqual(expectedAction);
+  });
+});
+
+describe('Tasks actions', () => {
+  it('should create a ADDING_TASK action', () => {
+    const expectedAction = {
+      type: atask.ADDING_TASK,
+    };
+    expect(atask.addingTask()).toEqual(expectedAction);
+  });
+
+  it('should create a TASK_ADDED action', () => {
+    const task = { id: 0, listId: 0, description: 'yata' };
+    const expectedAction = {
+      type: atask.TASK_ADDED,
+      task,
+    };
+    expect(atask.taskAdded(task)).toEqual(expectedAction);
+  });
+
+  it('should create a REMOVING_TASK action', () => {
+    const expectedAction = {
+      type: atask.REMOVING_TASK,
+    };
+    expect(atask.removingTask()).toEqual(expectedAction);
+  });
+
+  it('should create a TASK_REMOVED action', () => {
+    const expectedAction = {
+      type: atask.TASK_REMOVED,
+      id: 1,
+    };
+    expect(atask.taskRemoved(1)).toEqual(expectedAction);
+  });
+
+  it('should create a REQUEST_TASKS action', () => {
+    const expectedAction = {
+      type: atask.REQUEST_TASKS,
+    };
+    expect(atask.requestTasks()).toEqual(expectedAction);
+  });
+
+  it('should create a RECEIVE_TASKS action', () => {
+    const json = {
+      0: { id: 1, listId: 0, description: 'yata' },
+    };
+    const expectedAction = {
+      type: atask.RECEIVE_TASKS,
+      tasks: {
+        1: { id: 1, listId: 0, description: 'yata' },
+      },
+    };
+    expect(atask.receiveTasks(json)).toEqual(expectedAction);
   });
 });
