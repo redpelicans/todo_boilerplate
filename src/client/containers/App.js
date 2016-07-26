@@ -6,46 +6,35 @@ import TaskLists from '../components/TaskLists';
 import {
   addList,
   removeList,
+  fetchLists,
 } from '../actions/lists';
 import {
   addTask,
   removeTask,
+  fetchTasks,
 } from '../actions/tasks';
 
-const App = ({ dispatch, lists, tasks }) => {
+class App extends React.Component {
 
-  const onAddList = (title) => {
-    dispatch(addList(title));
-  };
+  componentWillMount() {
+    this.props.fetchAll();
+  }
 
-  const onRemoveList = (id) => {
-    dispatch(removeList(id));
-  };
-
-  const onAddTask = (listId, text) => {
-    dispatch(addTask(listId, text));
-  };
-
-  const onRemoveTask = (id) => {
-    dispatch(removeTask(id));
-  };
-
-  return (
-    <div className='todo-app'>
-      <Title value='Todo App' />
-      <AddTaskList onAddList={onAddList} />
-      <TaskLists
-        lists={lists.data}
-        onAddTask={onAddTask}
-        onRemoveList={onRemoveList}
-        onRemoveTask={onRemoveTask}
-        tasks={tasks} />
-    </div>
-  );
-};
+  render() {
+    return (
+      <div className='todo-app'>
+        <Title value='Todo App' />
+        <AddTaskList {...this.props} />
+        <TaskLists {...this.props}
+          lists={this.props.lists.data}
+          tasks={this.props.tasks} />
+      </div>
+    );
+  }
+}
 
 App.propTypes = {
-  dispatch: React.PropTypes.func.isRequired,
+  fetchAll: React.PropTypes.func.isRequired,
   lists: React.PropTypes.object.isRequired,
   tasks: React.PropTypes.object.isRequired,
 };
@@ -55,4 +44,23 @@ const mapStateToProps = (state) => ({
   tasks: state.tasks,
 });
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => ({
+  fetchAll: () => {
+    dispatch(fetchLists());
+    dispatch(fetchTasks());
+  },
+  onAddList: (title) => {
+    dispatch(addList(title));
+  },
+  onRemoveList: (id) => {
+    dispatch(removeList(id));
+  },
+  onAddTask: (listId, text) => {
+    dispatch(addTask(listId, text));
+  },
+  onRemoveTask: (id) => {
+    dispatch(removeTask(id));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

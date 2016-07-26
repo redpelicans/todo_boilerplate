@@ -55,10 +55,6 @@ export const listRemoved = (id) => ({
 export const removeList = (id) => {
   const options = {
     method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Methods': 'DELETE',
-    },
   };
   return (dispatch) => {
     dispatch(removingList());

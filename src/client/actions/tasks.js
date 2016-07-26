@@ -60,10 +60,6 @@ export const taskRemoved = (id) => ({
 export const removeTask = (id) => {
   const options = {
     method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Methods': 'DELETE',
-    },
   };
   return (dispatch) => {
     dispatch(removingTask());
