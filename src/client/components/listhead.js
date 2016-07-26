@@ -3,17 +3,17 @@
  */
 import React from 'react'
 
-const ListHead = ({ id, title, onDelList }) => (
+const ListHead = ({ id, label, onDelList }) => (
   <div className='padded'>
-    <span>{title}</span>
+    <span>{label}</span>
     <button id={id} onClick={onDelList}>-</button>
   </div>
 )
 
 ListHead.propTypes = {
   id: React.PropTypes.number.isRequired,
+  label: React.PropTypes.string.isRequired,
   onDelList: React.PropTypes.func.isRequired,
-  title: React.PropTypes.string.isRequired,
 }
 
 export default ListHead

@@ -11,8 +11,8 @@ const TaskList = ({ handlers, list, tasks }) => (
   <div className='todo-list'>
     <ListHead
       id={list.id}
-      onDelList={handlers.onDelList}
-      title={list.title} />
+      label={list.label}
+      onDelList={handlers.onDelList} />
     <div className='flex-container'>
     <NewTask
       handleChange={ handlers.taskChange }

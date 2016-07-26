@@ -5,6 +5,7 @@ import { INPUT_LIST, ADD_LIST } from '../actions/lists'
 
 export default function input(state = {}, action) {
   switch (action.type) {
+
   case ADD_LIST:
     return { lists: '' };
 

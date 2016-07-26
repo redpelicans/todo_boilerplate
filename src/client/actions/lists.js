@@ -6,13 +6,14 @@ export const ADD_LIST = 'ADD_LIST';
 export const DEL_LIST = 'DEL_LIST';
 export const INPUT_LIST = 'INPUT_LIST';
 
-let currID = 1;
+let currID;
 
-export const addList = title => {
-  currID = currID + 1;
+export const addList = (list) => {
+  currID = list.id >= currID ? list.id : currID;
+  console.log('currID : ', currID);
   return ({
     type: ADD_LIST,
-    list: { title, id: currID },
+    list,
   })
 }
 

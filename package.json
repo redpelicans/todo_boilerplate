@@ -15,10 +15,11 @@
   "dependencies": {
     "react": "^15.0.2",
     "react-dom": "^15.0.2",
-    "redux": "^3.5.2",
     "react-redux": "^4.4.5",
+    "redux": "^3.5.2",
     "redux-logger": "^2.6.1",
-    "redux-thunk": "^2.0.1"
+    "redux-thunk": "^2.1.0",
+    "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.7.7",
@@ -38,7 +39,7 @@
     "eslint-plugin-babel": "^3.3.0",
     "eslint-plugin-react": "^5.2.2",
     "lodash": "^4.13.1",
-    "mocha": "^2.4.5",
+    "mocha": "^2.5.3",
     "nyc": "^6.4.4",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.0",

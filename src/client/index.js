@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDom from 'react-dom'
 import createLogger from 'redux-logger'
+import thunk from 'redux-thunk';
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, combineReducers } from 'redux'
 
@@ -10,26 +11,27 @@ import tasks from './reducers/taskReducer'
 
 import App from './containers/app'
 
+// EXPERIMENTAL
+import doGet from './actions/async/todo'
+import { addList } from './actions/lists'
+import { addTask } from './actions/tasks'
+//
+
 const initialState = {
   input: {
+    api: 'http://rp4.redpelicans.com:13004/api/todo/',
     lists: '',
   },
   lists: [
-    { id: 0, title: 'first', input: '' },
-    { id: 1, title: 'second', input: '' },
   ],
   tasks: [
-    { id: 0, description: 'the first task', listId: 0 },
-    { id: 1, description: 'the 2nd task', listId: 0 },
-    { id: 2, description: 'the 3rd task', listId: 1 },
-    { id: 3, description: 'the 4th task', listId: 1 },
   ],
 };
 
 const todoStore = createStore(
   combineReducers({ input, lists, tasks }),
   initialState,
-  applyMiddleware(createLogger())
+  applyMiddleware(createLogger(), thunk)
 );
 
 ReactDom.render(
@@ -37,3 +39,17 @@ ReactDom.render(
     <App />
   </Provider>, document.getElementById('react-wrapper')
 );
+
+// EXPERIMENTAL
+const onLists = lists => { _.map(lists, list => {
+  console.log('list : ', list);
+  todoStore.dispatch(addList(list));
+}) }
+
+const onTasks = tasks => { _.map(tasks, task => {
+  console.log('task : ', task);
+  todoStore.dispatch(addTask(task));
+}) }
+
+doGet('lists')(onLists);
+doGet('tasks')(onTasks);

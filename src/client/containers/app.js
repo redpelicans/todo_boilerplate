@@ -9,8 +9,12 @@ import Todo from '../components/todo'
 
 import { addList, delList, listInput } from '../actions/lists'
 import { addTask, delTask, taskInput } from '../actions/tasks'
+// EXPERIMENTAL
+import fetcher from '../actions/async/todo'
+//
 
 const App = ({ input, lists, tasks, dispatch }) => {
+  // const refresh = listFetcher(lists => (onNewList(lists)));
   const listChange = value => {
     dispatch(listInput(value));
   };
@@ -30,11 +34,15 @@ const App = ({ input, lists, tasks, dispatch }) => {
   const onDelTask = e => {
     dispatch(delTask(e.target.id));
   }
+  const onFetch = (callback) => {
+    fetcher(callback)
+  }
   return (
     <div className='app-wrapper'>
       <h1>A fantastic Todo is on its way !</h1>
       <NewList handleChange={ listChange }
         inputVal={ input.lists }
+        onFetch={ onFetch }
         onNewList={ onNewList } />
       <Todo
         listChange={listChange}
