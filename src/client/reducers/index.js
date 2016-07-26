@@ -2,13 +2,8 @@ import _ from 'lodash';
 import * as list from '../actions/lists';
 import * as task from '../actions/tasks';
 
-function lists(state = { data: {}, input: '', isFetching: false }, action) {
+function lists(state = { data: {}, isFetching: false }, action) {
   switch (action.type) {
-  case list.LIST_INPUT:
-    return {
-      ...state,
-      input: action.value,
-    };
   case list.ADDING_LIST:
     return {
       ...state,
@@ -46,37 +41,17 @@ function lists(state = { data: {}, input: '', isFetching: false }, action) {
   }
 }
 
-function tasks(state = { data: {}, input: {}, isFetching: false }, action) {
+function tasks(state = { data: {}, isFetching: false }, action) {
   switch (action.type) {
-  case list.ADD_LIST:
-    return {
-      ...state,
-      input: {
-        ...state.input,
-        [action.id]: '',
-      },
-    };
-  case task.TASK_INPUT:
-    return {
-      ...state,
-      input: {
-        ...state.input,
-        [action.id]: action.value,
-      },
-    };
   case task.ADD_TASK:
     return {
       ...state,
-      input: {
-        ...state.input,
-        [action.listId]: '',
-      },
       data: {
         ...state.data,
         [action.id]: {
           id: action.id,
           listId: action.listId,
-          text: state.input[action.listId],
+          text: action.text,
         },
       },
     };
@@ -92,12 +67,10 @@ function tasks(state = { data: {}, input: {}, isFetching: false }, action) {
 
 const initialState = {
   lists: {
-    input: '',
     data: {},
     isFetching: false,
   },
   tasks: {
-    input: {},
     data: {},
     isFetching: false,
   },

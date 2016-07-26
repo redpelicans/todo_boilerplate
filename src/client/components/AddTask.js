@@ -1,34 +1,46 @@
 import React from 'react';
 
-const AddTask = ({ onAddTask, onChange, value, listId }) => {
+class AddTask extends React.Component {
 
-  const handleUserInput = (e) => {
+  constructor(props) {
+    super(props);
+    this.state = {
+      input: '',
+    };
+  }
+
+  handleUserInput = (e) => {
     e.preventDefault();
-    onChange(listId, e.target.value);
-  };
+    this.setState({
+      input: e.target.value,
+    });
+  }
 
-  const handleAdd = (e) => {
+  handleAdd = (e) => {
     e.preventDefault();
-    onAddTask(listId);
-  };
+    this.props.onAddTask(this.props.listId, this.state.input);
+    this.setState({
+      input: '',
+    });
+  }
 
-  return (
-    <form onSubmit={handleAdd}>
-      <input
-        className='add-task'
-        onChange={handleUserInput}
-        placeholder='New task..'
-        type='text'
-        value={value} />
-    </form>
-  );
-};
+  render() {
+    return (
+      <form onSubmit={this.handleAdd}>
+        <input
+          className='add-task'
+          onChange={this.handleUserInput}
+          placeholder='New task..'
+          type='text'
+          value={this.state.input} />
+      </form>
+    );
+  }
+}
 
 AddTask.propTypes = {
   listId: React.PropTypes.number.isRequired,
   onAddTask: React.PropTypes.func.isRequired,
-  onChange: React.PropTypes.func.isRequired,
-  value: React.PropTypes.string.isRequired,
 };
 
 export default AddTask;

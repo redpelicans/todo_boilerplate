@@ -1,33 +1,45 @@
 import React from 'react';
 
-const AddTaskList = ({ onAddList, onChange, value }) => {
+class AddTaskList extends React.Component {
 
-  const handleUserInput = (e) => {
+  constructor(props) {
+    super(props);
+    this.state = {
+      input: '',
+    };
+  }
+
+  handleUserInput = (e) => {
     e.preventDefault();
-    onChange(e.target.value);
-  };
+    this.setState({
+      input: e.target.value,
+    });
+  }
 
-  const handleSubmit = (e) => {
+  handleSubmit = (e) => {
     e.preventDefault();
-    onAddList();
-  };
+    this.props.onAddList(this.state.input);
+    this.setState({
+      input: '',
+    });
+  }
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <input
-        className='add-tasklist'
-        onChange={handleUserInput}
-        placeholder='New Task list..'
-        type='text'
-        value={value} />
-    </form>
-  );
-};
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <input
+          className='add-tasklist'
+          onChange={this.handleUserInput}
+          placeholder='New Task list..'
+          type='text'
+          value={this.state.input} />
+      </form>
+    );
+  }
+}
 
 AddTaskList.propTypes = {
   onAddList: React.PropTypes.func.isRequired,
-  onChange: React.PropTypes.func.isRequired,
-  value: React.PropTypes.string.isRequired,
 };
 
 export default AddTaskList;

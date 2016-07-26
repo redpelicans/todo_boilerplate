@@ -22,12 +22,7 @@ const TaskList = (props) => {
       <div className='tasks'>
         {taskElems}
       </div>
-      <AddTask
-        {...props}
-        listId={props.list.id}
-        onAddTask={props.onAddTask}
-        onChange={props.onTaskInput}
-        value={props.tasks.input[props.list.id]} />
+      <AddTask listId={props.list.id} onAddTask={props.onAddTask} />
     </div>
   );
 };
@@ -36,7 +31,6 @@ TaskList.propTypes = {
   list: React.PropTypes.object.isRequired,
   onAddTask: React.PropTypes.func.isRequired,
   onRemoveList: React.PropTypes.func.isRequired,
-  onTaskInput: React.PropTypes.func.isRequired,
   tasks: React.PropTypes.object.isRequired,
 };
 

@@ -4,7 +4,6 @@ import Title from '../components/Title';
 import AddTaskList from '../components/AddTaskList';
 import TaskLists from '../components/TaskLists';
 import {
-  listInput,
   addList,
   removeList,
   fetchLists,
@@ -17,24 +16,16 @@ import {
 
 const App = ({ dispatch, lists, tasks }) => {
 
-  const onListInput = (value) => {
-    dispatch(listInput(value));
-  };
-
-  const onAddList = () => {
-    dispatch(addList());
+  const onAddList = (title) => {
+    dispatch(addList(title));
   };
 
   const onRemoveList = (id) => {
     dispatch(removeList(id));
   };
 
-  const onTaskInput = (listId, value) => {
-    dispatch(taskInput(listId, value));
-  };
-
-  const onAddTask = (listId) => {
-    dispatch(addTask(listId));
+  const onAddTask = (listId, text) => {
+    dispatch(addTask(listId, text));
   };
 
   const onRemoveTask = (id) => {
@@ -44,16 +35,12 @@ const App = ({ dispatch, lists, tasks }) => {
   return (
     <div className='todo-app'>
       <Title value='Todo App' />
-      <AddTaskList
-        onAddList={onAddList}
-        onChange={onListInput}
-        value={lists.input} />
+      <AddTaskList onAddList={onAddList} />
       <TaskLists
         lists={lists.data}
         onAddTask={onAddTask}
         onRemoveList={onRemoveList}
         onRemoveTask={onRemoveTask}
-        onTaskInput={onTaskInput}
         tasks={tasks} />
     </div>
   );

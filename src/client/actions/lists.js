@@ -5,7 +5,6 @@ import _ from 'lodash';
  * action types
  */
 
-export const LIST_INPUT = 'LIST_INPUT';
 export const ADDING_LIST = 'ADDING_LIST';
 export const ADD_LIST = 'ADD_LIST';
 export const LIST_ADDED = 'LIST_ADDED';
@@ -17,28 +16,20 @@ export const RECEIVE_LISTS = 'RECEIVE_LISTS';
  * action creators
  */
 
-export const listInput = (value) => {
- return {
-   type: LIST_INPUT,
-   value,
- };
-};
-
 export const addingList = () => {
  return {
    type: ADDING_LIST,
  };
 };
 
-export const addList = (list) => {
- return (dispatch, getState) => {
-   const { lists:{ input } } = getState();
+export const addList = (title) => {
+ return (dispatch) => {
    const options = {
      method: 'POST',
      headers: {
        'Content-Type': 'application/json',
      },
-     body: JSON.stringify({ todo: { label: input } }),
+     body: JSON.stringify({ todo: { label: title } }),
    };
    dispatch(addingList());
    fetch('http://rp4.redpelicans.com:13004/api/todo/lists', options)
