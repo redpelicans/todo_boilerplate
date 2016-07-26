@@ -2,7 +2,7 @@
  * Created by Antoine on 19/07/2016.
  */
 import _ from 'lodash'
-import { ADD_LIST, DEL_LIST } from '../actions/lists'
+import { ADD_LIST, DEL_LIST, REFRESH_LISTS } from '../actions/lists'
 import { ADD_TASK, INPUT_TASK } from '../actions/tasks'
 
 export default function lists(state = [], action) {
@@ -23,6 +23,10 @@ export default function lists(state = [], action) {
     return _.map(state, list => (
       (list.id === parseInt(action.id)) ?
         _.create(list, { input: action.input }) : list))
+
+  case REFRESH_LISTS:
+    console.log('Reducing callback from fetch: ', action);
+    return {action};
 
   default:
     return state;

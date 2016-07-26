@@ -11,15 +11,8 @@ import tasks from './reducers/taskReducer'
 
 import App from './containers/app'
 
-// EXPERIMENTAL
-import doGet from './actions/async/todo'
-import { addList } from './actions/lists'
-import { addTask } from './actions/tasks'
-//
-
 const initialState = {
   input: {
-    api: 'http://rp4.redpelicans.com:13004/api/todo/',
     lists: '',
   },
   lists: [
@@ -41,15 +34,26 @@ ReactDom.render(
 );
 
 // EXPERIMENTAL
-const onLists = lists => { _.map(lists, list => {
-  console.log('list : ', list);
-  todoStore.dispatch(addList(list));
-}) }
+import apiCall from './actions/api'
+import { addList, delList, refreshLists } from './actions/lists'
+import { addTask, delTask } from './actions/tasks'
+//EXPERIMENTAL
+const onLists = lists => {
+//   _.map(lists, list => {
+//   // console.log('list : ', list);
+//   todoStore.dispatch(addList(list));
+// }) }
+  todoStore.dispatch(refreshLists(lists))
+}
 
 const onTasks = tasks => { _.map(tasks, task => {
-  console.log('task : ', task);
+  // console.log('task : ', task);
   todoStore.dispatch(addTask(task));
 }) }
 
-doGet('lists')(onLists);
-doGet('tasks')(onTasks);
+const onListDeletion = (res) => {
+  todo
+}
+
+apiCall('GET')('lists')(onLists);
+apiCall('GET')('tasks')(onTasks);

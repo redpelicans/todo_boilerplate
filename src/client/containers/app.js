@@ -7,10 +7,11 @@ import { connect } from 'react-redux'
 import NewList from '../components/newlist'
 import Todo from '../components/todo'
 
-import { addList, delList, listInput } from '../actions/lists'
+import { addList, delList, listInput, fetchLists, refreshLists } from '../actions/lists'
 import { addTask, delTask, taskInput } from '../actions/tasks'
+import apiCall from '../actions/api'
 // EXPERIMENTAL
-import fetcher from '../actions/async/todo'
+// import apiCall from '../actions/async/api'
 //
 
 const App = ({ input, lists, tasks, dispatch }) => {
@@ -22,7 +23,7 @@ const App = ({ input, lists, tasks, dispatch }) => {
     dispatch(addList(input.lists));
   }
   const onDelList = e => {
-    console.log(e);
+    console.log(e.target.id);
     dispatch(delList(e.target.id));
   }
   const taskChange = (value, id) => {
@@ -34,16 +35,22 @@ const App = ({ input, lists, tasks, dispatch }) => {
   const onDelTask = e => {
     dispatch(delTask(e.target.id));
   }
-  const onFetch = (callback) => {
-    fetcher(callback)
+  const onLists = lists => {
+    dispatch(refreshLists(lists));
   }
+  const onRefresh = () => {
+    // console.log('Asking for refresh...');
+    console.log('dispatching fetch');
+    dispatch(apiCall('GET')('lists')(refreshLists))
+  };
   return (
     <div className='app-wrapper'>
       <h1>A fantastic Todo is on its way !</h1>
       <NewList handleChange={ listChange }
         inputVal={ input.lists }
-        onFetch={ onFetch }
-        onNewList={ onNewList } />
+        onLists={ onLists }
+        onNewList={ onNewList }
+        onRefresh={ onRefresh } />
       <Todo
         listChange={listChange}
         lists={lists}

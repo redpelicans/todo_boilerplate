@@ -7,7 +7,9 @@ import ListHead from './listhead'
 import Task from './task'
 import NewTask from './newtask'
 
-const TaskList = ({ handlers, list, tasks }) => (
+const TaskList = ({ handlers, list, tasks }) => {
+  console.log(list);
+  return (
   <div className='todo-list'>
     <ListHead
       id={list.id}
@@ -23,7 +25,8 @@ const TaskList = ({ handlers, list, tasks }) => (
       <Task key={task.id} onDelTask={handlers.onDelTask} task={task} />))}
     </div>
   </div>
-)
+  )
+}
 
 TaskList.propTypes = {
   handlers: React.PropTypes.object.isRequired,
