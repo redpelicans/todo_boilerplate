@@ -21,7 +21,7 @@ function lists(state = { data: {}, input: '', isFetching: false }, action) {
         ...state.data,
         [action.list.id]: {
           id: action.list.id,
-          title: action.list.label,
+          label: action.list.label,
         },
       },
     };

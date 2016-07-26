@@ -16,7 +16,7 @@ const TaskList = (props) => {
   return (
     <div className='task-list'>
       <header>
-        <TaskListTitle value={props.list.title} />
+        <TaskListTitle value={props.list.label} />
         <RemoveTaskList id={props.list.id} onRemove={props.onRemoveList} />
       </header>
       <div className='tasks'>

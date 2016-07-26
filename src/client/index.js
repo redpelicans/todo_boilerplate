@@ -7,6 +7,7 @@ import thunk from 'redux-thunk'
 import { Provider } from 'react-redux';
 import App from './containers/App';
 import rootReducer from './reducers';
+import { fetchLists } from './actions/lists';
 
 const logger = createLogger();
 
@@ -15,7 +16,7 @@ const store = createStore(
   applyMiddleware(thunk, logger),
 );
 
-//store.dispatch(fetchLists());
+store.dispatch(fetchLists());
 
 ReactDom.render(
   <Provider store={store}>

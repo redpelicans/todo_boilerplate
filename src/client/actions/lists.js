@@ -37,8 +37,8 @@ export const addList = (list) => {
      method: 'POST',
      headers: {
        'Content-Type': 'application/json',
-     }
-     body: JSON.stringify({ todo: { label: input } });
+     },
+     body: JSON.stringify({ todo: { label: input } }),
    };
    dispatch(addingList());
    fetch('http://rp4.redpelicans.com:13004/api/todo/lists', options)
@@ -70,20 +70,15 @@ export const requestLists = () => {
 export const fetchLists = () => {
   return (dispatch) => {
     dispatch(requestLists());
-    return fetch('http://rp4.redpelicans.com:13004/api/todo/lists')
+    fetch('http://rp4.redpelicans.com:13004/api/todo/lists')
       .then(response => response.json())
-      .then(json => dispatch(receiveLists(json)));
+      .then(resLists => dispatch(receiveLists(resLists)));
   };
 };
 
 export const receiveLists = (json) => {
-  const lists =_.map({ ...json }, list => ([list.id]: {
-    id: list.id,
-    title: list.label,
-  }));
-  console.log('RECEIVE_LIST:', lists);
   return {
     type: RECEIVE_LISTS,
-    lists,
+    lists: { ...json },
   };
 };
