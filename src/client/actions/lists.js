@@ -18,21 +18,24 @@ export const RECEIVE_LISTS = 'RECEIVE_LISTS';
  * action creators
  */
 
-export const addingList = () => {
-  return {
-    type: ADDING_LIST,
-  };
-};
+export const addingList = () => ({
+  type: ADDING_LIST,
+});
+
+export const listAdded = (list) => ({
+  type: LIST_ADDED,
+  list,
+});
 
 export const addList = (title) => {
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ todo: { label: title } }),
+  };
   return (dispatch) => {
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ todo: { label: title } }),
-    };
     dispatch(addingList());
     fetch('http://rp4.redpelicans.com:13004/api/todo/lists', options)
     .then(response => response.json())
@@ -40,61 +43,46 @@ export const addList = (title) => {
   };
 };
 
-export const listAdded = (list) => {
-  return {
-    type: LIST_ADDED,
-    list,
-  };
-};
+export const removingList = () => ({
+  type: REMOVING_LIST,
+});
 
-export const removingList = () => {
-  return {
-    type: REMOVING_LIST,
-  };
-};
+export const listRemoved = (id) => ({
+  type: LIST_REMOVED,
+  id,
+});
 
 export const removeList = (id) => {
+  const options = {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Methods': 'DELETE',
+    },
+  };
   return (dispatch) => {
-    const options = {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Methods': 'DELETE',
-      },
-    };
     dispatch(removingList());
-    //fetch(`http://rp4.redpelicans.com:13004/api/todo/list/${id}`, options)
-    //.then(response => response.json())
-    //.then(response => dispatch(listRemoved(response.id)));
+    fetch(`http://rp4.redpelicans.com:13004/api/todo/list/${id}`, options)
+    .then(response => response.json())
+    .then(response => dispatch(listRemoved(response.id)));
     dispatch(listRemoved(id));
   };
 };
 
-export const listRemoved = (id) => {
-  return {
-    type: LIST_REMOVED,
-    id,
-  };
-};
+export const requestLists = () => ({
+  type: REQUEST_LISTS,
+});
 
-export const requestLists = () => {
-  return {
-    type: REQUEST_LISTS,
-  };
-};
+export const receiveLists = (json) => ({
+  type: RECEIVE_LISTS,
+  lists: _.keyBy(json, o => o.id),
+});
 
-export const fetchLists = () => {
-  return (dispatch) => {
+export const fetchLists = () => (
+  (dispatch) => {
     dispatch(requestLists());
     fetch('http://rp4.redpelicans.com:13004/api/todo/lists')
       .then(response => response.json())
       .then(resLists => dispatch(receiveLists(resLists)));
-  };
-};
-
-export const receiveLists = (json) => {
-  return {
-    type: RECEIVE_LISTS,
-    lists: _.keyBy(json, o => o.id),
-  };
-};
+  }
+);

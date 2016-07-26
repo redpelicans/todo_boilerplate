@@ -18,26 +18,29 @@ export const RECEIVE_TASKS = 'RECEIVE_TASKS';
  * action creators
  */
 
-export const addingTask = () => {
-  return {
-    type: ADDING_TASK,
-  };
-};
+export const addingTask = () => ({
+  type: ADDING_TASK,
+});
+
+export const taskAdded = (task) => ({
+  type: TASK_ADDED,
+  task,
+});
 
 export const addTask = (listId, text) => {
-  return (dispatch) => {
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      task: {
+        description: text,
+        listId,
       },
-      body: JSON.stringify({
-        task: {
-          description: text,
-          listId,
-        },
-      }),
-    };
+    }),
+  };
+  return (dispatch) => {
     dispatch(addingTask());
     fetch('http://rp4.redpelicans.com:13004/api/todo/tasks', options)
     .then(response => response.json())
@@ -45,61 +48,46 @@ export const addTask = (listId, text) => {
   };
 };
 
-export const taskAdded = (task) => {
-  return {
-    type: TASK_ADDED,
-    task,
-  };
-};
+export const removingTask = () => ({
+  type: REMOVING_TASK,
+});
 
-export const removingTask = () => {
-  return {
-    type: REMOVING_TASK,
-  };
-};
+export const taskRemoved = (id) => ({
+  type: TASK_REMOVED,
+  id,
+});
 
 export const removeTask = (id) => {
+  const options = {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Methods': 'DELETE',
+    },
+  };
   return (dispatch) => {
-    const options = {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Methods': 'DELETE',
-      },
-    };
     dispatch(removingTask());
-    //fetch(`http://rp4.redpelicans.com:13004/api/todo/task/${id}`, options)
-    //.then(response => response.json())
-    //.then(response => dispatch(taskRemoved(response.id)));
+    fetch(`http://rp4.redpelicans.com:13004/api/todo/task/${id}`, options)
+    .then(response => response.json())
+    .then(response => dispatch(taskRemoved(response.id)));
     dispatch(taskRemoved(id));
   };
 };
 
-export const taskRemoved = (id) => {
-  return {
-    type: TASK_REMOVED,
-    id,
-  };
-};
+export const requestTasks = () => ({
+  type: REQUEST_TASKS,
+});
 
-export const requestTasks = () => {
-  return {
-    type: REQUEST_TASKS,
-  };
-};
+export const receiveTasks = (json) => ({
+  type: RECEIVE_TASKS,
+  tasks: _.keyBy(json, o => o.id),
+});
 
-export const fetchTasks = () => {
-  return (dispatch) => {
+export const fetchTasks = () => (
+  (dispatch) => {
     dispatch(requestTasks());
     fetch('http://rp4.redpelicans.com:13004/api/todo/tasks')
       .then(response => response.json())
       .then(resTasks => dispatch(receiveTasks(resTasks)));
-  };
-};
-
-export const receiveTasks = (json) => {
-  return {
-    type: RECEIVE_TASKS,
-    tasks: _.keyBy(json, o => o.id),
-  };
-};
+  }
+);

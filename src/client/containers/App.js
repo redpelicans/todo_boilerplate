@@ -6,10 +6,8 @@ import TaskLists from '../components/TaskLists';
 import {
   addList,
   removeList,
-  fetchLists,
 } from '../actions/lists';
 import {
-  taskInput,
   addTask,
   removeTask,
 } from '../actions/tasks';

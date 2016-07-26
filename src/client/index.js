@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import createLogger from 'redux-logger';
-import thunk from 'redux-thunk'
+import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import App from './containers/App';
 import rootReducer from './reducers';
