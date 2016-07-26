@@ -7,7 +7,6 @@ function lists(state = { data: {}, isFetching: false }, action) {
   case list.ADDING_LIST:
     return {
       ...state,
-      input: '',
     };
   case list.LIST_ADDED:
     return {
@@ -20,7 +19,11 @@ function lists(state = { data: {}, isFetching: false }, action) {
         },
       },
     };
-  case list.REMOVE_LIST:
+  case list.REMOVING_LIST:
+    return {
+      ...state,
+    };
+  case list.LIST_REMOVED:
     return {
       ...state,
       data: _.omit(state.data, action.id),
