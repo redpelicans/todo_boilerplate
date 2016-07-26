@@ -52,9 +52,32 @@ export const taskAdded = (task) => {
   };
 };
 
-export const removeTask = (id) => {
+export const removingTask = () => {
   return {
-    type: REMOVE_TASK,
+    type: REMOVING_TASK,
+  };
+};
+
+export const removeTask = (id) => {
+  return (dispatch) => {
+    const options = {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Methods': 'DELETE',
+      },
+    };
+    dispatch(removingTask());
+    //fetch(`http://rp4.redpelicans.com:13004/api/todo/task/${id}`, options)
+    //.then(response => response.json())
+    //.then(response => dispatch(taskRemoved(response.id)));
+    dispatch(taskRemoved(id));
+  };
+};
+
+export const taskRemoved = (id) => {
+  return {
+    type: TASK_REMOVED,
     id,
   };
 };
@@ -75,7 +98,6 @@ export const fetchTasks = () => {
 };
 
 export const receiveTasks = (json) => {
-  console.log(_.keyBy(json, o => o.id));
   return {
     type: RECEIVE_TASKS,
     tasks: _.keyBy(json, o => o.id),
