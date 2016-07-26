@@ -7,10 +7,13 @@ import {
   listInput,
   addList,
   removeList,
+  fetchLists,
+} from '../actions/lists';
+import {
   taskInput,
   addTask,
   removeTask,
-} from '../actions';
+} from '../actions/tasks';
 
 const App = ({ dispatch, lists, tasks }) => {
 

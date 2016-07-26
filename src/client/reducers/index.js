@@ -1,36 +1,45 @@
 import _ from 'lodash';
-import {
-  ADD_LIST,
-  REMOVE_LIST,
-  ADD_TASK,
-  REMOVE_TASK,
-  LIST_INPUT,
-  TASK_INPUT,
-} from '../actions';
+import * as list from '../actions/lists';
+import * as task from '../actions/tasks';
 
 function lists(state = { data: {}, input: '', isFetching: false }, action) {
   switch (action.type) {
-  case LIST_INPUT:
+  case list.LIST_INPUT:
     return {
       ...state,
       input: action.value,
     };
-  case ADD_LIST:
+  case list.ADDING_LIST:
     return {
       ...state,
       input: '',
+    };
+  case list.LIST_ADDED:
+    return {
+      ...state,
       data: {
         ...state.data,
-        [action.id]: {
-          id: action.id,
-          title: state.input,
+        [action.list.id]: {
+          id: action.list.id,
+          title: action.list.label,
         },
       },
     };
-  case REMOVE_LIST:
+  case list.REMOVE_LIST:
     return {
       ...state,
       data: _.omit(state.data, action.id),
+    };
+  case list.REQUEST_LISTS:
+    return {
+      ...state,
+      isFetching: true,
+    };
+  case list.RECEIVE_LISTS:
+    return {
+      ...state,
+      isFetching: false,
+      data: action.lists,
     };
   default:
     return state;
@@ -39,7 +48,7 @@ function lists(state = { data: {}, input: '', isFetching: false }, action) {
 
 function tasks(state = { data: {}, input: {}, isFetching: false }, action) {
   switch (action.type) {
-  case ADD_LIST:
+  case list.ADD_LIST:
     return {
       ...state,
       input: {
@@ -47,7 +56,7 @@ function tasks(state = { data: {}, input: {}, isFetching: false }, action) {
         [action.id]: '',
       },
     };
-  case TASK_INPUT:
+  case task.TASK_INPUT:
     return {
       ...state,
       input: {
@@ -55,7 +64,7 @@ function tasks(state = { data: {}, input: {}, isFetching: false }, action) {
         [action.id]: action.value,
       },
     };
-  case ADD_TASK:
+  case task.ADD_TASK:
     return {
       ...state,
       input: {
@@ -71,7 +80,7 @@ function tasks(state = { data: {}, input: {}, isFetching: false }, action) {
         },
       },
     };
-  case REMOVE_TASK:
+  case task.REMOVE_TASK:
     return {
       ...state,
       data: _.omit(state.data, action.id),
