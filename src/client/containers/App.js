@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { getProps } from '../selectors';
 import Title from '../components/Title';
 import AddTaskList from '../components/AddTaskList';
 import TaskLists from '../components/TaskLists';
@@ -43,11 +44,6 @@ App.propTypes = {
   tasks: React.PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  lists: state.lists,
-  tasks: state.tasks,
-});
-
 const mapDispatchToProps = (dispatch) => ({
   fetchAll: () => {
     dispatch(fetchLists());
@@ -67,4 +63,4 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(getProps, mapDispatchToProps)(App);
