@@ -41,12 +41,13 @@ const App = ({ input, lists, tasks, dispatch }) => {
   const onRefresh = () => {
     // console.log('Asking for refresh...');
     console.log('dispatching fetch');
-    return (apiCall('GET')('lists')(refreshLists))
+    dispatch(fetchLists());
   };
   return (
     <div className='app-wrapper'>
       <h1>A fantastic Todo is on its way !</h1>
-      <NewList handleChange={ listChange }
+      <NewList 
+        handleChange={ listChange }
         inputVal={ input.lists }
         onLists={ onLists }
         onNewList={ onNewList }

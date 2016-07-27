@@ -32,12 +32,12 @@ export const refreshLists = lists => {
   console.log('Fetch called back with ', ...lists);
   return ({
     type: REFRESH_LISTS,
-    lists,
+    lists: lists,
   })
 }
 
 export const fetchLists = () => {
-  apiCall('GET')('lists')(refreshLists);
+  return apiCall('GET')('lists')(refreshLists);
 }
 
 // export const fetchLists = () => {

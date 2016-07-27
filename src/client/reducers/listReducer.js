@@ -25,8 +25,7 @@ export default function lists(state = [], action) {
         _.create(list, { input: action.input }) : list))
 
   case REFRESH_LISTS:
-    console.log('Reducing callback from fetch: ', action);
-    return {action};
+    return _.map(action.lists, l => ({...l, key: l.id}));
 
   default:
     return state;
