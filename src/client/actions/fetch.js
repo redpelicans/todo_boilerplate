@@ -6,9 +6,9 @@ export const MADE_TASKS = 'MADE_TASKS';
 export const MAKING_TASKS = 'MAKING_TASKS';
 export const MAKING_LISTS = 'MAKING_LISTS';
 
-export const makeLists = (lists) => ({ type: MADE_LISTS, lists: _.keyBy(lists, o => o.id) });
+export const makeLists = (lists) => ({ type: MADE_LISTS, lists: _.keyBy(lists, 'id') });
 
-export const makeTasks = (tasks) => ({ type: MADE_TASKS, tasks: _.keyBy(tasks, o => o.id) });
+export const makeTasks = (tasks) => ({ type: MADE_TASKS, tasks: _.keyBy(tasks, 'id') });
 
 export const makingLists = () => ({ type: MAKING_LISTS });
 

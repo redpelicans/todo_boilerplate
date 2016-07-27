@@ -1,8 +1,11 @@
+import { requestJSON } from '../helpers/utils'
+
 export const ADD_TASK = 'ADD_TASK';
 export const TASK_ADDED = 'TASK_ADDED';
 export const ADDING_TASK = 'ADDING_TASK';
 export const REMOVED_TASK = 'REMOVED_TASK';
 export const CHANGE_TASK = 'CHANGE_TASK';
+export const REMOVING_TASK = 'REMOVING_TASK';
 
 export const addingTask = (idList) => {
   return {
@@ -29,8 +32,8 @@ export const addTask = (idList) => {
     };
     dispatch(addingTask(idList));
     options.body = JSON.stringify({ task: { description: inputTask, listId: idList } });
-    fetch('http://rp4.redpelicans.com:13004/api/todo/tasks', options)
-    .then(res => res.json())
+    const url = 'http://rp4.redpelicans.com:13004/api/todo/tasks';
+    requestJSON(url, options)
     .then(todo => dispatch(taskAdded(todo)));
   };
 };
@@ -38,6 +41,8 @@ export const addTask = (idList) => {
 export const changeTask = (idList, inputtask) => ({ type: CHANGE_TASK, idList, inputtask });
 
 export const removedTask = (idTask) => ({ type: REMOVED_TASK, idTask });
+
+export const removingTask = (idTask) => ({ type: REMOVING_TASK });
 
 export const removeTask = (idTask) => {
   return (dispatch) => {
@@ -47,9 +52,9 @@ export const removeTask = (idTask) => {
         'Content-Type': 'application/json',
       }
     };
-    //dispatch(removingTask());
-    const url = 'http://rp4.redpelicans.com:13004/api/todo/task/';
-    fetch(url.concat(idTask), options)
+    dispatch(removingTask());
+    const url = `http://rp4.redpelicans.com:13004/api/todo/task/${idTask}`;
+    requestJSON(url, options)
     .then(dispatch(removedTask(idTask)));
   };
 };
