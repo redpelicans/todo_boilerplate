@@ -32,21 +32,3 @@ ReactDom.render(
     <App />
   </Provider>, document.getElementById('react-wrapper')
 );
-
-// // EXPERIMENTAL
-// import apiCall from './actions/api'
-// import { addList, delList, refreshLists } from './actions/lists'
-// import { addTask, delTask } from './actions/tasks'
-// //EXPERIMENTAL
-
-// const onTasks = tasks => { _.map(tasks, task => {
-//   // console.log('task : ', task);
-//   todoStore.dispatch(addTask(task));
-// }) }
-
-// const onListDeletion = (res) => {
-//   todo
-// }
-
-// apiCall('GET')('lists')(lists => todoStore.dispatch(refreshLists(lists)));
-// apiCall('GET')('tasks')(onTasks);

@@ -8,7 +8,6 @@ import Task from './task'
 import NewTask from './newtask'
 
 const TaskList = ({ handlers, list, tasks }) => {
-  console.log(list);
   return (
   <div className='todo-list'>
     <ListHead

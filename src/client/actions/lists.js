@@ -32,13 +32,13 @@ export const deleteList = (id) => (
   apiCall({ method: 'DELETE' })('list/'.concat(id))
 )
 
-export const pushList = list => {
+export const pushList = newList => {
   const req = {
     headers: { 'Content-Type': 'application/json' },
     method: 'POST',
-    body: JSON.stringify({ 'todo': { 'label': list.label } }),
+    body: JSON.stringify({ 'todo': { 'label': newList } }),
   }
-  return apiCall(req)('tasks')
+  return apiCall(req)('lists')
 }
 
 export const getLists = callback => {

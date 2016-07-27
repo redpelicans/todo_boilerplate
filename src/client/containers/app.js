@@ -15,19 +15,19 @@ const App = ({ input, lists, tasks, dispatch }) => {
     dispatch(listInput(value));
   };
   const onNewList = () => {
-    dispatch(addList(input.lists));
+    pushList(input.lists)(r => dispatch(addList(r)))
   }
   const onDelList = e => {
-    deleteList(e.target.id)(dispatch(delList(e.target.id)));
+    deleteList(e.target.id)(r => dispatch(delList(r.id)))
   }
   const taskChange = (value, id) => {
     dispatch(taskInput(value, id));
   }
   const onNewTask = (description, listId) => {
-    pushTask({listId, description})(r => dispatch(addTask(r)))
+    pushTask({ listId, description })(r => dispatch(addTask(r)))
   }
   const onDelTask = e => {
-    deleteTask(e.target.id)(dispatch(delTask(e.target.id)));
+    deleteTask(e.target.id)(r => dispatch(delTask(r.id)))
   }
   const fetchLists = () => {
     getLists(lists => dispatch(gotLists(lists)))
@@ -38,12 +38,12 @@ const App = ({ input, lists, tasks, dispatch }) => {
   return (
     <div className='app-wrapper'>
       <h1>A fantastic Todo is on its way !</h1>
-      <NewList 
-        inputVal={ input.lists }
-        handleChange={ listChange }
-        onNewList={ onNewList }
+      <NewList
         fetchLists={ fetchLists }
-        fetchTasks={ fetchTasks } />
+        fetchTasks={ fetchTasks }
+        handleChange={ listChange }
+        inputVal={ input.lists }
+        onNewList={ onNewList } />
       <Todo
         listChange={listChange}
         lists={lists}
