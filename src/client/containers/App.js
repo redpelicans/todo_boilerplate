@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Title from '../components/Title';
 import AddTaskList from '../components/AddTaskList';
 import TaskLists from '../components/TaskLists';
+import Button from '../components/Button';
 import {
   addList,
   removeList,
@@ -25,9 +26,8 @@ class App extends React.Component {
       <div className='todo-app'>
         <Title value='Todo App' />
         <AddTaskList {...this.props} />
-        <TaskLists {...this.props}
-          lists={this.props.lists.data}
-          tasks={this.props.tasks} />
+        <Button className='refresh' onClick={this.props.fetchAll}>Refresh</Button>
+        <TaskLists {...this.props} />
       </div>
     );
   }

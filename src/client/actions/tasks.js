@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-fetch';
+import { fetchJSON } from '../helpers';
 import _ from 'lodash';
 
 /*
@@ -42,9 +42,8 @@ export const addTask = (listId, text) => {
   };
   return (dispatch) => {
     dispatch(addingTask());
-    fetch('http://rp4.redpelicans.com:13004/api/todo/tasks', options)
-    .then(response => response.json())
-    .then(resTask => dispatch(taskAdded(resTask)));
+    fetchJSON('http://rp4.redpelicans.com:13004/api/todo/tasks', options)
+      .then(resTask => dispatch(taskAdded(resTask)));
   };
 };
 
@@ -63,10 +62,8 @@ export const removeTask = (id) => {
   };
   return (dispatch) => {
     dispatch(removingTask());
-    fetch(`http://rp4.redpelicans.com:13004/api/todo/task/${id}`, options)
-    .then(response => response.json())
-    .then(response => dispatch(taskRemoved(response.id)));
-    dispatch(taskRemoved(id));
+    fetchJSON(`http://rp4.redpelicans.com:13004/api/todo/task/${id}`, options)
+      .then(response => dispatch(taskRemoved(response.id)));
   };
 };
 
@@ -82,8 +79,7 @@ export const receiveTasks = (json) => ({
 export const fetchTasks = () => (
   (dispatch) => {
     dispatch(requestTasks());
-    fetch('http://rp4.redpelicans.com:13004/api/todo/tasks')
-      .then(response => response.json())
+    fetchJSON('http://rp4.redpelicans.com:13004/api/todo/tasks')
       .then(resTasks => dispatch(receiveTasks(resTasks)));
   }
 );

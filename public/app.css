@@ -75,6 +75,14 @@ h2 {
 
 }
 
+.refresh {
+	margin-left: 10px;
+}
+
+.spinner {
+
+}
+
 .task-lists {
   display: flex;
   flex-direction: row;

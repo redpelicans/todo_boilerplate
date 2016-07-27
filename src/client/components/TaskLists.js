@@ -4,7 +4,7 @@ import TaskList from './TaskList';
 
 const TaskLists = (props) => {
 
-  const listElems = _.map(props.lists, list => (
+  const listElems = _.map(props.lists.data, list => (
     <TaskList list={list} {...props} key={list.id} />
   ));
 

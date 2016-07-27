@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-fetch';
+import { fetchJSON } from '../helpers';
 import _ from 'lodash';
 
 /*
@@ -37,9 +37,8 @@ export const addList = (title) => {
   };
   return (dispatch) => {
     dispatch(addingList());
-    fetch('http://rp4.redpelicans.com:13004/api/todo/lists', options)
-    .then(response => response.json())
-    .then(resList => dispatch(listAdded(resList)));
+    fetchJSON('http://rp4.redpelicans.com:13004/api/todo/lists', options)
+      .then(resList => dispatch(listAdded(resList)));
   };
 };
 
@@ -58,9 +57,8 @@ export const removeList = (id) => {
   };
   return (dispatch) => {
     dispatch(removingList());
-    fetch(`http://rp4.redpelicans.com:13004/api/todo/list/${id}`, options)
-    .then(response => response.json())
-    .then(response => dispatch(listRemoved(response.id)));
+    fetchJSON(`http://rp4.redpelicans.com:13004/api/todo/list/${id}`, options)
+      .then(response => dispatch(listRemoved(response.id)));
     dispatch(listRemoved(id));
   };
 };
@@ -77,8 +75,7 @@ export const receiveLists = (json) => ({
 export const fetchLists = () => (
   (dispatch) => {
     dispatch(requestLists());
-    fetch('http://rp4.redpelicans.com:13004/api/todo/lists')
-      .then(response => response.json())
+    fetchJSON('http://rp4.redpelicans.com:13004/api/todo/lists')
       .then(resLists => dispatch(receiveLists(resLists)));
   }
 );
