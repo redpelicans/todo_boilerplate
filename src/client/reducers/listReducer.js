@@ -2,7 +2,7 @@
  * Created by Antoine on 19/07/2016.
  */
 import _ from 'lodash'
-import { ADD_LIST, DEL_LIST, REFRESH_LISTS } from '../actions/lists'
+import { ADD_LIST, DEL_LIST, GOT_LISTS } from '../actions/lists'
 import { ADD_TASK, INPUT_TASK } from '../actions/tasks'
 
 export default function lists(state = [], action) {
@@ -24,8 +24,8 @@ export default function lists(state = [], action) {
       (list.id === parseInt(action.id)) ?
         _.create(list, { input: action.input }) : list))
 
-  case REFRESH_LISTS:
-    return _.map(action.lists, l => ({...l, key: l.id}));
+  case GOT_LISTS:
+    return _.map(action.lists, l => ({ ...l, key: l.id }));
 
   default:
     return state;

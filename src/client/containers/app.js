@@ -7,15 +7,10 @@ import { connect } from 'react-redux'
 import NewList from '../components/newlist'
 import Todo from '../components/todo'
 
-import { addList, delList, listInput, fetchLists, refreshLists } from '../actions/lists'
-import { addTask, delTask, taskInput } from '../actions/tasks'
-import apiCall from '../actions/api'
-// EXPERIMENTAL
-// import apiCall from '../actions/async/api'
-//
+import { addList, pushList, delList, deleteList, listInput, getLists, gotLists } from '../actions/lists'
+import { addTask, pushTask, delTask, deleteTask, taskInput, getTasks, gotTasks } from '../actions/tasks'
 
 const App = ({ input, lists, tasks, dispatch }) => {
-  // const refresh = listFetcher(lists => (onNewList(lists)));
   const listChange = value => {
     dispatch(listInput(value));
   };
@@ -23,35 +18,32 @@ const App = ({ input, lists, tasks, dispatch }) => {
     dispatch(addList(input.lists));
   }
   const onDelList = e => {
-    console.log(e.target.id);
-    dispatch(delList(e.target.id));
+    deleteList(e.target.id)(dispatch(delList(e.target.id)));
   }
   const taskChange = (value, id) => {
     dispatch(taskInput(value, id));
   }
   const onNewTask = (description, listId) => {
-    dispatch(addTask(description, listId));
+    pushTask({listId, description})(r => dispatch(addTask(r)))
   }
   const onDelTask = e => {
-    dispatch(delTask(e.target.id));
+    deleteTask(e.target.id)(dispatch(delTask(e.target.id)));
   }
-  const onLists = lists => {
-    dispatch(refreshLists(lists));
-  }
-  const onRefresh = () => {
-    // console.log('Asking for refresh...');
-    console.log('dispatching fetch');
-    dispatch(fetchLists());
+  const fetchLists = () => {
+    getLists(lists => dispatch(gotLists(lists)))
+  };
+  const fetchTasks = () => {
+    getTasks(tasks => dispatch(gotTasks(tasks)))
   };
   return (
     <div className='app-wrapper'>
       <h1>A fantastic Todo is on its way !</h1>
       <NewList 
-        handleChange={ listChange }
         inputVal={ input.lists }
-        onLists={ onLists }
+        handleChange={ listChange }
         onNewList={ onNewList }
-        onRefresh={ onRefresh } />
+        fetchLists={ fetchLists }
+        fetchTasks={ fetchTasks } />
       <Todo
         listChange={listChange}
         lists={lists}

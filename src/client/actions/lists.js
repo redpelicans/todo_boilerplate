@@ -6,7 +6,7 @@ import apiCall from './api'
 export const ADD_LIST = 'ADD_LIST';
 export const DEL_LIST = 'DEL_LIST';
 export const INPUT_LIST = 'INPUT_LIST';
-export const REFRESH_LISTS = 'REFRESH_LISTS';
+export const GOT_LISTS = 'GOT_LISTS';
 
 let currID;
 
@@ -28,19 +28,24 @@ export const listInput = input => ({
   input,
 })
 
-export const refreshLists = lists => {
-  console.log('Fetch called back with ', ...lists);
-  return ({
-    type: REFRESH_LISTS,
-    lists: lists,
-  })
+export const deleteList = (id) => (
+  apiCall({ method: 'DELETE' })('list/'.concat(id))
+)
+
+export const pushList = list => {
+  const req = {
+    headers: { 'Content-Type': 'application/json' },
+    method: 'POST',
+    body: JSON.stringify({ 'todo': { 'label': list.label } }),
+  }
+  return apiCall(req)('tasks')
 }
 
-export const fetchLists = () => {
-  return apiCall('GET')('lists')(refreshLists);
+export const getLists = callback => {
+  apiCall({ method: 'GET' })('lists')(callback);
 }
 
-// export const fetchLists = () => {
-//   console.log('dispatching fetch');
-//   apiCall('GET')('lists')(refreshLists)
-// }
+export const gotLists = lists => ({
+  type: GOT_LISTS,
+  lists,
+})

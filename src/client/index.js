@@ -33,27 +33,20 @@ ReactDom.render(
   </Provider>, document.getElementById('react-wrapper')
 );
 
-// EXPERIMENTAL
-import apiCall from './actions/api'
-import { addList, delList, refreshLists } from './actions/lists'
-import { addTask, delTask } from './actions/tasks'
-//EXPERIMENTAL
-const onLists = lists => {
-//   _.map(lists, list => {
-//   // console.log('list : ', list);
-//   todoStore.dispatch(addList(list));
+// // EXPERIMENTAL
+// import apiCall from './actions/api'
+// import { addList, delList, refreshLists } from './actions/lists'
+// import { addTask, delTask } from './actions/tasks'
+// //EXPERIMENTAL
+
+// const onTasks = tasks => { _.map(tasks, task => {
+//   // console.log('task : ', task);
+//   todoStore.dispatch(addTask(task));
 // }) }
-  todoStore.dispatch(refreshLists(lists))
-}
 
-const onTasks = tasks => { _.map(tasks, task => {
-  // console.log('task : ', task);
-  todoStore.dispatch(addTask(task));
-}) }
+// const onListDeletion = (res) => {
+//   todo
+// }
 
-const onListDeletion = (res) => {
-  todo
-}
-
-apiCall('GET')('lists')(onLists);
-apiCall('GET')('tasks')(onTasks);
+// apiCall('GET')('lists')(lists => todoStore.dispatch(refreshLists(lists)));
+// apiCall('GET')('tasks')(onTasks);

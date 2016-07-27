@@ -1,6 +1,6 @@
 import React from 'react'
 
-const NewList = ({ inputVal, handleChange, onNewList, onRefresh }) => {
+const NewList = ({ inputVal, handleChange, onNewList, fetchLists, fetchTasks }) => {
   const handleInput = e => {
     handleChange(e.target.value);
   };
@@ -10,22 +10,21 @@ const NewList = ({ inputVal, handleChange, onNewList, onRefresh }) => {
       onNewList();
     }
   };
-  const handleRefresh = () => { 
-    console.log('Refresh  was clicked');
-    onRefresh();
-  }
   return (
     <div className='todo-list padded'>
       <form onSubmit={ handleSubmit }>
         <input onChange={ handleInput } placeholder='New List' value={inputVal} />
         <button type='submit'>+</button>
       </form>
-      <button onClick={ handleRefresh }>Refresh</button>
+      <button onClick={ fetchTasks }>Get Tasks !</button>
+      <button onClick={ fetchLists }>Get Lists !</button>
     </div>
   )
 }
 
 NewList.propTypes = {
+  fetchLists: React.PropTypes.func.isRequired,
+  fetchTasks: React.PropTypes.func.isRequired,
   handleChange: React.PropTypes.func.isRequired,
   inputVal: React.PropTypes.string,
   onNewList: React.PropTypes.func.isRequired,
