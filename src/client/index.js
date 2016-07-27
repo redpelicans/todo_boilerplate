@@ -5,13 +5,13 @@ import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import reducer from './reducers';
+import rootReducer from './reducers';
 import { fetchLists } from './actions/fetch';
 
 const loggerMiddleware = createLogger();
 
 const store = createStore(
-  reducer,
+  rootReducer,
   applyMiddleware(thunk, loggerMiddleware),
 );
 

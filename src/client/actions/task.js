@@ -20,7 +20,7 @@ export const taskAdded = (task) => {
 
 export const addTask = (idList) => {
   return (dispatch, getState) => {
-    const { lists } = getState();
+    const { inputTask } = getState();
     const options = {
       method: 'POST',
       headers: {
@@ -28,7 +28,7 @@ export const addTask = (idList) => {
       }
     };
     dispatch(addingTask(idList));
-    options.body = JSON.stringify({ task: { description: lists[idList].inputtask, listId: idList } });
+    options.body = JSON.stringify({ task: { description: inputTask, listId: idList } });
     fetch('http://rp4.redpelicans.com:13004/api/todo/tasks', options)
     .then(res => res.json())
     .then(todo => dispatch(taskAdded(todo)));
@@ -48,8 +48,8 @@ export const removeTask = (idTask) => {
       }
     };
     //dispatch(removingTask());
-    const url = 'http://rp4.redpelicans.com:13004/api/todo/task/' + idTask;
-    fetch(url, options)
+    const url = 'http://rp4.redpelicans.com:13004/api/todo/task/';
+    fetch(url.concat(idTask), options)
     .then(dispatch(removedTask(idTask)));
   };
 };

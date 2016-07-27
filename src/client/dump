@@ -151,3 +151,11 @@ changer le reject remove list en une fonction lodash object.
 
 
 component will mount dans app pour dispatch et chopé les données du server ou store.dispatch dans index.
+
+
+isLoading/fetching;
+
+tests;
+
+rendre les inputs en components;
+
