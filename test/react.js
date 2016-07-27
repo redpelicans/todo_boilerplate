@@ -9,6 +9,7 @@ import AddTask from '../src/client/components/AddTask';
 import RemoveTask from '../src/client/components/RemoveTask';
 import Task from '../src/client/components/Task';
 import Button from '../src/client/components/Button';
+import Spinner from '../src/client/components/Spinner';
 
 chai.should();
 chai.use(equalJSX);
@@ -40,6 +41,24 @@ describe('AddTaskList component', () => {
           type='text'
           value='' />
       </form>
+    );
+  });
+});
+
+describe('Spinner component', () => {
+  it('works', () => {
+    const renderer = createRenderer();
+    renderer.render(React.createElement(Spinner, {
+      lists: { isFetching: true },
+    }));
+    const output = renderer.getRenderOutput();
+    output.should.equalJSX(
+      <div className='spinner'>
+        <div className='double-bounce'>
+          <div className='double-bounce1'></div>
+          <div className='double-bounce2'></div>
+        </div>
+      </div>
     );
   });
 });

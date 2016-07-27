@@ -4,6 +4,7 @@ import Title from '../components/Title';
 import AddTaskList from '../components/AddTaskList';
 import TaskLists from '../components/TaskLists';
 import Button from '../components/Button';
+import Spinner from '../components/Spinner';
 import {
   addList,
   removeList,
@@ -26,7 +27,10 @@ class App extends React.Component {
       <div className='todo-app'>
         <Title value='Todo App' />
         <AddTaskList {...this.props} />
-        <Button className='refresh' onClick={this.props.fetchAll}>Refresh</Button>
+        <div className='nav'>
+          <Button className='refresh' onClick={this.props.fetchAll}>Refresh</Button>
+          <Spinner {...this.props} />
+        </div>
         <TaskLists {...this.props} />
       </div>
     );
