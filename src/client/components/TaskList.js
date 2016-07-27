@@ -5,27 +5,33 @@ import AddTask from './AddTask';
 import TaskListTitle from './TaskListTitle';
 import RemoveTaskList from './RemoveTaskList';
 
-const TaskList = (props) => {
+class TaskList extends React.Component {
 
-  const tasks = _.pickBy(props.tasks.data, task => task.listId === props.list.id);
+  shouldComponentUpdate(nextProps) {
+    return this.props.tasks.data !== nextProps.tasks.data;
+  }
 
-  const taskElems = _.map(tasks, task => (
-      <Task task={task} {...props} key={task.id} />
-  ));
+  render() {
+    const tasks = _.pickBy(this.props.tasks.data, task => task.listId === this.props.list.id);
 
-  return (
-    <div className='task-list'>
-      <header>
-        <TaskListTitle value={props.list.label} />
-        <RemoveTaskList id={props.list.id} onRemove={props.onRemoveList} />
-      </header>
-      <div className='tasks'>
-        {taskElems}
+    const taskElems = _.map(tasks, task => (
+        <Task task={task} {...this.props} key={task.id} />
+    ));
+
+    return (
+      <div className='task-list'>
+        <header>
+          <TaskListTitle value={this.props.list.label} />
+          <RemoveTaskList id={this.props.list.id} onRemove={this.props.onRemoveList} />
+        </header>
+        <div className='tasks'>
+          {taskElems}
+        </div>
+        <AddTask listId={this.props.list.id} onAddTask={this.props.onAddTask} />
       </div>
-      <AddTask listId={props.list.id} onAddTask={props.onAddTask} />
-    </div>
-  );
-};
+    );
+  }
+}
 
 TaskList.propTypes = {
   list: React.PropTypes.object.isRequired,
