@@ -7,31 +7,20 @@ export const REMOVED_TASK = 'REMOVED_TASK';
 export const CHANGE_TASK = 'CHANGE_TASK';
 export const REMOVING_TASK = 'REMOVING_TASK';
 
-export const addingTask = (idList) => {
-  return {
-    type: ADDING_TASK,
-    idList,
-  };
-};
+export const addingTask = () => ({ type: ADDING_TASK });
 
-export const taskAdded = (task) => {
-  return {
-    type: TASK_ADDED,
-    task,
-  };
-};
+export const taskAdded = (task) => ({ type: TASK_ADDED, task });
 
-export const addTask = (idList) => {
+export const addTask = (idList, task) => {
   return (dispatch, getState) => {
-    const { inputTask } = getState();
     const options = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       }
     };
-    dispatch(addingTask(idList));
-    options.body = JSON.stringify({ task: { description: inputTask, listId: idList } });
+    dispatch(addingTask());
+    options.body = JSON.stringify({ task: { description: task, listId: idList } });
     const url = 'http://rp4.redpelicans.com:13004/api/todo/tasks';
     requestJSON(url, options)
     .then(todo => dispatch(taskAdded(todo)));

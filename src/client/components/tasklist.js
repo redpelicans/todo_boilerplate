@@ -16,8 +16,7 @@ const TaskList = ({ idList, inputtask, label, tasks, ...actions }) => {
         <ListTitle { ...actions } idList={ idList } label={ label } />
         <InputFormTask
           idList={ idList }
-          value={ inputtask }
-          { ...actions }
+          onSubmitAddTask={ actions.onSubmitAddTask }
         />
         {data}
     </div>

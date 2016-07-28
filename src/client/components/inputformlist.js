@@ -1,33 +1,46 @@
 import React from 'react';
 
-const InputFormList = ({ value, ...actions }) => {
-  const handleSubmit = (event) => {
+export default class InputFormList extends React.Component {
+  state = {
+    input: '',
+  }
+
+  shouldComponentUpdate = (nextProps, nextState) => {
+    if (nextState.input !== this.state.input) {
+      return true;
+    }
+    return false;
+  }
+
+  handleSubmit = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    actions.onSubmitAddList();
-  };
-  const handleChange = (event) => {
+    this.props.onSubmitAddList(this.state.input);
+    this.setState({ input: '' });
+  }
+  
+  handleChange = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    actions.onChangeList(event.target.value);
-  };
-  console.log(value);
-  return (
-    <div className={ name }>
-      <form onSubmit={ handleSubmit }>
-        <input
-          onChange={ handleChange }
-          placeholder='New list...'
-          type='text'
-          value={ value }
-        />
-      </form>
-    </div>
-  );
+    this.setState({ input : event.target.value });
+  }
+
+  render() {
+    return (
+      <div className={ name }>
+        <form onSubmit={ this.handleSubmit }>
+          <input
+            onChange={ this.handleChange }
+            placeholder='New list...'
+            type='text'
+            value={ this.state.input }
+          />
+        </form>
+      </div>
+    );
+  }
 };
 
 InputFormList.propTypes = {
-  value: React.PropTypes.string,
+  onSubmitAddList: React.PropTypes.func.isRequired,
 };
-
-export default InputFormList;

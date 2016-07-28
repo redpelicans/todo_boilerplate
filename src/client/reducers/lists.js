@@ -14,9 +14,7 @@ export default function lists(state = {}, action) {
     };
   case REMOVED_LIST:
     return {
-      ...state,
-      lists: (_.omit(state.lists, action.idList)),
-      tasks: (_.omitBy(state.tasks, { 'listId': action.idList })),
+      ..._.omit(state, action.idList),
     };
   case MADE_LISTS:
     return {

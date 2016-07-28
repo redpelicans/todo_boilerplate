@@ -2,7 +2,7 @@ import { ADDING_LIST, LIST_ADDED, REMOVING_LIST, REMOVED_LIST } from '../actions
 import { ADDING_TASK, TASK_ADDED, REMOVING_TASK, REMOVED_TASK } from '../actions/task';
 import { MAKING_TASKS, MADE_TASKS, MAKING_LISTS, MADE_LISTS } from '../actions/fetch';
 
-export default function status(state = { isLoading: 0 }, action) {
+export default function status(state = {}, action) {
   switch (action.type) {
   case ADDING_LIST:
     return {

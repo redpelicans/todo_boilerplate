@@ -1,31 +1,46 @@
 import React from 'react';
 
-const InputFormTask = ({ idList, idTask, value, ...actions }) => {
-  const handleSubmit = (event) => {
+export default class InputFormTask extends React.Component {
+  state = {
+    input: '',
+  } 
+
+  shouldComponentUpdate = (nextProps, nextState) => {
+    if (nextState.input !== this.state.input) {
+      return true;
+    }
+    return false;
+  }
+  
+  handleSubmit = (event) => {
     event.preventDefault();
-    actions.onSubmitAddTask(idList);
-  };
-  const handleChange = (event) => {
+    event.stopPropagation();
+    this.props.onSubmitAddTask(this.props.idList, this.state.input);
+    this.setState({ input: '' });
+  }
+  
+  handleChange = (event) => {
     event.preventDefault();
-    actions.onChangeTask(idList, event.target.value);
-  };
-  return (
-    <div className='addtask'>
-      <form onSubmit={ handleSubmit }>
-        <input
-          onChange={ handleChange }
-          placeholder='New task...'
-          type='text'
-          value={ value }
-        />
-      </form>
-    </div>
-  );
+    this.setState({ input: event.target.value });
+  }
+
+  render() {
+    return (
+      <div className='addtask'>
+        <form onSubmit={ this.handleSubmit }>
+          <input
+            onChange={ this.handleChange }
+            placeholder='New task...'
+            type='text'
+            value={ this.state.input }
+          />
+        </form>
+      </div>
+    );
+  }
 };
 
 InputFormTask.propTypes = {
-  idList: React.PropTypes.number,
-  value: React.PropTypes.string,
+  idList: React.PropTypes.number.isRequired,
+  onSubmitAddTask: React.PropTypes.func.isRequired,
 };
-
-export default InputFormTask;

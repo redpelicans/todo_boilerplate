@@ -1,4 +1,5 @@
 import { REMOVED_TASK, TASK_ADDED } from '../actions/task';
+import { REMOVED_LIST } from '../actions/list';
 import { MADE_TASKS } from '../actions/fetch';
 import _ from 'lodash';
 
@@ -15,13 +16,16 @@ export default function tasks(state = {}, action) {
     };
   case REMOVED_TASK:
     return { 
-      ...state,
-      ..._.omit(state.tasks, action.idTask)
+      ..._.omit(state, action.idTask),
     };
   case MADE_TASKS:
     return {
       ...state,
       ...action.tasks,
+    };
+  case REMOVED_LIST:
+    return {
+      ..._.omitBy(state, { 'listId': action.idList }),
     };
   default:
     return state;

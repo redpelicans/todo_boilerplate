@@ -8,26 +8,18 @@ import { addTask, removeTask, changeTask } from '../actions/task';
 import { addList, removeList, changeList } from '../actions/list';
 import _ from 'lodash';
 
-const App = ({ dispatch, inputlist, isLoading, lists, tasks }) => {
+const App = ({ dispatch, lists, isLoading, tasks }) => {
 
-  const onChangeTask = (idList, inputtask) => {
-    dispatch(changeTask(idList, inputtask));
-  };
-
-  const onSubmitAddTask = (idList, idTask) => {
-    dispatch(addTask(idList, idTask));
+  const onSubmitAddTask = (idList, task) => {
+    dispatch(addTask(idList, task));
   };
 
   const onRemoveTask = (idTask) => {
     dispatch(removeTask(idTask));
   };
 
-  const onChangeList = (inputlist) => {
-    dispatch(changeList(inputlist));
-  };
-
-  const onSubmitAddList = () => {
-    dispatch(addList());
+  const onSubmitAddList = (input) => {
+    dispatch(addList(input));
   };
 
   const onRemoveList = (idList) => {
@@ -35,8 +27,6 @@ const App = ({ dispatch, inputlist, isLoading, lists, tasks }) => {
   };
 
   const actions = {
-    onChangeList,
-    onChangeTask,
     onSubmitAddList,
     onSubmitAddTask,
     onRemoveList,
@@ -48,8 +38,7 @@ const App = ({ dispatch, inputlist, isLoading, lists, tasks }) => {
         <Loading load={ isLoading } />
         <Title title='App' />
         <InputFormList
-          value={ inputlist }
-          { ...actions }
+          onSubmitAddList={ onSubmitAddList }
         />
         <TaskLists lists={ lists } tasks={ tasks } { ...actions } />
       </div>
@@ -58,10 +47,9 @@ const App = ({ dispatch, inputlist, isLoading, lists, tasks }) => {
 
 App.propTypes = {
   dispatch: React.PropTypes.func.isRequired,
-  inputlist: React.PropTypes.string.isRequired,
   isLoading: React.PropTypes.number.isRequired,
   lists: React.PropTypes.object.isRequired,
   tasks: React.PropTypes.object.isRequired,
 };
 
-export default connect(state => ({ lists: state.lists, inputlist: state.inputlist, tasks: state.tasks, isLoading: state.isLoading }))(App);
+export default connect(state => ({ lists: state.lists, isLoading: state.status.isLoading, tasks: state.tasks }))(App);

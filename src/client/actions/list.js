@@ -1,4 +1,5 @@
-import { requestJSON } from '../helpers/utils'
+import { requestJSON } from '../helpers/utils';
+import { removeTask } from './task';
 export const ADD_LIST = 'ADD_LIST';
 export const REMOVE_LIST = 'REMOVE_LIST';
 export const REMOVED_LIST = 'REMOVED_LIST';
@@ -35,9 +36,8 @@ export const removeList = (idList) => {
   };
 };
 
-export const addList = (list) => {
+export const addList = (input) => {
   return (dispatch, getState) => {
-    const { inputlist } = getState();
     const options = {
       method: 'POST',
       headers: {
@@ -45,7 +45,7 @@ export const addList = (list) => {
       }
     };
     dispatch(addingList());
-    options.body = JSON.stringify({ todo: { label: inputlist } });
+    options.body = JSON.stringify({ todo: { label: input } });
     const url = 'http://rp4.redpelicans.com:13004/api/todo/lists'
     requestJSON(url, options)
     .then(todo => dispatch(listAdded(todo)));
