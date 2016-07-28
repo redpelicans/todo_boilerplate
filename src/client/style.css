@@ -35,6 +35,10 @@ textarea {
     color: #DCDDD8;
 }
 
+.task_input {
+    width: 80%;
+}
+
 .padded {
     padding: 5px 5px 5px 5px;
 }

@@ -13,7 +13,7 @@ const NewTask = ({ listID, input, handleChange, onNewTask }) => {
   return (
     <div className='flex-item padded task'>
       <form onSubmit={ handleSubmit }>
-        <textarea onChange={ handleInput } placeholder='New Task' value={input} />
+        <input className='task_input' onChange={ handleInput } placeholder='New Task' value={input} />
         <button type='submit'>+</button>
       </form>
     </div>
