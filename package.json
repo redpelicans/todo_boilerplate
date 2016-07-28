@@ -5,20 +5,27 @@
   "license": "MIT",
   "scripts": {
     "eslint": "eslint src",
+    "srv-dev": "NODE_ENV=development DEBUG=todo:* babel-watch -w src src/server/main.js",
+    "srv-dist": "NODE_ENV=production DEBUG=todo:* babel src --out-dir dist",
     "client-dist": "NODE_ENV=production webpack --progress --colors",
     "client-dev": "webpack-dev-server --colors --hot --inline --host 0.0.0.0 --port 8080",
-    "srv-dev": "DEBUG=todo:* babel-watch -w src src/server/main.js",
-    "srv-dist": "DEBUG=todo:* babel src --out-dir dist",
-    "test": "mocha --require babel-core/register --reporter spec",
-    "coverage": "NODE_ENV=test nyc --include src --all -r text -r lcov -r text --require babel-core/register mocha "
+    "test": "NODE_ENV=testing DEBUG=Xtodo:* mocha --require babel-core/register --reporter spec",
+    "coverage": "NODE_ENV=testing nyc --include src --all -r text -r lcov -r text --require babel-core/register mocha "
   },
   "dependencies": {
+    "async": "^2.0.1",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "ioredis": "^2.2.0",
+    "morgan": "^1.7.0",
     "react": "^15.0.2",
     "react-dom": "^15.0.2",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
     "redux-logger": "^2.6.1",
-    "redux-thunk": "^2.0.1"
+    "redux-thunk": "^2.0.1",
+    "should": "^10.0.0",
+    "source-map-support": "^0.4.2"
   },
   "devDependencies": {
     "babel-cli": "^6.7.7",
