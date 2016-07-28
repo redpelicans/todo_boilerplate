@@ -1,8 +1,45 @@
-import React from 'react'
+import React from 'react';
 
-const AddTaskList = () =>
-  <form>
-    <input className='add-tasklist' placeholder='New Task list..' type='text' />
-  </form>
+class AddTaskList extends React.Component {
 
-export default AddTaskList
+  constructor(props) {
+    super(props);
+    this.state = {
+      input: '',
+    };
+  }
+
+  handleUserInput = (e) => {
+    e.preventDefault();
+    this.setState({
+      input: e.target.value,
+    });
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.onAddList(this.state.input);
+    this.setState({
+      input: '',
+    });
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <input
+          className='add-tasklist'
+          onChange={this.handleUserInput}
+          placeholder='New Task list..'
+          type='text'
+          value={this.state.input} />
+      </form>
+    );
+  }
+}
+
+AddTaskList.propTypes = {
+  onAddList: React.PropTypes.func.isRequired,
+};
+
+export default AddTaskList;

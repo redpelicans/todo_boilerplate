@@ -1,6 +1,20 @@
-import React from 'react'
-import Button from './Button'
+import React from 'react';
+import Button from './Button';
 
-const RemoveTask = () => <Button className='rm-task'>x</Button>
+const RemoveTask = ({ id, onRemove }) => {
 
-export default RemoveTask
+  const handleRemove = () => {
+    onRemove(id);
+  };
+
+  return (
+    <Button className='rm-task' onClick={handleRemove}>x</Button>
+  );
+};
+
+RemoveTask.propTypes = {
+  id: React.PropTypes.number.isRequired,
+  onRemove: React.PropTypes.func.isRequired,
+};
+
+export default RemoveTask;

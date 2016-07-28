@@ -1,11 +1,15 @@
-import React from 'react'
-import RemoveTask from './RemoveTask'
+import React from 'react';
+import RemoveTask from './RemoveTask';
 
-const Task = ({ text }) =>
+const Task = (props) =>
   <div className='task'>
-    <span>{text}</span><RemoveTask />
-  </div>
+    <span>{props.task.description}</span>
+    <RemoveTask id={props.task.id} onRemove={props.onRemoveTask} />
+  </div>;
 
-Task.propTypes = { text: React.PropTypes.string }
+Task.propTypes = {
+  onRemoveTask: React.PropTypes.func.isRequired,
+  task: React.PropTypes.object.isRequired,
+};
 
-export default Task
+export default Task;
