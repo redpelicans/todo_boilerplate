@@ -20,8 +20,8 @@ export const delTask = (id) => ({
   id,
 })
 
-export const deleteTask = (id) => (
-  apiCall({ method: 'DELETE' })('task/'.concat(id))
+export const deleteTask = (id, callback) => () => (
+  apiCall({ method: 'DELETE' })('task/'.concat(id))(callback)
 )
 
 export const taskInput = (input, id) => ({
@@ -31,18 +31,19 @@ export const taskInput = (input, id) => ({
 })
 
 // built req for greater readability
-export const pushTask = task => {
+export const pushTask = (task, callback) => () => {
   const req = {
     headers: { 'Content-Type': 'application/json' },
     method: 'POST',
     body: JSON.stringify({ 'task': { 'description': task.description, 'listId': task.listId } }),
   }
-  return apiCall(req)('tasks')
+  return apiCall(req)('tasks')(callback)
 }
 
-export const getTasks = callback => {
+export const getTasks = callback => () => {
   apiCall({ method: 'GET' })('tasks')(callback);
 }
+
 export const gotTasks = tasks => ({
   type: GOT_TASKS,
   tasks,

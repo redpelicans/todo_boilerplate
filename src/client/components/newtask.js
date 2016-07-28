@@ -2,6 +2,7 @@ import React from 'react'
 
 const NewTask = ({ listID, input, handleChange, onNewTask }) => {
   const handleInput = e => {
+    e.preventDefault();
     handleChange(e.target.value, listID);
   };
   const handleSubmit = e => {
@@ -13,7 +14,7 @@ const NewTask = ({ listID, input, handleChange, onNewTask }) => {
   return (
     <div className='flex-item padded task'>
       <form onSubmit={ handleSubmit }>
-        <input className='task_input' onChange={ handleInput } placeholder='New Task' value={input} />
+        <input onChange={ handleInput } placeholder='New Task' value={input} />
         <button type='submit'>+</button>
       </form>
     </div>

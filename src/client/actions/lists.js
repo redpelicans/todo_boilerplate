@@ -28,24 +28,26 @@ export const listInput = input => ({
   input,
 })
 
-export const deleteList = (id) => (
-  apiCall({ method: 'DELETE' })('list/'.concat(id))
+export const gotLists = lists => ({
+  type: GOT_LISTS,
+  lists,
+})
+
+// ASYNC STARTING HERE
+
+export const deleteList = (id, callback) => () => (
+  apiCall({ method: 'DELETE' })('list/'.concat(id))(callback)
 )
 
-export const pushList = newList => {
+export const pushList = (newList, callback) => () => {
   const req = {
     headers: { 'Content-Type': 'application/json' },
     method: 'POST',
     body: JSON.stringify({ 'todo': { 'label': newList } }),
   }
-  return apiCall(req)('lists')
+  return apiCall(req)('lists')(callback)
 }
 
-export const getLists = callback => {
+export const getLists = callback => () => {
   apiCall({ method: 'GET' })('lists')(callback);
 }
-
-export const gotLists = lists => ({
-  type: GOT_LISTS,
-  lists,
-})

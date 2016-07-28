@@ -7,8 +7,7 @@ import ListHead from './listhead'
 import Task from './task'
 import NewTask from './newtask'
 
-const TaskList = ({ handlers, list, tasks }) => {
-  return (
+const TaskList = ({ handlers, list, tasks }) => (
   <div className='todo-list'>
     <ListHead
       id={list.id}
@@ -17,15 +16,14 @@ const TaskList = ({ handlers, list, tasks }) => {
     <div className='flex-container'>
     <NewTask
       handleChange={ handlers.taskChange }
-      input={list.input}
-      listID={list.id}
+      input={ list.input }
+      listID={ list.id }
       onNewTask={handlers.onNewTask} />
     {_.map(tasks, (task =>
       <Task key={task.id} onDelTask={handlers.onDelTask} task={task} />))}
     </div>
   </div>
-  )
-}
+)
 
 TaskList.propTypes = {
   handlers: React.PropTypes.object.isRequired,

@@ -15,26 +15,26 @@ const App = ({ input, lists, tasks, dispatch }) => {
     dispatch(listInput(value));
   };
   const onNewList = () => {
-    pushList(input.lists)(r => dispatch(addList(r)))
+    dispatch(pushList(input.lists, r => dispatch(addList(r))))
   }
   const onDelList = e => {
-    deleteList(e.target.id)(r => dispatch(delList(r.id)))
+    dispatch(deleteList(e.target.id, r => dispatch(delList(r.id))))
   }
   const taskChange = (value, id) => {
     dispatch(taskInput(value, id));
   }
   const onNewTask = (description, listId) => {
-    pushTask({ listId, description })(r => dispatch(addTask(r)))
+    dispatch(pushTask({ listId, description }, r => dispatch(addTask(r))))
   }
   const onDelTask = e => {
-    deleteTask(e.target.id)(r => dispatch(delTask(r.id)))
+    dispatch(deleteTask(e.target.id, r => dispatch(delTask(r.id))))
   }
   const fetchLists = () => {
-    getLists(lists => dispatch(gotLists(lists)))
-  };
+    dispatch(getLists(lists => dispatch(gotLists(lists))))
+  }
   const fetchTasks = () => {
-    getTasks(tasks => dispatch(gotTasks(tasks)))
-  };
+    dispatch(getTasks(tasks => dispatch(gotTasks(tasks))))
+  }
   return (
     <div className='app-wrapper'>
       <h1>A fantastic Todo is on its way !</h1>

@@ -25,7 +25,7 @@ export default function lists(state = [], action) {
         _.create(list, { input: action.input }) : list))
 
   case GOT_LISTS:
-    return _.map(action.lists, l => ({ ...l, key: l.id }));
+    return _.map(action.lists, l => ({ ...l, key: l.id, input: '' }));
 
   default:
     return state;
