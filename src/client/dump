@@ -27,8 +27,135 @@ ReactDom.render(
     document.getElementById('todo')
 )
 
+dans les component :
+
+let globalPropsList = ''; // state précédente de l'élément concerné
+
+shouldComponentUpdate = (props, state) => {
+    return this.props.list !== globalPropsList;
+}
+
+globalPropsList = this.props.list;
+
+// faire les choses normales.
+TODO: add les proptypes actions et lists en nested.
+faire mieux le spread des actions, actions.nomdelaction a send direct
+
+
+
+
+
+seul les containers sont bindé sur le store;
+
+relation direct component => store = container;
+
+attribut type dans dispatch;
+
+attribut default dans reducer;
+
+2 fichiers actions : task et list;
+(addtask / addlist);
+
+on peu enum avec librairie !!! ! ! ! ! ! 
+
+actions addList et listAdded;
+
+todo: lire la doc redux.js intro et basics (et tout mais pas le async);
+introduire un reducer dans index.js, premiere chose à faire :
+- définir et créé les actions;
+- recabler app.js;
+
 arborescence
 injection modele de donnée
 les tests
 css
 flexbox
+
+state control 
+
+mount doc
+
+dom manip (ref)
+
+this.props.list (setstate)
+
+shouldcomponentupdate method (anciennes props, new props)
+
+outil de mesure sur facebook github react/docs/perf.html
+
+fichier action pour simuler les clicks & interactions
+
+checkout  poutchdb / dbconnect
+
+immutablejs
+
+component will mount
+component did mount
+
+
+
+/* <TaskList {...list} key={list.id} onButtonSelected={onButtonSelected} />)
+  return (
+    <div className='tasklists'>
+        {data}
+    </div>
+    )*/
+
+
+    removeTask(listId, taskId) {
+    const { lists } = this.state;
+    const list = lists[listId];
+    this.setState({
+      lists: {
+        ...lists,
+        [listId]: {
+          ...list,
+          tasks: _.omit(list.tasks, taskId),
+        }
+      },
+    });
+  }
+
+
+
+mocha alternatives: karma (usine à gaz)
+
+NYC pour encapsuler les tests et rajouter du code coverage;
+à voir ce week end !
+
+tester l immutabilité dans les reducers;
+
+asynchronisme
+(thunk ect);
+
+comment fonctionne l'event loop de l'engine javascript en doc;
+
+middleware;
+
+promises
+
+fonctions:
+get
+post
+delete
+
+outil a install : postman / jsonview
+
+addlist : retournera une fonction dispatch avec un fetch de 'http://rp4' blabla then.
+puis passé dans le body
+
+
+on peu pas addtask si la list n'existe pas mais ça remove pas les tasks quand on remove la liste'
+
+changer le reject remove list en une fonction lodash object.
+
+
+component will mount dans app pour dispatch et chopé les données du server ou store.dispatch dans index.
+
+
+isLoading/fetching;
+
+tests;
+
+rendre les inputs en components;
+

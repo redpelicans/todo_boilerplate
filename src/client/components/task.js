@@ -1,10 +1,14 @@
-import React from 'react'
-import CustomButton from './custombutton'
+import React from 'react';
+import RemoveTask from './removetask';
 
-const Task = ({ task }) => <li className='task'>{ task } <CustomButton message='X' /></li>
+const Task = ({ idTask, task, ...actions }) =>
+  <li className='task'>{ task }
+  <RemoveTask { ...actions } idTask={ idTask } />
+  </li>;
 
 Task.propTypes = {
-  task: React.PropTypes.string.isRequired,
+  idTask: React.PropTypes.number.isRequired,
+  task: React.PropTypes.string,
 };
 
-export default Task
+export default Task;

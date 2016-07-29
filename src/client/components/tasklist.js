@@ -1,22 +1,33 @@
-import React from 'react'
-import Task from './task'
-import ListTitle from './listtitle'
-import InputTask from './inputtask'
+import React from 'react';
+import Task from './task';
+import ListTitle from './listtitle';
+import InputFormTask from '../components/inputformtask';
+import _ from 'lodash';
 
-const TaskList = ({ tasks, title }) => {
-  const data = tasks.map((task) => <Task key={task.id} task={task.task} />)
+const TaskList = ({ idList, inputtask, label, tasks, ...actions }) => {
+  const data = _.map(_.filter(tasks, (task) => (task.listId === idList)), (task, id) =>
+    <Task { ...actions }
+      idTask={ task.id }
+      key={ Number(id) }
+      task={ task.description }
+    />);
   return (
     <div className='tasklist'>
-        <ListTitle title={title} />
-        <InputTask />
+        <ListTitle { ...actions } idList={ idList } label={ label } />
+        <InputFormTask
+          idList={ idList }
+          value={ inputtask }
+          { ...actions }
+        />
         {data}
     </div>
-    )
-}
-
-TaskList.propTypes = {
-  tasks: React.PropTypes.array.isRequired,
-  title: React.PropTypes.string.isRequired,
+    );
 };
 
-export default TaskList
+TaskList.propTypes = {
+  idList: React.PropTypes.number,
+  inputtask: React.PropTypes.string,
+  label: React.PropTypes.string,
+};
+
+export default TaskList;

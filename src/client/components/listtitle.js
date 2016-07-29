@@ -1,9 +1,17 @@
-import React from 'react'
+import React from 'react';
+import RemoveList from './removelist';
 
-const ListTitle = ({ title }) => <div className='listtitle'><h2>{ title }</h2></div>
+const ListTitle = ({ label, idList, ...actions }) =>
+  <div className='listtitle'>
+    <h2>
+    { label }
+    <RemoveList { ...actions } idList={ idList } />
+    </h2>
+  </div>;
 
 ListTitle.propTypes = {
-  title: React.PropTypes.string.isRequired,
+  idList: React.PropTypes.number.isRequired,
+  label: React.PropTypes.string.isRequired,
 };
 
-export default ListTitle
+export default ListTitle;
