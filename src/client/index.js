@@ -1,6 +1,13 @@
-import React from 'react'
-import ReactDom from 'react-dom'
+import React from 'react';
+import ReactDom from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import createLogger from 'redux-logger';
+import App from './components/App';
+import todo from './reducers/';
 
-const App = () => (<h1> A fantastic Todo list will be here soon ... </h1>)
+let store = createStore(
+  todo,
+  applyMiddleware(createLogger()));
 
-ReactDom.render(<App/>, document.getElementById('todo'))
+ReactDom.render(<Provider store={ store }><App /></Provider>, document.getElementById('todo'));
