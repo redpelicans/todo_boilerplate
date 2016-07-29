@@ -18,11 +18,11 @@ export default class InputFormList extends React.Component {
     this.props.onSubmitAddList(this.state.input);
     this.setState({ input: '' });
   }
-  
+
   handleChange = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    this.setState({ input : event.target.value });
+    this.setState({ input: event.target.value });
   }
 
   render() {
@@ -39,7 +39,7 @@ export default class InputFormList extends React.Component {
       </div>
     );
   }
-};
+}
 
 InputFormList.propTypes = {
   onSubmitAddList: React.PropTypes.func.isRequired,

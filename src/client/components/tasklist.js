@@ -4,7 +4,7 @@ import ListTitle from './listtitle';
 import InputFormTask from '../components/inputformtask';
 import _ from 'lodash';
 
-const TaskList = ({ idList, inputtask, label, tasks, ...actions }) => {
+const TaskList = ({ idList, label, tasks, ...actions }) => {
   const data = _.map(_.filter(tasks, (task) => (task.listId === idList)), (task, id) =>
     <Task { ...actions }
       idTask={ task.id }
@@ -25,8 +25,8 @@ const TaskList = ({ idList, inputtask, label, tasks, ...actions }) => {
 
 TaskList.propTypes = {
   idList: React.PropTypes.number,
-  inputtask: React.PropTypes.string,
   label: React.PropTypes.string,
+  tasks: React.PropTypes.array,
 };
 
 export default TaskList;

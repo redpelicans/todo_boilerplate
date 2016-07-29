@@ -7,10 +7,10 @@ export default function lists(state = {}, action) {
   case LIST_ADDED:
     return {
       ...state,
-        [action.list.id]: {
-          id: action.list.id,
-          label: action.list.label,
-        },
+      [action.list.id]: {
+        id: action.list.id,
+        label: action.list.label,
+      },
     };
   case REMOVED_LIST:
     return {

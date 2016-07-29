@@ -6,10 +6,9 @@ import RefreshButton from '../components/refreshbutton';
 import Loading from '../components/loading';
 import { fetchLists } from '../actions/fetch';
 import { connect } from 'react-redux';
-import { addTask, removeTask, changeTask } from '../actions/task';
-import { addList, removeList, changeList } from '../actions/list';
-import { sortAlphaSelector } from '../selector'
-import _ from 'lodash';
+import { addTask, removeTask } from '../actions/task';
+import { addList, removeList } from '../actions/list';
+import { sortListsSelector, sortTasksSelector } from '../selector';
 
 const App = ({ dispatch, lists, isLoading, tasks }) => {
 
@@ -57,8 +56,12 @@ const App = ({ dispatch, lists, isLoading, tasks }) => {
 App.propTypes = {
   dispatch: React.PropTypes.func.isRequired,
   isLoading: React.PropTypes.number.isRequired,
-  lists: React.PropTypes.object.isRequired,
-  tasks: React.PropTypes.object.isRequired,
+  lists: React.PropTypes.array.isRequired,
+  tasks: React.PropTypes.array.isRequired,
 };
 
-export default connect(state => ({ lists: state.lists, isLoading: state.status.isLoading, tasks: state.tasks }))(App);
+export default connect(state => ({
+  lists: sortListsSelector(state),
+  isLoading: state.status.isLoading,
+  tasks: sortTasksSelector(state)
+}))(App);

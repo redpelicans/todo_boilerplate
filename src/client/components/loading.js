@@ -6,9 +6,9 @@ const Loading = ({ load }) => {
     spinner = (
       <div>JE SUIS UN SPINNER</div>
     );
-  };
-  return <div className='loadingzone'> {spinner} </div>
-}
+  }
+  return <div className='loadingzone'> {spinner} </div>;
+};
 
 Loading.propTypes = {
   load: React.PropTypes.number.isRequired,

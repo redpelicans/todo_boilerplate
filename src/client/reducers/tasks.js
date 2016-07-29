@@ -8,14 +8,14 @@ export default function tasks(state = {}, action) {
   case TASK_ADDED:
     return {
       ...state,
-        [action.task.id]: {
-          id: action.task.id,
-          listId: action.task.listId,
-          description: action.task.description,
-        },
+      [action.task.id]: {
+        id: action.task.id,
+        listId: action.task.listId,
+        description: action.task.description,
+      },
     };
   case REMOVED_TASK:
-    return { 
+    return {
       ..._.omit(state, action.idTask),
     };
   case MADE_TASKS:

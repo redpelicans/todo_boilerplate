@@ -3,7 +3,7 @@ import React from 'react';
 export default class InputFormTask extends React.Component {
   state = {
     input: '',
-  } 
+  }
 
   shouldComponentUpdate = (nextProps, nextState) => {
     if (nextState.input !== this.state.input) {
@@ -11,14 +11,14 @@ export default class InputFormTask extends React.Component {
     }
     return false;
   }
-  
+
   handleSubmit = (event) => {
     event.preventDefault();
     event.stopPropagation();
     this.props.onSubmitAddTask(this.props.idList, this.state.input);
     this.setState({ input: '' });
   }
-  
+
   handleChange = (event) => {
     event.preventDefault();
     this.setState({ input: event.target.value });
@@ -38,7 +38,7 @@ export default class InputFormTask extends React.Component {
       </div>
     );
   }
-};
+}
 
 InputFormTask.propTypes = {
   idList: React.PropTypes.number.isRequired,

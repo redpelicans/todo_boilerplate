@@ -22,7 +22,7 @@ export const removeList = (idList) => {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-      }
+      },
     };
     dispatch(removingList());
     const url = `http://rp4.redpelicans.com:13004/api/todo/list/${idList}`;
@@ -35,12 +35,12 @@ export const removeList = (idList) => {
 };
 
 export const addList = (input) => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     const options = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-      }
+      },
     };
     dispatch(addingList());
     options.body = JSON.stringify({ todo: { label: input } });

@@ -2,14 +2,22 @@ import { createSelector } from 'reselect';
 import _ from 'lodash';
 
 const listSelector = state => state.lists;
-const textSelector = state => state.lists.label;
+const taskSelector = state => state.tasks;
 
-const sortAlpha = (state, text) => {
-  _.sortBy(state, text);
-};
+const sortListsAlpha = (lists) => (
+  _.sortBy(lists, 'label')
+);
 
+const sortTasksAlpha = (tasks) => (
+  _.sortBy(tasks, 'description')
+);
 
-export const sortAlphaSelector = createSelector(
-  [listSelector, textSelector],
-  sortAlpha(listSelector, textSelector)
-  );
+export const sortListsSelector = createSelector(
+  [listSelector],
+  lists => sortListsAlpha(lists)
+);
+
+export const sortTasksSelector = createSelector(
+  [taskSelector],
+  tasks => sortTasksAlpha(tasks)
+);

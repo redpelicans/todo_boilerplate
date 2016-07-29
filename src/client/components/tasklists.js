@@ -21,7 +21,8 @@ const TaskLists = ({ lists, tasks, ...actions }) => {
 };
 
 TaskLists.propTypes = {
-  lists: React.PropTypes.object,
+  lists: React.PropTypes.array,
+  tasks: React.PropTypes.array,
 };
 
 export default TaskLists;
