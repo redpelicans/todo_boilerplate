@@ -1,11 +1,11 @@
 import React from 'react';
 
-export default class ListHeader extends React.Component {
+export default class Task extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      input: '',
-      enable: false };
+      enable: false,
+      input: '' };
   }
 
   shouldComponentUpdate = (nextProps, nextState) => {
@@ -17,7 +17,7 @@ export default class ListHeader extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.onRenameList(this.props.id, this.state.input);
+    this.props.onRenameTask(this.props.id, this.state.input);
     this.setState({
       input: '',
       enable: false });
@@ -30,7 +30,7 @@ export default class ListHeader extends React.Component {
   }
 
   handleDeleteClick = () => {
-    this.props.onDeleteList(this.props.id);
+    this.props.onDeleteTask(this.props.id);
   }
 
   handleChange = (e) => {
@@ -57,18 +57,19 @@ export default class ListHeader extends React.Component {
 
   render() {
     return (
-    <div className='ListHeader'>
-      <h2>{this.props.name}</h2>
+    <div className='Elem'>
+      <p>{this.props.description}</p>
       {this.input(this.state.enable)}
       <button onClick={this.handleEnableClick}>{this.button(this.state.enable)}</button>
       <button onClick={this.handleDeleteClick}>Delete</button>
     </div>
     );
   }
+
 }
 
-ListHeader.propTypes = {
+Task.propTypes = {
+  description: React.PropTypes.string.isRequired,
   id: React.PropTypes.number.isRequired,
-  name: React.PropTypes.string.isRequired,
-  onDeleteList: React.PropTypes.func.isRequired,
-  onRenameList: React.PropTypes.func.isRequired };
+  onDeleteTask: React.PropTypes.func.isRequired,
+  onRenameTask: React.PropTypes.func.isRequired };

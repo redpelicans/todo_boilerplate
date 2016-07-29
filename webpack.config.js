@@ -1,6 +1,8 @@
 var path = require('path');
 
 module.exports = {
+  devtool: 'eval-source-map',
+
   entry: './src/client/index.js',
 
   output: {

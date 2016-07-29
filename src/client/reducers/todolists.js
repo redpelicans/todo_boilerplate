@@ -1,39 +1,20 @@
-import { ADD_LIST, DELETE_LIST, INPUT_ADD_LIST,
-  INPUT_RENAME_LIST, RENAME_LIST, ENABLE_RENAME_LIST } from '../actions/lists';
+import { FETCHED_LISTS, ADDED_LIST, DELETED_LIST, RENAMED_LIST } from '../actions/lists';
 import _ from 'lodash';
 
-let id = 0;
-
-const todoLists = (state = { addlist: '' }, action) => {
+const todoLists = (state = {}, action) => {
   switch (action.type) {
-  case ADD_LIST:
-    id = id + 1;
+  case FETCHED_LISTS:
+    return (action.lists);
+  case ADDED_LIST:
     return ({
       ...state,
-      [id]: { name: state.addlist, rename: false, input: '' },
-      addlist: '' });
-  case INPUT_ADD_LIST:
+      [action.id]: { id: action.id, label: action.name } });
+  case DELETED_LIST:
+    return (_.omit(state, action.id));
+  case RENAMED_LIST:
     return ({
       ...state,
-      addlist: action.text });
-  case INPUT_RENAME_LIST:
-    return ({
-      ...state,
-      [action.idlist]: {
-        ...state[action.idlist],
-        input: action.text } });
-  case DELETE_LIST:
-    return (_.omit(state, action.idlist));
-  case RENAME_LIST:
-    return ({
-      ...state,
-      [action.idlist]: { name: state[action.idlist].input, rename: false, input: '' } });
-  case ENABLE_RENAME_LIST:
-    return ({
-      ...state,
-      [action.idlist]: {
-        ...state[action.idlist],
-        rename: !(state[action.idlist].rename) } });
+      [action.id]: { id: action.id, label: action.newname } });
   default:
     return state;
   }

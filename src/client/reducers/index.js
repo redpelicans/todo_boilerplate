@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
+import todoFetching from './todofetching';
 import todoLists from './todolists';
-import todoElems from './todoelems';
+import todoTasks from './todotasks';
 
 const todo = combineReducers({
-  elems: todoElems,
-  lists: todoLists });
+  isFetching: todoFetching,
+  lists: todoLists,
+  tasks: todoTasks });
 
 export default todo;

@@ -1,43 +1,47 @@
 import React from 'react';
 import ListHeader from './ListHeader';
-import Elems from './Elems';
+import Tasks from './Tasks';
+import _ from 'lodash';
 
-const List = (props) => (
-  <div className='List'>
-    <ListHeader
-      id={props.id}
-      list={props.list}
-      onDeleteList={props.onDeleteList}
-      onEnableRenameList={props.onEnableRenameList}
-      onInputRenameList={props.onInputRenameList}
-      onRenameList={props.onRenameList} />
-    <Elems
-      elems={props.elems}
-      idList={props.id}
-      onAddElem={props.onAddElem}
-      onDeleteElem={props.onDeleteElem}
-      onDoneElem={props.onDoneElem}
-      onEnableRenameElem={props.onEnableRenameElem}
-      onInputAddElem={props.onInputAddElem}
-      onInputRenameElem={props.onInputRenameElem}
-      onRenameElem={props.onRenameElem} />
-  </div>
-);
+export default class List extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  shouldComponentUpdate = (nextProps) => {
+    if (nextProps.name !== this.props.name) {
+      return true;
+    }
+    if (_.isEqual(this.props.tasks, nextProps.tasks) !== true) {
+      return true;
+    }
+    return false;
+  }
+
+  render() {
+    return (
+      <div className='List'>
+        <ListHeader
+          id={this.props.id}
+          name={this.props.name}
+          onDeleteList={this.props.onDeleteList}
+          onRenameList={this.props.onRenameList} />
+        <Tasks
+          idList={this.props.id}
+          onAddTask={this.props.onAddTask}
+          onDeleteTask={this.props.onDeleteTask}
+          onRenameTask={this.props.onRenameTask}
+          tasks={this.props.tasks} />
+      </div>);
+  }
+}
 
 List.propTypes = {
-  elems: React.PropTypes.object.isRequired,
   id: React.PropTypes.number.isRequired,
-  list: React.PropTypes.object.isRequired,
-  onAddElem: React.PropTypes.func.isRequired,
-  onDeleteElem: React.PropTypes.func.isRequired,
+  name: React.PropTypes.string.isRequired,
+  onAddTask: React.PropTypes.func.isRequired,
   onDeleteList: React.PropTypes.func.isRequired,
-  onDoneElem: React.PropTypes.func.isRequired,
-  onEnableRenameElem: React.PropTypes.func.isRequired,
-  onEnableRenameList: React.PropTypes.func.isRequired,
-  onInputAddElem: React.PropTypes.func.isRequired,
-  onInputRenameElem: React.PropTypes.func.isRequired,
-  onInputRenameList: React.PropTypes.func.isRequired,
-  onRenameElem: React.PropTypes.func.isRequired,
-  onRenameList: React.PropTypes.func.isRequired };
-
-export default List;
+  onDeleteTask: React.PropTypes.func.isRequired,
+  onRenameList: React.PropTypes.func.isRequired,
+  onRenameTask: React.PropTypes.func.isRequired,
+  tasks: React.PropTypes.object.isRequired };

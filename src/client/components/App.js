@@ -1,29 +1,40 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Todo from './Todo';
-import { addElem, deleteElem, doneElem, enableRenameElem,
-  inputAddElem, inputRenameElem, renameElem } from '../actions/elems';
-import { addList, deleteList, inputAddList, inputRenameList, renameList, enableRenameList } from '../actions/lists';
+import { addTask, deleteTask, fetchTasks, renameTask } from '../actions/tasks';
+import { addList, deleteList, fetchLists, renameList } from '../actions/lists';
+import { getAlphaSortLists, getAlphaSortTasks } from '../selectors';
 
-const App = (props) => (
-  <Todo {...props} />
-);
+const mapStatetoProps = (state) => ({
+  isFetching: state.isFetching,
+  lists: getAlphaSortLists(state),
+  tasks: getAlphaSortTasks(state) });
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentWillMount = () => {
+    this.props.onFetchLists();
+    this.props.onFetchTasks();
+  }
+
+  render() {
+    return (<Todo {...this.props} />);
+  }
+}
 
 App.propTypes = {
-  elems: React.PropTypes.object.isRequired,
-  lists: React.PropTypes.object.isRequired };
+  onFetchLists: React.PropTypes.func.isRequired,
+  onFetchTasks: React.PropTypes.func.isRequired };
 
-export default connect(state => ({ elems: state.elems, lists: state.lists }),
-  { onAddElem: addElem,
+export default connect(mapStatetoProps,
+  { onAddTask: addTask,
     onAddList: addList,
-    onDeleteElem: deleteElem,
+    onDeleteTask: deleteTask,
     onDeleteList: deleteList,
-    onDoneElem: doneElem,
-    onEnableRenameElem: enableRenameElem,
-    onEnableRenameList: enableRenameList,
-    onInputAddElem: inputAddElem,
-    onInputAddList: inputAddList,
-    onInputRenameElem: inputRenameElem,
-    onInputRenameList: inputRenameList,
-    onRenameElem: renameElem,
+    onFetchLists: fetchLists,
+    onFetchTasks: fetchTasks,
+    onRenameTask: renameTask,
     onRenameList: renameList })(App);

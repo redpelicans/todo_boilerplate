@@ -4,50 +4,33 @@ import List from './List';
 import AddList from './AddList';
 
 const Lists = (props) => {
-  const lists = _.omitBy(props.lists, (list, id) => (id === 'addlist'));
-  const data = _.map(lists, (list, id) => (
+  const data = _.map(props.lists, (list) => (
     <List
-      elems={props.elems}
-      id={Number(id)}
-      key={id}
-      list={list}
-      onAddElem={props.onAddElem}
-      onDeleteElem={props.onDeleteElem}
+      id={Number(list.id)}
+      key={list.id}
+      name={list.label}
+      onAddTask={props.onAddTask}
       onDeleteList={props.onDeleteList}
-      onDoneElem={props.onDoneElem}
-      onEnableRenameElem={props.onEnableRenameElem}
-      onEnableRenameList={props.onEnableRenameList}
-      onInputAddElem={props.onInputAddElem}
-      onInputRenameElem={props.onInputRenameElem}
-      onInputRenameList={props.onInputRenameList}
-      onRenameElem={props.onRenameElem}
-      onRenameList={props.onRenameList} />));
+      onDeleteTask={props.onDeleteTask}
+      onRenameList={props.onRenameList}
+      onRenameTask={props.onRenameTask}
+      tasks={_.pickBy(props.tasks, (task) => task.listId === list.id)} />));
   return (
     <div className='Lists'>
       {data}
-      <AddList
-        addlist={props.lists.addlist}
-        onAddList={props.onAddList}
-        onInputAddList={props.onInputAddList} />
+      <AddList onAddList={props.onAddList} />
     </div>
   );
 };
 
 Lists.propTypes = {
-  elems: React.PropTypes.object.isRequired,
-  lists: React.PropTypes.object.isRequired,
-  onAddElem: React.PropTypes.func.isRequired,
+  lists: React.PropTypes.array.isRequired,
   onAddList: React.PropTypes.func.isRequired,
-  onDeleteElem: React.PropTypes.func.isRequired,
+  onAddTask: React.PropTypes.func.isRequired,
   onDeleteList: React.PropTypes.func.isRequired,
-  onDoneElem: React.PropTypes.func.isRequired,
-  onEnableRenameElem: React.PropTypes.func.isRequired,
-  onEnableRenameList: React.PropTypes.func.isRequired,
-  onInputAddElem: React.PropTypes.func.isRequired,
-  onInputAddList: React.PropTypes.func.isRequired,
-  onInputRenameElem: React.PropTypes.func.isRequired,
-  onInputRenameList: React.PropTypes.func.isRequired,
-  onRenameElem: React.PropTypes.func.isRequired,
-  onRenameList: React.PropTypes.func.isRequired };
+  onDeleteTask: React.PropTypes.func.isRequired,
+  onRenameList: React.PropTypes.func.isRequired,
+  onRenameTask: React.PropTypes.func.isRequired,
+  tasks: React.PropTypes.array.isRequired };
 
 export default Lists;

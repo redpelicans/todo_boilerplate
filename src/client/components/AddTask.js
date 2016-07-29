@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class AddList extends React.Component {
+export default class AddTask extends React.Component {
   constructor(props) {
     super(props);
     this.state = { input: '' };
@@ -15,7 +15,7 @@ export default class AddList extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.onAddList(this.state.input);
+    this.props.onAddTask(this.props.id, this.state.input);
     this.setState({ input: '' });
   }
 
@@ -25,8 +25,8 @@ export default class AddList extends React.Component {
 
   render() {
     return (
-      <div className='List' onSubmit={this.handleSubmit}>
-        <h2>New List :</h2>
+      <div onSubmit={this.handleSubmit}>
+        <h3>New Task :</h3>
         <form>
           <input onChange={this.handleChange} type='text' value={this.state.input}></input>
         </form>
@@ -34,4 +34,6 @@ export default class AddList extends React.Component {
   }
 }
 
-AddList.propTypes = { onAddList: React.PropTypes.func.isRequired };
+AddTask.propTypes = {
+  id: React.PropTypes.number.isRequired,
+  onAddTask: React.PropTypes.func.isRequired };
