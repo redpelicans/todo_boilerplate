@@ -1,57 +1,82 @@
 import { combineReducers } from 'redux';
-import { CHANGE_LIST, CREATE_LIST, REMOVE_LIST } from '../actions/lists';
-import { CHANGE_TASK, CREATE_TASK, REMOVE_TASK } from '../actions/tasks';
-
+import {
+  LIST_CREATED,
+  RECEIVED_LIST,
+  LIST_REMOVED,
+} from '../actions/lists';
+import {
+  RECEIVED_TASK,
+  TASK_CREATED,
+  TASK_REMOVED,
+} from '../actions/tasks';
+import {
+  FETCHED,
+  FETCHING,
+} from '../actions/spinner';
 import _ from 'lodash';
 
-const listReducer = (state = {}, action) => {
+const initialState = {
+  isFetching: false,
+  lists: {},
+  tasks: {},
+};
+
+const lists = (state = initialState.lists, action) => {
   switch (action.type) {
-  case CREATE_LIST:
+  case LIST_CREATED:
     return {
       ...state,
-      [action.listId]: {
-        title: action.title,
-        listId: action.listId,
+      [action.list.id]: {
+        label: action.list.label,
+        isFetching: false,
+        id: action.list.id,
       },
     };
-  case CHANGE_LIST:
-    return {
-      ...state,
-      listVal: action.listVal,
-    };
-  case REMOVE_LIST:
-    return _.omit(state, action.listId);
+  case RECEIVED_LIST:
+    return action.lists;
+  case LIST_REMOVED:
+    return _.omit(state, action.id);
   default:
     return state;
   }
 };
 
-const taskReducer = (state = {}, action) => {
+const tasks = (state = initialState.tasks, action) => {
   switch (action.type) {
-  case CREATE_TASK:
+  case TASK_CREATED:
     return {
       ...state,
-      [action.taskId]: {
-        listId: action.listId,
-        name: action.name,
-        taskId: action.taskId,
+      [action.task.id]: {
+        description: action.task.description,
+        id: action.task.id,
+        isFetching: false,
+        listId: action.task.listId,
       },
     };
-  case CHANGE_TASK:
-    return {
-      ...state,
-      taskVal: action.taskVal,
-    };
-  case REMOVE_TASK:
-    return _.omit(state, action.taskId);
+  case RECEIVED_TASK:
+    return action.tasks;
+  case TASK_REMOVED:
+    return _.omit(state, action.id);
+  default:
+    return state;
+  }
+};
+
+const isFetching = (state = initialState.isFetching, action) => {
+  switch (action.type) {
+  case FETCHING:
+    return action.isFetching;
+  case FETCHED:
+    return action.isFetching;
   default:
     return state;
   }
 };
 
 const rootReducer = combineReducers({
-  lists: listReducer,
-  tasks: taskReducer,
+  lists,
+  tasks,
+  isFetching,
 });
 
 export default rootReducer;

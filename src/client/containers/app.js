@@ -2,60 +2,83 @@ import React from 'react';
 import CreateList from '../components/createlist';
 import TodoList from '../components/todolist';
 import Title from '../components/title';
-import { changeList, createList, removeList } from '../actions/lists';
-import { changeTask, createTask, removeTask } from '../actions/tasks';
+import Refresh from '../components/refresh';
+import Spinner from '../components/spinner';
+import { createList, fetchList, removeList } from '../actions/lists';
+import { createTask, removeTask } from '../actions/tasks';
+import { sortAlphaListSelector, sortAlphaTaskSelector } from '../selectors';
 import { connect } from 'react-redux';
 
-const TodoApp = ({ dispatch, lists, tasks }) => {
+class TodoApp extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
-  const onChangeList = (listVal) => {
-    dispatch(changeList(listVal));
+  componentWillMount = () => {
+    this.onFetchList();
   };
 
-  const onCreateList = () => {
-    dispatch(createList(lists.listVal));
+  onCreateList = (input) => {
+    this.props.dispatch(createList(input));
   };
 
-  const onRemoveList = (listId) => {
-    dispatch(removeList(listId));
+  onFetchList = () => {
+    this.props.dispatch(fetchList());
   };
 
-  const onChangeTask = (taskVal) => {
-    dispatch(changeTask(taskVal));
+  onRemoveList = (listId) => {
+    this.props.dispatch(removeList(listId));
   };
 
-  const onCreateTask = (listId) => {
-    dispatch(createTask(listId, tasks.taskVal, tasks.listId));
+  onCreateTask = (input, listId) => {
+    this.props.dispatch(createTask(input, listId));
   };
 
-  const onRemoveTask = (taskId) => {
-    dispatch(removeTask(taskId));
+  onRemoveTask = (taskId) => {
+    this.props.dispatch(removeTask(taskId));
   };
 
-  return (
-    <div className='todoapp'>
+  onRefresh = () => {
+    this.props.dispatch(fetchList());
+  };
+
+  onSpinner = (isFetching) => {
+    if (isFetching === true) {
+      return <Spinner/>;
+    }
+    return null;
+  };
+
+  render() {
+    return (
+      <div className='todoapp'>
       <Title title='Marianne&#39;s todo list'/>
+      <Refresh onRefresh={ this.onRefresh } />
       <CreateList
-        listVal={ lists.listVal }
-        onChangeList={ onChangeList }
-        onCreateList={ onCreateList }
+        onCreateList={ this.onCreateList }
       />
+      { this.onSpinner(this.props.isFetching) }
       <TodoList
-        lists={ lists }
-        onChangeTask={ onChangeTask }
-        onCreateTask={ onCreateTask }
-        onRemoveList={ onRemoveList }
-        onRemoveTask={ onRemoveTask }
-        tasks={ tasks }
+        lists={ this.props.lists }
+        onCreateTask={ this.onCreateTask }
+        onRemoveList={ this.onRemoveList }
+        onRemoveTask={ this.onRemoveTask }
+        tasks={ this.props.tasks }
       />
-    </div>
-  );
-};
+      </div>
+    );
+  }
+}
 
 TodoApp.propTypes = {
   dispatch: React.PropTypes.func.isRequired,
-  lists: React.PropTypes.object.isRequired,
-  tasks: React.PropTypes.object.isRequired,
+  isFetching: React.PropTypes.bool.isRequired,
+  lists: React.PropTypes.array.isRequired,
+  tasks: React.PropTypes.array.isRequired,
 };
 
-export default connect(state => ({ lists: state.lists, tasks: state.tasks }))(TodoApp);
+export default connect(state => ({
+  lists: sortAlphaListSelector(state),
+  isFetching: state.isFetching,
+  tasks: sortAlphaTaskSelector(state),
+}))(TodoApp);

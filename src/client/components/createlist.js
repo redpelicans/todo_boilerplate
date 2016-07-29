@@ -1,34 +1,41 @@
 import React from 'react';
 
-const createList = ({ listVal, onChangeList, onCreateList }) => {
-  const handleCreateList = (event) => {
+class CreateList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { input: '' };
+  }
+
+  handleCreateList = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    onCreateList();
+    this.props.onCreateList(this.state.input);
+    this.setState({ input: '' });
   };
-  const handleChangeList = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    onChangeList(event.target.value);
+
+  handleChangeList = (event) => {
+    this.setState({ input: event.target.value });
   };
-  return (
-    <div className='createlist'>
-      <form onSubmit={ handleCreateList } >
+
+  render() {
+    return (
+      <div className='createlist'>
+      <form onSubmit={ this.handleCreateList } >
       <input
-        onChange={ handleChangeList }
+        onChange={ this.handleChangeList }
         placeholder='new list'
         type='text'
-        value={ listVal }
+        value={ this.state.input }
       />
       </form>
-    </div>
-  );
-};
+      </div>
+    );
+  }
+}
 
-createList.propTypes = {
-  listVal: React.PropTypes.string.isRequired,
-  onChangeList: React.PropTypes.func.isRequired,
+CreateList.propTypes = {
   onCreateList: React.PropTypes.func.isRequired,
 };
 
-export default createList;
+export default CreateList;
+
