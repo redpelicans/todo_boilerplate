@@ -7,13 +7,11 @@ import ListTitle from '../src/client/components/listtitle'
 import Task from '../src/client/components/task'
 import TaskList from '../src/client/components/tasklist'
 import TaskLists from '../src/client/components/tasklists'
-import Title from '../src/client/components/title'
-import CustomButton from '../src/client/components/custombutton'
-import InputTask from '../src/client/components/inputtask'                               
+import Title from '../src/client/components/title'                            
 
 chai.should()
 chai.use(equalJSX)
-
+/*
 const fake = [
     { id: 1, title: 'List1', tasks: [ { id: 1, task: '1st' },
     									 { id: 2, task: '2nd'},
@@ -89,3 +87,4 @@ describe('App test', function(){
     output.should.equalJSX(<div className='listtitle'><h2>{ title }</h2></div>);
   });
 })
+*/
