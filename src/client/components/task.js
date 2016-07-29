@@ -1,10 +1,14 @@
-/**
- * Created by Antoine on 11/07/2016.
- */
 import React from 'react'
 
-// A man must know how to render
-const Task = ({task}) => (
-  <li className="task flex-item padded">{task.id}: {task.description}</li>)
+const Task = ({ task, onDelTask }) => (
+  <div className='task flex-item padded'>
+  <button id={task.id} onClick={onDelTask} >x</button>
+    <h5>{task.id}: {task.description}</h5>
+  </div>);
+
+Task.propTypes = {
+  onDelTask: React.PropTypes.func.isRequired,
+  task: React.PropTypes.object.isRequired,
+}
 
 export default Task

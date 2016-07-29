@@ -1,12 +1,15 @@
 var path = require('path');
 
 module.exports = {
+  devtool: 'eval-source-map',
+
   entry: './src/client/index.js',
 
   output: {
     path: path.join(__dirname, 'build'),
     filename: 'bundle.js'
   },
+
 
   module: {
     loaders: [
@@ -18,10 +21,6 @@ module.exports = {
         presets: ["es2015", "react", "stage-0"]
       }
     },
-    // {
-    //   test: /\.css$/,
-    //   loader: "style-loader!css-loader"
-    // }
     ]
   }
 };

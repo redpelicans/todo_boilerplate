@@ -5,3 +5,4 @@ dist
 *.tmp
 *.log
 .idea
+npm-debug.log.*

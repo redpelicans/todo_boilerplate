@@ -3,14 +3,32 @@
  */
 import React from 'react'
 import _ from 'lodash'
+import ListHead from './listhead'
 import Task from './task'
+import NewTask from './newtask'
 
-const TaskList = ({list}) => (
-  <div className="todo-list">
-    <h3>{list.title}</h3>
-    <div className="flex-container">{_.map(list.tasks, (task =>
-      <Task task={task} key={task.id} />))}
+const TaskList = ({ handlers, list, tasks }) => (
+  <div className='todo-list'>
+    <ListHead
+      id={list.id}
+      onDelList={handlers.onDelList}
+      title={list.title} />
+    <div className='flex-container'>
+    <NewTask
+      handleChange={ handlers.taskChange }
+      input={list.input}
+      listID={list.id}
+      onNewTask={handlers.onNewTask} />
+    {_.map(tasks, (task =>
+      <Task key={task.id} onDelTask={handlers.onDelTask} task={task} />))}
     </div>
-  </div>)
+  </div>
+)
+
+TaskList.propTypes = {
+  handlers: React.PropTypes.object.isRequired,
+  list: React.PropTypes.object.isRequired,
+  tasks: React.PropTypes.array.isRequired,
+}
 
 export default TaskList
