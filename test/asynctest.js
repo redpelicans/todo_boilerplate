@@ -5,7 +5,7 @@ import { addTask, TASK_ADDED, removeTask, REMOVED_TASK } from '../src/client/act
 import { MADE_LIST, MADE_TASK, fetchLists } from '../src/client/actions/fetch';
 
 describe('async actions test', function() {
-  it('should addList', done => {
+/*  it('should addList', done => {
     const store = configureStore(rootReducer, undefined, {
       LIST_ADDED : ({ dispatch, getState }) => {
         done();
@@ -29,7 +29,7 @@ describe('async actions test', function() {
       },
     });
     store.dispatch(addTask(1, 'task de test'));
-  });
+  });*/
   it('should removeTask', done => {
     const store = configureStore(rootReducer, undefined, {
       REMOVED_TASK : ({ dispatch, getState }) => {
@@ -38,12 +38,12 @@ describe('async actions test', function() {
     });
     store.dispatch(removeTask(1));
   });
-  it('should removeList', done => {
+  /*it('should removeList', done => {
     const store = configureStore(rootReducer, undefined, {
       REMOVED_LIST : ({ dispatch, getState }) => {
         done();
       },
     });
     store.dispatch(removeList(1));
-  });
+  });*/
 });

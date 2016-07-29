@@ -1,5 +1,8 @@
 import * as list from '../src/client/actions/list';
 import * as task from '../src/client/actions/task';
+import lists from '../src/client/reducers/lists';
+import tasks from '../src/client/reducers/tasks';
+import status from '../src/client/reducers/status';
 import rootReducer from '../src/client/reducers';
 import expect from 'expect';
 var deepFreeze = require('deep-freeze-es6');
@@ -24,15 +27,7 @@ describe('actions creators', () => {
       type: list.ADD_LIST,
       id,
     };
-    expect(list.addList(id)).toEqual(expectedReturn);
-  });
-  it('should create an action to change a list', () => {
-    const inputlist = 'test';
-    const expectedReturn = {
-      type: list.CHANGE_LIST,
-      inputlist,
-    };
-    expect(list.changeList(inputlist)).toEqual(expectedReturn);
+    expect(list.listAdded(id)).toEqual(expectedReturn);
   });
   it('should create an action to remove a list', () => {
     const idList = 3;
@@ -52,16 +47,6 @@ describe('actions creators', () => {
     };
     expect(task.addTask(idList)).toEqual(expectedReturn);
   });
-  it('should create an action to change a task', () => {
-    const idList = 3;
-    const inputtask = 'test';
-    const expectedReturn = {
-      type: task.CHANGE_TASK,
-      idList,
-      inputtask,
-    };
-    expect(task.changeTask(idList, inputtask)).toEqual(expectedReturn);
-  });
   it('should create an action to remove a task', () => {
     const idTask = 3;
     const expectedReturn = {
@@ -73,87 +58,55 @@ describe('actions creators', () => {
 });
 
 describe('app rootReducer', () => {
-  it('should return the initial state', () => {
+/*  it('should return the initial state', () => {
     expect(
       rootReducer(undefined, {})
       ).toEqual({
       lists: {},
-      inputlist: '',
+      status: {},
       tasks: {},
     });
       });
-  it('should handle ADD_LIST', () => {
-    expect(
-      rootReducer(deepFreeze({ lists: {}, inputlist: 'list1', tasks: {}}), {
-        type: list.ADD_LIST,
-        id: 2,
-      })
-      ).toEqual({
-        lists: { 2: { id: 2, title: 'list1', inputtask: '' } },
-        tasks: {},
-        inputlist: '',
-      });
+  it('should handle LIST_ADDED', () => {
+    const test = { type: list.LIST_ADDED, list: { id: 1, label: 'test' } };
+    const state = {};
+    const result = {
+      1: { id: 1, label: 'test' }
+    };
+    deepFreeze(state);
+    expect(lists(state, test)).toEqual(result);
   });
-  it('should handle CHANGE_LIST', () => {
-    expect(
-      rootReducer(deepFreeze({ lists: {}, inputlist: 'list1', tasks: {}}), {
-        type: list.CHANGE_LIST,
-        inputlist: 'lalali',
-      })
-      ).toEqual({
-        lists: {},
-        tasks: {},
-        inputlist: 'lalali',
-      });
+  it('should handle REMOVED_TASK', () => {
+    const test = { type: task.REMOVED_TASK, idTask: 1 };
+    const state = {
+      1: { id: 1, listId: 3, description: 'testtask1' },
+      2: { id: 2, listId: 1, description: 'tasktest8' }
+    };
+    const result = {
+      2: { id: 2, listId: 1, description: 'tasktest8' }
+    };
+    deepFreeze(state);
+    expect(tasks(state, test)).toEqual(result);
   });
-  it('should handle REMOVE_LIST', () => {
-    expect(
-      rootReducer(deepFreeze({ lists: { 0: { id: 0, title: 'list1', inputtask: '', }}, inputlist: '', tasks: {} }), {
-        type: list.REMOVE_LIST,
-        idList: 0,
-      })
-      ).toEqual({
-        lists: {},
-        tasks: {},
-        inputlist: '',
-      });
-  });
-  it('should handle ADD_TASK', () => {
-    expect(
-      rootReducer(deepFreeze({ lists: { 0: { id: 0, title: 'list1', inputtask: 'lala', }}, inputlist: '', tasks: {}}), {
-        type: task.ADD_TASK,
-        idList: 0,
-        idTask: 0,
-      })
-      ).toEqual({
-        lists: { 0: { id: 0, title: 'list1', inputtask: '', } },
-        tasks: { 0: { idList: 0, id: 0, task: 'lala'} },
-        inputlist: '',
-      });
-  });
-  it('should handle CHANGE_TASK', () => {
-    expect(
-      rootReducer(deepFreeze({ lists: { 0: { id: 0, title: 'list1', inputtask: 'lala', }}, inputlist: '', tasks: {}}), {
-        type: task.CHANGE_TASK,
-        idList: 0,
-        inputtask: 'lali',
-      })
-      ).toEqual({
-        lists: { 0: { id: 0, title: 'list1', inputtask: 'lali' } },
-        tasks: {},
-        inputlist: '',
-      });
-  });
+  it('should handle TASK_ADDED', () => {
+    const test = { type: task.TASK_ADDED, task: { 1 : { id: 1, listId: 1, description: 'test' } } };
+    const state = {};
+    const result = {
+      1: { id: 1, listId: 1, description: 'test' }
+    };
+    deepFreeze(state);
+    expect(tasks(state, test)).toEqual(result);
+  });*/
   it('should handle REMOVE_TASK', () => {
     expect(
-      rootReducer(deepFreeze({ lists: { 0: { id: 0, title: 'list1', inputtask: '', }}, inputlist: '', tasks: { 0: { id: 0, idList: 0, task: 'lala', } } }), {
+      rootReducer(deepFreeze({ lists: { 0: { id: 0, label: 'list1' } }, status: {}, tasks: { 0: { id: 0, idList: 0, description: 'lala' } } }), {
         type: task.REMOVE_TASK,
         idTask: 0,
       })
       ).toEqual({
-        lists: { 0: { id: 0, title: 'list1', inputtask: '' } },
+        lists: { 0: { id: 0, label: 'list1' } },
         tasks: {},
-        inputlist: '',
+        status: {},
       });
   });
 });

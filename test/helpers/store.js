@@ -3,7 +3,7 @@ import { createStore, applyMiddleware } from 'redux';
 
 const isFunction = arg => typeof arg === 'function';
 
-const myMiddleware = (types = {}) => {
+const myMiddlewareFactory = (types = {}) => {
   const fired = {};
   return store => next => action => {
     const result = next(action);
@@ -21,7 +21,7 @@ const configureStore = (reducer, initialState, types) => createStore(
   reducer,
   initialState,
   applyMiddleware(
-    myMiddleware(types),
+    myMiddlewareFactory(types),
     thunk,
   ),
 )
