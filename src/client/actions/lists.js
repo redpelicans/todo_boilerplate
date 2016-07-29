@@ -48,6 +48,6 @@ export const pushList = (newList, callback) => () => {
   return apiCall(req)('lists')(callback)
 }
 
-export const getLists = callback => () => {
-  apiCall({ method: 'GET' })('lists')(callback);
+export const getLists = () => (dispatch) => {
+  apiCall({ method: 'GET' })('lists')(lists => dispatch(gotLists(lists)));
 }

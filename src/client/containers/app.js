@@ -14,8 +14,8 @@ const App = ({ input, lists, tasks, dispatch }) => {
   const listChange = value => {
     dispatch(listInput(value));
   };
-  const onNewList = () => {
-    dispatch(pushList(input.lists, r => dispatch(addList(r))))
+  const onNewList = (title) => {
+    dispatch(pushList(title, r => dispatch(addList(r))))
   }
   const onDelList = e => {
     dispatch(deleteList(e.target.id, r => dispatch(delList(r.id))))
@@ -30,7 +30,7 @@ const App = ({ input, lists, tasks, dispatch }) => {
     dispatch(deleteTask(e.target.id, r => dispatch(delTask(r.id))))
   }
   const fetchLists = () => {
-    dispatch(getLists(lists => dispatch(gotLists(lists))))
+    dispatch(getLists(/*lists => dispatch(gotLists(lists))*/))
   }
   const fetchTasks = () => {
     dispatch(getTasks(tasks => dispatch(gotTasks(tasks))))
