@@ -5,15 +5,16 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, combineReducers } from 'redux'
 
-import input from './reducers/inputReducer'
+import api from './reducers/apiReducer'
 import lists from './reducers/listReducer'
 import tasks from './reducers/taskReducer'
 
 import App from './containers/app'
 
 const initialState = {
-  input: {
-    lists: '',
+  api: {
+    lists: 'idle',
+    tasks: 'idle',
   },
   lists: [
   ],
@@ -22,7 +23,7 @@ const initialState = {
 };
 
 const todoStore = createStore(
-  combineReducers({ input, lists, tasks }),
+  combineReducers({ api, lists, tasks }),
   initialState,
   applyMiddleware(createLogger(), thunk)
 );

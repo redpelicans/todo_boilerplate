@@ -1,31 +1,32 @@
 import React from 'react'
 
-const NewTask = ({ listID, input, handleChange, onNewTask }) => {
-  const handleInput = e => {
-    e.preventDefault();
-    handleChange(e.target.value, listID);
-  };
-  const handleSubmit = e => {
-    e.preventDefault();
-    if (input) {
-      onNewTask(input, listID);
-    }
-  };
-  return (
-    <div className='flex-item padded task'>
-      <form onSubmit={ handleSubmit }>
-        <input onChange={ handleInput } placeholder='New Task' value={input} />
-        <button type='submit'>+</button>
-      </form>
-    </div>
-  )
-}
+class NewTask extends React.Component {
+  static propTypes = {
+    listId: React.PropTypes.number,
+    onNewTask: React.PropTypes.func,
+  }
+  state = { input: '' }
 
-NewTask.propTypes = {
-  handleChange: React.PropTypes.func,
-  input: React.PropTypes.string,
-  listID: React.PropTypes.number,
-  onNewTask: React.PropTypes.func,
+  handleInput = e => {
+    e.preventDefault();
+    this.setState({ input: e.target.value });
+  }
+  handleSubmit = e => {
+    e.preventDefault();
+    if (!this.state.input) { return }
+    this.setState({ input: '' });
+    console.log(this.props.listId);
+    this.props.onNewTask({ description: this.state.input, listId: this.props.listId });
+  }
+  render() {
+    return (
+      <div className='flex-item padded task'>
+        <form onSubmit={ this.handleSubmit }>
+          <input onChange={ this.handleInput } placeholder='New Task' value={ this.state.input } />
+          <button type='submit'>+</button>
+        </form>
+      </div>
+    ) }
 }
 
 export default NewTask

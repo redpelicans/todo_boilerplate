@@ -2,11 +2,7 @@ import React from 'react'
 
 class NewList extends React.Component {
   static propTypes = {
-    fetchLists: React.PropTypes.func.isRequired,
-    fetchTasks: React.PropTypes.func.isRequired,
-    handleChange: React.PropTypes.func.isRequired,
-    inputVal: React.PropTypes.string,
-    onNewList: React.PropTypes.func.isRequired,
+    handlers: React.PropTypes.object.isRequired,
   }
 
   state = { input: '' }
@@ -17,7 +13,7 @@ class NewList extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     if (!this.state.input) { return }
-    this.props.onNewList(this.state.input);
+    this.props.handlers.onNewList(this.state.input);
     this.setState({ input: '' });
   };
   render() {
@@ -30,8 +26,8 @@ class NewList extends React.Component {
             value={ this.state.input } />
           <button type='submit'>+</button>
         </form>
-        <button onClick={ this.props.fetchTasks }>Get Tasks !</button>
-        <button onClick={ this.props.fetchLists }>Get Lists !</button>
+        <button onClick={ this.props.handlers.fetchTasks }>Get Tasks !</button>
+        <button onClick={ this.props.handlers.fetchLists }>Get Lists !</button>
       </div>
   ) }
 }

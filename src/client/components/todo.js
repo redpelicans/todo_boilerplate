@@ -5,7 +5,7 @@ import React from 'react'
 import _ from 'lodash'
 import TaskList from './tasklist'
 
-const Todo = ({ lists, tasks, ...handlers }) => (
+const Todo = ({ lists, tasks, handlers }) => (
   <div className='todo'>
   {_.map(lists, (taskList) => (
     <TaskList
@@ -17,8 +17,8 @@ const Todo = ({ lists, tasks, ...handlers }) => (
 )
 
 Todo.propTypes = {
+  handlers: React.PropTypes.object.isRequired,
   lists: React.PropTypes.array.isRequired,
-  onDelList: React.PropTypes.func.isRequired,
   tasks: React.PropTypes.array.isRequired,
 }
 

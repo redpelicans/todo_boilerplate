@@ -5,27 +5,16 @@ import apiCall from './api'
 
 export const ADD_LIST = 'ADD_LIST';
 export const DEL_LIST = 'DEL_LIST';
-export const INPUT_LIST = 'INPUT_LIST';
 export const GOT_LISTS = 'GOT_LISTS';
 
-let currID;
-
-export const addList = (list) => {
-  currID = list.id >= currID ? list.id : currID;
-  return ({
-    type: ADD_LIST,
-    list,
-  })
-}
+export const addList = (list) => ({
+  type: ADD_LIST,
+  list,
+})
 
 export const delList = id => ({
   type: DEL_LIST,
   id,
-})
-
-export const listInput = input => ({
-  type: INPUT_LIST,
-  input,
 })
 
 export const gotLists = lists => ({
@@ -33,19 +22,17 @@ export const gotLists = lists => ({
   lists,
 })
 
-// ASYNC STARTING HERE
-
-export const deleteList = (id, callback) => () => (
-  apiCall({ method: 'DELETE' })('list/'.concat(id))(callback)
+export const deleteList = (id) => (dispatch) => (
+  apiCall({ method: 'DELETE' })('list/'.concat(id))(r => dispatch(delList(r.id)))
 )
 
-export const pushList = (newList, callback) => () => {
+export const pushList = (newList) => (dispatch) => {
   const req = {
     headers: { 'Content-Type': 'application/json' },
     method: 'POST',
     body: JSON.stringify({ 'todo': { 'label': newList } }),
   }
-  return apiCall(req)('lists')(callback)
+  return apiCall(req)('lists')(l => dispatch(addList(l)))
 }
 
 export const getLists = () => (dispatch) => {

@@ -5,10 +5,8 @@ export const DEL_TASK = 'DEL_TASK';
 export const INPUT_TASK = 'INPUT_TASK';
 export const GOT_TASKS = 'GOT_TASKS';
 
-let currID;
-
 export const addTask = (task) => {
-  currID = task.id >= currID ? task.id : currID;
+  console.log(task.id);
   return ({
     type: ADD_TASK,
     task,
@@ -20,31 +18,32 @@ export const delTask = (id) => ({
   id,
 })
 
-export const deleteTask = (id, callback) => () => (
-  apiCall({ method: 'DELETE' })('task/'.concat(id))(callback)
-)
-
 export const taskInput = (input, id) => ({
   type: INPUT_TASK,
   input,
   id,
 })
 
+export const gotTasks = tasks => ({
+  type: GOT_TASKS,
+  tasks,
+})
+
+export const deleteTask = (id) => (dispatch) => (
+  apiCall({ method: 'DELETE' })('task/'.concat(id))(t => dispatch(delTask(t.id)))
+)
+
 // built req for greater readability
-export const pushTask = (task, callback) => () => {
+export const pushTask = (task, listId) => (dispatch) => {
   const req = {
     headers: { 'Content-Type': 'application/json' },
     method: 'POST',
     body: JSON.stringify({ 'task': { 'description': task.description, 'listId': task.listId } }),
   }
-  return apiCall(req)('tasks')(callback)
+  return apiCall(req)('tasks')(t => {console.log(t); return(dispatch(addTask(t)))})
 }
 
-export const getTasks = callback => () => {
-  apiCall({ method: 'GET' })('tasks')(callback);
+export const getTasks = () => (dispatch) => {
+  apiCall({ method: 'GET' })('tasks')(t => dispatch(gotTasks(t)));
 }
 
-export const gotTasks = tasks => ({
-  type: GOT_TASKS,
-  tasks,
-})

@@ -12,15 +12,14 @@ const TaskList = ({ handlers, list, tasks }) => (
     <ListHead
       id={list.id}
       label={list.label}
-      onDelList={handlers.onDelList} />
+      onDelList={ handlers.onDelList} />
     <div className='flex-container'>
     <NewTask
-      handleChange={ handlers.taskChange }
       input={ list.input }
-      listID={ list.id }
-      onNewTask={handlers.onNewTask} />
+      listId={ list.id }
+      onNewTask={ handlers.onNewTask } />
     {_.map(tasks, (task =>
-      <Task key={task.id} onDelTask={handlers.onDelTask} task={task} />))}
+      <Task key={task.id} onDelTask={ handlers.onDelTask } task={task} />))}
     </div>
   </div>
 )
