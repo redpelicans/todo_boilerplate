@@ -1,10 +1,10 @@
 import React from 'react'
-import { BUSY, IDLE } from '../actions/api'
+import { IDLE } from '../actions/api'
 
 const Spinner = ({ api }) => {
   console.log(api);
   if (api.lists === IDLE && api.tasks === IDLE) {
-    return (<div></div>)
+    return (<div className='spinner'></div>)
   }
   return (
     <div className='spinner'>
