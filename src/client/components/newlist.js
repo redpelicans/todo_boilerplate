@@ -1,8 +1,10 @@
 import React from 'react'
+import Spinner from './spinner'
 
 class NewList extends React.Component {
   static propTypes = {
     handlers: React.PropTypes.object.isRequired,
+    status: React.PropTypes.object.isRequired,
   }
 
   state = { input: '' }
@@ -24,6 +26,7 @@ class NewList extends React.Component {
             onChange={ this.handleInput }
             placeholder='New List'
             value={ this.state.input } />
+          <Spinner api={ this.props.status } />
           <button type='submit'>+</button>
         </form>
         <button onClick={ this.props.handlers.fetchTasks }>Get Tasks !</button>

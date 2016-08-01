@@ -13,8 +13,8 @@ import App from './containers/app'
 
 const initialState = {
   api: {
-    lists: 'idle',
-    tasks: 'idle',
+    lists: 'IDLE',
+    tasks: 'IDLE',
   },
   lists: [
   ],

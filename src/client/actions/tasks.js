@@ -1,4 +1,4 @@
-import apiCall from './api'
+import { apiCall, working, TASKS } from './api'
 
 export const ADD_TASK = 'ADD_TASK';
 export const DEL_TASK = 'DEL_TASK';
@@ -18,32 +18,28 @@ export const delTask = (id) => ({
   id,
 })
 
-export const taskInput = (input, id) => ({
-  type: INPUT_TASK,
-  input,
-  id,
-})
-
 export const gotTasks = tasks => ({
   type: GOT_TASKS,
   tasks,
 })
 
-export const deleteTask = (id) => (dispatch) => (
-  apiCall({ method: 'DELETE' })('task/'.concat(id))(t => dispatch(delTask(t.id)))
-)
+export const deleteTask = (id) => (dispatch) => {
+  dispatch(working(TASKS))
+  return (apiCall({ method: 'DELETE' })('task/'.concat(id))(t => dispatch(delTask(t.id))))
+}
 
 // built req for greater readability
-export const pushTask = (task, listId) => (dispatch) => {
+export const pushTask = (task) => (dispatch) => {
+  dispatch(working(TASKS))
   const req = {
     headers: { 'Content-Type': 'application/json' },
     method: 'POST',
     body: JSON.stringify({ 'task': { 'description': task.description, 'listId': task.listId } }),
   }
-  return apiCall(req)('tasks')(t => {console.log(t); return(dispatch(addTask(t)))})
+  return apiCall(req)('tasks')(t => (dispatch(addTask(t))))
 }
 
 export const getTasks = () => (dispatch) => {
+  dispatch(working(TASKS))
   apiCall({ method: 'GET' })('tasks')(t => dispatch(gotTasks(t)));
 }
-
