@@ -2,7 +2,6 @@ import React from 'react'
 import { IDLE } from '../actions/api'
 
 const Spinner = ({ api }) => {
-  console.log(api);
   if (api.lists === IDLE && api.tasks === IDLE) {
     return (<div className='spinner'></div>)
   }

@@ -5,13 +5,10 @@ export const DEL_TASK = 'DEL_TASK';
 export const INPUT_TASK = 'INPUT_TASK';
 export const GOT_TASKS = 'GOT_TASKS';
 
-export const addTask = (task) => {
-  console.log(task.id);
-  return ({
-    type: ADD_TASK,
-    task,
-  })
-}
+export const addTask = (task) => ({
+  type: ADD_TASK,
+  task,
+})
 
 export const delTask = (id) => ({
   type: DEL_TASK,
@@ -28,7 +25,6 @@ export const deleteTask = (id) => (dispatch) => {
   return (apiCall({ method: 'DELETE' })('task/'.concat(id))(t => dispatch(delTask(t.id))))
 }
 
-// built req for greater readability
 export const pushTask = (task) => (dispatch) => {
   dispatch(working(TASKS))
   const req = {

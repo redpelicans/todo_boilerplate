@@ -12,6 +12,7 @@ const Todo = ({ lists, tasks, handlers }) => (
       handlers={ handlers }
       key={ taskList.id }
       list={ taskList }
+      // getTasksByListId selector
       tasks={ _.filter(tasks, t => (t.listId === taskList.id)) } />))}
   </div>
 )

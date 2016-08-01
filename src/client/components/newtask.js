@@ -15,7 +15,6 @@ class NewTask extends React.Component {
     e.preventDefault();
     if (!this.state.input) { return }
     this.setState({ input: '' });
-    console.log(this.props.listId);
     this.props.onNewTask({ description: this.state.input, listId: this.props.listId });
   }
   render() {
