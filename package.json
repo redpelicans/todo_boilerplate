@@ -6,7 +6,7 @@
   "scripts": {
     "eslint": "eslint src",
     "client-dist": "NODE_ENV=production webpack --progress --colors",
-    "client-dev": "webpack-dev-server --colors --hot --inline --host 0.0.0.0 --port 8080",
+    "client-dev": "webpack-dev-server --colors --hot --inline --host 127.0.0.1 --port 8877",
     "srv-dev": "DEBUG=todo:* babel-watch -w src src/server/main.js",
     "srv-dist": "DEBUG=todo:* babel src --out-dir dist",
     "test": "mocha --require babel-core/register --reporter spec",
@@ -18,7 +18,9 @@
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
     "redux-logger": "^2.6.1",
-    "redux-thunk": "^2.0.1"
+    "redux-thunk": "^2.1.0",
+    "reselect": "^2.5.3",
+    "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.7.7",
@@ -33,11 +35,14 @@
     "chai": "^3.5.0",
     "chai-as-promised": "^5.3.0",
     "chai-equal-jsx": "^1.0.9",
+    "css-loader": "^0.23.1",
     "eslint": "^2.13.1",
     "eslint-plugin-babel": "^3.3.0",
     "eslint-plugin-react": "^5.2.2",
-    "mocha": "^2.4.5",
+    "lodash": "^4.13.1",
+    "mocha": "^2.5.3",
     "nyc": "^6.4.4",
+    "style-loader": "^0.13.1",
     "webpack": "^1.13.0",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-dev-server": "^1.14.1",

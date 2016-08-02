@@ -1,6 +1,35 @@
 import React from 'react'
 import ReactDom from 'react-dom'
+import createLogger from 'redux-logger'
+import thunk from 'redux-thunk';
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware, combineReducers } from 'redux'
 
-const App = () => (<h1> A fantastic Todo list will be here soon ... </h1>)
+import api from './reducers/apiReducer'
+import lists from './reducers/listReducer'
+import tasks from './reducers/taskReducer'
 
-ReactDom.render(<App/>, document.getElementById('todo'))
+import App from './containers/app'
+
+const initialState = {
+  api: {
+    lists: 'IDLE',
+    tasks: 'IDLE',
+  },
+  lists: [
+  ],
+  tasks: [
+  ],
+};
+
+const todoStore = createStore(
+  combineReducers({ api, lists, tasks }),
+  initialState,
+  applyMiddleware(createLogger(), thunk)
+);
+
+ReactDom.render(
+  <Provider store={todoStore}>
+    <App />
+  </Provider>, document.getElementById('react-wrapper')
+);
