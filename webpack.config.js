@@ -1,6 +1,8 @@
 var path = require('path');
 
 module.exports = {
+  devtool: 'eval-source-map',
+
   entry: './src/client/index.js',
 
   output: {
@@ -8,14 +10,17 @@ module.exports = {
     filename: 'bundle.js'
   },
 
+
   module: {
-    loaders: [{
+    loaders: [
+    {
       test: /\.js$/,
       exclude: /node_modules/,
       loader: 'babel',
       query:{
         presets: ["es2015", "react", "stage-0"]
       }
-    }]
+    },
+    ]
   }
 };

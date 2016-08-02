@@ -44,7 +44,7 @@ $ npm run client-dev
 > todoboilerplate@0.0.1 client-dev /home/eric/JS/todo_boilerplate
 > webpack-dev-server --colors --hot --inline --host 0.0.0.0 --port 8080
 
-http://0.0.0.0:8080/
+http://127.0.0.1:8877/
 webpack result is served from /
 content is served from /home/eric/JS/todo_boilerplate
 …
@@ -52,7 +52,7 @@ webpack: bundle is now VALID.
 ```
 
 
-Point your browser to `http://0.0.0.0:8080/` it will load client side application. You should see `Soon, will be here a fantastic todo ...`, open your console and check you have :
+Point your browser to `http://127.0.0.1:8877/` it will load client side application. You should see `Soon, will be here a fantastic todo ...`, open your console and check you have :
 
 ```
 [HMR] Waiting for update signal from WDS...

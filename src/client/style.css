@@ -1,0 +1,100 @@
+/* couleurs redPels : Red CD4436 | white DCDDD8 | anthracite 424242 */
+
+body {
+	background-color: #DCDDD8;
+    color: #424242;
+    font-family: sans-serif;
+}
+
+button {
+    float: right;
+}
+
+h1 {
+    text-align: center;
+}
+
+li {
+    list-style: none;
+}
+
+textarea {
+    margin-top: 10px;
+    height: 35px;
+    width: 80%;
+}
+
+.todo-list {
+    margin-top: 30px;
+    background-color: #424242;
+    color: #DCDDD8;
+}
+
+.task {
+    background-color: #CD4436;
+    color: #DCDDD8;
+}
+
+.task_input {
+    width: 80%;
+}
+
+.padded {
+    padding: 5px 5px 5px 5px;
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-flow: row wrap;
+    justify-content: space-between;
+
+    height: 100%;
+
+    margin: auto;
+}
+
+.flex-item {
+    flex: 1 1 100%;
+
+    min-height: 50px;
+    margin-bottom: 10px;
+}
+
+@media all and (min-width: 550px) {
+    h1 {
+        text-align: left;
+    }
+    .flex-item {
+        max-width: 48%;
+    }
+}
+
+@media all and (min-width: 850px) {
+    .flex-item {
+        max-width: 30%;
+    }
+}
+
+.spinner {
+  width: 50px;
+  height: 10px;
+  text-align: center;
+  font-size: 10px;
+  display: inline-block;
+}
+
+.spinner > div {
+  background-color: #DCDDD8;
+  height: 100%;
+  width: 6px;
+  display: inline-block;
+  
+  -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+  animation: sk-stretchdelay 1.2s infinite ease-in-out;
+}
+
+.spinner .rect2 {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s;
+}

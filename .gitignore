@@ -3,3 +3,6 @@ coverage
 dist
 *.lock
 *.tmp
+*.log
+.idea
+npm-debug.log.*
