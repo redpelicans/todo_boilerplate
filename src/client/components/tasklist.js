@@ -5,12 +5,13 @@ import InputFormTask from '../components/inputformtask';
 import _ from 'lodash';
 
 const TaskList = ({ idList, label, tasks, ...actions }) => {
-  const data = _.map(_.filter(tasks, (task) => (task.listId === idList)), (task, id) =>
-    <Task { ...actions }
+  const data = _.map(_.filter(tasks, (task) => (task.listId === idList)), (task, id) => {
+    return <Task { ...actions }
       idTask={ task.id }
       key={ Number(id) }
       task={ task.description }
-    />);
+    />
+  });
   return (
     <div className='tasklist'>
         <ListTitle { ...actions } idList={ idList } label={ label } />
@@ -24,7 +25,7 @@ const TaskList = ({ idList, label, tasks, ...actions }) => {
 };
 
 TaskList.propTypes = {
-  idList: React.PropTypes.number,
+  idList: React.PropTypes.string,
   label: React.PropTypes.string,
   tasks: React.PropTypes.array,
 };

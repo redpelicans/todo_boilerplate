@@ -20,7 +20,7 @@ export const addTask = (idList, task) => {
     };
     dispatch(addingTask());
     options.body = JSON.stringify({ task: { description: task, listId: idList } });
-    const url = 'http://rp4.redpelicans.com:13004/api/todo/tasks';
+    const url = 'http://localhost:3000/todo/tasks';
     requestJSON(url, options)
     .then(todo => dispatch(taskAdded(todo)));
   };
@@ -39,7 +39,7 @@ export const removeTask = (idTask) => {
       },
     };
     dispatch(removingTask());
-    const url = `http://rp4.redpelicans.com:13004/api/todo/task/${idTask}`;
+    const url = `http://localhost:3000/todo/tasks/${idTask}`;
     requestJSON(url, options)
     .then(dispatch(removedTask(idTask)));
   };

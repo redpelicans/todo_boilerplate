@@ -7,7 +7,6 @@ let idTaskGlobal = 11;
 let idListGlobal = 3;
 
 class App extends React.Component {
-
   createList = (name) => {
     const currentLists = this.state.lists;
     const id = idListGlobal + 1;

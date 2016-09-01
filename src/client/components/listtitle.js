@@ -5,12 +5,12 @@ const ListTitle = ({ label, idList, ...actions }) =>
   <div className='listtitle'>
     <h2>
     { label }
-    <RemoveList { ...actions } idList={ idList } />
+      <RemoveList { ...actions } idList={ idList } />
     </h2>
   </div>;
 
 ListTitle.propTypes = {
-  idList: React.PropTypes.number.isRequired,
+  idList: React.PropTypes.string.isRequired,
   label: React.PropTypes.string.isRequired,
 };
 

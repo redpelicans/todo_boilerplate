@@ -9,7 +9,7 @@ const	RemoveList = ({ idList, ...actions }) => {
 };
 
 RemoveList.propTypes = {
-  idList: React.PropTypes.number.isRequired,
+  idList: React.PropTypes.string.isRequired,
 };
 
 export default RemoveList;

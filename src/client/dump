@@ -162,3 +162,6 @@ rendre les inputs en components;
 premiere partie promise.all;
 
 deuxieme partie plus promise.all (pour pouvoir 1 spinner par roulette);
+
+component did mount a les props;
+component will mount les a pas encore;

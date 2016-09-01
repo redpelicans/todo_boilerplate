@@ -1,12 +1,14 @@
 import { requestJSON } from '../helpers/utils';
 import { removeTask } from './task';
 import _ from 'lodash';
+
 export const ADD_LIST = 'ADD_LIST';
 export const REMOVE_LIST = 'REMOVE_LIST';
 export const REMOVED_LIST = 'REMOVED_LIST';
 export const LIST_ADDED = 'LIST_ADDED';
 export const ADDING_LIST = 'ADDING_LIST';
 export const REMOVING_LIST = 'REMOVING_LIST';
+
 
 export const listAdded = (list) => ({ type: LIST_ADDED, list });
 
@@ -24,13 +26,11 @@ export const removeList = (idList) => {
         'Content-Type': 'application/json',
       },
     };
+    console.log('idList removeList : ', idList);
     dispatch(removingList());
-    const url = `http://rp4.redpelicans.com:13004/api/todo/list/${idList}`;
+    const url = `http://localhost:3000/todo/lists/${idList}`;
     requestJSON(url, options)
     .then(dispatch(removedList(idList)));
-    const { tasks } = getState();
-    const linkedTasks = _.find(tasks, ['listId', idList]);
-    _.map(linkedTasks, (task) => dispatch(removeTask(task.id)));
   };
 };
 
@@ -44,7 +44,7 @@ export const addList = (input) => {
     };
     dispatch(addingList());
     options.body = JSON.stringify({ todo: { label: input } });
-    const url = 'http://rp4.redpelicans.com:13004/api/todo/lists';
+    const url = 'http://localhost:3000/todo/lists';
     requestJSON(url, options)
     .then(todo => dispatch(listAdded(todo)));
   };

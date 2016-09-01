@@ -41,6 +41,6 @@ export default class InputFormTask extends React.Component {
 }
 
 InputFormTask.propTypes = {
-  idList: React.PropTypes.number.isRequired,
+  idList: React.PropTypes.string.isRequired,
   onSubmitAddTask: React.PropTypes.func.isRequired,
 };

@@ -7,7 +7,7 @@ const Task = ({ idTask, task, ...actions }) =>
   </li>;
 
 Task.propTypes = {
-  idTask: React.PropTypes.number.isRequired,
+  idTask: React.PropTypes.string.isRequired,
   task: React.PropTypes.string,
 };
 

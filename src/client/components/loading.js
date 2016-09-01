@@ -4,10 +4,10 @@ const Loading = ({ load }) => {
   let spinner = (<div></div>);
   if (load === 1) {
     spinner = (
-      <div>JE SUIS UN SPINNER</div>
+      <span className="fa fa-refresh fa-spin fa-3x "></span>
     );
   }
-  return <div className='loadingzone'> {spinner} </div>;
+  return <div className='load'> {spinner} </div>;
 };
 
 Loading.propTypes = {

@@ -9,7 +9,7 @@ const	RemoveTask = ({ idTask, ...actions }) => {
 };
 
 RemoveTask.propTypes = {
-  idTask: React.PropTypes.number.isRequired,
+  idTask: React.PropTypes.string.isRequired,
 };
 
 export default RemoveTask;

@@ -11,8 +11,16 @@
  .create-task {
      padding: 1em;
  }
+ .listtittle {
+     display: flex;
+     flex-direction: row;
+     margin: 1em;
+     padding: 1em;
+     justify-content: space-between;
+ }
  .tasklists {
      display: flex;
+     flex-wrap: wrap;
      background-color: yellow;
      border: 1px;
      border-style: solid;
@@ -28,8 +36,11 @@
      border-color: black;
  }
  .task {
+     display: flex;
+     flex-direction: row;
      margin: 1em;
      padding: 1em;
+     justify-content: space-between;
  }
  .removeTask {
  }
