@@ -1,6 +1,7 @@
-import React from 'react'
-import ReactDom from 'react-dom'
+import React from 'react';
+import { render } from 'react-dom';
+import App from './components/app';
 
-const App = () => (<h1> A fantastic Todo list will be here soon ... </h1>)
+console.log('mounting react app ...');
+render(<App />, document.getElementById('__TODO__'));
 
-ReactDom.render(<App/>, document.getElementById('todo'))
