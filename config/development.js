@@ -1,5 +1,6 @@
 module.exports = {
-  devtool: 'eval-source-map',
+  // devtool: 'eval-source-map',
+  devtool: 'cheap-module-eval-source-map',
   devServer: {
     contentBase: './public',
     historyApiFallback: true,
