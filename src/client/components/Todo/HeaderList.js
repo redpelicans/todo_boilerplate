@@ -13,12 +13,16 @@ const Wrapper = styled.section`
   border: 1px solid black;
 `;
 
-const HeaderTask = ({name}) => (
+const HeaderTask = ({ name }) => (
   <Wrapper>
-    <Title>{name}</Title>
+    <Title>{ name }</Title>
     <button>+</button>
     <button>-</button>
   </Wrapper>
 );
+
+HeaderTask.propTypes = {
+  name: React.PropTypes.string,
+};
 
 export default HeaderTask;

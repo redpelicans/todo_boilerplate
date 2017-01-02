@@ -14,14 +14,17 @@ const Wrapper = styled.div`
   display: block;
 `;
 
-
-const TodoTask = ({name}) => (
+const TodoTask = ({ name }) => (
   <Wrapper>
-    <HeaderTask name={name}/>
+    <HeaderTask name={name} />
     <TaskElem />
     <TaskElem />
     <TaskElem />
   </Wrapper>
 );
+
+TodoTask.propTypes = {
+  name: React.PropTypes.string,
+};
 
 export default TodoTask;

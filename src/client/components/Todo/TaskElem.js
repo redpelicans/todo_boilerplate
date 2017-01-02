@@ -22,8 +22,8 @@ const TaskElem = () => (
     <input type="checkbox" />
     <Task>Task ...</Task>
     <Settings>
-    <button>Edit</button>
-    <button>Del</button>
+      <button>Edit</button>
+      <button>Del</button>
     </Settings>
   </Wrapper>
 );

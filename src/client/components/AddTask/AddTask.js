@@ -17,10 +17,10 @@ const TextInput = styled.input`
   height: 25px;
 `;
 
-const AddTask = (addNewTask) => (
+const AddTask = () => (
   <Wrapper>
     <TextInput placeholder="Add a new Todo ..." />
-    <button OnClick={addNewTask} >+</button>
+    <button>+</button>
   </Wrapper>
 );
 
