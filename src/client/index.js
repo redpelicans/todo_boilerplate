@@ -4,4 +4,3 @@ import App from './components/app';
 
 console.log('mounting react app ...');
 render(<App />, document.getElementById('__TODO__'));
-
