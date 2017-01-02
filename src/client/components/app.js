@@ -1,21 +1,15 @@
 import React from 'react';
-import styled from 'styled-components';
-
-const Title = styled.h1`
-  font-size: 1.5em;
-  text-align: center;
-  color: palevioletred;
-`;
-
-const Wrapper = styled.section`
-  padding: 4em;
-  background: papayawhip;
-`;
+import HeaderTodo from './Header/header';
+import AddTask from './AddTask/AddTask';
+import TodoTask from './Todo/TodoComp'
 
 const App = () => (
-  <Wrapper>
-    <Title>Hello World, this is my first react app!</Title>
-  </Wrapper>
+  <div>
+    <HeaderTodo />
+    <AddTask />
+    <TodoTask name="todo1" />
+    <TodoTask name="todo2" />
+  </div>
 );
 
 export default App;
