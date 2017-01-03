@@ -10,50 +10,11 @@ export const Title = styled.h1`
   color: palevioletred;
 `;
 
-const todos = [
-  {
-    name: 'todo_1',
-    tasks: [
-      {
-        name: 'task_1',
-        isChecked: true,
-      },
-      {
-        name: 'task_2',
-        isChecked: false,
-      },
-      {
-        name: 'task_3',
-        isChecked: false,
-      },
-    ],
-  },
-  {
-    name: 'todo_2',
-    tasks: [
-      {
-        name: 'task_1',
-        isChecked: true,
-      },
-      {
-        name: 'task_2',
-        isChecked: false,
-      },
-      {
-        name: 'task_3',
-        isChecked: true,
-      },
-    ],
-  },
-];
-
-const addTodo = () => alert('new todo');
-
-const App = () => (
+const App = ({ todos, tasks, actions }) => (
   <div className="main-container">
     <Header title="Todo APP." />
-    <AddTodo addTodo={addTodo} />
-    <Todos todos={todos} />
+    <AddTodo addTodo={actions.addTodo} />
+    <Todos todos={todos} tasks={tasks} actions={actions} />
   </div>
 );
 
