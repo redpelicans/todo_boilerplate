@@ -55,7 +55,12 @@
   },
   "babel": {
     "presets": [
-      [ "latest", { "modules": false } ],
+      [
+        "latest",
+        {
+          "modules": false
+        }
+      ],
       "stage-0",
       "react"
     ]
