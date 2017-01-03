@@ -1,14 +1,15 @@
 import React, { PropTypes } from 'react';
 
-const AddTodo = ({ addTodo }) =>
+const AddTodo = ({ dispatch, onAdd }) =>
   <div className="add-todo">
     <input type="text" placeholder="titre" />
-    <button onClick={addTodo}>+</button>
+    <button onClick={() => dispatch(onAdd('new todo'))}>+</button>
   </div>
 ;
 
 AddTodo.propTypes = {
-  addTodo: PropTypes.func,
+  dispatch: PropTypes.func,
+  onAdd: PropTypes.func,
 };
 
 export default AddTodo;

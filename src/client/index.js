@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import App from './components/App/index';
 
-const store = {
+const mockUp = {
   todos: [
     {
       id: 1,
@@ -51,12 +51,45 @@ const store = {
   ],
 };
 
+const store = {
+  state: {
+    todos: mockUp.todos,
+    tasks: mockUp.tasks,
+  },
+  listeners: [],
+  listen(cb) {
+    this.listeners.push(cb);
+  },
+  update() {
+    this.listeners.forEach(cb => cb());
+  },
+  dispatch(action) {
+    this.state = action(this.state);
+    this.update();
+  },
+};
 const actions = {
-  addTodo: () => { console.log('add todo'); }, // eslint-disable-line no-console
-  delTodo: () => { console.log('del todo'); }, // eslint-disable-line no-console
-  editTask: () => { console.log('edit task'); }, // eslint-disable-line no-console
-  delTask: () => { console.log('del task'); }, // eslint-disable-line no-console
+  addTodo(name) {
+    console.log('add todo ', name); // eslint-disable-line no-console
+    return state => ({
+      todos: state.todos.concat({ title: name, id: state.todos.length + 1 }),
+      tasks: state.tasks,
+    });
+  },
+  delTodo(id) {
+    console.log('del todo ', id); // eslint-disable-line no-console
+    return state => ({
+      todos: state.todos.filter(todo => todo.id !== id),
+      tasks: state.tasks,
+    });
+  },
+  editTask() {
+    console.log('edit task'); // eslint-disable-line no-console
+  },
+  delTask() {
+    console.log('del task'); // eslint-disable-line no-console
+  },
 };
 
 console.log('mounting react app ...');  // eslint-disable-line no-console
-render(<App todos={store.todos} tasks={store.tasks} actions={actions} />, document.getElementById('__TODO__'));
+render(<App store={store} actions={actions} />, document.getElementById('__TODO__'));
