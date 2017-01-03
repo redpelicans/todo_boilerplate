@@ -35,24 +35,16 @@ const TodoSubmit = styled.input`
   }
 `;
 
-const CreateTodoForm = ({ onSubmit, onChange, inputValue }) =>
-  <FormContainer onSubmit={onSubmit}>
+const CreateTodoForm = () =>
+  <FormContainer>
     <TodoInput
       placeholder="Enter your todo here"
       type="text"
       name="todo"
-      value={inputValue}
-      onChange={onChange}
       autoComplete="off"
     />
     <TodoSubmit type="submit" value="Save your todo" />
   </FormContainer>
 ;
-
-CreateTodoForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
-  inputValue: PropTypes.string.isRequired,
-};
 
 export default CreateTodoForm;

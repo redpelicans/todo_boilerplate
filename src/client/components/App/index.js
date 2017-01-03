@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import Header from '../Header';
-import Todo from '../Todo';
+import TodoContainer from '../TodoContainer';
 
 const MainContainer = styled.div`
   display: flex;
@@ -9,11 +9,24 @@ const MainContainer = styled.div`
   align-items: center;
 `;
 
-const App = () =>
-  <MainContainer>
-    <Header />
-    <Todo />
-  </MainContainer>
-;
+export default class App extends React.Component {
+  componentDidMount() {
+    const { store } = this.props;
+    store.listen(() => this.forceUpdate());
+  }
 
-export default App;
+  render() {
+    const { store, actions } = this.props;
+    return (
+      <MainContainer>
+        <Header />
+        <TodoContainer store={store} actions={actions} />
+      </MainContainer>
+    );
+  }
+}
+
+App.propTypes = {
+  store: PropTypes.object.isRequired,
+  actions: PropTypes.object.isRequired,
+};
