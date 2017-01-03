@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Todo = () =>
+const Todo = ({ taskName }) =>
   <div>
     <input type="checkbox" />
-    Todo to do..
+    { taskName }
     <button>edit</button>
     <button>del</button>
   </div>

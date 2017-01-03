@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import Todo from './todo';
-import AddTodo from './add_todo';
+import AddTask from './add_task';
 
 const Area = styled.section`
   background: white;
@@ -21,12 +21,11 @@ const TitleTodo = ({ name }) =>
   </WrapTitle>
   ;
 
-const TodoArea = ({ name }) =>
+const TodoArea = ({ name, taskName }) =>
   <Area>
     <TitleTodo name={name} />
-    <AddTodo />
-    <Todo />
-    <Todo />
+    <AddTask />
+    <Todo taskName={taskName} />
   </Area>
   ;
 

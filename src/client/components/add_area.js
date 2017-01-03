@@ -5,10 +5,10 @@ const Wrapper = styled.section`
   margin-bottom: 10px;
 `;
 
-const AddArea = () =>
+const AddArea = ({ props }) =>
   <Wrapper>
     <input placeholder="new todoArea" />
-    <button>Add</button>
+    <button onClick={props.store.dispatch(props.actions.addArea())}>Add</button>
   </Wrapper>
   ;
 
