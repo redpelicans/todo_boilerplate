@@ -1,20 +1,18 @@
 import React, { PropTypes } from 'react';
 
-const edit = () => {};
-const del = () => {};
-
-const Task = ({ name, isChecked }) =>
+const Task = ({ title, isChecked, actions }) =>
   <div className="todo-task">
     <input type="checkbox" onChange={() => {}} checked={isChecked} />
-    <p style={isChecked ? { textDecoration: 'line-through' } : {}}>{name}</p>
-    <button onClick={edit}>edit</button>
-    <button onClick={del}>del</button>
+    <p style={isChecked ? { textDecoration: 'line-through' } : {}}>{title}</p>
+    <button onClick={actions.editTask}>edit</button>
+    <button onClick={actions.delTask}>del</button>
   </div>
 ;
 
 Task.propTypes = {
-  name: PropTypes.string.isRequired,
-  isChecked: PropTypes.bool.isRequired,
+  title: PropTypes.string,
+  isChecked: PropTypes.bool,
+  actions: PropTypes.object,
 };
 
 export default Task;
