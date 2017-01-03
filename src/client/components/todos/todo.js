@@ -2,13 +2,13 @@ import React, { PropTypes } from 'react';
 import Task from './task';
 import getTasksByTodoId from '../../model';
 
-const Todo = ({ todo, tasks, actions }) =>
+const Todo = ({ todo, tasks, dispatch, actions }) =>
   <div className="todo">
     <header>
       <h1>
         {todo.title}
       </h1>
-      <button onClick={actions.delTodo}>
+      <button onClick={() => dispatch(actions.delTodo(todo.id))}>
         del
       </button>
     </header>
@@ -23,6 +23,7 @@ const Todo = ({ todo, tasks, actions }) =>
 Todo.propTypes = {
   todo: PropTypes.object,
   tasks: PropTypes.array,
+  dispatch: PropTypes.func,
   actions: PropTypes.object,
 };
 
