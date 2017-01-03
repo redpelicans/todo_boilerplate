@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import styled from 'styled-components';
+import Header from '../Header';
+import TodoContainer from '../TodoContainer';
 
 export const Title = styled.h1`
   font-size: 1.5em;
@@ -7,15 +9,24 @@ export const Title = styled.h1`
   color: palevioletred;
 `;
 
-const Wrapper = styled.section`
-  padding: 4em;
-  background: papayawhip;
-`;
+export default class App extends React.Component {
+  componentDidMount() {
+    const { store } = this.props;
+    store.listen(() => this.forceUpdate());
+  }
 
-const App = () => (
-  <Wrapper>
-    <Title>Hello World, this is my first react app!</Title>
-  </Wrapper>
-);
+  render() {
+    const { store, actions } = this.props;
+    return (
+      <MainContainer>
+        <Header />
+        <TodoContainer store={store} actions={actions} />
+      </MainContainer>
+    );
+  }
+}
 
-export default App;
+App.propTypes = {
+  store: PropTypes.object.isRequired,
+  actions: PropTypes.object.isRequired,
+};

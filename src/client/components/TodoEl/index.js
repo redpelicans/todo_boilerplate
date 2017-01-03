@@ -2,49 +2,81 @@ import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import colors from '../../colors.json';
 
-const TodoLi = styled.li`
+const TodoBlock = styled.li`
   list-style: none;
-  width: 90%;
-  height: 3em;
   font-family: Roboto, arial, verdana;
   background-color: white;
-  margin-top: 10px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  margin: 2em;
+  border-radius: 2px;
 `;
 
 const RemoveButton = styled.button`
   border: none;
-  background-color: ${colors.blueGrey};
   width: 4em;
   height: 100%;
   cursor: pointer;
   transition: all .2s;
-  color: white;
   font-size: 20px;
-
+  background-color: white;
   &:hover {
-    background-color: white;
-    color: ${colors.blueGrey};
+    background-color: ${colors.blueGrey};
+    color: white;
   }
 `;
 
-const TodoText = styled.span`
-  margin-left: 1em;
+const TaskContainer = styled.li`
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all .2s;
 `;
 
-const todoEl = ({ children, onClick }) =>
-  <TodoLi>
-    <TodoText>{children}</TodoText>
-    <RemoveButton onClick={onClick}>&#x2716;</RemoveButton>
-  </TodoLi>
+const TasksList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin-top: 1em;
+`;
+
+const TodoTitle = styled.span`
+  text-align: center;
+  margin: 1em 0;
+`;
+
+const TaskTitle = styled.span`
+  margin: 0 .5em;
+`;
+
+const drawTasks = (tasks, dispatch, actions, todoID) => tasks.map(task =>
+  <TaskContainer key={task.id}>
+    <TaskTitle>{task.title}</TaskTitle>
+    <RemoveButton
+      onClick={() => dispatch(
+        actions.todo.removeTask({ taskID: task.id, todoID })
+      )}
+    >
+      &#10006;
+    </RemoveButton>
+  </TaskContainer>
+);
+
+const TodoEl = ({ children, tasks, dispatch, actions, todoID }) =>
+  <TodoBlock>
+    <TodoTitle>{children}</TodoTitle>
+    <TasksList>{drawTasks(tasks, dispatch, actions, todoID)}</TasksList>
+  </TodoBlock>
 ;
 
-todoEl.propTypes = {
+TodoEl.propTypes = {
   children: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
+  tasks: PropTypes.array.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  actions: PropTypes.object.isRequired,
+  todoID: PropTypes.number.isRequired,
 };
 
-export default todoEl;
+export default TodoEl;
