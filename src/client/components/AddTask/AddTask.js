@@ -13,15 +13,20 @@ const Wrapper = styled.div`
 
 const TextInput = styled.input`
   margin: 0px;
-  width: 88%;
+  width: 85%;
   height: 25px;
 `;
 
-const AddTask = () => (
+const AddTask = ({onAdd}) => (
   <Wrapper>
     <TextInput placeholder="Add a new Todo ..." />
-    <button>+</button>
+    <button onClick={onAdd}>+</button>
   </Wrapper>
 );
+
+
+AddTask.propTypes = {
+  onAdd: React.PropTypes.func,
+};
 
 export default AddTask;

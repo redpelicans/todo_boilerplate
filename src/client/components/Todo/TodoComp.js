@@ -14,9 +14,9 @@ const Wrapper = styled.div`
   display: block;
 `;
 
-const TodoTask = ({ name }) => (
+const TodoTask = ({ todos, dispatch, onDelete }) => (
   <Wrapper>
-    <HeaderTask name={name} />
+    <HeaderTask name="tt" />
     <TaskElem />
     <TaskElem />
     <TaskElem />
@@ -24,7 +24,21 @@ const TodoTask = ({ name }) => (
 );
 
 TodoTask.propTypes = {
-  name: React.PropTypes.string,
+  todos: React.PropTypes.array,
+  dispatch: React.PropTypes.func,
+  onDelete: React.PropTypes.func,
 };
 
 export default TodoTask;
+
+
+// MyComponent.propTypes = {
+   // You can declare that a prop is a specific JS primitive. By default, these
+   // are all optional.
+//   optionalArray: React.PropTypes.array,
+//   optionalBool: React.PropTypes.bool,
+//   optionalFunc: React.PropTypes.func,
+//   optionalNumber: React.PropTypes.number,
+//   optionalObject: React.PropTypes.object,
+//   optionalString: React.PropTypes.string,
+//   optionalSymbol: React.PropTypes.symbol,
