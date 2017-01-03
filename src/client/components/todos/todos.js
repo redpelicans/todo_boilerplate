@@ -3,7 +3,7 @@ import Todo from './todo';
 
 const Todos = ({ todos, tasks, actions }) =>
   <div className="todos-container">
-    {todos.map(todo => <Todo title={todo.title} tasks={tasks} actions={actions} key={todo.id} />)}
+    {todos.map(todo => <Todo todo={todo} tasks={tasks} actions={actions} key={todo.id} />)}
   </div>
 ;
 
