@@ -27,7 +27,7 @@ const Task = ({ task, dispatch, onDel, onEdit }) =>
         Object.assign({}, task, { title: `${task.title} edited` })
       ))}
     >editer</button>
-  <button onClick={() => dispatch(onDel(task.id))}>supprimer</button>
+    <button onClick={() => dispatch(onDel(task.id))}>supprimer</button>
   </Wrapper>;
 
 Task.propTypes = {

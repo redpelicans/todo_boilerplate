@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import Task from './task';
 import AddTask from './add_task';
-import filterTasksByTodoId from '../../model';
+import { filterTasksByTodoId } from '../../model';
 
 const Wrapper = styled.div`
   border: 1px solid #ccc;

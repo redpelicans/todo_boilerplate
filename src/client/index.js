@@ -55,6 +55,8 @@ const store = {
   state: {
     todos: mockUp.todos,
     tasks: mockUp.tasks,
+    showCompletedTodos: true,
+    sortByAsc: true,
   },
   listeners: [],
   listen(cb) {
@@ -65,6 +67,7 @@ const store = {
   },
   dispatch(action) {
     this.state = action(this.state);
+    console.log('state : ', this.state);
     this.update();
   },
 };
@@ -73,13 +76,17 @@ const actions = {
   addTodo(name) {
     console.log('add todo ', name); // eslint-disable-line no-console
     return state => ({
-      todos: state.todos.concat({ title: name, id: state.todos[state.todos.length - 1].id + 1 }),
-      tasks: state.tasks,
+      ...state,
+      todos: state.todos.concat({
+        title: name,
+        id: state.todos[state.todos.length - 1].id + 1,
+      }),
     });
   },
   delTodo(id) {
     console.log('del todo ', id); // eslint-disable-line no-console
     return state => ({
+      ...state,
       todos: state.todos.filter(todo => todo.id !== id),
       tasks: state.tasks.filter(task => task.todoId !== id),
     });
@@ -87,22 +94,33 @@ const actions = {
   addTask(task) {
     console.log('add task ', task); // eslint-disable-line no-console
     return state => ({
-      todos: state.todos,
-      tasks: state.tasks.concat(Object.assign({}, task, { id: state.tasks[state.tasks.length - 1].id + 1, isChecked: false })),
+      ...state,
+      tasks: state.tasks.concat({
+        ...task,
+        id: state.tasks[state.tasks.length - 1].id + 1,
+        isChecked: false,
+      }),
     });
   },
   editTask(editedTask) {
     console.log('edit task ', editedTask.id); // eslint-disable-line no-console
     return state => ({
-      todos: state.todos,
+      ...state,
       tasks: state.tasks.map(task => ((task.id === editedTask.id) ? editedTask : task)),
     });
   },
   delTask(id) {
     console.log('del task ', id); // eslint-disable-line no-console
     return state => ({
-      todos: state.todos,
+      ...state,
       tasks: state.tasks.filter(task => task.id !== id),
+    });
+  },
+  switchMode() {
+    console.log('switch mode'); // eslint-disable-line no-console
+    return state => ({
+      ...state,
+      showCompletedTodos: !state.showCompletedTodos,
     });
   },
 };

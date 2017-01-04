@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
-import Title from './title';
 import styled from 'styled-components';
+import Title from './title';
 
 const Wrapper = styled.header`
   text-align: center;
