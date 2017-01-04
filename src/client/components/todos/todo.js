@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import Task from './task';
-import getTasksByTodoId from '../../model';
+import AddTask from './add_task'
+import filterTasksByTodoId from '../../model';
 
 const Todo = ({ todo, tasks, dispatch, actions }) =>
   <div className="todo">
@@ -12,10 +13,21 @@ const Todo = ({ todo, tasks, dispatch, actions }) =>
         del
       </button>
     </header>
+    <AddTask dispatch={dispatch} onAdd={actions.addTask} todoId={todo.id} />
     <div className="todo-body">
-      {getTasksByTodoId(tasks, todo.id).map(task =>
-        <Task title={task.title} isChecked={task.isChecked} actions={actions} key={task.id} />
-      )}
+      <ul>
+        {filterTasksByTodoId(tasks, todo.id).map(task =>
+          <li key={task.id}>
+            <Task
+              task={task}
+              dispatch={dispatch}
+              onDel={actions.delTask}
+              onEdit={actions.editTask}
+              key={task.id}
+            />
+          </li>
+        )}
+      </ul>
     </div>
   </div>
 ;
