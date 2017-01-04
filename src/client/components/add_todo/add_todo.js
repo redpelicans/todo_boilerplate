@@ -1,4 +1,9 @@
 import React, { PropTypes } from 'react';
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+  text-align: center;
+`;
 
 class AddTodo extends React.Component {
 
@@ -18,10 +23,10 @@ class AddTodo extends React.Component {
   render() {
     const { input } = this.state;
     return (
-      <div className="add-todo">
+      <Wrapper>
         <input type="text" placeholder="titre" value={input} onChange={this.handleInputChange} />
         <button onClick={this.handleButtonClick}>+</button>
-      </div>
+      </Wrapper>
     );
   }
 }

@@ -1,10 +1,15 @@
 import React, { PropTypes } from 'react';
 import Title from './title';
+import styled from 'styled-components';
+
+const Wrapper = styled.header`
+  text-align: center;
+`;
 
 const Header = ({ title }) =>
-  <header className="brand-header">
+  <Wrapper>
     <Title name={title} />
-  </header>;
+  </Wrapper>;
 
 Header.propTypes = {
   title: PropTypes.string.isRequired,
