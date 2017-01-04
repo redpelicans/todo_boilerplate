@@ -16,6 +16,13 @@ const Wrapper = styled.div`
 
 const TodoTask = ({ todos, dispatch, onDelete }) => (
   <Wrapper>
+    {todos.map(todo => (
+      <div key={todo.id}>
+        <button onClick={() => dispatch(onDelete(todo.id))}>
+          {todo.title}
+          </button>
+        </div>
+        ))}
     <HeaderTask name="tt" />
     <TaskElem />
     <TaskElem />

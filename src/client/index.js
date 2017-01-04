@@ -25,6 +25,16 @@ const actions = {
   },
 };
 
+window.store = store
+window.actions = actions
+
+// const actions = {
+// };
+
+console.log('mounting react app ...');  // eslint-disable-line no-console
+render(<App store={store} actions={actions} />, document.getElementById('__TODO__'));
+
+
 // const Store = {
 //   todos: [
 //     {
@@ -77,13 +87,3 @@ const actions = {
 //     },
 //   ],
 // };
-
-window.store = store
-window.actions = actions
-
-// const actions = {
-// };
-
-console.log('mounting react app ...');  // eslint-disable-line no-console
-render(<App store={store} actions={actions} />, document.getElementById('__TODO__'));
-
