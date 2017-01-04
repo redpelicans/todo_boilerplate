@@ -1,32 +1,44 @@
 import React from 'react';
 import HeaderTodo from './Header/header';
-import AddTask from './AddTask/AddTask';
-import TodoTask from './Todo/TodoComp';
-
-// const App = ({ store }) => (
-//   <div>
-//     <HeaderTodo />
-//     <AddTask />
-//     <TodoTask store={store} />
-//   </div>
-// );
+import AddTodo from './AddTodo/AddTodo';
+import TodoList from './Todo/TodoComp';
 
 class App extends React.Component {
-	onAdd = () => {
+	componentWillMount() {
+		const { store } = this.props;
+		store.listen(() => this.forceUpdate());
+	}
+	onAdd = (name) => {
 		const { store, actions } = this.props;
-		console.log('tt chakal')
-		store.dispatch(actions.addTodo('tt'))
+		store.dispatch(actions.addTodo(name));
+	}
+	onDel = (id) => {
+		const { store, actions } = this.props;
+		store.dispatch(actions.deleteTodo(id));
+	}
+	taskAdd = (task, todoRef) => {
+		const { store, actions } = this.props;
+		store.dispatch(actions.addTask(task, todoRef));
+	}
+	taskDelete = (id) => {
+		const { store, actions } = this.props;
+		store.dispatch(actions.delTask(id));
 	}
 	render (){
-		const { store, actions } = this.props;
+		const { actions, store } = this.props;
 		return (
 			<div>
 			  <HeaderTodo />
-			  <AddTask onAdd={this.onAdd}/>
-			  <TodoTask todos={store.state.todos} dispatch={store.dispatch.bind(store)} onDelete={ () => {}} />
+			  <AddTodo onAdd={this.onAdd}/>
+			  <TodoList store={store} onDel={this.onDel} addTask={this.taskAdd} delTask={this.taskDelete} />
 			</div>
 		)
 	}
 }
 
 export default App;
+
+App.propTypes = {
+  store: React.PropTypes.object.isRequired,
+  actions: React.PropTypes.object.isRequired,
+};

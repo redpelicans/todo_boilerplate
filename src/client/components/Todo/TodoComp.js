@@ -8,35 +8,91 @@ const Wrapper = styled.div`
   background-color: whitesmoke;
   margin-top: 10px;
   text-align: center;
-  width: 30%;
+  width: 50%;
   margin-left: auto;
   margin-right: auto;
   display: block;
 `;
 
-const TodoTask = ({ todos, dispatch, onDelete }) => (
-  <Wrapper>
-    {todos.map(todo => (
-      <div key={todo.id}>
-        <button onClick={() => dispatch(onDelete(todo.id))}>
-          {todo.title}
-          </button>
-        </div>
-        ))}
-    <HeaderTask name="tt" />
-    <TaskElem />
-    <TaskElem />
-    <TaskElem />
-  </Wrapper>
+const TodoHeader = ( { todo, onDel, addTask } ) => (
+  <div>
+    <span>{ todo.title } </span>
+    <button onClick={() => addTask('task x, todoId = ' + todo.id, todo.id)}>+</button>
+    <button onClick={() => onDel(todo.id)}>-</button>
+  </div>
 );
 
-TodoTask.propTypes = {
-  todos: React.PropTypes.array,
-  dispatch: React.PropTypes.func,
-  onDelete: React.PropTypes.func,
+TodoHeader.propTypes = {
+  todo: React.PropTypes.object.isRequired,
+  onDel: React.PropTypes.func.isRequired,
+  addTask: React.PropTypes.func.isRequired,
+}
+
+const TodoContent = ( { todo, tasks, delTask } ) => (
+  <div>
+    {(tasks.filter(task => task.todoId === todo.id)).map(task =>
+      <div key={task.id}>
+        <input type="checkbox" />
+        <span>{task.title}</span>
+        <button>edit</button>
+         <button onClick={() => delTask(task.id)}>x</button>
+      </div>)}
+  </div>
+);
+
+TodoContent.propTypes = {
+  todo: React.PropTypes.object.isRequired,
+  tasks: React.PropTypes.array.isRequired,
+  delTask: React.PropTypes.func.isRequired,
+}
+
+class TodoList extends React.Component {
+  render () {
+  const { store, onDel, addTask, delTask } = this.props;
+  const { state: { todos, tasks} } = store;
+
+  return (
+    <Wrapper>
+      {todos.map(todo =>
+        <div key={todo.id}>
+          <TodoHeader todo={todo} onDel={onDel} addTask={addTask} />
+          <TodoContent todo={todo} tasks={tasks} delTask={delTask} />
+          <br />
+        </div>)}
+    </Wrapper>
+    )
+  }
+}
+
+TodoList.propTypes = {
+  store: React.PropTypes.object.isRequired,
+  onDel: React.PropTypes.func.isRequired,
 };
 
-export default TodoTask;
+// class AddTodo extends React.Component {
+//   state = {
+//     value: '',
+//   }
+//   handleChange = event => this.setState({value: event.target.value})
+//   handleClick = (value) => {
+//     const { onAdd } = this.props;
+//     onAdd(value);
+//     this.setState({value: ''});
+//   }
+
+//   render() {
+//     const { value } = this.state;
+//     const { onAdd } = this.props;
+//     return (
+//     <Wrapper>
+//       <TextInput placeholder="Add a new Todo ..." onChange={this.handleChange} value={value} />
+//       <button onClick={() => this.handleClick(value)}>+</button>
+//     </Wrapper>
+//     )
+//   }
+// };
+
+export default TodoList;
 
 
 // MyComponent.propTypes = {
