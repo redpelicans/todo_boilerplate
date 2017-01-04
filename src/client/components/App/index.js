@@ -10,6 +10,15 @@ export const Title = styled.h1`
   color: palevioletred;
 `;
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 0 auto;
+  min-width: 200px;
+  max-width: 600px;
+  color: #666;
+`;
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -27,11 +36,11 @@ class App extends React.Component {
     const { todos, tasks } = this.props.store.state;
     const { actions } = this.props;
     return (
-      <div className="main-container">
+      <Wrapper>
         <Header title="Todo APP." />
         <AddTodo dispatch={this.dispatcher} onAdd={actions.addTodo} />
         <Todos todos={todos} tasks={tasks} dispatch={this.dispatcher} actions={actions} />
-      </div>
+      </Wrapper>
     );
   }
 }

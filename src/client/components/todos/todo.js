@@ -1,19 +1,38 @@
 import React, { PropTypes } from 'react';
+import styled from 'styled-components';
 import Task from './task';
-import AddTask from './add_task'
+import AddTask from './add_task';
 import filterTasksByTodoId from '../../model';
 
+const Wrapper = styled.div`
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  padding: 1em;
+  margin: 1em;
+`;
+
+const Header = styled.header`
+  display: flex;
+  padding: 10px;
+  height: 2em;
+  border-radius: 2px;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  background: #eee;
+`;
+
 const Todo = ({ todo, tasks, dispatch, actions }) =>
-  <div className="todo">
-    <header>
+  <Wrapper>
+    <Header>
       <h1>
         {todo.title}
       </h1>
+      <AddTask dispatch={dispatch} onAdd={actions.addTask} todoId={todo.id} />
       <button onClick={() => dispatch(actions.delTodo(todo.id))}>
-        del
+        supprimer
       </button>
-    </header>
-    <AddTask dispatch={dispatch} onAdd={actions.addTask} todoId={todo.id} />
+    </Header>
     <div className="todo-body">
       <ul>
         {filterTasksByTodoId(tasks, todo.id).map(task =>
@@ -29,7 +48,7 @@ const Todo = ({ todo, tasks, dispatch, actions }) =>
         )}
       </ul>
     </div>
-  </div>
+  </Wrapper>
 ;
 
 Todo.propTypes = {

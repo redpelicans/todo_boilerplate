@@ -1,7 +1,16 @@
 import React, { PropTypes } from 'react';
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+  display: inline-flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  height: 2em;
+`;
 
 const Task = ({ task, dispatch, onDel, onEdit }) =>
-  <div className="todo-task">
+  <Wrapper>
     <input
       type="checkbox"
       onChange={
@@ -17,10 +26,9 @@ const Task = ({ task, dispatch, onDel, onEdit }) =>
       onClick={() => dispatch(onEdit(
         Object.assign({}, task, { title: `${task.title} edited` })
       ))}
-    >edit</button>
-    <button onClick={() => dispatch(onDel(task.id))}>del</button>
-  </div>
-;
+    >editer</button>
+  <button onClick={() => dispatch(onDel(task.id))}>supprimer</button>
+  </Wrapper>;
 
 Task.propTypes = {
   task: PropTypes.object,
