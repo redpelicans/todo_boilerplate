@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import Header from '../header/header';
-import AddTodo from '../add_todo/add_todo';
+import Menu from '../menu/menu';
 import Todos from '../todos/todos';
 
 export const Title = styled.h1`
@@ -33,13 +33,13 @@ class App extends React.Component {
   }
 
   render() {
-    const { todos, tasks } = this.props.store.state;
-    const { actions } = this.props;
+    const { todos, tasks, showCompletedTodos } = this.props.store.state;
+    const { store, actions } = this.props;
     return (
       <Wrapper>
         <Header title="Todo APP." />
-        <AddTodo dispatch={this.dispatcher} onAdd={actions.addTodo} />
-        <Todos todos={todos} tasks={tasks} dispatch={this.dispatcher} actions={actions} />
+        <Menu switchMode={showCompletedTodos} dispatch={this.dispatcher} actions={actions} />
+        <Todos showCompleted={showCompletedTodos} todos={todos} tasks={tasks} dispatch={this.dispatcher} actions={actions} />
       </Wrapper>
     );
   }
