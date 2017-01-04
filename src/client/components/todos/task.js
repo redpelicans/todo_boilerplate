@@ -1,18 +1,32 @@
 import React, { PropTypes } from 'react';
 
-const Task = ({ title, isChecked, actions }) =>
+const Task = ({ task, dispatch, onDel, onEdit }) =>
   <div className="todo-task">
-    <input type="checkbox" onChange={() => {}} checked={isChecked} />
-    <p style={isChecked ? { textDecoration: 'line-through' } : {}}>{title}</p>
-    <button onClick={actions.editTask}>edit</button>
-    <button onClick={actions.delTask}>del</button>
+    <input
+      type="checkbox"
+      onChange={
+        () => dispatch(onEdit(
+          Object.assign({}, task, { isChecked: !task.isChecked })
+        ))}
+      checked={task.isChecked}
+    />
+    <p style={task.isChecked ? { textDecoration: 'line-through' } : {}}>
+      {task.title}
+    </p>
+    <button
+      onClick={() => dispatch(onEdit(
+        Object.assign({}, task, { title: `${task.title} edited` })
+      ))}
+    >edit</button>
+    <button onClick={() => dispatch(onDel(task.id))}>del</button>
   </div>
 ;
 
 Task.propTypes = {
-  title: PropTypes.string,
-  isChecked: PropTypes.bool,
-  actions: PropTypes.object,
+  task: PropTypes.object,
+  dispatch: PropTypes.func,
+  onDel: PropTypes.func,
+  onEdit: PropTypes.func,
 };
 
 export default Task;

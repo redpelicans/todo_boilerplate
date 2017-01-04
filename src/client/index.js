@@ -68,11 +68,12 @@ const store = {
     this.update();
   },
 };
+
 const actions = {
   addTodo(name) {
     console.log('add todo ', name); // eslint-disable-line no-console
     return state => ({
-      todos: state.todos.concat({ title: name, id: state.todos.length + 1 }),
+      todos: state.todos.concat({ title: name, id: state.todos[state.todos.length - 1].id + 1 }),
       tasks: state.tasks,
     });
   },
@@ -80,14 +81,29 @@ const actions = {
     console.log('del todo ', id); // eslint-disable-line no-console
     return state => ({
       todos: state.todos.filter(todo => todo.id !== id),
-      tasks: state.tasks,
+      tasks: state.tasks.filter(task => task.todoId !== id),
     });
   },
-  editTask() {
-    console.log('edit task'); // eslint-disable-line no-console
+  addTask(task) {
+    console.log('add task ', task); // eslint-disable-line no-console
+    return state => ({
+      todos: state.todos,
+      tasks: state.tasks.concat(Object.assign({}, task, { id: state.tasks[state.tasks.length - 1].id + 1, isChecked: false })),
+    });
   },
-  delTask() {
-    console.log('del task'); // eslint-disable-line no-console
+  editTask(editedTask) {
+    console.log('edit task ', editedTask.id); // eslint-disable-line no-console
+    return state => ({
+      todos: state.todos,
+      tasks: state.tasks.map(task => ((task.id === editedTask.id) ? editedTask : task)),
+    });
+  },
+  delTask(id) {
+    console.log('del task ', id); // eslint-disable-line no-console
+    return state => ({
+      todos: state.todos,
+      tasks: state.tasks.filter(task => task.id !== id),
+    });
   },
 };
 

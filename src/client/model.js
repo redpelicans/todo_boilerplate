@@ -1,4 +1,4 @@
-const getTasksByTodoId = (tasks, todoId) =>
+const filterTasksByTodoId = (tasks, todoId) =>
   tasks.filter(task => task.todoId === todoId);
 
-export default getTasksByTodoId;
+export default filterTasksByTodoId;

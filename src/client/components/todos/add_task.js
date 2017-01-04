@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-class AddTodo extends React.Component {
+class AddTask extends React.Component {
 
   state = {
     input: '',
@@ -11,24 +11,25 @@ class AddTodo extends React.Component {
   handleButtonClick = () => {
     const { dispatch, onAdd } = this.props;
     const { input } = this.state;
-    dispatch(onAdd(input));
+    dispatch(onAdd({ title: input, todoId: this.props.todoId }));
     this.setState({ input: '' });
   }
 
   render() {
     const { input } = this.state;
     return (
-      <div className="add-todo">
-        <input type="text" placeholder="titre" value={input} onChange={this.handleInputChange} />
+      <div className="add-task">
+        <input type="text" placeholder="description tache" value={input} onChange={this.handleInputChange} />
         <button onClick={this.handleButtonClick}>+</button>
       </div>
     );
   }
 }
 
-AddTodo.propTypes = {
+AddTask.propTypes = {
+  todoId: PropTypes.number,
   dispatch: PropTypes.func,
   onAdd: PropTypes.func,
 };
 
-export default AddTodo;
+export default AddTask;
