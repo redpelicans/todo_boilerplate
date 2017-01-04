@@ -1,15 +1,17 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 
-import CreateTodoForm from '../CreateTodoForm';
+import AddTodo from '../AddTodo';
+import MainContainer from '../Container';
 import TodoEl from '../TodoEl';
 
 const TodoList = styled.ul`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  padding: 0;
+  align-items: flex-start;
   margin: 0;
+  padding: 0;
 `;
 
 const drawTodos = (todos, actions, dispatch) => todos.map(todo =>
@@ -25,12 +27,12 @@ const drawTodos = (todos, actions, dispatch) => todos.map(todo =>
 );
 
 const TodoContainer = ({ store, actions }) =>
-  <div>
-    <CreateTodoForm />
+  <MainContainer>
+    <AddTodo store={store} actions={actions} />
     <TodoList>
       {drawTodos(store.state, actions, store.dispatch.bind(store))}
     </TodoList>
-  </div>
+  </MainContainer>
 ;
 
 TodoContainer.propTypes = {

@@ -1,13 +1,8 @@
 import React, { PropTypes } from 'react';
-import styled from 'styled-components';
 import Header from '../Header';
 import TodoContainer from '../TodoContainer';
 
-const MainContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
+import MainContainer from '../Container';
 
 export default class App extends React.Component {
   componentDidMount() {

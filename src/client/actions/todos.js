@@ -29,6 +29,12 @@ export const createTodo = title => (state) => {
 
 export const removeTodo = id => state => state.filter(el => el.id !== id);
 
+/*
+*   payload = {
+*     title: String,
+*     todoID: Number
+*   }
+*/
 export const addTask = payload => state => state.map((todo) => {
   if (todo.id === payload.todoID) {
     const newTask = {
@@ -42,7 +48,10 @@ export const addTask = payload => state => state.map((todo) => {
 });
 
 /*
-*   seems ok
+*   payload = {
+*     todoID: Number,
+*     taskID: Number,
+*   }
 */
 export const removeTask = payload => state => state.map((todo) => {
   if (todo.id === payload.todoID) {
@@ -52,14 +61,40 @@ export const removeTask = payload => state => state.map((todo) => {
   return todo;
 });
 
+/*
+*  payload = {
+*    todoID: Number,
+*    title: String (optional),
+*    checked: Boolean (optional),
+*  }
+*/
+export const updateTodo = payload => state => state.map((todo) => {
+  if (todo.id === payload.todoID) {
+    return {
+      ...todo,
+      title: payload.title || todo.title,
+      checked: payload.checked || todo.checked,
+    };
+  }
+  return todo;
+});
+
+/*
+*  payload = {
+*    todoID: Number,
+*    taskID: Number,
+*    title: String (optional),
+*    checked: Boolean (optional),
+*  }
+*/
 export const updateTask = payload => state => state.map((todo) => {
   if (todo.id === payload.todoID) {
     const newTasks = todo.tasks.map((task) => {
       if (task.id === payload.taskID) {
         return {
-          title: payload.title,
-          checked: payload.checked,
-          id: task.id,
+          ...task,
+          title: payload.title || task.title,
+          checked: payload.checked !== undefined ? payload.checked : task.checked,
         };
       }
       return task;
