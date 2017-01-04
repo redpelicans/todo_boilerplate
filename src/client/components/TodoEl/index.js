@@ -1,6 +1,11 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-import colors from '../../colors.json';
+
+import AddTask from '../AddTask';
+import RemoveTodo from '../RemoveTodo';
+import UpdateTask from '../UpdateTask';
+import UpdateTodo from '../UpdateTodo';
+import Button from '../Button';
 
 const TodoBlock = styled.li`
   list-style: none;
@@ -11,20 +16,6 @@ const TodoBlock = styled.li`
   flex-direction: column;
   margin: 2em;
   border-radius: 2px;
-`;
-
-const RemoveButton = styled.button`
-  border: none;
-  width: 4em;
-  height: 100%;
-  cursor: pointer;
-  transition: all .2s;
-  font-size: 20px;
-  background-color: white;
-  &:hover {
-    background-color: ${colors.blueGrey};
-    color: white;
-  }
 `;
 
 const TaskContainer = styled.li`
@@ -39,34 +30,74 @@ const TasksList = styled.ul`
   display: flex;
   flex-direction: column;
   padding: 0;
-  margin-top: 1em;
 `;
 
 const TodoTitle = styled.span`
-  text-align: center;
-  margin: 1em 0;
+  margin: 1em 1em;
 `;
 
 const TaskTitle = styled.span`
   margin: 0 .5em;
+  cursor: pointer;
+  text-decoration: ${props => (props.checked ? 'line-through' : 'none')};
+  color: ${props => (props.checked ? 'grey' : 'black')}
+`;
+
+const TopTodo = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  background-color: rgba(0,0,0,.1);
+  & button {
+    background-color: rgba(0,0,0,0);
+  }
+`;
+
+const TaskControls = styled.div`
+  display: flex;
 `;
 
 const drawTasks = (tasks, dispatch, actions, todoID) => tasks.map(task =>
   <TaskContainer key={task.id}>
-    <TaskTitle>{task.title}</TaskTitle>
-    <RemoveButton
-      onClick={() => dispatch(
-        actions.todo.removeTask({ taskID: task.id, todoID })
-      )}
+    <TaskTitle
+      checked={task.checked}
+      onClick={() => dispatch(actions.todo.updateTask({
+        todoID,
+        taskID: task.id,
+        checked: !task.checked,
+      }))}
     >
-      &#10006;
-    </RemoveButton>
+      {task.title}
+    </TaskTitle>
+    <TaskControls>
+      <UpdateTask
+        dispatch={dispatch}
+        actions={actions}
+        todoID={todoID}
+        taskID={task.id}
+        value={task.title}
+      />
+      <Button
+        onClick={() => dispatch(
+          actions.todo.removeTask({ taskID: task.id, todoID })
+        )}
+      >
+        &#10006;
+      </Button>
+    </TaskControls>
   </TaskContainer>
 );
 
 const TodoEl = ({ children, tasks, dispatch, actions, todoID }) =>
   <TodoBlock>
-    <TodoTitle>{children}</TodoTitle>
+    <TopTodo>
+      <TodoTitle>{children}</TodoTitle>
+      <AddTask dispatch={dispatch} actions={actions} todoID={todoID} />
+      <UpdateTodo dispatch={dispatch} actions={actions} todoID={todoID} value={children} />
+      <RemoveTodo dispatch={dispatch} actions={actions} todoID={todoID} />
+    </TopTodo>
     <TasksList>{drawTasks(tasks, dispatch, actions, todoID)}</TasksList>
   </TodoBlock>
 ;
