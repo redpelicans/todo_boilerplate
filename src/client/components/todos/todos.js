@@ -2,9 +2,9 @@ import React, { PropTypes } from 'react';
 import Todo from './todo';
 import { filterTodosByMode } from '../../model';
 
-const Todos = ({ showCompleted, todos, tasks, dispatch, actions }) =>
+const Todos = ({ showCompletedTodos, todos, tasks, dispatch, actions }) =>
   <div className="todos-container">
-    {filterTodosByMode(todos, tasks, showCompleted).map(
+    {filterTodosByMode(todos, tasks, showCompletedTodos).map(
       todo => <Todo
         todo={todo}
         tasks={tasks}
@@ -17,7 +17,7 @@ const Todos = ({ showCompleted, todos, tasks, dispatch, actions }) =>
 ;
 
 Todos.propTypes = {
-  showCompleted: PropTypes.bool,
+  showCompletedTodos: PropTypes.bool,
   todos: PropTypes.array,
   tasks: PropTypes.array,
   dispatch: PropTypes.func,

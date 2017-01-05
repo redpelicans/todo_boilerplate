@@ -28,11 +28,11 @@ const actions = {
       }),
     });
   },
-  editTask(editedTask) {
-    console.log('edit task ', editedTask.id); // eslint-disable-line no-console
+  updateTask(updated) {
+    console.log('update task ', updated.id); // eslint-disable-line no-console
     return state => ({
       ...state,
-      tasks: state.tasks.map(task => ((task.id === editedTask.id) ? editedTask : task)),
+      tasks: state.tasks.map(task => ((task.id === updated.id) ? updated : task)),
     });
   },
   delTask(id) {

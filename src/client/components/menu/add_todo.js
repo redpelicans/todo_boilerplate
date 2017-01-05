@@ -13,7 +13,7 @@ class AddTodo extends React.Component {
 
   handleInputChange = e => this.setState({ input: e.target.value });
 
-  handleButtonClick = () => {
+  handleInputValidation = () => {
     const { dispatch, onAdd } = this.props;
     const { input } = this.state;
     dispatch(onAdd(input));
@@ -24,8 +24,8 @@ class AddTodo extends React.Component {
     const { input } = this.state;
     return (
       <Wrapper>
-        <input type="text" placeholder="titre" value={input} onChange={this.handleInputChange} />
-        <button onClick={this.handleButtonClick}>+</button>
+        <input type="text" placeholder="title" value={input} onChange={this.handleInputChange} />
+        <button onClick={this.handleInputValidation}>+</button>
       </Wrapper>
     );
   }
