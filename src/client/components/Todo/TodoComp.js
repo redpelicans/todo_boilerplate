@@ -2,24 +2,50 @@ import React from 'react';
 import styled from 'styled-components';
 import HeaderTask from './HeaderList';
 import TaskElem from './TaskElem';
+import MyModal from '../AddTodo/modal';
+import Switch from 'antd/lib/switch';
+import Button from 'antd/lib/button';
+import Progress from 'antd/lib/progress';
+import Icon from 'antd/lib/icon';
+
 
 const Wrapper = styled.div`
   padding: 0px;
-  background-color: whitesmoke;
+  background-color: none;
   margin-top: 10px;
   text-align: center;
-  width: 50%;
+  width: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  display: table;
+`;
+
+const TodoWrap = styled.div`
+  padding: 0px;
+  width: auto;
+  background-color: whitesmoke;
+  margin-bottom: 4%;
+  margin-top: 10px;
+  text-align: center;
   margin-left: auto;
   margin-right: auto;
   display: block;
 `;
 
+const TodoHead = styled.div`
+  border-bottom: 1px solid darkgrey;
+  padding: 3px;
+  margin-bottom: 4px;
+`;
+
 const TodoHeader = ( { todo, onDel, addTask } ) => (
-  <div>
-    <span>{ todo.title } </span>
-    <button onClick={() => addTask('task x, todoId = ' + todo.id, todo.id)}>+</button>
-    <button onClick={() => onDel(todo.id)}>-</button>
-  </div>
+  <TodoHead>
+    <MyModal todo={todo} onDel={onDel} addTask={addTask} />
+    <span> { todo.title } </span>
+    <Progress type="circle" percent={60} width={30} />
+    <Button type="primary" size='small' style={{marginLeft: '5px', backgroundColor: 'red', border: 'none', float: 'right'}} onClick={() => onDel(todo.id)}>x</Button>
+  </TodoHead>
 );
 
 TodoHeader.propTypes = {
@@ -28,14 +54,40 @@ TodoHeader.propTypes = {
   addTask: React.PropTypes.func.isRequired,
 }
 
+class Task extends React.Component {
+  state = {
+    isChecked: false,
+  }
+  checker = (checked) => {
+    this.setState({isChecked: checked});
+  }
+  render () {
+    const { todo, task, delTask} = this.props;
+    return (
+      <div>
+        <Switch style={{float: 'left'}} defaultChecked={false} onChange={this.checker} />
+        <span style={this.state.isChecked ? { textDecoration: 'line-through', margin: '15px' } : {margin: '15px'}}> {task.title} </span>
+        <div style={{float: 'right'}}>
+          <Icon style={{margin: '4px'}} type="edit" /> 
+          <Icon style={{margin: '4px'}} type="delete" onClick={() => delTask(task.id)}/>
+        </div>
+      </div>
+    )
+  }
+}
+
+Task.propTypes = {
+  todo: React.PropTypes.object.isRequired,
+  task: React.PropTypes.object.isRequired,
+  delTask: React.PropTypes.func.isRequired,
+}
+
+
 const TodoContent = ( { todo, tasks, delTask } ) => (
   <div>
     {(tasks.filter(task => task.todoId === todo.id)).map(task =>
-      <div key={task.id}>
-        <input type="checkbox" />
-        <span>{task.title}</span>
-        <button>edit</button>
-         <button onClick={() => delTask(task.id)}>x</button>
+      <div style={{margin: '10px'}} key={task.id}>
+      <Task todo={todo} task={task} delTask={delTask} />    
       </div>)}
   </div>
 );
@@ -54,11 +106,11 @@ class TodoList extends React.Component {
   return (
     <Wrapper>
       {todos.map(todo =>
-        <div key={todo.id}>
+        <TodoWrap key={todo.id}>
           <TodoHeader todo={todo} onDel={onDel} addTask={addTask} />
           <TodoContent todo={todo} tasks={tasks} delTask={delTask} />
           <br />
-        </div>)}
+        </TodoWrap>)}
     </Wrapper>
     )
   }
@@ -69,39 +121,5 @@ TodoList.propTypes = {
   onDel: React.PropTypes.func.isRequired,
 };
 
-// class AddTodo extends React.Component {
-//   state = {
-//     value: '',
-//   }
-//   handleChange = event => this.setState({value: event.target.value})
-//   handleClick = (value) => {
-//     const { onAdd } = this.props;
-//     onAdd(value);
-//     this.setState({value: ''});
-//   }
-
-//   render() {
-//     const { value } = this.state;
-//     const { onAdd } = this.props;
-//     return (
-//     <Wrapper>
-//       <TextInput placeholder="Add a new Todo ..." onChange={this.handleChange} value={value} />
-//       <button onClick={() => this.handleClick(value)}>+</button>
-//     </Wrapper>
-//     )
-//   }
-// };
-
 export default TodoList;
 
-
-// MyComponent.propTypes = {
-   // You can declare that a prop is a specific JS primitive. By default, these
-   // are all optional.
-//   optionalArray: React.PropTypes.array,
-//   optionalBool: React.PropTypes.bool,
-//   optionalFunc: React.PropTypes.func,
-//   optionalNumber: React.PropTypes.number,
-//   optionalObject: React.PropTypes.object,
-//   optionalString: React.PropTypes.string,
-//   optionalSymbol: React.PropTypes.symbol,

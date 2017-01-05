@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Icon from 'antd/lib/icon';
 
 const Wrapper = styled.div`
   padding: 0px;
@@ -13,6 +14,7 @@ const Wrapper = styled.div`
 
 const TextInput = styled.input`
   margin: 0px;
+  margin-right: 5px;
   width: 85%;
   height: 25px;
 `;
@@ -29,12 +31,12 @@ class AddTodo extends React.Component {
 	}
 
 	render() {
-		const { value } = this.state;
-		const { onAdd } = this.props;
+        const { value } = this.state;
+        const { onAdd } = this.props;
 		return (
 		<Wrapper>
 		  <TextInput placeholder="Add a new Todo ..." onChange={this.handleChange} value={value} />
-		  <button onClick={() => this.handleClick(value)}>+</button>
+          <Icon type="plus" onClick={() => this.handleClick(value)} />
 		</Wrapper>
 		)
 	}

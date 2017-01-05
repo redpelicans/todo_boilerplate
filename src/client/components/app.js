@@ -2,6 +2,8 @@ import React from 'react';
 import HeaderTodo from './Header/header';
 import AddTodo from './AddTodo/AddTodo';
 import TodoList from './Todo/TodoComp';
+import 'antd/dist/antd.css';
+import MyModal from './AddTodo/modal';
 
 class App extends React.Component {
 	componentWillMount() {

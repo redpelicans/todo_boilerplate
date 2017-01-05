@@ -81,10 +81,10 @@ const actions = {
     	tasks: state.tasks,
     });
   },
-  addTask(task, todoRef){
+  addTask(task, todoId){
   	return state => ({
   		todos: state.todos,
-  		tasks: state.tasks.concat({ id: ++taskId, todoId: todoRef, title: task, checked: false }),
+  		tasks: state.tasks.concat({ id: ++taskId, todoId: todoId, title: task, checked: false }),
   	})
   },
   delTask(id){
