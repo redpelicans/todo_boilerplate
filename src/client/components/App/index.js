@@ -29,7 +29,6 @@ class App extends React.Component {
 
   render() {
     const { store: { state, state: { mode } }, actions } = this.props;
-    console.log(mode);
     return (
       <Wrapper>
         <Header title="Todo APP." />

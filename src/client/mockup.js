@@ -45,8 +45,10 @@ const mockUp = {
       isChecked: true,
     },
   ],
-  showCompletedTodos: true,
-  sortByAsc: true,
+  mode: {
+    showCompletedTodos: true,
+    sortByAsc: true,
+  },
 };
 
 export default mockUp;

@@ -7,9 +7,9 @@ const Wrapper = styled.div`
   justify-content: space-around;
 `;
 
-const Switch = ({ dispatch, switchFunc, showCompletedTodos }) =>
+const Switch = ({ dispatch, onSwitch, showCompletedTodos }) =>
   <Wrapper>
-    <button onClick={() => dispatch(switchFunc())}>
+    <button onClick={() => dispatch(onSwitch())}>
       {(showCompletedTodos === true) ? 'hide completed todos' : 'show completed todos'}
     </button>
   </Wrapper>
@@ -17,7 +17,7 @@ const Switch = ({ dispatch, switchFunc, showCompletedTodos }) =>
 
 Switch.propTypes = {
   dispatch: PropTypes.func,
-  switchFunc: PropTypes.func,
+  onSwitch: PropTypes.func,
   showCompletedTodos: PropTypes.bool,
 };
 

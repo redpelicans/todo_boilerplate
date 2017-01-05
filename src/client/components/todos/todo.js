@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import Task from './task';
 import AddTask from './add_task';
-import { filterTasksByTodoId } from '../../model';
+import { matchTasksWithTodo } from '../../model';
 
 const Wrapper = styled.div`
   border: 1px solid #ccc;
@@ -35,7 +35,7 @@ const Todo = ({ todo, tasks, dispatch, actions }) =>
     </Header>
     <div className="todo-body">
       <ul>
-        {filterTasksByTodoId(tasks, todo.id).map(task =>
+        {matchTasksWithTodo(tasks, todo).map(task =>
           <li key={task.id}>
             <Task
               task={task}
