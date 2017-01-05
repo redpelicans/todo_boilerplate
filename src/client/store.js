@@ -1,7 +1,6 @@
-import mockUp from './mockup';
+import React, { PropTypes } from 'react';
 
-const store = {
-  state: { ...mockUp },
+const baseStore = {
   listeners: [],
   listen(cb) {
     this.listeners.push(cb);
@@ -16,4 +15,26 @@ const store = {
   },
 };
 
-export default store;
+export class Provider extends React.Component {
+  componentWillMount() {
+    const { store } = this.props;
+    store.listen(() => this.forceUpdate());
+  }
+  render() {
+    const { store, actions, children } = this.props;
+    return React.cloneElement(
+      React.Children.only(children),
+      { store, actions }
+    );
+  }
+}
+
+Provider.propTypes = {
+  store: PropTypes.object.isRequired,
+  actions: PropTypes.object.isRequired,
+};
+
+export const createStore = state => ({
+  ...baseStore,
+  state,
+});
