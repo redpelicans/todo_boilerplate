@@ -1,6 +1,5 @@
 const actions = {
   addTodo(name) {
-    console.log('add todo ', name); // eslint-disable-line no-console
     return state => ({
       ...state,
       todos: state.todos.concat({
@@ -10,7 +9,6 @@ const actions = {
     });
   },
   delTodo(id) {
-    console.log('del todo ', id); // eslint-disable-line no-console
     return state => ({
       ...state,
       todos: state.todos.filter(todo => todo.id !== id),
@@ -18,7 +16,6 @@ const actions = {
     });
   },
   addTask(task) {
-    console.log('add task ', task); // eslint-disable-line no-console
     return state => ({
       ...state,
       tasks: state.tasks.concat({
@@ -29,24 +26,27 @@ const actions = {
     });
   },
   updateTask(updated) {
-    console.log('update task ', updated.id); // eslint-disable-line no-console
     return state => ({
       ...state,
       tasks: state.tasks.map(task => ((task.id === updated.id) ? updated : task)),
     });
   },
   delTask(id) {
-    console.log('del task ', id); // eslint-disable-line no-console
     return state => ({
       ...state,
       tasks: state.tasks.filter(task => task.id !== id),
     });
   },
-  switchMode() {
-    console.log('switch mode'); // eslint-disable-line no-console
+  showCompleted() {
     return state => ({
       ...state,
-      showCompletedTodos: !state.showCompletedTodos,
+      mode: { ...state.mode, showCompletedTodos: !state.mode.showCompletedTodos },
+    });
+  },
+  sortByAsc() {
+    return state => ({
+      ...state,
+      mode: { ...state.mode, sortByAsc: !state.mode.sortByAsc },
     });
   },
 };

@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import AddTodo from './add_todo';
 import Switch from './switch';
-// import SortTodo from './sort_todo';
+import SortTodo from './sort_todo';
 
 const Wrapper = styled.div`
   display: flex;
@@ -10,20 +10,25 @@ const Wrapper = styled.div`
   justify-content: space-around;
 `;
 
-const Menu = ({ dispatch, actions, switchMode }) =>
+const Menu = ({ dispatch, actions, mode }) =>
   <Wrapper>
     <AddTodo dispatch={dispatch} onAdd={actions.addTodo} />
+    <SortTodo
+      dispatch={dispatch}
+      onSwitch={actions.sortByAsc}
+      sortByAsc={mode.sortByAsc}
+    />
     <Switch
       dispatch={dispatch}
-      switchFunc={actions.switchMode}
-      showCompletedTodos={switchMode}
+      onSwitch={actions.showCompleted}
+      showCompletedTodos={mode.showCompletedTodos}
     />
   </Wrapper>;
 
 Menu.propTypes = {
-  dispatch: PropTypes.func,
-  actions: PropTypes.object,
-  switchMode: PropTypes.bool,
+  dispatch: PropTypes.func.isRequired,
+  actions: PropTypes.object.isRequired,
+  mode: PropTypes.object.isRequired,
 };
 
 export default Menu;

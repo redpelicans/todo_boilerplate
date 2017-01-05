@@ -41,7 +41,7 @@ class Task extends React.Component {
             value={input}
             onChange={this.handleInputChange}
           />) :
-          (<p style={task.isChecked ? { textDecoration: 'line-through' } : {}}>
+          (<p style={{ textDecoration: task.isChecked ? 'line-through' : '' }}>
             {task.title}
           </p>)
         }
