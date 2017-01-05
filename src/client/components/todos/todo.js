@@ -40,8 +40,8 @@ const Todo = ({ todo, tasks, dispatch, actions }) =>
             <Task
               task={task}
               dispatch={dispatch}
-              onDel={actions.delTask}
-              onEdit={actions.editTask}
+              onDelete={actions.delTask}
+              onUpdate={actions.updateTask}
               key={task.id}
             />
           </li>

@@ -10,7 +10,7 @@ const Wrapper = styled.div`
 const Switch = ({ dispatch, switchFunc, showCompletedTodos }) =>
   <Wrapper>
     <button onClick={() => dispatch(switchFunc())}>
-      {(showCompletedTodos === true) ? 'cacher les taches completees' : 'montrer les taches completees'}
+      {(showCompletedTodos === true) ? 'hide completed todos' : 'show completed todos'}
     </button>
   </Wrapper>
 ;

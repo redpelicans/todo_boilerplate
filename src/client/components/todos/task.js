@@ -9,32 +9,65 @@ const Wrapper = styled.div`
   height: 2em;
 `;
 
-const Task = ({ task, dispatch, onDel, onEdit }) =>
-  <Wrapper>
-    <input
-      type="checkbox"
-      onChange={
-        () => dispatch(onEdit(
-          Object.assign({}, task, { isChecked: !task.isChecked })
-        ))}
-      checked={task.isChecked}
-    />
-    <p style={task.isChecked ? { textDecoration: 'line-through' } : {}}>
-      {task.title}
-    </p>
-    <button
-      onClick={() => dispatch(onEdit(
-        Object.assign({}, task, { title: `${task.title} edited` })
-      ))}
-    >editer</button>
-    <button onClick={() => dispatch(onDel(task.id))}>supprimer</button>
-  </Wrapper>;
+class Task extends React.Component {
+  state = {
+    input: this.props.task.title,
+    updateMode: false,
+  }
+
+  handleInputChange = e => this.setState({ input: e.target.value });
+
+  handleInputValidation = (task) => {
+    const { dispatch, onUpdate } = this.props;
+    const { input } = this.state;
+    dispatch(onUpdate({ ...task, title: input }));
+    this.setState({ updateMode: false });
+  }
+
+  render() {
+    const { input, updateMode } = this.state;
+    const { task, dispatch, onDelete, onUpdate } = this.props;
+    return (
+      <Wrapper>
+        <input
+          type="checkbox"
+          onChange={() => dispatch(onUpdate({ ...task, isChecked: !task.isChecked }))}
+          checked={task.isChecked}
+        />
+        {updateMode ?
+          (<input
+            type="text"
+            placeholder={task.title}
+            value={input}
+            onChange={this.handleInputChange}
+          />) :
+          (<p style={task.isChecked ? { textDecoration: 'line-through' } : {}}>
+            {task.title}
+          </p>)
+        }
+        {updateMode ?
+          (<button onClick={() => this.handleInputValidation(task)}>
+            send
+          </button>) :
+          (<button onClick={() => this.setState({ updateMode: true })}>
+            update
+          </button>)
+        }
+        {updateMode ||
+        <button onClick={() => dispatch(onDelete(task.id))}>
+           delete
+         </button>
+        }
+      </Wrapper>
+    );
+  }
+}
 
 Task.propTypes = {
   task: PropTypes.object,
   dispatch: PropTypes.func,
-  onDel: PropTypes.func,
-  onEdit: PropTypes.func,
+  onDelete: PropTypes.func,
+  onUpdate: PropTypes.func,
 };
 
 export default Task;
