@@ -27,18 +27,14 @@ class App extends React.Component {
     this.dispatcher = store.dispatch.bind(store);
   }
 
-  componentWillMount() {
-    const { store } = this.props;
-    store.listen(() => this.forceUpdate());
-  }
-
   render() {
-    const { store: { state, state: { showCompletedTodos } }, actions } = this.props;
+    const { store: { state, state: { mode } }, actions } = this.props;
+    console.log(mode);
     return (
       <Wrapper>
         <Header title="Todo APP." />
-        <Menu switchMode={showCompletedTodos} dispatch={this.dispatcher} actions={actions} />
-        <Todos {...state} dispatch={this.dispatcher} actions={actions} />
+        <Menu dispatch={this.dispatcher} actions={actions} mode={mode} />
+        <Todos dispatch={this.dispatcher} actions={actions} {...state} />
       </Wrapper>
     );
   }
