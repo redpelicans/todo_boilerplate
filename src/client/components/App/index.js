@@ -25,10 +25,6 @@ const Todos = ({todos, dispatch, onDelete}) =>  (
 );
 
 class App extends React.Component {
-  componentDidMount() {
-    const { store } = this.props;
-    store.listen(() => this.forceUpdate());
-  }
 
   onAdd = () => {
     const { actions, store } = this.props;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import App from './components/App';
+import Provider from './containers/Provider';
 
 let id = 0;
 
@@ -25,4 +26,9 @@ const actions = {
 };
 
 console.log('mounting react app ...');  // eslint-disable-line no-console 
-render(<App store={store} actions={actions} />, document.getElementById('__TODO__'));
+const Root = (
+  <Provider store={store} actions={actions}>
+    <App />
+  </Provider>
+);
+render(Root, document.getElementById('__TODO__'));
