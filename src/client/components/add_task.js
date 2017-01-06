@@ -9,26 +9,25 @@ class AddTask extends React.Component {
   state = { name: '' };
   handleChange = event => this.setState({ name: event.target.value })
   handleClick = () => {
-    const { onAddTask, dispatch } = this.props;
-    dispatch(onAddTask(this.state.name));
+    const { onAddTask, dispatch, todoId } = this.props;
+    dispatch(onAddTask(this.state.name, todoId));
     this.setState({ name: '' });
   };
   render() {
     const { name } = this.state;
-    const { onAddTask, dispatch } = this.props;
     return (
       <Wrapper>
-        <input placeholder="todo to do ..." onChange={this.handleChange} value={name} />
+        <input onChange={this.handleChange} placeholder="new task" value={name} />
         <button onClick={this.handleClick}>Add</button>
-        {/* <button onClick={dispatch}>DelTodo</button> */}
       </Wrapper>
     );
   }
 }
 
 AddTask.propTypes = {
-  onAddTask: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired,
+  onAddTask: PropTypes.func.isRequired,
+  todoId: PropTypes.number.isRequired,
 };
 
 export default AddTask;

@@ -15,7 +15,6 @@ class AddTodo extends React.Component {
   };
   render() {
     const { name } = this.state;
-    const { onAddTodo, dispatch } = this.props;
     return (
       <Wrapper>
         <input placeholder="new todo" onChange={this.handleChange} value={name} />

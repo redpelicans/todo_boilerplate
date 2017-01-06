@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-import Task from './task_list';
+import TaskList from './task_list';
 import AddTask from './add_task';
 
 const Area = styled.section`
@@ -22,20 +22,7 @@ const TitleTodo = ({ name }) =>
   ;
 
 TitleTodo.propTypes = {
-  name: PropTypes.string,
-};
-
-const TaskList = ({ tasks }) =>
-  <div>
-    {
-        Object.values(tasks).map(task =>
-          <Task task={task} key={task.id} />)
-    }
-  </div>
-;
-
-TaskList.propTypes = {
-  tasks: PropTypes.object,
+  name: PropTypes.string.isRequired,
 };
 
 const Todo = ({ todo, actions, store }) => {
@@ -43,15 +30,16 @@ const Todo = ({ todo, actions, store }) => {
   return (
     <Area>
       <TitleTodo name={todo.name} />
-      <AddTask onAddTask={actions.addTask} dispatch={bDispatch} />
-      <TaskList tasks={todo.tasks} />
+      <button onClick={() => bDispatch(actions.deleteTodo(todo.id))}>Del</button>
+      <AddTask dispatch={bDispatch} onAddTask={actions.addTask} todoId={todo.id} />
+      <TaskList actions={actions} dispatch={bDispatch} tasks={todo.tasks} todo={todo} />
     </Area>
   );
 };
 
 Todo.propTypes = {
-  todo: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
+  todo: PropTypes.object.isRequired,
   store: PropTypes.object.isRequired,
 };
 

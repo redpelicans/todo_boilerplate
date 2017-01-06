@@ -1,16 +1,20 @@
 import React, { PropTypes } from 'react';
+import Task from './task';
 
-const Task = ({ task }) =>
+const TaskList = ({ actions, dispatch, tasks, todo }) =>
   <div>
-    <input type="checkbox" />
-    { task.name }
-    <button>edit</button>
-    <button>del</button>
+    {
+        Object.values(tasks).map(task =>
+          <Task actions={actions} dispatch={dispatch} key={task.id} task={task} todo={todo} />)
+    }
   </div>
 ;
 
-Task.propTypes = {
-  task: PropTypes.object.isRequired,
+TaskList.propTypes = {
+  actions: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  tasks: PropTypes.object.isRequired,
+  todo: PropTypes.object.isRequired,
 };
 
-export default Task;
+export default TaskList;

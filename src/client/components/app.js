@@ -21,7 +21,7 @@ const TodoList = ({ store, actions }) => {
     <div>
       {
         Object.values(todos).map(todo =>
-        <Todo todo={todo} actions={actions} store={store} key={todo.id} />)
+          <Todo todo={todo} actions={actions} store={store} key={todo.id} />)
       }
     </div>
   );
@@ -44,15 +44,15 @@ class App extends React.Component {
       <Wrapper>
         <Header />
         <AddTodo onAddTodo={actions.addTodo} dispatch={bDispatch} />
-        <TodoList { ...this.props } />
+        <TodoList {...this.props} />
       </Wrapper>
     );
   }
 }
 
 App.propTypes = {
-  store: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
+  store: PropTypes.object.isRequired,
 };
 
 export default App;
