@@ -36,6 +36,7 @@ const actions = {
   },
   deleteTask(TodoId, id) {
     return (state) => {
+      console.log('Launch action deleteTask()');
       const newTasks = {};
       const tasks = Object.values(state[TodoId].tasks);
       tasks.forEach((task) => {
@@ -48,6 +49,21 @@ const actions = {
         ...newState[TodoId],
         tasks: newTasks,
       };
+      return newState;
+    };
+  },
+  toggleCompleted(TodoId, task) {
+    return (state) => {
+      console.log('Launch action toggleCompleted()');
+      const newState = { ...state };
+      if (state[TodoId].tasks[task.id].checked) {
+        // console.log('TRUE');
+        newState[TodoId].tasks[task.id].checked = !newState[TodoId].tasks[task.id].checked;
+      }
+      else {
+        // console.log('FALSE');
+        newState[TodoId].tasks[task.id].checked = !newState[TodoId].tasks[task.id].checked;
+      }
       return newState;
     };
   },

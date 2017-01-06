@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 
 const Task = ({ actions, dispatch, task, todo }) =>
   <div>
-    <input type="checkbox" />
+    <input onClick={() => dispatch(actions.toggleCompleted(todo.id, task))} type="checkbox" />
     { task.name }
     <button>edit</button>
     <button onClick={() => dispatch(actions.deleteTask(todo.id, task.id))}>del</button>

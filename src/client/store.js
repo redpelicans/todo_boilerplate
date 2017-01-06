@@ -1,32 +1,41 @@
-const store = {
-  1: {
-    order: 1,
-    name: 'first_todo',
-    tasks: {
-      1: {
-        name: 'task_1',
-        checked: true,
-      },
-    },
+import React, { PropTypes } from 'react';
+
+const baseStore = {
+  listeners: [],
+  listen(cb) {
+    this.listeners.push(cb);
   },
-  2: {
-    order: 2,
-    name: 'second_todo',
-    tasks: {
-      1: {
-        name: 'task_1',
-        checked: false,
-      },
-      2: {
-        name: 'task_2',
-        checked: false,
-      },
-      3: {
-        name: 'task_3',
-        checked: true,
-      },
-    },
+  update() {
+    this.listeners.forEach(cb => cb());
+  },
+  dispatch(action) {
+    this.state = action(this.state);
+    console.log('state : ', this.state);
+    this.update();
   },
 };
 
-export default store;
+export class Provider extends React.Component {
+  componentWillMount() {
+    const { store } = this.props;
+    store.listen(() => this.forceUpdate());
+  }
+  render() {
+    const { store, actions, children } = this.props;
+    return React.cloneElement(
+      React.Children.only(children),
+      { store, actions }
+    );
+  }
+}
+
+Provider.propTypes = {
+  actions: PropTypes.object.isRequired,
+  children: PropTypes.object.isRequired,
+  store: PropTypes.object.isRequired,
+};
+
+export const createStore = state => ({
+  ...baseStore,
+  state,
+});

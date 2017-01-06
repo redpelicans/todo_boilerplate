@@ -12,7 +12,7 @@ const state = {
       1: {
         id: 1,
         name: 'task.1.1',
-        checked: true,
+        checked: false,
       },
     },
   },
@@ -34,7 +34,7 @@ const state = {
       4: {
         id: 4,
         name: 'task_3',
-        checked: true,
+        checked: false,
       },
     },
   },
