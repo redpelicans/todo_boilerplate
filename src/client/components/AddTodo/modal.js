@@ -29,7 +29,6 @@ ValidButton.propTypes = {
   addTask: React.PropTypes.func.isRequired,
 };
 
-
 class MyModal extends React.Component {
   state = {
     value: '',
@@ -43,7 +42,7 @@ class MyModal extends React.Component {
   }
 
   showModal = () => this.setState({ visible: true })
-  
+
   handleOk = () => this.setState({ visible: false })
 
   handleCancel = () => this.setState({ visible: false })

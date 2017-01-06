@@ -22,6 +22,8 @@ const TextInput = styled.input`
 class AddTodo extends React.Component {
 	state = {
 		value: '',
+		iconeColor: '',
+		fontColor: 'black',
 	}
 	handleChange = event => this.setState({value: event.target.value})
 	handleClick = (value) => {
@@ -30,13 +32,22 @@ class AddTodo extends React.Component {
 		this.setState({value: ''});
 	}
 
+	changeBgColor = () => {
+		this.setState({iconeColor: '#108ee9'});
+		this.setState({fontColor: 'white'});
+	}
+	unsetBgColor = () => {
+		this.setState({iconeColor: ''});
+		this.setState({fontColor: 'black'});
+	}
+
 	render() {
-        const { value } = this.state;
+        const { value, iconeColor, fontColor } = this.state;
         const { onAdd } = this.props;
 		return (
 		<Wrapper>
 		  <TextInput placeholder="Add a new Todo ..." onChange={this.handleChange} value={value} />
-          <Icon type="plus" onClick={() => this.handleClick(value)} />
+          <Icon style={{backgroundColor: iconeColor, color: fontColor}} onMouseOut={this.unsetBgColor} onMouseOver={this.changeBgColor} type="plus" onClick={() => this.handleClick(value)} />
 		</Wrapper>
 		)
 	}

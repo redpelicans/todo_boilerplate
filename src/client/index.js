@@ -70,6 +70,9 @@ const store = {
 
 const actions = {
   addTodo(name){
+  	if (!name)
+  		return state => state
+  	else
     return state => ({
     	todos: state.todos.concat({ id: ++todoId, title: name }),
     	tasks: state.tasks,
@@ -93,6 +96,44 @@ const actions = {
   		tasks: state.tasks.filter(task => task.id !== id),
   	})
   },
+  checkTask(id){
+  	return state => ({
+  		...state,
+  		tasks: state.tasks.map(task => {
+  			if (task.id === id) return {...task, checked: true}
+  			return task;
+  		}),
+  	})
+  },
+  unCheckTask(id){
+  	return state => ({
+  		...state,
+  		tasks: state.tasks.map(task => {
+  			if (task.id === id) return {...task, checked: false}
+  			return task;
+  		}),
+  	})
+  },
+  manageTask(id, checked){
+  	return state => ({
+  		...state,
+  		tasks: state.tasks.map(task => {
+  			if (task.id === id) return {...task, checked: checked}
+  			return task;
+  		}),
+  	})
+  },
+  updateTask(id, newTitle){
+    console.log(">>>>>>" + newTitle);
+  	return state => ({
+  		...state,
+  		tasks: state.tasks.map(task => {
+  			if (task.id === id) return {...task, title: newTitle}
+  			return task;
+  		}),
+  	})
+  },
+
 };
 
 window.store = store
@@ -100,4 +141,3 @@ window.actions = actions
 
 console.log('mounting react app ...');  // eslint-disable-line no-console
 render(<App store={store} actions={actions} />, document.getElementById('__TODO__'));
-

@@ -26,13 +26,28 @@ class App extends React.Component {
 		const { store, actions } = this.props;
 		store.dispatch(actions.delTask(id));
 	}
+	manageTask = (id, checked) => {
+		const { store, actions } = this.props;
+		store.dispatch(actions.manageTask(id, checked));
+	}
+	updateTask = (id, newTitle) => {
+		const {store, actions } = this.props;
+		store.dispatch(actions.updateTask(id, newTitle))
+	}
 	render (){
 		const { actions, store } = this.props;
 		return (
 			<div>
 			  <HeaderTodo />
 			  <AddTodo onAdd={this.onAdd}/>
-			  <TodoList store={store} onDel={this.onDel} addTask={this.taskAdd} delTask={this.taskDelete} />
+			  <TodoList store={store}
+			  			onDel={this.onDel}
+			  			addTask={this.taskAdd}
+			  			delTask={this.taskDelete}
+			  			checkTask={this.checkTask}
+			  			unCheckTask={this.unCheckTask}
+			  			manageTask={this.manageTask}
+			  			updateTask={this.updateTask} />
 			</div>
 		)
 	}
