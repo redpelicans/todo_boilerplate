@@ -44,7 +44,7 @@ class Task extends React.Component {
     console.log(`render task: ${task.title}`);
     return (
       <div style={{marginBottom: '15px'}} >
-        <Switch style={{float: 'left'}} defaultChecked={task.checked} onChange={this.handleChange} />
+        <Switch size="small" style={{float: 'left'}} defaultChecked={task.checked} onChange={this.handleChange} />
         {onEdit ?
           <input value={value} onChange={this.handleUpDating} />
           :

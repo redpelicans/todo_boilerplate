@@ -32,13 +32,17 @@ class App extends React.Component {
 	}
 	updateTask = (id, newTitle) => {
 		const {store, actions } = this.props;
-		store.dispatch(actions.updateTask(id, newTitle))
+		store.dispatch(actions.updateTask(id, newTitle));
+	}
+	setMode = (newMode, todoId) => {
+		const {store, actions } = this.props;
+		store.dispatch(actions.setMode(newMode, todoId));
 	}
 	render (){
 		const { actions, store } = this.props;
 		return (
 			<div>
-			  <HeaderTodo />
+			  <HeaderTodo store={store} />
 			  <AddTodo onAdd={this.onAdd}/>
 			  <TodoList store={store}
 			  			onDel={this.onDel}
@@ -47,7 +51,8 @@ class App extends React.Component {
 			  			checkTask={this.checkTask}
 			  			unCheckTask={this.unCheckTask}
 			  			manageTask={this.manageTask}
-			  			updateTask={this.updateTask} />
+			  			updateTask={this.updateTask} 
+			  			setMode={this.setMode} />
 			</div>
 		)
 	}

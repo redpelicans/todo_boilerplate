@@ -9,10 +9,12 @@ const state = {
     {
       id: 1,
       title: 'todo1',
+      mode: 1,
     },
     {
       id: 2,
       title: 'todo2',
+      mode: 1,
     },
   ],
   tasks: [
@@ -53,9 +55,10 @@ const state = {
       checked: false,
     },
   ],
+  mode: {
+    filter: 0,
+  }
 };
-
-let taskId = 6;
 
 const store = {
   state,
@@ -67,6 +70,8 @@ const store = {
     this.forceUpdate();
   },
 };
+
+let taskId = 6;
 
 const actions = {
   addTodo(name){
@@ -88,13 +93,13 @@ const actions = {
   	return state => ({
   		todos: state.todos,
   		tasks: state.tasks.concat({ id: ++taskId, todoId: todoId, title: task, checked: false }),
-  	})
+  	});
   },
   delTask(id){
   	return state => ({
   		todos: state.todos,
   		tasks: state.tasks.filter(task => task.id !== id),
-  	})
+  	});
   },
   checkTask(id){
   	return state => ({
@@ -103,7 +108,7 @@ const actions = {
   			if (task.id === id) return {...task, checked: true}
   			return task;
   		}),
-  	})
+  	});
   },
   unCheckTask(id){
   	return state => ({
@@ -112,7 +117,7 @@ const actions = {
   			if (task.id === id) return {...task, checked: false}
   			return task;
   		}),
-  	})
+  	});
   },
   manageTask(id, checked){
   	return state => ({
@@ -121,17 +126,25 @@ const actions = {
   			if (task.id === id) return {...task, checked: checked}
   			return task;
   		}),
-  	})
+  	});
   },
   updateTask(id, newTitle){
-    console.log(">>>>>>" + newTitle);
   	return state => ({
   		...state,
   		tasks: state.tasks.map(task => {
   			if (task.id === id) return {...task, title: newTitle}
   			return task;
   		}),
-  	})
+  	});
+  },
+  setMode(newMode, todoId){
+    return state => ({
+      ...state,
+      todos: state.todos.map(todo => {
+        if (todo.id === todoId) return {...todo, mode: newMode}
+        return todo;
+      }),
+    });
   },
 
 };
