@@ -77,7 +77,7 @@ const TodoHeader = ( { todo, onDel, addTask, tasks, setMode } ) => {
   <TodoHead>
     <MyModal todo={todo} onDel={onDel} addTask={addTask} />
     <TaskSettings tasks={tasks} todo={todo} setMode={setMode} />
-    <span style={{ marginLeft: '20px', marginRight: '20px'}} > { todo.title } </span>
+    <span style={{ marginLeft: '20px', marginRight: '20px'}} > <h2 style={{ display: 'inline' }} >{ todo.title } </h2> </span>
     <Progress type="circle" percent={percentCompleted} width={30} />
     <Button type="primary" size='small' style={{marginLeft: '5px', backgroundColor: 'red', border: 'none', float: 'right'}} onClick={() => onDel(todo.id)}>x</Button>
     <Button type="primary" icon="delete" size={state.size} style={{marginLeft: '10px', marginRight: '10px', marginTop: '0px', float: 'right'}} >Delete completed</Button>
