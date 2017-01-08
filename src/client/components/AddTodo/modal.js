@@ -49,9 +49,11 @@ class MyModal extends React.Component {
 
   validateTask = (todoId, value) => {
     const { addTask } = this.props;
-    addTask(value, todoId)
-    this.handleClick(value);
-    this.handleCancel();
+    if (value !== '') {
+      addTask(value, todoId)
+      this.handleClick(value);
+      this.handleCancel();
+    };
   }
 
   render() {

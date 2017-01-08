@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Select } from 'antd';
 
+const Option = Select.Option;
 
 const Title = styled.h1`
   font-size: 1.5em;
@@ -14,13 +15,13 @@ const Wrapper = styled.section`
   background: whitesmoke;
 `;
 
-const children = [];
-// for (let i = 10; i < 36; i++) {
-//   children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
-// }
 
 function handleChange(value) {
   console.log(`selected ${value}`);
+}
+const children = [];
+for (let i = 10; i < 36; i++) {
+  children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
 }
 
 const HeaderTodo = () => (
@@ -29,7 +30,7 @@ const HeaderTodo = () => (
     <div>Filter Tags:
     <Select
     multiple
-    style={{ width: '100%', display: 'inline' }}
+    style={{ width: '100%' }}
     placeholder="Please select"
     defaultValue={['a10', 'c12']}
     onChange={handleChange}

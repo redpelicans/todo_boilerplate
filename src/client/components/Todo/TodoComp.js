@@ -93,7 +93,8 @@ class TodoList extends React.Component {
                       addTask={addTask} 
                       tasks={tasks} 
                       mode={mode} 
-                      setMode={setMode} />
+                      setMode={setMode} 
+                      delTask={delTask} />
 
           <TodoContent todo={todo}
                        tasks={tasks}

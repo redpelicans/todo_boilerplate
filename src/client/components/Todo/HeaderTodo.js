@@ -8,7 +8,7 @@ import Icon from 'antd/lib/icon';
 import Task from '../Task/ManageTask'
 import Dropdown from 'antd/lib/dropdown';
 import Menu from 'antd/lib/menu';
-import {  Radio } from 'antd';
+import Radio from 'antd/lib/radio';
 
 const TodoHead = styled.div`
   border-bottom: 1px solid darkgrey;
@@ -37,10 +37,6 @@ const menu = (
   </Menu>
 );
 
- const tt = event => {
-  	console.log('tt');
-  }
-
 const TaskSettings = ( { tasks, todo, setMode } ) => {
   return (
     <div style={{ display: 'inline', float: "left" }} >
@@ -64,15 +60,19 @@ TaskSettings.propTypes = {
 }
 
 
-const TodoHeader = ( { todo, onDel, addTask, tasks, setMode } ) => {
+const TodoHeader = ( { todo, onDel, addTask, tasks, setMode, delTask } ) => {
   const state = {
     size: 'small',
   }
   const handleSizeChange = (e) => {
     this.setState({ size: e.target.value });
   }
+
+  const handleDeleteC = () => {
+    tasks.filter(task => task.checked === true && task.todoId === todo.id).map(task => {delTask(task.id)});
+  }
   const percentCompleted = parseInt(((tasks.filter(task => task.checked === true && task.todoId === todo.id).length) * 100) / (tasks.filter(task => task.todoId === todo.id).length)) || 0;
-  console.log(parseInt(percentCompleted));
+  
   return (
   <TodoHead>
     <MyModal todo={todo} onDel={onDel} addTask={addTask} />
@@ -80,7 +80,7 @@ const TodoHeader = ( { todo, onDel, addTask, tasks, setMode } ) => {
     <span style={{ marginLeft: '20px', marginRight: '20px'}} > <h2 style={{ display: 'inline' }} >{ todo.title } </h2> </span>
     <Progress type="circle" percent={percentCompleted} width={30} />
     <Button type="primary" size='small' style={{marginLeft: '5px', backgroundColor: 'red', border: 'none', float: 'right'}} onClick={() => onDel(todo.id)}>x</Button>
-    <Button type="primary" icon="delete" size={state.size} style={{marginLeft: '10px', marginRight: '10px', marginTop: '0px', float: 'right'}} >Delete completed</Button>
+    <Button type="primary" icon="delete" size={state.size} style={{marginLeft: '10px', marginRight: '10px', marginTop: '0px', float: 'right'}} onClick={handleDeleteC} >Delete completed</Button>
   </TodoHead>
   )
 };
@@ -90,6 +90,7 @@ TodoHeader.propTypes = {
   tasks: React.PropTypes.array.isRequired,
   onDel: React.PropTypes.func.isRequired,
   addTask: React.PropTypes.func.isRequired,
+  delTask: React.PropTypes.func.isRequired,
   setMode: React.PropTypes.func.isRequired,
 };
 

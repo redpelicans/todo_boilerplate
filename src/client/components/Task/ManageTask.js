@@ -13,46 +13,40 @@ class Task extends React.Component {
   }
   handleChange = (checked) => {
     const { task, manageTask } = this.props;
-    if (checked) manageTask(task.id, true);
-    else manageTask(task.id);
+    manageTask(task.id, checked);
   }
   handleUpdate = () => {
     const { onEdit } = this.state;
-    console.log(onEdit);
-    console.log(this.state.value);
     if (onEdit) this.setState({onEdit: false});
     else this.setState({onEdit: true});
-    //
   }
-
   handleUpDating = event => {
     this.setState({value: event.target.value})
   }
-  confirmUpdate = () => {
+  handleConfirmUpdate = () => {
     const { updateTask, task } = this.props;
     const { value } = this.state;
 
     updateTask(task.id, value);
     this.setState({onEdit: false});
-    this.handleChange(false);
+    this.handleChange(0);
 
   }
 
   render () {
     const { todo, task, delTask } = this.props;
     const { onEdit, value } = this.state;
-    console.log(`render task: ${task.title}`);
     return (
       <div style={{marginBottom: '15px'}} >
-        <Switch size="small" style={{float: 'left'}} defaultChecked={task.checked} onChange={this.handleChange} />
+        <Switch size="small" style={{float: 'left'}} defaultChecked={task.checked} checked={task.checked} onChange={this.handleChange} />
         {onEdit ?
           <input value={value} onChange={this.handleUpDating} />
           :
-          <span style={task.checked ? { textDecoration: 'line-through', margin: '15px' } : {margin: '15px'}}> {task.title} </span>
+          <span onDoubleClick={() => this.handleUpdate()} style={task.checked ? { textDecoration: 'line-through', margin: '15px' } : {margin: '15px'}}> {task.title} </span>
         }
         <div style={{float: 'right'}}>
         {onEdit ?
-          <Icon type="check" onClick={this.confirmUpdate} />
+          <Icon type="check" onClick={this.handleConfirmUpdate} />
           :
           <Icon style={{marginLeft: '9px'}} type="edit" onClick={() => this.handleUpdate()} />
          }

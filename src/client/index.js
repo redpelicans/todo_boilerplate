@@ -27,31 +27,31 @@ const state = {
     {
       id: 2,
       todoId: 1,
-      title: 'task 1, todoid = 1',
+      title: 'task 2, todoid = 1',
       checked: false,
     },
     {
       id: 3,
       todoId: 1,
-      title: 'task 1, todoid = 1',
+      title: 'task 3, todoid = 1',
       checked: false,
     },
     {
       id: 4,
       todoId: 2,
-      title: 'task 1, todoid = 2',
+      title: 'task 4, todoid = 2',
       checked: true,
     },
     {
       id: 5,
       todoId: 2,
-      title: 'task 1, todoid = 2',
+      title: 'task 5, todoid = 2',
       checked: false,
     },
     {
       id: 6,
       todoId: 2,
-      title: 'task 1, todoid = 2',
+      title: 'task 6, todoid = 2',
       checked: false,
     },
   ],
@@ -101,24 +101,6 @@ const actions = {
   		tasks: state.tasks.filter(task => task.id !== id),
   	});
   },
-  checkTask(id){
-  	return state => ({
-  		...state,
-  		tasks: state.tasks.map(task => {
-  			if (task.id === id) return {...task, checked: true}
-  			return task;
-  		}),
-  	});
-  },
-  unCheckTask(id){
-  	return state => ({
-  		...state,
-  		tasks: state.tasks.map(task => {
-  			if (task.id === id) return {...task, checked: false}
-  			return task;
-  		}),
-  	});
-  },
   manageTask(id, checked){
   	return state => ({
   		...state,
@@ -129,7 +111,7 @@ const actions = {
   	});
   },
   updateTask(id, newTitle){
-  	return state => ({
+    return state => ({
   		...state,
   		tasks: state.tasks.map(task => {
   			if (task.id === id) return {...task, title: newTitle}
