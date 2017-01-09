@@ -4,7 +4,7 @@ const actions = {
       ...state,
       todos: state.todos.concat({
         title: name,
-        id: state.todos[state.todos.length - 1].id + 1,
+        id: state.todos.length ? state.todos[state.todos.length - 1].id + 1 : 1,
       }),
     });
   },
@@ -20,7 +20,7 @@ const actions = {
       ...state,
       tasks: state.tasks.concat({
         ...task,
-        id: state.tasks[state.tasks.length - 1].id + 1,
+        id: state.tasks.length ? state.tasks[state.tasks.length - 1].id + 1 : 1,
         isChecked: false,
       }),
     });

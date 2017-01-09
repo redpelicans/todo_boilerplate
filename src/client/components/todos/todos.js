@@ -1,10 +1,16 @@
 import React, { PropTypes } from 'react';
-import { Row, Col } from 'antd/lib/grid';
+import styled from 'styled-components';
 import Todo from './todo';
 import { filterTodos } from '../../model';
 
+const FlexWrap = styled.section`
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+`;
+
 const Todos = ({ mode, todos, tasks, dispatch, actions }) =>
-  <Row type="flex" justify="start" align="center" gutter={16}>
+  <FlexWrap>
     {filterTodos(todos, tasks, mode).map(
       todo => <Todo
         todo={todo}
@@ -14,7 +20,7 @@ const Todos = ({ mode, todos, tasks, dispatch, actions }) =>
         key={todo.id}
       />)
     }
-  </Row>
+  </FlexWrap>
 ;
 
 Todos.propTypes = {

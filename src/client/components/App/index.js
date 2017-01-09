@@ -1,14 +1,18 @@
 import React, { PropTypes } from 'react';
+import styled from 'styled-components';
 import 'antd/dist/antd.css';
-import Layout from 'antd/lib/layout';
-import { Row, Col } from 'antd/lib/grid';
 import Menu from '../menu/menu';
 import Todos from '../todos/todos';
 
-const { Header, Content } = Layout;
+const Header = styled.header`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+`;
 
 const Title = ({ title }) => <h1>{title}</h1>;
-Title.propTypes = { title: PropTypes.string };
+Title.propTypes = { title: PropTypes.string.isRequired };
 
 class App extends React.Component {
   constructor(props) {
@@ -21,19 +25,15 @@ class App extends React.Component {
   render() {
     const { store: { state, state: { mode } }, actions } = this.props;
     return (
-      <Layout>
+      <div>
         <Header>
-          <Row type="flex" justify="center" align="center">
-            <Col>
-              <Title title={'Todo List'} />
-            </Col>
-          </Row>
+          <Title title={'Todo List'} />
         </Header>
-        <Content>
+        <section>
           <Menu dispatch={this.dispatcher} actions={actions} mode={mode} />
           <Todos dispatch={this.dispatcher} actions={actions} {...state} />
-        </Content>
-      </Layout>
+        </section>
+      </div>
     );
   }
 }

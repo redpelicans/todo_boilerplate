@@ -25,10 +25,16 @@ class AddTodo extends React.Component {
     return (
       <Form inline onSubmit={this.handleSubmit}>
         <FormItem>
-          <Input value={input} onChange={this.handleInput} placeholder="todo's title" required />
+          <Input
+            value={input}
+            onChange={this.handleInput}
+            placeholder="todo's title"
+            style={{ width: '300px' }}
+            required
+          />
         </FormItem>
         <FormItem>
-          <Button size="large" type="primary" htmlType="submit" icon="plus" />
+          <Button size="large" htmlType="submit" icon="plus" />
         </FormItem>
       </Form>
     );

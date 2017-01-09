@@ -1,8 +1,17 @@
 import React, { PropTypes } from 'react';
-import { Row, Col } from 'antd/lib/grid';
+import styled from 'styled-components';
 import CheckBox from 'antd/lib/checkbox';
 import Input from 'antd/lib/input';
 import Button from 'antd/lib/button';
+
+const Row = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const Col = styled.div``;
 
 class Task extends React.Component {
   state = {
@@ -23,7 +32,7 @@ class Task extends React.Component {
     const { input, updateMode } = this.state;
     const { task, dispatch, onDelete, onUpdate } = this.props;
     return (
-      <Row type="flex" justify="space-between" gutter={16}>
+      <Row>
         <Col>
           <CheckBox
             onChange={() => dispatch(onUpdate({ ...task, isChecked: !task.isChecked }))}
@@ -35,7 +44,7 @@ class Task extends React.Component {
               value={input}
               onChange={this.handleInput}
               size="small"
-              style={{ width: '80%' }}
+              style={{ width: '150px' }}
             />) :
             (<p style={{ display: 'inline', textDecoration: task.isChecked ? 'line-through' : '' }}>
               {task.title}
@@ -44,12 +53,8 @@ class Task extends React.Component {
         </Col>
         <Col>
           {updateMode ?
-            (<Button onClick={() => this.handleSubmit(task)} size="small">
-              send
-            </Button>) :
-            (<Button onClick={() => this.setState({ updateMode: true })} size="small">
-              update
-            </Button>)
+            (<Button onClick={() => this.handleSubmit(task)} size="small" icon="check" />) :
+            (<Button onClick={() => this.setState({ updateMode: true })} size="small" icon="edit" />)
           }
           {updateMode ||
             <Button onClick={() => dispatch(onDelete(task.id))} icon="close" size="small" />

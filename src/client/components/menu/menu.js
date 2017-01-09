@@ -1,35 +1,38 @@
 import React, { PropTypes } from 'react';
-import { Row, Col } from 'antd/lib/grid';
+import styled from 'styled-components';
 import AddTodo from './add_todo';
 import FilterTodos from './filter_todos';
 import SortTodos from './sort_todos';
 
+const Section = styled.section`
+  display: flex;
+  padding: 10px;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 100px;
+`;
+
+const Filters = styled.div`
+  align-self: flex-start;
+`;
+
 const Menu = ({ dispatch, actions, mode }) =>
-  <Row type="flex" justify="center" align="center" style={{ padding: '15px' }}>
-    <Col span="12" offset="6">
-      <Row type="flex" justify="center" align="center">
-        <AddTodo dispatch={dispatch} onAdd={actions.addTodo} />
-      </Row>
-    </Col>
-    <Col span="6">
-      <Row type="flex" justify="center" align="bottom" gutter={16}>
-        <Col>
-          <SortTodos
-            dispatch={dispatch}
-            onSwitch={actions.sortByAsc}
-            sortByAsc={mode.sortByAsc}
-          />
-        </Col>
-        <Col>
-          <FilterTodos
-            dispatch={dispatch}
-            onSwitch={actions.showCompleted}
-            showCompletedTodos={mode.showCompletedTodos}
-          />
-        </Col>
-      </Row>
-    </Col>
-  </Row>;
+  <Section>
+    <AddTodo dispatch={dispatch} onAdd={actions.addTodo} />
+    <Filters>
+      <SortTodos
+        dispatch={dispatch}
+        onSwitch={actions.sortByAsc}
+        sortByAsc={mode.sortByAsc}
+      />
+      <FilterTodos
+        dispatch={dispatch}
+        onSwitch={actions.showCompleted}
+        showCompletedTodos={mode.showCompletedTodos}
+      />
+    </Filters>
+  </Section>;
 
 Menu.propTypes = {
   dispatch: PropTypes.func.isRequired,
