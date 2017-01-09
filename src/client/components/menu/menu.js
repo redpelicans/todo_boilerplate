@@ -1,29 +1,35 @@
 import React, { PropTypes } from 'react';
-import styled from 'styled-components';
+import { Row, Col } from 'antd/lib/grid';
 import AddTodo from './add_todo';
-import Switch from './switch';
-import SortTodo from './sort_todo';
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-around;
-`;
+import FilterTodos from './filter_todos';
+import SortTodos from './sort_todos';
 
 const Menu = ({ dispatch, actions, mode }) =>
-  <Wrapper>
-    <AddTodo dispatch={dispatch} onAdd={actions.addTodo} />
-    <SortTodo
-      dispatch={dispatch}
-      onSwitch={actions.sortByAsc}
-      sortByAsc={mode.sortByAsc}
-    />
-    <Switch
-      dispatch={dispatch}
-      onSwitch={actions.showCompleted}
-      showCompletedTodos={mode.showCompletedTodos}
-    />
-  </Wrapper>;
+  <Row type="flex" justify="center" align="center" style={{ padding: '15px' }}>
+    <Col span="12" offset="6">
+      <Row type="flex" justify="center" align="center">
+        <AddTodo dispatch={dispatch} onAdd={actions.addTodo} />
+      </Row>
+    </Col>
+    <Col span="6">
+      <Row type="flex" justify="center" align="bottom" gutter={16}>
+        <Col>
+          <SortTodos
+            dispatch={dispatch}
+            onSwitch={actions.sortByAsc}
+            sortByAsc={mode.sortByAsc}
+          />
+        </Col>
+        <Col>
+          <FilterTodos
+            dispatch={dispatch}
+            onSwitch={actions.showCompleted}
+            showCompletedTodos={mode.showCompletedTodos}
+          />
+        </Col>
+      </Row>
+    </Col>
+  </Row>;
 
 Menu.propTypes = {
   dispatch: PropTypes.func.isRequired,

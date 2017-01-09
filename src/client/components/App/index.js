@@ -1,23 +1,14 @@
 import React, { PropTypes } from 'react';
-import styled from 'styled-components';
-import Header from '../header/header';
+import 'antd/dist/antd.css';
+import Layout from 'antd/lib/layout';
+import { Row, Col } from 'antd/lib/grid';
 import Menu from '../menu/menu';
 import Todos from '../todos/todos';
 
-export const Title = styled.h1`
-  font-size: 1.5em;
-  text-align: center;
-  color: palevioletred;
-`;
+const { Header, Content } = Layout;
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-flow: column nowrap;
-  margin: 0 auto;
-  min-width: 200px;
-  max-width: 600px;
-  color: #666;
-`;
+const Title = ({ title }) => <h1>{title}</h1>;
+Title.propTypes = { title: PropTypes.string };
 
 class App extends React.Component {
   constructor(props) {
@@ -30,11 +21,19 @@ class App extends React.Component {
   render() {
     const { store: { state, state: { mode } }, actions } = this.props;
     return (
-      <Wrapper>
-        <Header title="Todo APP." />
-        <Menu dispatch={this.dispatcher} actions={actions} mode={mode} />
-        <Todos dispatch={this.dispatcher} actions={actions} {...state} />
-      </Wrapper>
+      <Layout>
+        <Header>
+          <Row type="flex" justify="center" align="center">
+            <Col>
+              <Title title={'Todo List'} />
+            </Col>
+          </Row>
+        </Header>
+        <Content>
+          <Menu dispatch={this.dispatcher} actions={actions} mode={mode} />
+          <Todos dispatch={this.dispatcher} actions={actions} {...state} />
+        </Content>
+      </Layout>
     );
   }
 }

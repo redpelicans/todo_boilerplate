@@ -1,39 +1,30 @@
 import React, { PropTypes } from 'react';
-import styled from 'styled-components';
+import { Row, Col } from 'antd/lib/grid';
+import Card from 'antd/lib/card';
+import Button from 'antd/lib/button';
 import Task from './task';
 import AddTask from './add_task';
 import { matchTasksWithTodo } from '../../model';
 
-const Wrapper = styled.div`
-  border: 1px solid #ccc;
-  border-radius: 2px;
-  padding: 1em;
-  margin: 1em;
-`;
-
-const Header = styled.header`
-  display: flex;
-  padding: 10px;
-  height: 2em;
-  border-radius: 2px;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  align-items: center;
-  background: #eee;
-`;
+const TodoHeader = ({ todo, dispatch, actions }) =>
+  <Row type="flex" justify="space-between">
+    <Col>
+      {todo.title}
+    </Col>
+    <Col>
+      <Button onClick={() => dispatch(actions.delTodo(todo.id))} type="ghost" shape="circle" icon={'close'} size="small" />
+    </Col>
+  </Row>
+;
 
 const Todo = ({ todo, tasks, dispatch, actions }) =>
-  <Wrapper>
-    <Header>
-      <h1>
-        {todo.title}
-      </h1>
-      <AddTask dispatch={dispatch} onAdd={actions.addTask} todoId={todo.id} />
-      <button onClick={() => dispatch(actions.delTodo(todo.id))}>
-        supprimer
-      </button>
-    </Header>
-    <div className="todo-body">
+  <Col span={8}>
+    <Card title={<TodoHeader todo={todo} dispatch={dispatch} actions={actions} />} style={{ margin: '5px' }} bodyStyle={{ padding: '10px' }}>
+      <Row type="flex" justify="center" align="center" style={{ marginBottom: '10px' }}>
+        <Col>
+          <AddTask dispatch={dispatch} onAdd={actions.addTask} todoId={todo.id} />
+        </Col>
+      </Row>
       <ul>
         {matchTasksWithTodo(tasks, todo).map(task =>
           <li key={task.id}>
@@ -47,8 +38,8 @@ const Todo = ({ todo, tasks, dispatch, actions }) =>
           </li>
         )}
       </ul>
-    </div>
-  </Wrapper>
+    </Card>
+  </Col>
 ;
 
 Todo.propTypes = {

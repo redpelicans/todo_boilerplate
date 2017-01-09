@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react';
+import { Row, Col } from 'antd/lib/grid';
 import Todo from './todo';
 import { filterTodos } from '../../model';
 
 const Todos = ({ mode, todos, tasks, dispatch, actions }) =>
-  <div className="todos-container">
+  <Row type="flex" justify="start" align="center" gutter={16}>
     {filterTodos(todos, tasks, mode).map(
       todo => <Todo
         todo={todo}
@@ -13,7 +14,7 @@ const Todos = ({ mode, todos, tasks, dispatch, actions }) =>
         key={todo.id}
       />)
     }
-  </div>
+  </Row>
 ;
 
 Todos.propTypes = {
