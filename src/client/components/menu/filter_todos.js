@@ -7,7 +7,6 @@ const FilterTodos = ({ dispatch, onSwitch, showCompletedTodos }) =>
     unCheckedChildren="Hide Comp."
     default={showCompletedTodos}
     onChange={() => dispatch(onSwitch())}
-    style={{ width: '10em' }}
   />;
 
 FilterTodos.propTypes = {
