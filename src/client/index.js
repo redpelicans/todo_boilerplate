@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
+import 'antd/dist/antd.css';
 import App from './components/app';
 import actions from './actions';
 
@@ -29,7 +30,7 @@ const state = {
       3: {
         id: 3,
         name: 'task_2',
-        checked: false,
+        checked: true,
       },
       4: {
         id: 4,

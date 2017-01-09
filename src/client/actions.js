@@ -29,7 +29,7 @@ const actions = {
       const newState = { ...state };
       newState[TodoId] = {
         ...newState[TodoId],
-        tasks: { ...newState[todoId].tasks, [newTask.id]: newTask },
+        tasks: { ...newState[TodoId].tasks, [newTask.id]: newTask },
       };
       return newState;
     };
@@ -59,13 +59,17 @@ const actions = {
       if (state[TodoId].tasks[task.id].checked) {
         // console.log('TRUE');
         newState[TodoId].tasks[task.id].checked = !newState[TodoId].tasks[task.id].checked;
-      }
-      else {
+      } else {
         // console.log('FALSE');
         newState[TodoId].tasks[task.id].checked = !newState[TodoId].tasks[task.id].checked;
       }
       return newState;
     };
+  },
+  updateValue() {
+    // return (state) => {
+    //   return (...state);
+    // }
   },
 };
 

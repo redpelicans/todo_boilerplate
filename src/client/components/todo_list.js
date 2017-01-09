@@ -1,46 +1,32 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-import TaskList from './task_list';
-import AddTask from './add_task';
+import Todo from './todo';
 
-const Area = styled.section`
-  background: white;
-  border: solid black;
-  width: 250px;
-  padding: 1em;
-  margin-bottom: 1em;
+const TodoContainer = styled.ul`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 0;
+  margin: 0;
 `;
 
-const WrapTitle = styled.section`
-  background: grey;
-`;
-
-const TitleTodo = ({ name }) =>
-  <WrapTitle>
-    <h3>{name}</h3>
-  </WrapTitle>
-  ;
-
-TitleTodo.propTypes = {
-  name: PropTypes.string.isRequired,
-};
-
-const Todo = ({ todo, actions, store }) => {
-  const bDispatch = store.dispatch.bind(store);
+const TodoList = ({ store, actions }) => {
+  const { state: todos } = store;
   return (
-    <Area>
-      <TitleTodo name={todo.name} />
-      <button onClick={() => bDispatch(actions.deleteTodo(todo.id))}>Del</button>
-      <AddTask dispatch={bDispatch} onAddTask={actions.addTask} todoId={todo.id} />
-      <TaskList actions={actions} dispatch={bDispatch} tasks={todo.tasks} todo={todo} />
-    </Area>
+    <TodoContainer>
+      {
+        Object.values(todos).map(todo =>
+          <Todo actions={actions} store={store} todo={todo} key={todo.id} />)
+      }
+    </TodoContainer>
   );
 };
 
-Todo.propTypes = {
-  actions: PropTypes.object.isRequired,
-  todo: PropTypes.object.isRequired,
+TodoList.propTypes = {
   store: PropTypes.object.isRequired,
+  actions: PropTypes.object.isRequired,
 };
 
-export default Todo;
+export default TodoList;

@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
+import { Button, Input } from 'antd';
 
 const Wrapper = styled.section`
   margin-bottom: 10px;
@@ -17,8 +18,8 @@ class AddTodo extends React.Component {
     const { name } = this.state;
     return (
       <Wrapper>
-        <input placeholder="new todo" onChange={this.handleChange} value={name} />
-        <button onClick={this.handleClick}>Add</button>
+        <Input style={{ width: '35%' }} placeholder="new todo" onChange={this.handleChange} value={name} />
+        <Button onClick={this.handleClick}>Add</Button>
       </Wrapper>
     );
   }

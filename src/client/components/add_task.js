@@ -1,8 +1,10 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
+import { Button, Input } from 'antd';
 
 const Wrapper = styled.section`
-  margin-bottom: 10px;
+  display: flex;
+  margin: 0.5em 0;
 `;
 
 class AddTask extends React.Component {
@@ -17,8 +19,8 @@ class AddTask extends React.Component {
     const { name } = this.state;
     return (
       <Wrapper>
-        <input onChange={this.handleChange} placeholder="new task" value={name} />
-        <button onClick={this.handleClick}>Add</button>
+        <Input onChange={this.handleChange} placeholder="new task" value={name} />
+        <Button type="ghost" onClick={this.handleClick}>Add</Button>
       </Wrapper>
     );
   }
