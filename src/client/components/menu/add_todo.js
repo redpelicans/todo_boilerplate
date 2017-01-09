@@ -1,21 +1,21 @@
 import React, { PropTypes } from 'react';
-import styled from 'styled-components';
+import Form from 'antd/lib/form';
+import Input from 'antd/lib/input';
+import Button from 'antd/lib/button';
 
-const Wrapper = styled.div`
-  text-align: center;
-`;
+const FormItem = Form.Item;
 
 class AddTodo extends React.Component {
-
   state = {
     input: '',
   };
 
-  handleInputChange = e => this.setState({ input: e.target.value });
+  handleInput = e => this.setState({ input: e.target.value });
 
-  handleInputValidation = () => {
+  handleSubmit = (e) => {
     const { dispatch, onAdd } = this.props;
     const { input } = this.state;
+    e.preventDefault();
     dispatch(onAdd(input));
     this.setState({ input: '' });
   }
@@ -23,10 +23,14 @@ class AddTodo extends React.Component {
   render() {
     const { input } = this.state;
     return (
-      <Wrapper>
-        <input type="text" placeholder="title" value={input} onChange={this.handleInputChange} />
-        <button onClick={this.handleInputValidation}>+</button>
-      </Wrapper>
+      <Form inline onSubmit={this.handleSubmit}>
+        <FormItem>
+          <Input value={input} onChange={this.handleInput} placeholder="todo's title" required />
+        </FormItem>
+        <FormItem>
+          <Button size="large" type="primary" htmlType="submit" icon="plus" />
+        </FormItem>
+      </Form>
     );
   }
 }
