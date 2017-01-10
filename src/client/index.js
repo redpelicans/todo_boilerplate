@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import 'antd/dist/antd.css';
-import App from './components/app';
+import App from './components/App/index';
 import actions from './actions';
 
 const state = {

@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint src --color",
-    "test": "NODE_ENV=testing  eslint test --color && NODE_ENV=testing mocha --require babel-core/register --reporter spec ",
+    "test": "NODE_ENV=testing mocha --require babel-core/register --reporter spec \"./**/__test__/*.js\" ",
     "build:prod": "NODE_ENV=production webpack -p --config webpack.config.js --progress",
     "build:dev": "NODE_ENV=development webpack-dev-server --progress --config webpack.config.js",
     "bundle:stats": "NODE_ENV=production webpack -p --config webpack.config.js --profile --json > stats.json",
@@ -13,8 +13,6 @@
     "coverage": "NODE_ENV=testing nyc yarn test"
   },
   "dependencies": {
-    "chai": "^3.5.0",
-    "enzyme": "^2.6.0",
     "ramda": "^0.22.1",
     "react": "^15.0.2",
     "react-addons-test-utils": "^15.4.1",
@@ -27,6 +25,9 @@
     "styled-components": "^1.2.1"
   },
   "devDependencies": {
+    "sinon": "^1.17.7",
+    "chai": "^3.5.0",
+    "enzyme": "^2.6.0",
     "babel-cli": "^6.18.0",
     "babel-core": "^6.18.2",
     "babel-eslint": "^7.1.1",
@@ -34,6 +35,7 @@
     "babel-preset-latest": "^6.16.0",
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
+    "css-loader": "^0.26.1",
     "eslint": "^3.11.1",
     "eslint-config-airbnb": "^12.0.0",
     "eslint-plugin-import": "^2.2.0",
@@ -42,6 +44,7 @@
     "extract-text-webpack-plugin": "^2.0.0-beta",
     "mocha": "^3.2.0",
     "nyc": "^10.0.0",
+    "style-loader": "^0.13.1",
     "webpack": "^2.1.0-beta.26",
     "webpack-bundle-analyzer": "^1.5.0",
     "webpack-dev-server": "^2.1.0-beta.10"
@@ -53,13 +56,13 @@
   },
   "babel": {
     "presets": [
-      "stage-0",
       [
         "latest",
         {
           "modules": false
         }
       ],
+      "stage-0",
       "react"
     ]
   }

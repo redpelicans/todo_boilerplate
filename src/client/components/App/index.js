@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-import Header from './header';
-import AddTodo from './add_todo';
-import TodoList from './todo_list';
+import Header from '../header';
+import AddTodo from '../add_todo';
+import TodoList from '../todo_list';
 
 const Wrapper = styled.section`
   padding: 4em;

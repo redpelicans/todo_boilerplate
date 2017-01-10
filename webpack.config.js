@@ -26,8 +26,14 @@ const webpackConfig = {
     rules: [
       {
         test:  /\.(js|jsx)$/,
-        loader: 'babel-loader'
-      }
+        loaders: [ 'babel-loader?cacheDirectory' ],
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.css$/,
+        include: /node_modules/,
+        loaders: ['style-loader', 'css-loader'],
+      },
     ],
   },
   plugins: compact([
