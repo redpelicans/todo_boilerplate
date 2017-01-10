@@ -6,7 +6,7 @@ import Button from 'antd/lib/button';
 
 const FormItem = Form.Item;
 
-const Row = styled.div`
+export const Row = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;

@@ -2,15 +2,13 @@ import React from 'react';
 import chai from 'chai';
 import Card from 'antd/lib/card';
 import Button from 'antd/lib/button';
-// import CheckBox from 'antd/lib/checkbox';
-// import Input from 'antd/lib/input';
 import { shallow } from 'enzyme';
 import { createStore } from '../../../../store';
 import initialState from '../../../../mockup';
 import actions from '../../../../actions';
 import Todo, { Header, TodoHeader } from '..';
-import Task from '../task';
 import AddTask from '../add_task';
+import Task from '../task';
 
 const { describe, it } = global;
 const { expect } = chai;
@@ -91,7 +89,3 @@ describe('[UT] <TodoHeader />', () => {
     />).find(Button)).to.have.length(1);
   });
 });
-
-// describe('[UT] <Task />', () => {
-//   it('should')
-// });
