@@ -13,6 +13,8 @@
     "coverage": "NODE_ENV=testing nyc yarn test"
   },
   "dependencies": {
+    "babel-plugin-import": "^1.1.0",
+    "babel-plugin-ramda": "^1.1.6",
     "ramda": "^0.22.1",
     "react": "^15.0.2",
     "react-addons-test-utils": "^15.4.1",
@@ -25,9 +27,6 @@
     "styled-components": "^1.2.1"
   },
   "devDependencies": {
-    "sinon": "^1.17.7",
-    "chai": "^3.5.0",
-    "enzyme": "^2.6.0",
     "babel-cli": "^6.18.0",
     "babel-core": "^6.18.2",
     "babel-eslint": "^7.1.1",
@@ -35,7 +34,9 @@
     "babel-preset-latest": "^6.16.0",
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
+    "chai": "^3.5.0",
     "css-loader": "^0.26.1",
+    "enzyme": "^2.6.0",
     "eslint": "^3.11.1",
     "eslint-config-airbnb": "^12.0.0",
     "eslint-plugin-import": "^2.2.0",
@@ -44,6 +45,7 @@
     "extract-text-webpack-plugin": "^2.0.0-beta",
     "mocha": "^3.2.0",
     "nyc": "^10.0.0",
+    "sinon": "^1.17.7",
     "style-loader": "^0.13.1",
     "webpack": "^2.1.0-beta.26",
     "webpack-bundle-analyzer": "^1.5.0",
@@ -64,6 +66,16 @@
       ],
       "stage-0",
       "react"
+    ],
+    "plugins": [
+      "ramda",
+      [
+        "import",
+        {
+          "libraryName": "antd",
+          "style": "css"
+        }
+      ]
     ]
   }
 }
