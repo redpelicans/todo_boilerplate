@@ -3,6 +3,8 @@ coverage
 dist
 *.lock
 *.tmp
+.*DS*
 .nyc_output
 build
 *.log
+.nfs*
