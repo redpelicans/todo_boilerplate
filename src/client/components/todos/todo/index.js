@@ -4,15 +4,15 @@ import Card from 'antd/lib/card';
 import Button from 'antd/lib/button';
 import Task from './task';
 import AddTask from './add_task';
-import { matchTasksWithTodo } from '../../model';
+import { matchTasksWithTodo } from '../../../model';
 
-const Header = styled.header`
+export const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
 `;
 
-const TodoHeader = ({ todo, dispatch, actions }) =>
+export const TodoHeader = ({ todo, dispatch, actions }) =>
   <Header>
     <h3>{todo.title}</h3>
     <Button onClick={() => dispatch(actions.delTodo(todo.id))} type="ghost" shape="circle" icon={'close'} size="small" />
@@ -54,10 +54,10 @@ const Todo = ({ todo, tasks, dispatch, actions }) =>
 ;
 
 Todo.propTypes = {
-  todo: PropTypes.object,
-  tasks: PropTypes.array,
-  dispatch: PropTypes.func,
-  actions: PropTypes.object,
+  todo: PropTypes.object.isRequired,
+  tasks: PropTypes.array.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  actions: PropTypes.object.isRequired,
 };
 
 export default Todo;

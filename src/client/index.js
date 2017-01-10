@@ -1,6 +1,7 @@
 import React from 'react';
+import 'antd/dist/antd.css';
 import { render } from 'react-dom';
-import App from './components/App/index';
+import App from './components/App/';
 import { createStore, Provider } from './store';
 import initialState from './mockup';
 import actions from './actions';

@@ -1,8 +1,12 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-import 'antd/dist/antd.css';
-import Menu from '../menu/menu';
-import Todos from '../todos/todos';
+import Menu from '../menu/';
+import Todos from '../todos/';
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const Header = styled.header`
   display: flex;
@@ -11,7 +15,7 @@ const Header = styled.header`
   padding: 10px;
 `;
 
-const Title = ({ title }) => <h1>{title}</h1>;
+export const Title = ({ title }) => <h1>{title}</h1>;
 Title.propTypes = { title: PropTypes.string.isRequired };
 
 class App extends React.Component {
@@ -25,7 +29,7 @@ class App extends React.Component {
   render() {
     const { store: { state, state: { mode } }, actions } = this.props;
     return (
-      <div>
+      <Wrapper>
         <Header>
           <Title title={'Todo List'} />
         </Header>
@@ -33,7 +37,7 @@ class App extends React.Component {
           <Menu dispatch={this.dispatcher} actions={actions} mode={mode} />
           <Todos dispatch={this.dispatcher} actions={actions} {...state} />
         </section>
-      </div>
+      </Wrapper>
     );
   }
 }

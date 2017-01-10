@@ -42,8 +42,8 @@ class AddTodo extends React.Component {
 }
 
 AddTodo.propTypes = {
-  dispatch: PropTypes.func,
-  onAdd: PropTypes.func,
+  dispatch: PropTypes.func.isRequired,
+  onAdd: PropTypes.func.isRequired,
 };
 
 export default AddTodo;

@@ -10,7 +10,7 @@ const baseStore = {
   },
   dispatch(action) {
     this.state = action(this.state);
-    console.log('state : ', this.state);
+    console.log('state : ', this.state); // eslint-disable-line no-console
     this.update();
   },
 };
@@ -32,6 +32,7 @@ export class Provider extends React.Component {
 Provider.propTypes = {
   store: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
+  children: PropTypes.element.isRequired,
 };
 
 export const createStore = state => ({

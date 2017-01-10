@@ -4,7 +4,7 @@ import AddTodo from './add_todo';
 import FilterTodos from './filter_todos';
 import SortTodos from './sort_todos';
 
-const Section = styled.section`
+export const Section = styled.section`
   display: flex;
   padding: 10px;
   flex-direction: column;
@@ -13,7 +13,7 @@ const Section = styled.section`
   height: 100px;
 `;
 
-const Filters = styled.div`
+export const Filters = styled.div`
   align-self: flex-start;
 `;
 
