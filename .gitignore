@@ -3,3 +3,6 @@ coverage
 dist
 *.lock
 *.tmp
+.nyc_output
+build
+*.log
