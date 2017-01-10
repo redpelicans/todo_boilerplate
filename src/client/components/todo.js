@@ -4,7 +4,7 @@ import { Button } from 'antd';
 import TaskList from './task_list';
 import AddTask from './add_task';
 
-const Area = styled.li`
+export const Area = styled.li`
   background: white;
   list-style: none;
   border: solid black;
@@ -13,7 +13,7 @@ const Area = styled.li`
   margin: 1em 1em 0 0;
 `;
 
-const WrapTitle = styled.section`
+export const WrapTitle = styled.section`
   background: grey;
   text-align: center;
   padding: 0.5em;
@@ -21,7 +21,7 @@ const WrapTitle = styled.section`
   margin-bottom: 0.5em;
 `;
 
-const TitleTodo = ({ name }) =>
+export const TitleTodo = ({ name }) =>
   <WrapTitle>
     <h3>{name}</h3>
   </WrapTitle>

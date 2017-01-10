@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import { Button, Input } from 'antd';
 
-const Wrapper = styled.section`
+export const Wrapper = styled.section`
   margin-bottom: 10px;
 `;
 

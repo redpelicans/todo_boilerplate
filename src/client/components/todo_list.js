@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import Todo from './todo';
 
-const TodoContainer = styled.ul`
+export const TodoContainer = styled.ul`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
