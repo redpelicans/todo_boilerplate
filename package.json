@@ -13,6 +13,7 @@
     "coverage": "NODE_ENV=testing nyc yarn test"
   },
   "dependencies": {
+    "antd": "^2.6.1",
     "babel-plugin-import": "^1.1.0",
     "babel-plugin-ramda": "^1.1.6",
     "ignore-styles": "^5.0.1",

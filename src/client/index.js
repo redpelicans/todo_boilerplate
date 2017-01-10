@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import 'antd/dist/antd.css';
-import App from './components/App/index';
+import App from './components/App/app';
 import actions from './actions';
 
 const state = {
@@ -54,6 +54,8 @@ const store = {
 
 console.log('mounting react app ..');
 render(<App store={store} actions={actions} />, document.getElementById('__TODO__'));
+
+export default store;
 
 window.store = store;
 window.actions = actions;
