@@ -26,7 +26,7 @@ const webpackConfig = {
     rules: [
       {
         test:  /\.(js|jsx)$/,
-        loader: 'babel-loader',
+        loaders: [ 'babel-loader?cacheDirectory' ],
         exclude: /node_modules/,
       },
       {
