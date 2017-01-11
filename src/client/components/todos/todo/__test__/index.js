@@ -1,7 +1,6 @@
 import React from 'react';
 import chai from 'chai';
-import Card from 'antd/lib/card';
-import Button from 'antd/lib/button';
+import { Card, Button } from 'antd';
 import { shallow } from 'enzyme';
 import { createStore } from '../../../../store';
 import initialState from '../../../../mockup';

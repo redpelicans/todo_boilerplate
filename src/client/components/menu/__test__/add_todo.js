@@ -1,9 +1,7 @@
 import React from 'react';
 import chai from 'chai';
 import { shallow } from 'enzyme';
-import Form from 'antd/lib/form';
-import Input from 'antd/lib/input';
-import Button from 'antd/lib/button';
+import { Form, Input, Button } from 'antd';
 import { createStore } from '../../../store';
 import initialState from '../../../mockup';
 import actions from '../../../actions';

@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-import Card from 'antd/lib/card';
-import Button from 'antd/lib/button';
+import { Card, Button } from 'antd';
 import Task from './task';
 import AddTask from './add_task';
 import { matchTasksWithTodo } from '../../../model';

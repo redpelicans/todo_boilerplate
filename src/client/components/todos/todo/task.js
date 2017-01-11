@@ -1,8 +1,6 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-import CheckBox from 'antd/lib/checkbox';
-import Input from 'antd/lib/input';
-import Button from 'antd/lib/button';
+import { Checkbox, Button, Input } from 'antd';
 
 export const Row = styled.div`
   display: flex;
@@ -34,7 +32,7 @@ class Task extends React.Component {
     return (
       <Row>
         <Col>
-          <CheckBox
+          <Checkbox
             onChange={() => dispatch(updateTask({ ...task, isChecked: !task.isChecked }))}
             checked={task.isChecked}
           />
@@ -57,7 +55,7 @@ class Task extends React.Component {
             (<Button icon="edit" onClick={() => this.setState({ updateMode: true })} size="small" />)
           }
           {updateMode ||
-            <Button icon="close" onClick={() => dispatch(delTask(task.id))} size="small" />
+            <Button onClick={() => dispatch(delTask(task.id))} icon="close" size="small" />
           }
         </Col>
       </Row>

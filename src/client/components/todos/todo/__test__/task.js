@@ -1,7 +1,6 @@
 import React from 'react';
 import chai from 'chai';
-import CheckBox from 'antd/lib/checkbox';
-import Input from 'antd/lib/input';
+import { Checkbox, Input } from 'antd';
 import { shallow } from 'enzyme';
 import { createStore } from '../../../../store';
 import initialState from '../../../../mockup';
@@ -36,7 +35,7 @@ describe('[UT] <Task />', () => {
       task={task}
       dispatch={dispatch}
       actions={actions}
-    />).find(CheckBox)).to.have.length(1);
+    />).find(Checkbox)).to.have.length(1);
   });
 });
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import chai from 'chai';
 import { shallow } from 'enzyme';
-import Switch from 'antd/lib/switch';
+import { Switch } from 'antd';
 import { createStore } from '../../../store';
 import initialState from '../../../mockup';
 import actions from '../../../actions';

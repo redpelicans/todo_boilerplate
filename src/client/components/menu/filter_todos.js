@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import Switch from 'antd/lib/switch';
+import { Switch } from 'antd';
 
 const FilterTodos = ({ dispatch, onSwitch, showCompletedTodos }) =>
   <Switch

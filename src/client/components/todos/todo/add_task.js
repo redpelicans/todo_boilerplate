@@ -1,8 +1,6 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-import Form from 'antd/lib/form';
-import Input from 'antd/lib/input';
-import Button from 'antd/lib/button';
+import { Form, Input, Button } from 'antd';
 
 const FormItem = Form.Item;
 
