@@ -10,8 +10,8 @@ class AddTodo extends React.Component {
   state = { name: '' };
   handleChange = event => this.setState({ name: event.target.value });
   handleClick = () => {
-    const { dispatch, onAddTodo } = this.props;
-    dispatch(onAddTodo(this.state.name));
+    const { onAddTodo } = this.props;
+    onAddTodo(this.state.name);
     this.setState({ name: '' });
   };
   render() {
@@ -27,7 +27,6 @@ class AddTodo extends React.Component {
 
 AddTodo.propTypes = {
   onAddTodo: PropTypes.func.isRequired,
-  dispatch: PropTypes.func.isRequired,
 };
 
 export default AddTodo;

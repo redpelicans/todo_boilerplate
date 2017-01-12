@@ -11,7 +11,7 @@ class AddTask extends React.Component {
   state = { name: '' };
   handleChange = event => this.setState({ name: event.target.value })
   handleClick = () => {
-    const { onAddTask, dispatch, todoId } = this.props;
+    const { onAddTask, todoId } = this.props;
     dispatch(onAddTask(this.state.name, todoId));
     this.setState({ name: '' });
   };
@@ -27,7 +27,6 @@ class AddTask extends React.Component {
 }
 
 AddTask.propTypes = {
-  dispatch: PropTypes.func.isRequired,
   onAddTask: PropTypes.func.isRequired,
   todoId: PropTypes.number.isRequired,
 };

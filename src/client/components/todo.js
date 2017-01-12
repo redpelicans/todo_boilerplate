@@ -31,21 +31,17 @@ TitleTodo.propTypes = {
   name: PropTypes.string.isRequired,
 };
 
-const Todo = ({ actions, store, todo }) => {
-  const bDispatch = store.dispatch.bind(store);
-  return (
-    <Area>
-      <TitleTodo name={todo.name} />
-      <Button style={{ width: '100%' }} onClick={() => bDispatch(actions.deleteTodo(todo.id))}>Delete Todo</Button>
-      <AddTask dispatch={bDispatch} onAddTask={actions.addTask} todoId={todo.id} />
-      <TaskList actions={actions} dispatch={bDispatch} tasks={todo.tasks} todo={todo} />
-    </Area>
-  );
-};
+const Todo = ({ actions, todo }) =>
+  <Area>
+    <TitleTodo name={todo.name} />
+    <Button style={{ width: '100%' }} >Delete Todo</Button>
+    <AddTask onAddTask={actions.addTask} todoId={todo.id} />
+    <TaskList actions={actions} tasks={todo.tasks} todo={todo} />
+  </Area>
+;
 
 Todo.propTypes = {
   actions: PropTypes.object.isRequired,
-  store: PropTypes.object.isRequired,
   todo: PropTypes.object.isRequired,
 };
 

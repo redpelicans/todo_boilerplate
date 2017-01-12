@@ -38,7 +38,7 @@ class Task extends React.Component {
   }
   handleChange = event => this.setState({ value: event.target.value });
   render() {
-    const { actions, dispatch, task, todo } = this.props;
+    const { actions, task, todo } = this.props;
     const { editStatus, value } = this.state;
     const ifChecked = todo.tasks[task.id].checked;
     return (
@@ -50,14 +50,13 @@ class Task extends React.Component {
           <input onChange={this.handleChange} value={value} />
         }
         <Button type="ghost" icon="edit" onClick={this.handleEdit} />
-        <Button type="ghost" icon="delete" onClick={() => dispatch(actions.deleteTask(todo.id, task.id))} />
+        <Button type="ghost" icon="delete" onClick={() => actions.deleteTask(todo.id, task.id)} />
       </SingleTask>);
   }
 }
 
 Task.propTypes = {
   actions: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired,
   task: PropTypes.object.isRequired,
   todo: PropTypes.object.isRequired,
 };

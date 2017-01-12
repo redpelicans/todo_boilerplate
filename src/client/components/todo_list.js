@@ -12,20 +12,17 @@ export const TodoContainer = styled.ul`
   margin: 0;
 `;
 
-const TodoList = ({ store, actions }) => {
-  const { state: todos } = store;
-  return (
-    <TodoContainer>
-      {
-        Object.values(todos).map(todo =>
-          <Todo actions={actions} store={store} todo={todo} key={todo.id} />)
-      }
-    </TodoContainer>
-  );
-};
+const TodoList = ({ todos, actions }) =>
+  <TodoContainer>
+    {
+      Object.values(todos).map(todo =>
+        <Todo actions={actions} todo={todo} key={todo.id} />)
+    }
+  </TodoContainer>
+;
 
 TodoList.propTypes = {
-  store: PropTypes.object.isRequired,
+  todos: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
 };
 
