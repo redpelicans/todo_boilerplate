@@ -21,7 +21,7 @@ const Header = styled.header`
 export const Title = ({ title }) => <h1>{title}</h1>;
 Title.propTypes = { title: PropTypes.string.isRequired };
 
-const App = ({ todos, tasks, options, actions }) =>
+export const AppComponent = ({ todos, tasks, options, actions }) =>
   <Wrapper>
     <Header>
       <Title title={'Todo List'} />
@@ -32,7 +32,7 @@ const App = ({ todos, tasks, options, actions }) =>
     </section>
   </Wrapper>;
 
-App.propTypes = {
+AppComponent.propTypes = {
   todos: PropTypes.array,
   tasks: PropTypes.array,
   options: PropTypes.object,
@@ -42,4 +42,4 @@ App.propTypes = {
 const mapStateToProps = state => state;
 const mapDispatchToProps = dispatch => ({ actions: bindActionCreators(actionList, dispatch) });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(AppComponent);
