@@ -1,7 +1,10 @@
 import React, { PropTypes } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Menu from '../menu/';
 import Todos from '../todos/';
+import actionList from '../../actions/';
 
 const Wrapper = styled.div`
   display: flex;
@@ -18,33 +21,25 @@ const Header = styled.header`
 export const Title = ({ title }) => <h1>{title}</h1>;
 Title.propTypes = { title: PropTypes.string.isRequired };
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    const { store } = props;
-    /* https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-no-bind.md */
-    this.dispatcher = store.dispatch.bind(store);
-  }
-
-  render() {
-    const { store: { state, state: { mode } }, actions } = this.props;
-    return (
-      <Wrapper>
-        <Header>
-          <Title title={'Todo List'} />
-        </Header>
-        <section>
-          <Menu dispatch={this.dispatcher} actions={actions} mode={mode} />
-          <Todos dispatch={this.dispatcher} actions={actions} {...state} />
-        </section>
-      </Wrapper>
-    );
-  }
-}
+const App = ({ todos, tasks, options, actions }) =>
+  <Wrapper>
+    <Header>
+      <Title title={'Todo List'} />
+    </Header>
+    <section>
+      <Menu options={options} actions={actions} />
+      <Todos todos={todos} tasks={tasks} options={options} actions={actions} />
+    </section>
+  </Wrapper>;
 
 App.propTypes = {
-  store: PropTypes.object,
+  todos: PropTypes.array,
+  tasks: PropTypes.array,
+  options: PropTypes.object,
   actions: PropTypes.object,
 };
 
-export default App;
+const mapStateToProps = state => state;
+const mapDispatchToProps = dispatch => ({ actions: bindActionCreators(actionList, dispatch) });
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

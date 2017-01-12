@@ -10,11 +10,11 @@ const filterCompletedTodos = (todos, tasks) =>
 const sortTodos = todos =>
   todos.sort((t1, t2) => t1.title - t2.title);
 
-const filterTodos = (todos, tasks, mode) => {
+const filterTodos = (todos, tasks, options) => {
   let filtered = [...todos];
-  filtered = (mode.showCompletedTodos) ? filtered : filterCompletedTodos(filtered, tasks);
+  filtered = (options.showCompleted) ? filtered : filterCompletedTodos(filtered, tasks);
   filtered = sortTodos(filtered);
-  filtered = (mode.sortByAsc) ? filtered : filtered.reverse();
+  filtered = (options.sortByAsc) ? filtered : filtered.reverse();
   return filtered;
 };
 
