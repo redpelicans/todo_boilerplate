@@ -9,13 +9,12 @@ export const Section = styled.section`
   justify-content: center;
 `;
 
-const Todos = ({ mode, todos, tasks, dispatch, actions }) =>
+const Todos = ({ todos, tasks, options, actions }) =>
   <Section>
-    {filterTodos(todos, tasks, mode).map(
+    {filterTodos(todos, tasks, options).map(
       todo => <Todo
         todo={todo}
         tasks={tasks}
-        dispatch={dispatch}
         actions={actions}
         key={todo.id}
       />)
@@ -24,10 +23,9 @@ const Todos = ({ mode, todos, tasks, dispatch, actions }) =>
 ;
 
 Todos.propTypes = {
-  mode: PropTypes.object.isRequired,
   todos: PropTypes.array.isRequired,
   tasks: PropTypes.array.isRequired,
-  dispatch: PropTypes.func.isRequired,
+  options: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
 };
 
