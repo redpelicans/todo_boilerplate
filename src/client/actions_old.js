@@ -57,10 +57,8 @@ const actions = {
       console.log('Launch action toggleCompleted()');
       const newState = { ...state };
       if (state[TodoId].tasks[task.id].checked) {
-        // console.log('TRUE');
         newState[TodoId].tasks[task.id].checked = !newState[TodoId].tasks[task.id].checked;
       } else {
-        // console.log('FALSE');
         newState[TodoId].tasks[task.id].checked = !newState[TodoId].tasks[task.id].checked;
       }
       return newState;

@@ -12,7 +12,7 @@ class AddTask extends React.Component {
   handleChange = event => this.setState({ name: event.target.value })
   handleClick = () => {
     const { onAddTask, todoId } = this.props;
-    dispatch(onAddTask(this.state.name, todoId));
+    onAddTask(this.state.name, todoId);
     this.setState({ name: '' });
   };
   render() {

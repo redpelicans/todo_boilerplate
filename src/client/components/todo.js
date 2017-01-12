@@ -31,14 +31,19 @@ TitleTodo.propTypes = {
   name: PropTypes.string.isRequired,
 };
 
-const Todo = ({ actions, todo }) =>
-  <Area>
-    <TitleTodo name={todo.name} />
-    <Button style={{ width: '100%' }} >Delete Todo</Button>
-    <AddTask onAddTask={actions.addTask} todoId={todo.id} />
-    <TaskList actions={actions} tasks={todo.tasks} todo={todo} />
-  </Area>
-;
+const Todo = ({ actions, todo }) => {
+  const handleClick = () => {
+    actions.deleteTodo(todo.id);
+  };
+  return (
+    <Area>
+      <TitleTodo name={todo.name} />
+      <Button style={{ width: '100%' }} onClick={handleClick}>Delete Todo</Button>
+      <AddTask onAddTask={actions.addTask} todoId={todo.id} />
+      <TaskList actions={actions} tasks={todo.tasks} todo={todo} />
+    </Area>
+  );
+};
 
 Todo.propTypes = {
   actions: PropTypes.object.isRequired,
