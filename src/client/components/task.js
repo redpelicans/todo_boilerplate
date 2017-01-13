@@ -2,13 +2,13 @@ import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import { Switch, Button } from 'antd';
 
-const SingleTask = styled.div`
+export const SingleTask = styled.div`
   display: flex;
   list-style: none;
   align-items: center;
 `;
 
-const TaskName = styled.span`
+export const TaskName = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,19 +22,18 @@ class Task extends React.Component {
     value: this.props.task.name,
   }
   handleToggle = () => {
-    const { actions, dispatch, task, todo } = this.props;
-    dispatch(actions.toggleCompleted(todo.id, task));
+    const { actions, task, todo } = this.props;
+    actions.toggleCompleted(todo.id, task);
   }
   handleEdit = () => {
-    const { actions, dispatch } = this.props;
+    const { actions } = this.props;
     const { editStatus } = this.state;
-    console.log('Launch Edit task');
     if (editStatus) {
       this.setState({ editStatus: false });
     } else {
       this.setState({ editStatus: true });
     }
-    dispatch(actions.updateValue());
+    actions.updateValue();
   }
   handleChange = event => this.setState({ value: event.target.value });
   render() {

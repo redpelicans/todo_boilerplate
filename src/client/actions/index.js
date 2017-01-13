@@ -2,6 +2,7 @@ export const ADD_TODO = 'todo/addTodo';
 export const DELETE_TODO = 'todo/deleteTodo';
 export const ADD_TASK = 'task/addTask';
 export const DELETE_TASK = 'task/deleteTask';
+export const TOGGLE_COMPLETED = 'task/toggleCompleted';
 
 let todoId = 2;
 let taskId = 4;
@@ -28,9 +29,16 @@ export const deleteTask = (IDtodo, IDtask) => ({
   idTask: IDtask,
 });
 
+export const toggleCompleted = (IDtodo, IDtask) => ({
+  type: TOGGLE_COMPLETED,
+  idTodo: IDtodo,
+  idTask: IDtask,
+});
+
 export default {
   addTodo,
   deleteTodo,
   addTask,
   deleteTask,
+  toggleCompleted,
 };

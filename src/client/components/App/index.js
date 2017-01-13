@@ -12,7 +12,7 @@ export const Wrapper = styled.section`
   background: papayawhip;
 `;
 
-const App = ({ todos, actions }) =>
+export const App = ({ todos, actions }) =>
   <Wrapper>
     <Header />
     <AddTodo onAddTodo={actions.addTodo} />
