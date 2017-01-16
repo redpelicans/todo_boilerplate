@@ -27,7 +27,7 @@ describe('[UT] <Todos />', () => {
     expect(shallow(<Todos
       options={{}}
       todos={todos}
-      tasks={[]}
+      tasks={{}}
       actions={{}}
     />).find(Section)).to.have.length(1);
   });
@@ -36,7 +36,7 @@ describe('[UT] <Todos />', () => {
     expect(shallow(<Todos
       options={{}}
       todos={todos}
-      tasks={[]}
+      tasks={{}}
       actions={{}}
     />).find(Todo)).to.have.length(todos.length);
   });

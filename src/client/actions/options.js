@@ -1,12 +1,12 @@
 export const SHOW_COMPLETED = 'filters/showCompleted';
 export const SORT_BY_ASC = 'filters/sortByAsc';
 
-const showCompleted = () => ({
+export const showCompleted = () => ({
   type: SHOW_COMPLETED,
 });
 
-const sortByAsc = () => ({
+export const sortByAsc = () => ({
   type: SORT_BY_ASC,
 });
 
-export { showCompleted, sortByAsc };
+export default { showCompleted, sortByAsc };

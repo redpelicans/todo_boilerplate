@@ -3,24 +3,24 @@ export const DEL_TASK = 'tasks/delTask';
 export const UPDATE_TASK = 'tasks/updateTask';
 export const TOGGLE_TASK = 'tasks/toggleTask';
 
-const addTask = (title, todoId) => ({
+export const addTask = (title, todoId) => ({
   type: ADD_TASK,
   payload: { title, todoId, isChecked: false },
 });
 
-const delTask = id => ({
+export const delTask = id => ({
   type: DEL_TASK,
   payload: { id },
 });
 
-const updateTask = (id, title) => ({
+export const updateTask = (id, title) => ({
   type: UPDATE_TASK,
   payload: { id, title },
 });
 
-const toggleTask = id => ({
+export const toggleTask = id => ({
   type: TOGGLE_TASK,
   payload: { id },
 });
 
-export { addTask, delTask, updateTask, toggleTask };
+export default { addTask, delTask, updateTask, toggleTask };

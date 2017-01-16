@@ -7,7 +7,7 @@ import Todos from '../../todos/';
 
 const { describe, it } = global;
 const { expect } = chai;
-const props = { todos: [], tasks: [], options: {}, actions: {} };
+const props = { todos: [], tasks: {}, options: {}, actions: {} };
 
 describe('[UT] <App />', () => {
   it('should render a <Title />', () => {

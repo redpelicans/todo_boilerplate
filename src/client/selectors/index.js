@@ -21,7 +21,7 @@ const reduceTasksWithTodoId = tasks =>
   }),
   {});
 
-const filterCompletedTodos = (todos, tasks) =>
+const filterCompletedTodos = (todos, tasks = []) =>
   todos.filter(todo =>
     tasks[todo.id].some(task => task.isChecked === false) || tasks[todo.id].length === 0);
 
