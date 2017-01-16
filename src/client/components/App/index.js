@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Menu from '../menu/';
 import Todos from '../todos/';
 import actionList from '../../actions/';
+import { todosSelector, tasksSelector } from '../../selectors/';
 
 const Wrapper = styled.div`
   display: flex;
@@ -28,18 +29,23 @@ export const AppComponent = ({ todos, tasks, options, actions }) =>
     </Header>
     <section>
       <Menu options={options} actions={actions} />
-      <Todos todos={todos} tasks={tasks} options={options} actions={actions} />
+      <Todos todos={todos} tasks={tasks} actions={actions} />
     </section>
   </Wrapper>;
 
 AppComponent.propTypes = {
   todos: PropTypes.array,
-  tasks: PropTypes.array,
+  tasks: PropTypes.object,
   options: PropTypes.object,
   actions: PropTypes.object,
 };
 
-const mapStateToProps = state => state;
+const mapStateToProps = state => ({
+  todos: todosSelector(state),
+  tasks: tasksSelector(state),
+  options: state.options,
+});
+
 const mapDispatchToProps = dispatch => ({ actions: bindActionCreators(actionList, dispatch) });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppComponent);
