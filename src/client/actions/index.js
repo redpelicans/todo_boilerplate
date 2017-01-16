@@ -29,10 +29,10 @@ export const deleteTask = (IDtodo, IDtask) => ({
   idTask: IDtask,
 });
 
-export const toggleCompleted = (IDtodo, IDtask) => ({
+export const toggleCompleted = (IDtodo, task) => ({
   type: TOGGLE_COMPLETED,
   idTodo: IDtodo,
-  idTask: IDtask,
+  task,
 });
 
 export default {

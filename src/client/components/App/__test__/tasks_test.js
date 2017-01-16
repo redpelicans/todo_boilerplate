@@ -5,13 +5,14 @@ import { Button, Input } from 'antd';
 import AddTask, { Wrapper } from '../../add_task';
 import Task, { SingleTask, TaskName } from '../../task';
 import actions, { addTask } from '../../../actions';
-import store from '../../../mystore';
+import store from '../../../store';
+import state from '../../../mystate';
 
 const { describe, it } = global;
 const { expect } = chai;
 const dispatch = store.dispatch;
-const task = store.state.todos[1].tasks[1];
-const todo = store.state.todos[1];
+const task = state.todos[1].tasks[1];
+const todo = state.todos[1];
 
 describe('[UT] <AddTask />', () => {
   it('should render a  <Wrapper />', () => {

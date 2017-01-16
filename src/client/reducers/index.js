@@ -3,9 +3,10 @@ import {
   DELETE_TODO,
   ADD_TASK,
   DELETE_TASK,
+  TOGGLE_COMPLETED,
 } from '../actions';
 
-const todosReducer = (state = {}, action) => {
+export const todosReducer = (state = {}, action) => {
   switch (action.type) {
     case ADD_TODO: {
       const { todo2add } = action;
@@ -19,10 +20,9 @@ const todosReducer = (state = {}, action) => {
     case DELETE_TODO: {
       const newTodo = {};
       const { todos } = state;
-      const todoList = Object.values(todos);
-      todoList.forEach((todo) => {
-        if (todo.id !== action.id) {
-          newTodo[todo.id] = todo;
+      Object.keys(todos).forEach((id) => {
+        if (id !== String(action.id)) {
+          newTodo[id] = todos[id];
         }
       });
       const newStateDel = { ...state, todos: newTodo };
@@ -39,13 +39,13 @@ const todosReducer = (state = {}, action) => {
       return newStateAddTask;
     }
     case DELETE_TASK: {
-      const { todos: todos2del } = state;
+      const { todos } = state;
       const { idTodo, idTask } = action;
+      const { tasks } = todos[idTodo];
       const newTasks = {};
-      const tasks = Object.values(todos2del[idTodo].tasks);
-      tasks.forEach((task2save) => {
-        if (task2save.id !== idTask) {
-          newTasks[task2save.id] = task2save;
+      Object.keys(tasks).forEach((id) => {
+        if (id !== String(idTask)) {
+          newTasks[id] = tasks[id];
         }
       });
       const newState = { ...state };
@@ -56,6 +56,20 @@ const todosReducer = (state = {}, action) => {
         },
       };
       return newState;
+    }
+    case TOGGLE_COMPLETED: {
+      const { idTodo, task } = action;
+      // console.log('checkd?:    ', task.checked);
+      const newStateToggle = { ...state };
+      if (state.todos[idTodo].tasks[task.id].checked) {
+        newStateToggle.todos[idTodo].tasks[task.id].checked =
+          !newStateToggle.todos[idTodo].tasks[task.id].checked;
+      } else {
+        newStateToggle.todos[idTodo].tasks[task.id].checked =
+          !newStateToggle.todos[idTodo].tasks[task.id].checked;
+      }
+      // console.log('checkd?:    ', task.checked);
+      return newStateToggle;
     }
     default: return state;
   }
