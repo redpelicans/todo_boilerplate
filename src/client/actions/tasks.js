@@ -5,7 +5,7 @@ export const TOGGLE_TASK = 'tasks/toggleTask';
 
 const addTask = (title, todoId) => ({
   type: ADD_TASK,
-  payload: { title, todoId },
+  payload: { title, todoId, isChecked: false },
 });
 
 const delTask = id => ({
@@ -23,4 +23,4 @@ const toggleTask = id => ({
   payload: { id },
 });
 
-export default { addTask, delTask, updateTask, toggleTask };
+export { addTask, delTask, updateTask, toggleTask };

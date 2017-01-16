@@ -9,4 +9,4 @@ const sortByAsc = () => ({
   type: SORT_BY_ASC,
 });
 
-export default { showCompleted, sortByAsc };
+export { showCompleted, sortByAsc };

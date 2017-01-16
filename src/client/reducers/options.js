@@ -1,6 +1,6 @@
 import { SHOW_COMPLETED, SORT_BY_ASC } from '../actions/options';
 
-const options = (state = {}, action) => {
+const options = (state = {}, action = {}) => {
   switch (action.type) {
     case SHOW_COMPLETED:
       return { ...state, showCompleted: !state.showCompleted };
