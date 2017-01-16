@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import Todo from './todo/';
-import { filterTodos } from '../../model';
 
 export const Section = styled.section`
   display: flex;
@@ -9,12 +8,12 @@ export const Section = styled.section`
   justify-content: center;
 `;
 
-const Todos = ({ todos, tasks, options, actions }) =>
+const Todos = ({ todos, tasks, actions }) =>
   <Section>
-    {filterTodos(todos, tasks, options).map(
-      todo => <Todo
+    {todos.map(todo =>
+      <Todo
         todo={todo}
-        tasks={tasks}
+        tasks={tasks[todo.id]}
         actions={actions}
         key={todo.id}
       />)
@@ -24,8 +23,7 @@ const Todos = ({ todos, tasks, options, actions }) =>
 
 Todos.propTypes = {
   todos: PropTypes.array.isRequired,
-  tasks: PropTypes.array.isRequired,
-  options: PropTypes.object.isRequired,
+  tasks: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
 };
 

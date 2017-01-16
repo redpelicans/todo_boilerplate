@@ -2,7 +2,7 @@ import { ADD_TODO, DEL_TODO } from '../actions/todos';
 
 let todoId = 3;
 
-const todos = (state = [], action) => {
+const todos = (state = [], action = {}) => {
   const { type, payload } = action;
 
   switch (type) {

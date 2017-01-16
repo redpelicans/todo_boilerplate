@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Card, Button } from 'antd';
 import Task from './task';
 import AddTask from './add_task';
-import { matchTasksWithTodo } from '../../../model';
 
 export const Header = styled.header`
   display: flex;
@@ -23,7 +22,7 @@ TodoHeader.propTypes = {
   actions: PropTypes.object.isRequired,
 };
 
-const Todo = ({ todo, tasks, actions }) =>
+const Todo = ({ todo, tasks = [], actions }) =>
   <Card
     title={
       <TodoHeader
@@ -35,14 +34,15 @@ const Todo = ({ todo, tasks, actions }) =>
   >
     <AddTask onAdd={actions.addTask} todoId={todo.id} />
     <ul>
-      {matchTasksWithTodo(tasks, todo).map(task =>
-        <li key={task.id}>
-          <Task
-            task={task}
-            actions={actions}
-            key={task.id}
-          />
-        </li>
+      {
+        tasks.map(task =>
+          <li key={task.id}>
+            <Task
+              task={task}
+              actions={actions}
+              key={task.id}
+            />
+          </li>
       )}
     </ul>
   </Card>
@@ -50,7 +50,7 @@ const Todo = ({ todo, tasks, actions }) =>
 
 Todo.propTypes = {
   todo: PropTypes.object.isRequired,
-  tasks: PropTypes.array.isRequired,
+  tasks: PropTypes.array,
   actions: PropTypes.object.isRequired,
 };
 

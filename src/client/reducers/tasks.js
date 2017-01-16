@@ -3,7 +3,7 @@ import { DEL_TODO } from '../actions/todos';
 
 let taskId = 5;
 
-const tasks = (state = [], action) => {
+const tasks = (state = [], action = {}) => {
   const { type, payload } = action;
 
   switch (type) {
