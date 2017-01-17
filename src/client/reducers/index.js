@@ -1,22 +1,17 @@
 import {
-  ADD_TODO,
+  TODO_ADDED,
   DELETE_TODO,
-  ADD_TASK,
+  TASKS_LOADED,
+  TODOS_LOADED,
+  TASK_ADDED,
   DELETE_TASK,
   TOGGLE_COMPLETED,
 } from '../actions';
 
 export const todosReducer = (state = {}, action) => {
   switch (action.type) {
-    case ADD_TODO: {
-      const { todo2add } = action;
-      const newStateAddTodo = { ...state };
-      newStateAddTodo.todos = {
-        ...newStateAddTodo.todos,
-        [todo2add.id]: { ...todo2add },
-      };
-      return newStateAddTodo;
-    }
+    case TODO_ADDED:
+      return { ...state, todos: [...state.todos, action.todo] };
     case DELETE_TODO: {
       const newTodo = {};
       const { todos } = state;
@@ -28,15 +23,11 @@ export const todosReducer = (state = {}, action) => {
       const newStateDel = { ...state, todos: newTodo };
       return newStateDel;
     }
-    case ADD_TASK: {
-      const { task, id } = action;
-      const newStateAddTask = { ...state };
-      newStateAddTask.todos = {
-        ...newStateAddTask.todos,
-        [id]: { ...state.todos[id],
-          tasks: { ...state.todos[id].tasks, [task.id]: { ...task, checked: false } } },
-      };
-      return newStateAddTask;
+    case TODOS_LOADED: {
+      return { ...state, todos: action.payload };
+    }
+    case TASK_ADDED: {
+      return { ...state, tasks: [...state.tasks, action.task] };
     }
     case DELETE_TASK: {
       const { todos } = state;
@@ -57,6 +48,8 @@ export const todosReducer = (state = {}, action) => {
       };
       return newState;
     }
+    case TASKS_LOADED:
+      return { ...state, tasks: action.payload };
     case TOGGLE_COMPLETED: {
       const { idTodo, task } = action;
       // console.log('checkd?:    ', task.checked);

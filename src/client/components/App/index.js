@@ -12,16 +12,17 @@ export const Wrapper = styled.section`
   background: papayawhip;
 `;
 
-export const App = ({ todos, actions }) =>
+export const App = ({ todos, tasks, actions }) =>
   <Wrapper>
     <Header />
     <AddTodo onAddTodo={actions.addTodo} />
-    <TodoList todos={todos} actions={actions} />
+    <TodoList tasks={tasks} todos={todos} actions={actions} />
   </Wrapper>
   ;
 
 App.propTypes = {
-  todos: PropTypes.object.isRequired,
+  todos: PropTypes.array.isRequired,
+  tasks: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired,
 };
 

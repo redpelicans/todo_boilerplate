@@ -12,17 +12,18 @@ export const TodoContainer = styled.ul`
   margin: 0;
 `;
 
-const TodoList = ({ todos, actions }) =>
+const TodoList = ({ tasks, todos, actions }) =>
   <TodoContainer>
     {
-      Object.values(todos).map(todo =>
-        <Todo actions={actions} todo={todo} key={todo.id} />)
+      todos.map(todo =>
+        <Todo actions={actions} tasks={tasks} todo={todo} key={todo.id} />)
     }
   </TodoContainer>
 ;
 
 TodoList.propTypes = {
-  todos: PropTypes.object.isRequired,
+  todos: PropTypes.array.isRequired,
+  tasks: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired,
 };
 

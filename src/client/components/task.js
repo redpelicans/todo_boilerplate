@@ -19,7 +19,7 @@ export const TaskName = styled.span`
 class Task extends React.Component {
   state = {
     editStatus: true,
-    value: this.props.task.name,
+    value: this.props.task.description,
   }
   handleToggle = () => {
     const { actions, task, todo } = this.props;
@@ -38,13 +38,17 @@ class Task extends React.Component {
   handleChange = event => this.setState({ value: event.target.value });
   render() {
     const { actions, task, todo } = this.props;
+    // console.log('task:    ', task);
+    // console.log('todo.id:    ', todo.id);
+    // console.log('task.listId:    ', task.listId);
+    // console.log('task.description:    ', task.description);
     const { editStatus, value } = this.state;
-    const ifChecked = todo.tasks[task.id].checked;
+    const ifChecked = false;
     return (
       <SingleTask>
         <Switch checked={ifChecked} defaultChecked={ifChecked} onChange={this.handleToggle} />
         { editStatus ?
-          <TaskName>{ task.name }</TaskName>
+          <TaskName>{ task.description }</TaskName>
         :
           <input onChange={this.handleChange} value={value} />
         }

@@ -1,15 +1,16 @@
 import chai from 'chai';
 import { todosReducer } from '../../reducers';
-import { todos } from '../../mystate';
 import { ADD_TODO, DELETE_TODO, ADD_TASK, DELETE_TASK } from '../../actions';
 
 const { describe, it } = global;
 const { expect } = chai;
 
+// console.log('todos:   ', todos);
+
 describe('[UT] todo reducers', () => {
   it('should handle a ADD_TODO', () => {
     expect(
-      todosReducer({ todos }, {
+      todosReducer({}, {
         type: ADD_TODO,
         todo2add: {
           id: 1,
