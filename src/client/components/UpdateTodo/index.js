@@ -8,19 +8,19 @@ import ModalInput from '../ModalInput';
 export default class UpdateTodo extends React.Component {
   state = {
     visible: false,
-    value: this.props.value,
+    value: this.props.label,
   }
 
   componentWillReceiveProps = (newProps) => {
-    this.setState({ value: newProps.value });
+    this.setState({ value: newProps.label });
   }
 
   updateTodo = () => {
     const { value } = this.state;
-    const { dispatch, actions, todoID } = this.props;
+    const { actions, listId } = this.props;
 
     if (!value || value.length > 1000) return false;
-    dispatch(actions.todo.updateTodo({ todoID, title: value }));
+    actions.todo.update({ id: listId, label: value });
     this.setState({ visible: false });
     return (true);
   }
@@ -68,8 +68,7 @@ export default class UpdateTodo extends React.Component {
 }
 
 UpdateTodo.propTypes = {
-  value: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
   actions: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired,
-  todoID: PropTypes.number.isRequired,
+  listId: PropTypes.number.isRequired,
 };

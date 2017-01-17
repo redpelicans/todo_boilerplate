@@ -14,29 +14,31 @@ const TodoList = styled.ul`
   padding: 0;
 `;
 
-const drawTodos = (todos, actions, dispatch) => todos.map(todo =>
+const linkTasks = (id, tasks) => tasks.filter(task => task.listId === id);
+
+const drawTodos = (todos, tasks, actions) => todos.map(todo =>
   <TodoEl
     key={todo.id}
-    tasks={todo.tasks}
+    tasks={linkTasks(todo.id, tasks)}
     actions={actions}
-    dispatch={dispatch}
-    todoID={todo.id}
+    listId={todo.id}
   >
-    {todo.title}
-  </TodoEl>
+    {todo.label}
+  </TodoEl>,
 );
 
-const TodoContainer = ({ store, actions }) =>
+const TodoContainer = ({ todos, tasks, actions }) =>
   <MainContainer>
-    <AddTodo store={store} actions={actions} />
+    <AddTodo todos={todos} actions={actions} />
     <TodoList>
-      {drawTodos(store.state, actions, store.dispatch.bind(store))}
+      {drawTodos(todos, tasks, actions)}
     </TodoList>
   </MainContainer>
 ;
 
 TodoContainer.propTypes = {
-  store: PropTypes.object.isRequired,
+  todos: PropTypes.array.isRequired,
+  tasks: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired,
 };
 

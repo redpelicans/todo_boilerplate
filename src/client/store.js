@@ -1,35 +1,41 @@
-import React, { PropTypes } from 'react';
+import { createStore, applyMiddleware } from 'redux';
+import createLogger from 'redux-logger';
+import thunkMiddleware from 'redux-thunk';
+import reducers from './reducers';
+import { initialState, getInitialTodos, getInitialTasks } from './initialState';
+import { INITIAL_TODOS_LOADED } from './actions/todos';
+import { INITIAL_TASKS_LOADED } from './actions/tasks';
 
-const storeGen = {
-  listeners: [],
-  listen(cb) { this.listeners.push(cb); },
-  callListeners() { this.listeners.forEach(cb => cb()); },
-  dispatch(action) {
-    this.state = action(this.state);
-    this.callListeners();
-  },
-};
+const logger = createLogger();
 
-export const createStore = state => ({ ...storeGen, state });
-
-export class Provider extends React.Component {
-
-  componentWillMount() {
-    const { store } = this.props;
-    store.listen(() => this.forceUpdate());
-  }
-
-  render() {
-    const { children, store, actions } = this.props;
-    return React.cloneElement(
-      React.Children.only(children),
-      { store, actions },
+const generateStore = (mode) => {
+  if (mode === 'development') {
+    return createStore(
+      reducers,
+      initialState,
+      applyMiddleware(
+        logger,
+        thunkMiddleware,
+      ),
     );
   }
-}
-
-Provider.propTypes = {
-  store: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired,
-  children: PropTypes.object.isRequired,
+  return createStore(
+    reducers,
+    initialState,
+    applyMiddleware(
+      thunkMiddleware,
+    ),
+  );
 };
+
+const store = generateStore(process.env.NODE_ENV);
+
+getInitialTodos((data) => {
+  store.dispatch({ type: INITIAL_TODOS_LOADED, payload: data });
+});
+
+getInitialTasks((data) => {
+  store.dispatch({ type: INITIAL_TASKS_LOADED, payload: data });
+});
+
+export default store;

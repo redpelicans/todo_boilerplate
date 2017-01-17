@@ -26,9 +26,9 @@ export default class AddTask extends React.Component {
 
   saveTask = () => {
     const { value } = this.state;
-    const { dispatch, actions, todoID } = this.props;
+    const { actions, listId } = this.props;
 
-    dispatch(actions.todo.addTask({ title: value, todoID }));
+    actions.task.add({ description: value, isCompleted: false, listId });
     this.setState({ value: '', visible: false });
   }
 
@@ -62,7 +62,6 @@ export default class AddTask extends React.Component {
 }
 
 AddTask.propTypes = {
-  dispatch: PropTypes.func.isRequired,
   actions: PropTypes.object.isRequired,
-  todoID: PropTypes.number.isRequired,
+  listId: PropTypes.number.isRequired,
 };

@@ -39,14 +39,12 @@ export default class AddTodo extends React.Component {
   addTodo = (e) => {
     e.preventDefault();
 
-    const { store, actions } = this.props;
-    const { dispatch } = store;
+    const { actions } = this.props;
     const { value } = this.state;
-    const bDispatch = dispatch.bind(store);
 
     if (!value) return false;
 
-    bDispatch(actions.todo.createTodo(value));
+    actions.todo.create({ label: value });
     this.setState({ value: '' });
     return true;
   }
@@ -70,6 +68,5 @@ export default class AddTodo extends React.Component {
 }
 
 AddTodo.propTypes = {
-  store: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
 };

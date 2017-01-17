@@ -59,55 +59,43 @@ const TaskControls = styled.div`
   display: flex;
 `;
 
-const drawTasks = (tasks, dispatch, actions, todoID) => tasks.map(task =>
+const drawTasks = (tasks, actions) => tasks.map(task =>
   <TaskContainer key={task.id}>
     <TaskTitle
-      checked={task.checked}
-      onClick={() => dispatch(actions.todo.updateTask({
-        todoID,
-        taskID: task.id,
-        checked: !task.checked,
-      }))}
+      checked={task.isCompleted}
+      onClick={() => actions.task.update({
+        ...task,
+        isCompleted: !task.isCompleted,
+      })}
     >
-      {task.title}
+      {task.description}
     </TaskTitle>
     <TaskControls>
-      <UpdateTask
-        dispatch={dispatch}
-        actions={actions}
-        todoID={todoID}
-        taskID={task.id}
-        value={task.title}
-      />
-      <Button
-        onClick={() => dispatch(
-          actions.todo.removeTask({ taskID: task.id, todoID })
-        )}
-      >
+      <UpdateTask actions={actions} task={task} />
+      <Button onClick={() => actions.task.remove(task.id)}>
         &#10006;
       </Button>
     </TaskControls>
-  </TaskContainer>
+  </TaskContainer>,
 );
 
-const TodoEl = ({ children, tasks, dispatch, actions, todoID }) =>
+const TodoEl = ({ children, tasks, actions, listId }) =>
   <TodoBlock>
     <TopTodo>
       <TodoTitle>{children}</TodoTitle>
-      <AddTask dispatch={dispatch} actions={actions} todoID={todoID} />
-      <UpdateTodo dispatch={dispatch} actions={actions} todoID={todoID} value={children} />
-      <RemoveTodo dispatch={dispatch} actions={actions} todoID={todoID} />
+      <AddTask actions={actions} listId={listId} />
+      <UpdateTodo actions={actions} listId={listId} label={children} />
+      <RemoveTodo actions={actions} listId={listId} />
     </TopTodo>
-    <TasksList>{drawTasks(tasks, dispatch, actions, todoID)}</TasksList>
+    <TasksList>{drawTasks(tasks, actions)}</TasksList>
   </TodoBlock>
 ;
 
 TodoEl.propTypes = {
   children: PropTypes.string.isRequired,
   tasks: PropTypes.array.isRequired,
-  dispatch: PropTypes.func.isRequired,
   actions: PropTypes.object.isRequired,
-  todoID: PropTypes.number.isRequired,
+  listId: PropTypes.number.isRequired,
 };
 
 export default TodoEl;

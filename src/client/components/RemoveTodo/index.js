@@ -14,9 +14,9 @@ export default class RemoveTodo extends React.Component {
   showModal = () => this.setState({ visible: true })
 
   removeTodo = () => {
-    const { dispatch, actions, todoID } = this.props;
+    const { actions, listId } = this.props;
 
-    dispatch(actions.todo.removeTodo(todoID));
+    actions.todo.remove(listId);
   }
 
   render() {
@@ -41,7 +41,6 @@ export default class RemoveTodo extends React.Component {
 }
 
 RemoveTodo.propTypes = {
-  dispatch: PropTypes.func.isRequired,
   actions: PropTypes.object.isRequired,
-  todoID: PropTypes.number.isRequired,
+  listId: PropTypes.number.isRequired,
 };
