@@ -9,19 +9,19 @@ const addAction = addTodo('todo test 4');
 const delAction = delTodo(1);
 
 const initialState = [
-  { id: 1, title: 'todo test 1' },
-  { id: 2, title: 'todo test 2' },
-  { id: 3, title: 'todo test 3' },
+  { id: 1, label: 'todo test 1' },
+  { id: 2, label: 'todo test 2' },
+  { id: 3, label: 'todo test 3' },
 ];
 
 const stateAfterAdd = [
   ...initialState,
-  { id: 4, title: 'todo test 4' },
+  { id: 4, label: 'todo test 4' },
 ];
 
 const stateAfterDel = [
-  { id: 2, title: 'todo test 2' },
-  { id: 3, title: 'todo test 3' },
+  { id: 2, label: 'todo test 2' },
+  { id: 3, label: 'todo test 3' },
 ];
 
 describe('[UT] [Reducer] todos', () => {

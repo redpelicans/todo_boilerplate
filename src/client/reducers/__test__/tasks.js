@@ -13,31 +13,31 @@ const toggleAction = toggleTask(1);
 const delTodoAction = delTodo(1);
 
 const initialState = [
-  { id: 1, todoId: 1, title: 'task test 1', isChecked: false },
-  { id: 2, todoId: 1, title: 'task test 2', isChecked: false },
-  { id: 3, todoId: 2, title: 'task test 3', isChecked: true },
+  { id: 1, listId: 1, description: 'task test 1', isCompleted: false },
+  { id: 2, listId: 1, description: 'task test 2', isCompleted: false },
+  { id: 3, listId: 2, description: 'task test 3', isCompleted: true },
 ];
 
 const stateAfterAdd = [
   ...initialState,
-  { id: 6, todoId: 2, title: 'task test 4', isChecked: false },
+  { id: 6, listId: 2, description: 'task test 4', isCompleted: false },
 ];
 
 const stateAfterDel = initialState.filter(task => task.id !== 1);
 
 const stateAfterUpdate = [
-  { id: 1, todoId: 1, title: 'updated', isChecked: false },
-  { id: 2, todoId: 1, title: 'task test 2', isChecked: false },
-  { id: 3, todoId: 2, title: 'task test 3', isChecked: true },
+  { id: 1, listId: 1, description: 'updated', isCompleted: false },
+  { id: 2, listId: 1, description: 'task test 2', isCompleted: false },
+  { id: 3, listId: 2, description: 'task test 3', isCompleted: true },
 ];
 
 const stateAfterToggle = [
-  { id: 1, todoId: 1, title: 'task test 1', isChecked: true },
-  { id: 2, todoId: 1, title: 'task test 2', isChecked: false },
-  { id: 3, todoId: 2, title: 'task test 3', isChecked: true },
+  { id: 1, listId: 1, description: 'task test 1', isCompleted: true },
+  { id: 2, listId: 1, description: 'task test 2', isCompleted: false },
+  { id: 3, listId: 2, description: 'task test 3', isCompleted: true },
 ];
 
-const stateAfterDelTodo = initialState.filter(task => task.todoId !== 1);
+const stateAfterDelTodo = initialState.filter(task => task.listId !== 1);
 
 describe('[UT] [Reducer] tasks', () => {
   it('should return the initial state when action is undefined', () => {
