@@ -1,18 +1,31 @@
 import requestJson from '../utils';
 
-export const ADD_TODO = 'todos/addTodo';
-export const DEL_TODO = 'todos/delTodo';
+export const TODO_ADDED = 'todos/todoAdded';
+export const TODO_DELETED = 'todos/delTodo';
 export const TODOS_LOADED = 'todos/todosLoaded';
 
-export const addTodo = label => ({
-  type: ADD_TODO,
-  payload: { label },
+export const todoAdded = todo => ({
+  type: TODO_ADDED,
+  payload: todo,
 });
 
-export const delTodo = id => ({
-  type: DEL_TODO,
-  payload: { id },
+const addTodo = label => (dispatch) => {
+  const uri = 'api/todo/lists';
+  const body = { todo: { label } };
+  const options = { method: 'POST', body };
+  requestJson(uri, options).then(todo => dispatch(todoAdded(todo)));
+};
+
+export const todoDeleted = todo => ({
+  type: TODO_DELETED,
+  payload: todo,
 });
+
+const delTodo = id => (dispatch) => {
+  const uri = `api/todo/list/${id}`;
+  const options = { method: 'DELETE' };
+  requestJson(uri, options).then(todo => dispatch(todoDeleted(todo)));
+};
 
 const todosLoaded = todos => ({
   type: TODOS_LOADED,

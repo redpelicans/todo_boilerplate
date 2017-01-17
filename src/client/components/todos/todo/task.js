@@ -21,9 +21,9 @@ class Task extends React.Component {
 
   handleSubmit = () => {
     const { actions: { updateTask } } = this.props;
-    const { id } = this.props.task;
+    const { task } = this.props;
     const { input } = this.state;
-    updateTask(id, input);
+    updateTask({ ...task, description: input });
     this.setState({ updateMode: false });
   }
 
@@ -34,7 +34,7 @@ class Task extends React.Component {
       <Row>
         <Col>
           <Checkbox
-            onChange={() => toggleTask(task.id)}
+            onChange={() => toggleTask(task)}
             checked={task.isCompleted}
           />
           {updateMode ?

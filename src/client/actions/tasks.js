@@ -1,32 +1,59 @@
 import requestJson from '../utils';
 
-export const ADD_TASK = 'tasks/addTask';
-export const DEL_TASK = 'tasks/delTask';
-export const UPDATE_TASK = 'tasks/updateTask';
-export const TOGGLE_TASK = 'tasks/toggleTask';
-export const TASKS_LOADED = 'tasks/loadedTasks';
+export const TASK_ADDED = 'tasks/taskAdded';
+export const TASK_DELETED = 'tasks/taskDeleted';
+export const TASK_UPDATED = 'tasks/taskUpdated';
+export const TASK_TOGGLED = 'tasks/taskToggled';
+export const TASKS_LOADED = 'tasks/tasksLoaded';
 
-export const addTask = (description, listId) => ({
-  type: ADD_TASK,
-  payload: { description, listId, isCompleted: false },
+export const taskAdded = task => ({
+  type: TASK_ADDED,
+  payload: task,
 });
 
-export const delTask = id => ({
-  type: DEL_TASK,
-  payload: { id },
+export const addTask = (description, listId) => (dispatch) => {
+  const uri = 'api/todo/tasks';
+  const body = { task: { description, listId, isCompleted: false } };
+  const options = { method: 'POST', body };
+  requestJson(uri, options).then(task => dispatch(taskAdded(task)));
+};
+
+export const taskDeleted = task => ({
+  type: TASK_DELETED,
+  payload: task,
 });
 
-export const updateTask = (id, description) => ({
-  type: UPDATE_TASK,
-  payload: { id, description },
+export const delTask = id => (dispatch) => {
+  const uri = `api/todo/task/${id}`;
+  const options = { method: 'DELETE' };
+  requestJson(uri, options).then(task => dispatch(taskDeleted(task)));
+};
+
+export const taskUpdated = task => ({
+  type: TASK_UPDATED,
+  payload: task,
 });
 
-export const toggleTask = id => ({
-  type: TOGGLE_TASK,
-  payload: { id },
+export const updateTask = task => (dispatch) => {
+  const uri = 'api/todo/tasks';
+  const body = { task };
+  const options = { method: 'PUT', body };
+  requestJson(uri, options).then(updated => dispatch(taskUpdated(updated)));
+};
+
+export const taskToggled = task => ({
+  type: TASK_TOGGLED,
+  payload: task,
 });
 
-const tasksLoaded = tasks => ({
+export const toggleTask = task => (dispatch) => {
+  const uri = 'api/todo/tasks';
+  const body = { task: { ...task, isCompleted: !task.isCompleted } };
+  const options = { method: 'PUT', body };
+  requestJson(uri, options).then(updated => dispatch(taskUpdated(updated)));
+};
+
+export const tasksLoaded = tasks => ({
   type: TASKS_LOADED,
   payload: tasks,
 });

@@ -1,16 +1,16 @@
 import chai from 'chai';
 import tasksReducer from '../tasks';
-import { addTask, delTask, updateTask, toggleTask } from '../../actions/tasks';
-import { delTodo } from '../../actions/todos';
+import { taskAdded, taskDeleted, taskUpdated, taskToggled } from '../../actions/tasks';
+import { todoDeleted } from '../../actions/todos';
 
 const { describe, it } = global;
 const { expect } = chai;
 
-const addAction = addTask('task test 4', 2);
-const delAction = delTask(1);
-const updateAction = updateTask(1, 'updated');
-const toggleAction = toggleTask(1);
-const delTodoAction = delTodo(1);
+const addAction = taskAdded({ id: 4, description: 'task test 4', listId: 2, isCompleted: false });
+const delAction = taskDeleted({ id: 1 });
+const updateAction = taskUpdated({ id: 1, description: 'updated', isCompleted: false, listId: 1 });
+const toggleAction = taskToggled({ id: 1, description: 'task test 1', isCompleted: true, listId: 1 });
+const delTodoAction = todoDeleted({ id: 1 });
 
 const initialState = [
   { id: 1, listId: 1, description: 'task test 1', isCompleted: false },
@@ -20,7 +20,7 @@ const initialState = [
 
 const stateAfterAdd = [
   ...initialState,
-  { id: 6, listId: 2, description: 'task test 4', isCompleted: false },
+  { id: 4, listId: 2, description: 'task test 4', isCompleted: false },
 ];
 
 const stateAfterDel = initialState.filter(task => task.id !== 1);

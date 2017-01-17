@@ -1,12 +1,12 @@
 import chai from 'chai';
 import todosReducer from '../todos';
-import { addTodo, delTodo } from '../../actions/todos';
+import { todoAdded, todoDeleted } from '../../actions/todos';
 
 const { describe, it } = global;
 const { expect } = chai;
 
-const addAction = addTodo('todo test 4');
-const delAction = delTodo(1);
+const addAction = todoAdded({ id: 4, label: 'todo test 4' });
+const delAction = todoDeleted({ id: 1 });
 
 const initialState = [
   { id: 1, label: 'todo test 1' },
