@@ -22,8 +22,8 @@ class Task extends React.Component {
     value: this.props.task.description,
   }
   handleToggle = () => {
-    const { actions, task, todo } = this.props;
-    actions.toggleCompleted(todo.id, task);
+    const { actions, task } = this.props;
+    actions.toggleCompleted(task);
   }
   handleEdit = () => {
     const { actions } = this.props;
@@ -35,13 +35,13 @@ class Task extends React.Component {
     }
     actions.updateValue();
   }
+  handleDelete = () => {
+    const { actions, task } = this.props;
+    actions.deleteTask(task.id);
+  }
   handleChange = event => this.setState({ value: event.target.value });
   render() {
-    const { actions, task, todo } = this.props;
-    // console.log('task:    ', task);
-    // console.log('todo.id:    ', todo.id);
-    // console.log('task.listId:    ', task.listId);
-    // console.log('task.description:    ', task.description);
+    const { task } = this.props;
     const { editStatus, value } = this.state;
     const ifChecked = false;
     return (
@@ -53,7 +53,7 @@ class Task extends React.Component {
           <input onChange={this.handleChange} value={value} />
         }
         <Button type="ghost" icon="edit" onClick={this.handleEdit} />
-        <Button type="ghost" icon="delete" onClick={() => actions.deleteTask(todo.id, task.id)} />
+        <Button type="ghost" icon="delete" onClick={this.handleDelete} />
       </SingleTask>);
   }
 }
@@ -61,7 +61,6 @@ class Task extends React.Component {
 Task.propTypes = {
   actions: PropTypes.object.isRequired,
   task: PropTypes.object.isRequired,
-  todo: PropTypes.object.isRequired,
 };
 
 export default Task;

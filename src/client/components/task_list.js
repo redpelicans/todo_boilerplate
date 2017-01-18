@@ -5,7 +5,7 @@ const TaskList = ({ actions, tasks, todo }) =>
   <div>
     {
         tasks.filter(task => task.listId === todo.id).map(task =>
-           <Task actions={actions} key={task.id} task={task} todo={todo} />)
+          <Task actions={actions} key={task.id} task={task} />)
     }
   </div>
 ;

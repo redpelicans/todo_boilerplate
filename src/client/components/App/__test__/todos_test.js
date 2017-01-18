@@ -7,48 +7,44 @@ import Todo, { Area, TitleTodo } from '../../todo';
 import TaskList from '../../task_list';
 import AddTask from '../../add_task';
 import actions, { addTodo } from '../../../actions';
-import store from '../../../store';
 import state from '../../../mystate';
+import store from '../../../store';
 
 const { dispatch } = store;
 const { describe, it } = global;
 const { expect } = chai;
+const tasks = state.tasks;
+const todo = state.todos;
 
 describe('[UT] <AddTodo />', () => {
+  const path = <AddTodo onAddTodo={addTodo} dispatch={dispatch} />;
   it('should render a  <Wrapper />', () => {
-    expect(shallow(<AddTodo onAddTodo={addTodo} dispatch={dispatch} />)
-      .find(Wrapper)).to.have.length(1);
+    expect(shallow(path).find(Wrapper)).to.have.length(1);
   });
   it('should render a   <Input />', () => {
-    expect(shallow(<AddTodo onAddTodo={addTodo} dispatch={dispatch} />)
-      .find(Input)).to.have.length(1);
+    expect(shallow(path).find(Input)).to.have.length(1);
   });
   it('should render a   <Button />', () => {
-    expect(shallow(<AddTodo onAddTodo={addTodo} dispatch={dispatch} />)
-      .find(Button)).to.have.length(1);
+    expect(shallow(path).find(Button)).to.have.length(1);
   });
 });
 
 describe('[UT] <Todo />', () => {
+  const path = <Todo actions={actions} tasks={tasks} todo={todo} key={1} />;
   it('should render a  <Area />', () => {
-    expect(shallow(<Todo actions={actions} store={store} todo={state.todos[1]} key={1} />)
-      .find(Area)).to.have.length(1);
+    expect(shallow(path).find(Area)).to.have.length(1);
   });
   it('should render a   <TitleTodo />', () => {
-    expect(shallow(<Todo actions={actions} store={store} todo={state.todos[1]} key={1} />)
-      .find(TitleTodo)).to.have.length(1);
+    expect(shallow(path).find(TitleTodo)).to.have.length(1);
   });
   it('should render a   <Button />', () => {
-    expect(shallow(<Todo actions={actions} store={store} todo={state.todos[1]} key={1} />)
-      .find(Button)).to.have.length(1);
+    expect(shallow(path).find(Button)).to.have.length(1);
   });
   it('should render a   <AddTask />', () => {
-    expect(shallow(<Todo actions={actions} store={store} todo={state.todos[1]} key={1} />)
-      .find(AddTask)).to.have.length(1);
+    expect(shallow(path).find(AddTask)).to.have.length(1);
   });
   it('should render a   <TaskList />', () => {
-    expect(shallow(<Todo actions={actions} store={store} todo={state.todos[1]} key={1} />)
-      .find(TaskList)).to.have.length(1);
+    expect(shallow(path).find(TaskList)).to.have.length(1);
   });
 });
 
