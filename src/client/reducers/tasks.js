@@ -1,5 +1,4 @@
 import { TASK_ADDED, TASK_DELETED, TASK_UPDATED, TASK_TOGGLED, TASKS_LOADED } from '../actions/tasks';
-import { TODO_DELETED } from '../actions/todos';
 
 const tasks = (state = [], action = {}) => {
   const { type, payload } = action;
@@ -15,8 +14,6 @@ const tasks = (state = [], action = {}) => {
     case TASK_TOGGLED:
       return state.map(task =>
         ((task.id === payload.id) ? payload : task));
-    case TODO_DELETED:
-      return state.filter(task => task.listId !== payload.id);
     case TASKS_LOADED:
       return [...state, ...action.payload];
     default:

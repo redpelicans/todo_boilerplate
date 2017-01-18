@@ -1,7 +1,6 @@
 import chai from 'chai';
 import tasksReducer from '../tasks';
 import { taskAdded, taskDeleted, taskUpdated, taskToggled } from '../../actions/tasks';
-import { todoDeleted } from '../../actions/todos';
 
 const { describe, it } = global;
 const { expect } = chai;
@@ -10,7 +9,6 @@ const addAction = taskAdded({ id: 4, description: 'task test 4', listId: 2, isCo
 const delAction = taskDeleted({ id: 1 });
 const updateAction = taskUpdated({ id: 1, description: 'updated', isCompleted: false, listId: 1 });
 const toggleAction = taskToggled({ id: 1, description: 'task test 1', isCompleted: true, listId: 1 });
-const delTodoAction = todoDeleted({ id: 1 });
 
 const initialState = [
   { id: 1, listId: 1, description: 'task test 1', isCompleted: false },
@@ -62,9 +60,5 @@ describe('[UT] [Reducer] tasks', () => {
 
   it('should toggle a task', () => {
     expect(tasksReducer(initialState, toggleAction)).to.deep.equal(stateAfterToggle);
-  });
-
-  it('should delete tasks with same todo id', () => {
-    expect(tasksReducer(initialState, delTodoAction)).to.deep.equal(stateAfterDelTodo);
   });
 });

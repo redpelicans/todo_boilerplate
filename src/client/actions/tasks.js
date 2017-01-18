@@ -26,7 +26,7 @@ export const taskDeleted = task => ({
 export const delTask = id => (dispatch) => {
   const uri = `api/todo/task/${id}`;
   const options = { method: 'DELETE' };
-  requestJson(uri, options).then(task => dispatch(taskDeleted(task)));
+  return requestJson(uri, options).then(task => dispatch(taskDeleted(task)));
 };
 
 export const taskUpdated = task => ({

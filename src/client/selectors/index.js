@@ -44,14 +44,14 @@ const getOptions = state => state.options;
 
 /* Selectors */
 
-const tasksSelector = createSelector(
+export const tasksSelector = createSelector(
   [getTasks],
   reduceTasksWithTodoId,
 );
 
-const todosSelector = createSelector(
+export const todosSelector = createSelector(
   [getTodos, tasksSelector, getOptions],
   filterTodos,
 );
 
-export { tasksSelector, todosSelector };
+export default { tasksSelector, todosSelector };

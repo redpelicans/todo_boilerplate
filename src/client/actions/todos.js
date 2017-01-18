@@ -1,4 +1,6 @@
 import requestJson from '../utils';
+import { tasksSelector } from '../selectors/';
+import { delTask } from './tasks';
 
 export const TODO_ADDED = 'todos/todoAdded';
 export const TODO_DELETED = 'todos/delTodo';
@@ -21,10 +23,14 @@ export const todoDeleted = todo => ({
   payload: todo,
 });
 
-const delTodo = id => (dispatch) => {
+const delTodo = id => (dispatch, getState) => {
   const uri = `api/todo/list/${id}`;
   const options = { method: 'DELETE' };
-  requestJson(uri, options).then(todo => dispatch(todoDeleted(todo)));
+  const state = getState();
+  const tasks = tasksSelector(state)[id] || [];
+  const tasksPromises = tasks.map(task => delTask(task.id)(dispatch));
+  Promise.all([requestJson(uri, options), ...tasksPromises])
+    .then(values => dispatch(todoDeleted(values[0])));
 };
 
 const todosLoaded = todos => ({
