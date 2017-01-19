@@ -15,11 +15,23 @@ class AddTask extends React.Component {
     onAddTask(this.state.name, todoId);
     this.setState({ name: '' });
   };
+  handleKey = (event) => {
+    if (event.key === 'Enter') {
+      const { onAddTask, todoId } = this.props;
+      onAddTask(this.state.name, todoId);
+      this.setState({ name: '' });
+    }
+  }
   render() {
     const { name } = this.state;
     return (
       <Wrapper>
-        <Input onChange={this.handleChange} placeholder="new task" value={name} />
+        <Input
+          onChange={this.handleChange}
+          onKeyPress={this.handleKey}
+          placeholder="new task"
+          value={name}
+        />
         <Button type="ghost" onClick={this.handleClick}>Add</Button>
       </Wrapper>
     );

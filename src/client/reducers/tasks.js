@@ -2,7 +2,7 @@ import {
   TASK_ADDED,
   TASK_DELETED,
   TASKS_LOADED,
-} from '../actions';
+} from '../actions/tasks';
 
 const tasksReducer = (state = [], action) => {
   const { payload } = action;

@@ -4,7 +4,8 @@ import { Provider } from 'react-redux';
 import MainApp from './components/App';
 import configureStore from './store';
 import initialState from './mystate';
-import { loadTodos, loadTasks } from './actions';
+import { loadTodos } from './actions/todos';
+import { loadTasks } from './actions/tasks';
 
 const store = configureStore(initialState);
 

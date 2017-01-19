@@ -2,7 +2,7 @@ import {
   TODO_ADDED,
   TODO_DELETED,
   TODOS_LOADED,
-} from '../actions';
+} from '../actions/todos';
 
 const todosReducer = (state = [], action) => {
   const { payload } = action;

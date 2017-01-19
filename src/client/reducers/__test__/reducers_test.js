@@ -1,163 +1,34 @@
 import chai from 'chai';
-import { todosReducer } from '../../reducers';
-import { ADD_TODO, DELETE_TODO, ADD_TASK, DELETE_TASK } from '../../actions';
+import todosReducer from '../todos';
+import { todoAdded, todoDeleted } from '../../actions/todos';
 
 const { describe, it } = global;
 const { expect } = chai;
 
-// console.log('todos:   ', todos);
+const initialState = [
+  { id: 0, label: '1st todo' },
+  { id: 1, label: '2nd todo' },
+];
 
-describe('[UT] todo reducers', () => {
-  it('should handle a ADD_TODO', () => {
-    expect(
-      todosReducer({}, {
-        type: ADD_TODO,
-        todo2add: {
-          id: 1,
-          name: 'first_todo',
-          tasks: {
-            1: {
-              checked: false,
-              id: 1,
-              name: 'task.1.1',
-            },
-          },
-        },
-      }),
-    ).to.deep.equal({
-      todos: {
-        1: {
-          id: 1,
-          name: 'first_todo',
-          tasks: {
-            1: {
-              id: 1,
-              name: 'task.1.1',
-              checked: false,
-            },
-          },
-        },
-      },
-    });
+const stateAfterAdd = [
+  { id: 0, label: '1st todo' },
+  { id: 1, label: '2nd todo' },
+  { id: 2, label: '3rd todo' },
+];
+
+const stateAfterDel = [
+  { id: 0, label: '1st todo' },
+];
+
+describe.only('[UT] todo reducers', () => {
+  it('should add a new todo', () => {
+    expect(todosReducer(
+      initialState, todoAdded({ id: 2, label: '3rd todo' })))
+      .to.deep.equal(stateAfterAdd);
   });
-  it('should handle a DELETE_TODO', () => {
-    expect(
-      todosReducer({
-        todos: {
-          1: {
-            id: 1,
-            name: 'first_todo',
-            tasks: {
-              1: {
-                id: 1,
-                name: 'task.1.1',
-                checked: false,
-              },
-            },
-          },
-        },
-      }, {
-        type: DELETE_TODO,
-        id: 1,
-      }),
-    ).to.deep.equal({ todos: {} });
-  });
-  it('should handle a ADD_TASK', () => {
-    expect(
-       todosReducer({
-         todos: {
-           1: {
-             id: 1,
-             name: 'first_todo',
-             tasks: {
-               1: {
-                 id: 1,
-                 name: 'task.1.1',
-                 checked: false,
-               },
-             },
-           },
-         },
-       }, {
-         type: ADD_TASK,
-         id: 1,
-         task: {
-           id: 2,
-           name: 'task.1.2',
-           checked: false,
-         },
-       }),
-    ).to.deep.equal({
-      todos: {
-        1: {
-          id: 1,
-          name: 'first_todo',
-          tasks: {
-            1: {
-              id: 1,
-              name: 'task.1.1',
-              checked: false,
-            },
-            2: {
-              id: 2,
-              name: 'task.1.2',
-              checked: false,
-            },
-          },
-        },
-      },
-    });
-  });
-  it('should handle a DELETE_TASK', () => {
-    expect(
-      todosReducer({
-        todos: {
-          2: {
-            id: 2,
-            name: 'second_todo',
-            tasks: {
-              2: {
-                id: 2,
-                name: 'task.2.1',
-                checked: false,
-              },
-              3: {
-                id: 3,
-                name: 'task_2',
-                checked: true,
-              },
-              4: {
-                id: 4,
-                name: 'task_3',
-                checked: false,
-              },
-            },
-          },
-        },
-      }, {
-        type: DELETE_TASK,
-        idTodo: 2,
-        idTask: 3,
-      }),
-    ).to.deep.equal({
-      todos: {
-        2: {
-          id: 2,
-          name: 'second_todo',
-          tasks: {
-            2: {
-              id: 2,
-              name: 'task.2.1',
-              checked: false,
-            },
-            4: {
-              id: 4,
-              name: 'task_3',
-              checked: false,
-            },
-          },
-        },
-      },
-    });
+  it('should delete a todo', () => {
+    expect(todosReducer(
+      initialState, todoDeleted({ id: 1 })))
+      .to.deep.equal(stateAfterDel);
   });
 });
