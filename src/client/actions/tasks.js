@@ -14,7 +14,7 @@ export const taskAdded = task => ({
 export const addTask = (description, listId) => (dispatch) => {
   const uri = 'api/todo/tasks';
   const body = { task: { description, listId, isCompleted: false } };
-  const options = { method: 'POST', body };
+  const options = { method: 'POST', body, dispatch };
   requestJson(uri, options).then(task => dispatch(taskAdded(task)));
 };
 
@@ -25,7 +25,7 @@ export const taskDeleted = task => ({
 
 export const delTask = id => (dispatch) => {
   const uri = `api/todo/task/${id}`;
-  const options = { method: 'DELETE' };
+  const options = { method: 'DELETE', dispatch };
   return requestJson(uri, options).then(task => dispatch(taskDeleted(task)));
 };
 
@@ -37,7 +37,7 @@ export const taskUpdated = task => ({
 export const updateTask = task => (dispatch) => {
   const uri = 'api/todo/tasks';
   const body = { task };
-  const options = { method: 'PUT', body };
+  const options = { method: 'PUT', body, dispatch };
   requestJson(uri, options).then(updated => dispatch(taskUpdated(updated)));
 };
 
@@ -49,7 +49,7 @@ export const taskToggled = task => ({
 export const toggleTask = task => (dispatch) => {
   const uri = 'api/todo/tasks';
   const body = { task: { ...task, isCompleted: !task.isCompleted } };
-  const options = { method: 'PUT', body };
+  const options = { method: 'PUT', body, dispatch };
   requestJson(uri, options).then(updated => dispatch(taskUpdated(updated)));
 };
 
@@ -60,7 +60,8 @@ export const tasksLoaded = tasks => ({
 
 export const loadTasks = () => (dispatch) => {
   const uri = 'api/todo/tasks';
-  requestJson(uri).then(tasks => dispatch(tasksLoaded(tasks)));
+  const options = { dispatch };
+  requestJson(uri, options).then(tasks => dispatch(tasksLoaded(tasks)));
 };
 
 export default { addTask, delTask, updateTask, toggleTask };

@@ -5,6 +5,8 @@ const initialState = {
     showCompleted: true,
     sortByAsc: true,
   },
+  alert: {},
+  currentLoads: 0,
 };
 
 export default initialState;

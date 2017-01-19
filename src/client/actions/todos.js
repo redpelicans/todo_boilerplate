@@ -14,7 +14,7 @@ export const todoAdded = todo => ({
 const addTodo = label => (dispatch) => {
   const uri = 'api/todo/lists';
   const body = { todo: { label } };
-  const options = { method: 'POST', body };
+  const options = { method: 'POST', body, dispatch };
   requestJson(uri, options).then(todo => dispatch(todoAdded(todo)));
 };
 
@@ -25,7 +25,7 @@ export const todoDeleted = todo => ({
 
 const delTodo = id => (dispatch, getState) => {
   const uri = `api/todo/list/${id}`;
-  const options = { method: 'DELETE' };
+  const options = { method: 'DELETE', dispatch };
   const state = getState();
   const tasks = tasksSelector(state)[id] || [];
   const tasksPromises = tasks.map(task => delTask(task.id)(dispatch));
@@ -40,7 +40,8 @@ const todosLoaded = todos => ({
 
 export const loadTodos = () => (dispatch) => {
   const uri = 'api/todo/lists';
-  requestJson(uri).then(todos => dispatch(todosLoaded(todos)));
+  const options = { dispatch };
+  requestJson(uri, options).then(todos => dispatch(todosLoaded(todos)));
 };
 
 export default { addTodo, delTodo };

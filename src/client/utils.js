@@ -1,4 +1,6 @@
 import 'whatwg-fetch';
+import { addLoading, delLoading } from './actions/currentLoads';
+import { addAlert } from './actions/alert';
 
 const checkStatus = (result) => {
   if (result.status !== 200) {
@@ -9,13 +11,30 @@ const checkStatus = (result) => {
 
 const parseJson = result => result.json();
 
-const requestJson = (uri, { method = 'GET', body } = {}) => {
+const launchActions = (dispatch, actions = []) => {
+  if (dispatch) {
+    actions.forEach(action => dispatch(action));
+  }
+};
+
+const requestJson = (uri, { method = 'GET', body, dispatch } = {}) => {
   const absoluteUri = `http://rp3.redpelicans.com:4006/${uri}`;
   const params = { headers: { 'Content-Type': 'application/json' }, method };
   if (body) {
     params.body = JSON.stringify(body || {});
   }
-  return fetch(absoluteUri, params).then(checkStatus).then(parseJson);
+  launchActions(dispatch, [addLoading()]);
+  return fetch(absoluteUri, params)
+          .then(checkStatus)
+          .then(parseJson)
+          .then((result) => {
+            launchActions(dispatch, [delLoading(), addAlert('success', 'success')]);
+            return result;
+          })
+          .catch((error) => {
+            launchActions(dispatch, [delLoading(), addAlert('error', error.message)]);
+            return error;
+          });
 };
 
 export default requestJson;

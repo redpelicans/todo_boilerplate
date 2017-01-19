@@ -35,8 +35,6 @@ const stateAfterToggle = [
   { id: 3, listId: 2, description: 'task test 3', isCompleted: true },
 ];
 
-const stateAfterDelTodo = initialState.filter(task => task.listId !== 1);
-
 describe('[UT] [Reducer] tasks', () => {
   it('should return the initial state when action is undefined', () => {
     expect(tasksReducer(initialState, undefined)).to.deep.equal(initialState);
