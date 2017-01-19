@@ -1,12 +1,2 @@
-React element:
-	- describes what you want to see on the screen
-	- is an object representation of a DOM node
-	- old JavaScript objects (used to describe how the HTML for the 	component should look — there are no methods on the object, 	just data.) with a couple of properties:
-		- key
-		- props
-		- ref
-		- type
-
-React component:
-	- is a function or a Class which optionally accepts input and	 	returns a React element.
-	- A ReactComponent must have at least a render method, which 		returns a ReactElement(-tree) when invoked
+http://rp3.redpelicans.com:4005/api/todo/tasks
+absolutURI: http:rp3 ....
