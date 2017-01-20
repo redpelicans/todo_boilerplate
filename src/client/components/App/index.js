@@ -1,21 +1,33 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import styled from 'styled-components';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import Header from '../header';
+import AddTodo from '../add_todo';
+import TodoList from '../todo_list';
+import actionList from '../../actions';
 
-export const Title = styled.h1`
-  font-size: 1.5em;
-  text-align: center;
-  color: palevioletred;
-`;
-
-const Wrapper = styled.section`
+export const Wrapper = styled.section`
   padding: 4em;
   background: papayawhip;
 `;
 
-const App = () => (
+export const App = ({ todos, tasks, currentLoads, actions }) =>
   <Wrapper>
-    <Title>Hello World, this is my first react app!</Title>
+    <Header />
+    <AddTodo onAddTodo={actions.addTodo} currentLoads={currentLoads} />
+    <TodoList tasks={tasks} todos={todos} actions={actions} />
   </Wrapper>
-);
+  ;
 
-export default App;
+App.propTypes = {
+  actions: PropTypes.object.isRequired,
+  currentLoads: PropTypes.number.isRequired,
+  todos: PropTypes.array.isRequired,
+  tasks: PropTypes.array.isRequired,
+};
+
+const mapStateToProps = state => state;
+const mapDispatchToProps = dispatch => ({ actions: bindActionCreators(actionList, dispatch) });
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

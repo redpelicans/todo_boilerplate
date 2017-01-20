@@ -10,7 +10,7 @@ const { expect } = chai;
 describe('[UT] <Button />', () => {
   it('should call right callback after click', () => {
     const onClick = sinon.spy();
-    const wrapper = shallow(<Button onClick={onClick} />).simulate('click');
+    shallow(<Button onClick={onClick} />).simulate('click');
     expect(onClick.calledOnce).to.equal(true);
   });
 });
