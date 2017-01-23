@@ -11,7 +11,7 @@ export const todoAdded = todo => ({
   payload: todo,
 });
 
-const addTodo = label => (dispatch) => {
+export const addTodo = label => (dispatch) => {
   const uri = 'api/todo/lists';
   const body = { todo: { label } };
   const options = { method: 'POST', body, dispatch };
@@ -23,7 +23,7 @@ export const todoDeleted = todo => ({
   payload: todo,
 });
 
-const delTodo = id => (dispatch, getState) => {
+export const delTodo = id => (dispatch, getState) => {
   const uri = `api/todo/list/${id}`;
   const options = { method: 'DELETE', dispatch };
   const state = getState();

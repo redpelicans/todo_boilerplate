@@ -1,4 +1,5 @@
 import 'whatwg-fetch';
+import { api } from '../../config/';
 import { addLoading, delLoading } from './actions/currentLoads';
 import { addAlert } from './actions/alert';
 
@@ -18,7 +19,7 @@ const launchActions = (dispatch, actions = []) => {
 };
 
 const requestJson = (uri, { method = 'GET', body, dispatch } = {}) => {
-  const absoluteUri = `http://rp3.redpelicans.com:4006/${uri}`;
+  const absoluteUri = `${api}/${uri}`;
   const params = { headers: { 'Content-Type': 'application/json' }, method };
   if (body) {
     params.body = JSON.stringify(body || {});
