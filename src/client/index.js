@@ -7,7 +7,7 @@ import initialState from './mystate';
 import { loadTodos } from './actions/todos';
 import { loadTasks } from './actions/tasks';
 
-const store = configureStore(initialState);
+export const store = configureStore(initialState);
 
 store.dispatch(loadTodos());
 store.dispatch(loadTasks());

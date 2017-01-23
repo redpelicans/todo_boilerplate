@@ -7,7 +7,7 @@ export const TASK_DELETED = 'task/deleteTask';
 export const TASKS_LOADED = 'task/tasksLoaded';
 export const TOGGLE_COMPLETED = 'task/toggleCompleted';
 
-const tasksLoaded = tasks => ({
+export const tasksLoaded = tasks => ({
   type: TASKS_LOADED,
   payload: tasks,
 });
@@ -21,12 +21,12 @@ export const loadTasks = () => (dispatch) => {
     });
 };
 
-const taskAdded = task => ({
+export const taskAdded = task => ({
   type: TASK_ADDED,
   payload: task,
 });
 
-const addTask = (description, listId) => (dispatch) => {
+export const addTask = (description, listId) => (dispatch) => {
   const uri = 'api/todo/tasks';
   const body = { task: { description, listId } };
   const options = { method: 'post', body, dispatch };

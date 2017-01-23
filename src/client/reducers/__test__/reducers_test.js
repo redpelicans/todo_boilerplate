@@ -20,7 +20,7 @@ const stateAfterDel = [
   { id: 0, label: '1st todo' },
 ];
 
-describe.only('[UT] todo reducers', () => {
+describe('[UT] todo reducers', () => {
   it('should add a new todo', () => {
     expect(todosReducer(
       initialState, todoAdded({ id: 2, label: '3rd todo' })))

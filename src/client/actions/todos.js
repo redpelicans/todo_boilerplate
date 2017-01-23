@@ -12,7 +12,7 @@ export const todosLoaded = todos => ({
   payload: todos,
 });
 
-const loadTodos = () => (dispatch) => {
+export const loadTodos = () => (dispatch) => {
   const uri = 'api/todo/lists';
   requestJson(uri)
     .then(todos => dispatch(todosLoaded(todos)))
@@ -26,13 +26,13 @@ export const todoAdded = todo => ({
   payload: todo,
 });
 
-const addTodo = title => (dispatch) => {
+export const addTodo = title => (dispatch) => {
   const uri = 'api/todo/lists';
   const body = { todo: { label: title } };
   const options = { method: 'post', body, dispatch };
   requestJson(uri, options)
     .then(todo => dispatch(todoAdded(todo)))
-    .then((error) => {
+    .catch((error) => {
       if (dispatch) dispatch(addAlert(`${error.type} failed !`, state.alert.id += 1));
     });
 };
@@ -42,7 +42,7 @@ export const todoDeleted = todo => ({
   payload: todo,
 });
 
-const deleteTodo = id => (dispatch, getState) => {
+export const deleteTodo = id => (dispatch, getState) => {
   const { tasks } = getState();
   const uri = `api/todo/list/${id}`;
   const options = { method: 'DELETE', dispatch };
@@ -56,7 +56,7 @@ const deleteTodo = id => (dispatch, getState) => {
 };
 
 export default {
+  loadTodos,
   addTodo,
   deleteTodo,
-  todosLoaded,
 };
